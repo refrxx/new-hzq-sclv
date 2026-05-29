@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Scalev API Test</title>
+  <style>
+    body { font-family: monospace; padding: 2rem; background: #0f172a; color: #e2e8f0; }
+    h1 { color: #38bdf8; margin-bottom: 1rem; }
+    input, button { padding: 0.5rem 1rem; border-radius: 6px; border: none; margin: 0.25rem; }
+    input { background: #1e293b; color: #e2e8f0; width: 400px; }
+    button { background: #38bdf8; color: #0f172a; font-weight: bold; cursor: pointer; }
+    button:hover { background: #7dd3fc; }
+    #output {
+      margin-top: 1.5rem; background: #1e293b; border-radius: 8px;
+      padding: 1.5rem; white-space: pre-wrap; word-break: break-all;
+      font-size: 0.85rem; min-height: 200px; border: 1px solid #334155;
+    }
+    .label { color: #94a3b8; font-size: 0.75rem; margin-bottom: 0.25rem; display: block; }
+    .btn-group { margin-top: 1rem; display: flex; flex-wrap: wrap; gap: 0.5rem; }
+  </style>
+</head>
+<body>
+<h1>🔍 Scalev API Tester</h1>
+<div>
+  <span class="label">Store ID</span>
+  <input id="store-id" type="text" placeholder="store_xxx..." />
+</div>
+<div>
+  <span class="label">API Key</span>
+  <input id="api-key" type="text" placeholder="sfpk_xxx..." />
+</div>
+<div class="btn-group">
+  <button onclick="testItems()">GET /public/items</button>
+  <button onclick="testCart()">GET /public/cart</button>
+  <button onclick="testProvinces()">GET /public/locations/provinces</button>
+  <button onclick="testProductDetail()">GET /public/products/{slug}</button>
+</div>
+<div id="output">Masukkan Store ID dan API Key, lalu klik salah satu tombol...</div>
+<script>
+  const out = document.getElementById('output');
+
+  function log(msg, type = 'normal') {
+    const color = type === 'ok' ? '#4ade80' : type === 'err' ? '#f87171' : '#e2e8f0';
+    out.innerHTML += `<span style="color:${color}">${msg}</span>\n`;
+  }
+
+  function getConfig() {
+    return {
+      storeId: document.getElementById('store-id').value.trim(),
+      apiKey: document.getElementById('api-key').value.trim(),
+    };
+  }
+
+  async function callScalev(path) {
+    const { storeId, apiKey } = getConfig();
+    out.innerHTML = '';
+    if (!storeId || !apiKey) { log('❌ Store ID dan API Key harus diisi.', 'err'); return; }
+
+    const url = `https://api.scalev.com/v3/stores/${storeId}${path}`;
+    log(`→ GET ${url}`);
+    log(`→ X-Scalev-Storefront-Api-Key: ${apiKey.slice(0, 12)}...`);
+    log('');
+
+    const headers = { 'Accept': 'application/json', 'X-Scalev-Storefront-Api-Key': apiKey };
+    const guestToken = localStorage.getItem('scalev_guest_token');
+    if (guestToken) { headers['X-Scalev-Guest-Token'] = guestToken; log(`→ X-Scalev-Guest-Token: ${guestToken.slice(0,12)}...`); }
+
+    try {
+      const res = await fetch(url, { credentials: 'omit', headers });
+
+      const newToken = res.headers.get('x-scalev-guest-token');
+      if (newToken) { localStorage.setItem('scalev_guest_token', newToken); log(`← Guest token saved: ${newToken.slice(0,12)}...`, 'ok'); }
+
+      log(`← Status: ${res.status} ${res.statusText}`, res.ok ? 'ok' : 'err');
+      log('');
+      const data = await res.json();
+      log(JSON.stringify(data, null, 2), res.ok ? 'ok' : 'err');
+    } catch (err) {
+      log(`❌ Fetch error: ${err.message}`, 'err');
+      log('(Kemungkinan CORS — pastikan origin ini sudah didaftarkan di Scalev)', 'err');
+    }
+  }
+
+  function testItems()   { callScalev('/public/items?per_page=5&page=1'); }
+  function testCart()    { callScalev('/public/cart'); }
+  function testProvinces() { callScalev('/public/locations/provinces'); }
+  function testProductDetail() {
+    const slug = prompt('Masukkan slug produk (cek dari hasil /public/items):');
+    if (slug) callScalev(`/public/products/${slug}`);
+  }
+</script>
+</body>
+</html>

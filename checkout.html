@@ -349,21 +349,21 @@
             const provinces = (await scalevGetProvinces()).data || [];
             provinces.forEach(p => {
                 const opt = document.createElement('option');
-                opt.value = p.id;
-                opt.textContent = p.name;
+                opt.value = p.province_id;
+                opt.textContent = p.province_name;
                 provinceSelect.appendChild(opt);
             });
 
             provinceSelect.addEventListener('change', async () => {
                 citySelect.innerHTML = '<option value="" disabled selected>Memuat...</option>';
                 citySelect.disabled = false;
-                selectedProvinceName = provinceSelect.options[provinceSelect.selectedIndex].text;
+                selectedProvinceName = provinceSelect.options[provinceSelect.selectedIndex].textContent;
                 const cities = (await scalevGetCities(provinceSelect.value)).data || [];
                 citySelect.innerHTML = '<option value="" disabled selected>Pilih Kota/Kabupaten</option>';
                 cities.forEach(c => {
                     const opt = document.createElement('option');
-                    opt.value = c.id;
-                    opt.textContent = c.name;
+                    opt.value = c.city_id;
+                    opt.textContent = c.city_name;
                     citySelect.appendChild(opt);
                 });
                 subdistrictSelect.innerHTML = '<option value="" disabled selected>Pilih Kecamatan</option>';
@@ -377,13 +377,13 @@
             citySelect.addEventListener('change', async () => {
                 subdistrictSelect.innerHTML = '<option value="" disabled selected>Memuat...</option>';
                 subdistrictSelect.disabled = false;
-                selectedCityName = citySelect.options[citySelect.selectedIndex].text;
+                selectedCityName = citySelect.options[citySelect.selectedIndex].textContent;
                 const subdistricts = (await scalevGetSubdistricts(citySelect.value)).data || [];
                 subdistrictSelect.innerHTML = '<option value="" disabled selected>Pilih Kecamatan</option>';
                 subdistricts.forEach(s => {
                     const opt = document.createElement('option');
-                    opt.value = s.id;
-                    opt.textContent = s.name;
+                    opt.value = s.subdistrict_id;
+                    opt.textContent = s.subdistrict_name;
                     opt.dataset.postalCode = s.postal_code || '';
                     subdistrictSelect.appendChild(opt);
                 });
@@ -394,8 +394,8 @@
 
             subdistrictSelect.addEventListener('change', () => {
                 const selected = subdistrictSelect.options[subdistrictSelect.selectedIndex];
-                selectedSubdistrictName = selected.text;
-                selectedLocationId = selected.value;
+                selectedSubdistrictName = selected.textContent;
+                selectedLocationId = parseInt(selected.value);
                 postalInput.value = selected.dataset.postalCode || '';
                 cekBtn.disabled = false;
                 document.getElementById('shipping-options').innerHTML = '';
