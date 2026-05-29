@@ -56,6 +56,7 @@ window.scalevRemoveCart = (itemId) => scalevFetch(`/public/cart/items/${itemId}`
 window.scalevGetProvinces = () => scalevFetch('/public/locations/provinces');
 window.scalevGetCities = (provinceId) => scalevFetch(`/public/locations/cities?province_id=${provinceId}`);
 window.scalevGetSubdistricts = (cityId) => scalevFetch(`/public/locations/subdistricts?city_id=${cityId}`);
+window.scalevGetPostalCodes = (locationId) => scalevFetch(`/public/locations/${locationId}/postal-codes`);
 
 window.scalevGetShipping = (payload) => scalevFetch('/public/checkout/shipping-options', {
   method: 'POST',

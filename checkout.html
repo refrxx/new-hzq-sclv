@@ -384,7 +384,6 @@
                     const opt = document.createElement('option');
                     opt.value = s.subdistrict_id;
                     opt.textContent = s.subdistrict_name;
-                    opt.dataset.postalCode = s.postal_code || '';
                     subdistrictSelect.appendChild(opt);
                 });
                 document.getElementById('shipping-options').innerHTML = '';
@@ -392,11 +391,21 @@
                 resetShipping();
             });
 
-            subdistrictSelect.addEventListener('change', () => {
+            subdistrictSelect.addEventListener('change', async () => {
                 const selected = subdistrictSelect.options[subdistrictSelect.selectedIndex];
                 selectedSubdistrictName = selected.textContent;
                 selectedLocationId = parseInt(selected.value);
-                postalInput.value = selected.dataset.postalCode || '';
+                try {
+                    const postalData = await scalevGetPostalCodes(selectedLocationId);
+                    const codes = postalData.data || [];
+                    if (codes.length > 0) {
+                        postalInput.value = codes[0].postal_code || '';
+                    } else {
+                        postalInput.value = '';
+                    }
+                } catch {
+                    postalInput.value = '';
+                }
                 cekBtn.disabled = false;
                 document.getElementById('shipping-options').innerHTML = '';
                 resetShipping();
