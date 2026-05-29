@@ -1570,7 +1570,7 @@ async function initCart() {
         document.querySelectorAll('.cart-subtotal').forEach(el => el.textContent = scalevFormatRupiah(totalPrice));
         document.querySelectorAll('.cart-discount').forEach(el => el.textContent = '- Rp0');
 
-        document.querySelectorAll('.btn-checkout-wa').forEach(btn => {
+        document.querySelectorAll('.btn-checkout').forEach(btn => {
             btn.textContent = 'Proses Checkout';
             btn.onclick = () => window.location.href = 'checkout.html';
         });

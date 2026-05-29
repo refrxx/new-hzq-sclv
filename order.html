@@ -154,18 +154,12 @@
                     <div class="mt-6 p-4 bg-amber-50 dark:bg-amber-900/20 rounded-2xl border border-amber-200 dark:border-amber-800">
                         <div class="flex items-start gap-3">
                             <span class="material-symbols-outlined text-amber-600">info</span>
-                            <p class="text-xs text-amber-800 dark:text-amber-200">Lakukan pembayaran ke salah satu rekening di atas. Konfirmasi pembayaran melalui WhatsApp agar pesanan segera diproses.</p>
+                            <p class="text-xs text-amber-800 dark:text-amber-200">Lakukan pembayaran ke salah satu rekening di atas. Pesanan akan diproses setelah pembayaran dikonfirmasi.</p>
                         </div>
                     </div>
                 </div>
 
                 <div class="text-center animate-fade-in-up">
-                    <a id="order-wa-link" href="#" target="_blank"
-                        class="inline-flex items-center gap-2 bg-green-600 text-white px-8 py-4 rounded-2xl font-bold shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all mb-4">
-                        <img src="img/wa-logo.svg" alt="WA" class="w-5 h-5 invert brightness-0">
-                        Konfirmasi ke WhatsApp
-                    </a>
-                    <br>
                     <a href="produk.html" class="text-brand-blue dark:text-brand-gold font-bold hover:underline">Lanjut Belanja</a>
                 </div>
             </div>
@@ -317,12 +311,6 @@
                     }
                 }
 
-                const waLink = document.getElementById('order-wa-link');
-                if (order.handler_phone) {
-                    waLink.href = `https://wa.me/${order.handler_phone}?text=${encodeURIComponent(order.chat_message || 'Halo, saya ingin konfirmasi pembayaran')}`;
-                } else {
-                    waLink.href = 'https://wa.me/6285155060816';
-                }
 
             } catch (err) {
                 document.getElementById('order-loading').classList.add('hidden');
