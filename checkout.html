@@ -104,7 +104,7 @@
                     </div>
 
                     <!-- Section 2: Alamat -->
-                    <div class="bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-32 p-6 md:p-8 shadow-sm">
+                    <div class="shipping-address-fieldset bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-32 p-6 md:p-8 shadow-sm">
                         <h2 class="text-xl font-bold text-slate-900 dark:text-white mb-6 border-b border-slate-100 dark:border-slate-800 pb-4">Alamat Pengiriman</h2>
                         <div class="space-y-5">
                             <div>
@@ -157,7 +157,7 @@
                     </div>
 
                     <!-- Section 3: Opsi Pengiriman -->
-                    <div class="bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-32 p-6 md:p-8 shadow-sm">
+                    <div class="shipping-address-fieldset bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-32 p-6 md:p-8 shadow-sm">
                         <h2 class="text-xl font-bold text-slate-900 dark:text-white mb-6 border-b border-slate-100 dark:border-slate-800 pb-4">Opsi Pengiriman</h2>
                         <div id="shipping-section">
                             <p class="text-slate-500 dark:text-slate-400 text-sm mb-4">Pilih provinsi, kota, dan kecamatan terlebih dahulu, lalu klik "Cek Ongkir".</p>
@@ -288,13 +288,12 @@
     <script>
         const courierNames = { jnt: 'J&T', jne: 'JNE', anteraja: 'AnterAja', sicepat: 'SiCepat', self_courier: 'Kurir Toko' };
 
+        let hasVariants = false;
         let selectedProvinceName = '';
         let selectedCityName = '';
         let selectedSubdistrictName = '';
         let selectedLocationId = '';
         let selectedShippingCost = 0;
-        let selectedCourierServiceId = '';
-        let selectedWarehouseUniqueId = '';
         let cartData = [];
         let cartSubtotal = 0;
 
@@ -305,6 +304,17 @@
             if (!cartData.length) {
                 window.location.href = 'cart.html';
                 return;
+            }
+
+            hasVariants = cartData.some(i => i.type === 'variant');
+
+            if (!hasVariants) {
+                // Bundle-only: hide shipping sections
+                document.getElementById('shipping-section').classList.add('hidden');
+                document.getElementById('checkout-shipping-cost').textContent = 'Rp0';
+                document.getElementById('checkout-shipping-cost').parentElement.classList.add('hidden');
+                const hide = document.querySelectorAll('.shipping-address-fieldset');
+                hide.forEach(el => el.classList.add('hidden'));
             }
 
             const summaryContainer = document.getElementById('checkout-summary-items');
@@ -328,15 +338,13 @@
             }).join('');
 
             document.getElementById('checkout-subtotal').textContent = scalevFormatRupiah(cartSubtotal);
-            updateTotal();
+            document.getElementById('checkout-total').textContent = scalevFormatRupiah(cartSubtotal);
 
-            // Init locations
-            await initCheckoutLocations();
-        }
-
-        function updateTotal() {
-            const total = cartSubtotal + selectedShippingCost;
-            document.getElementById('checkout-total').textContent = scalevFormatRupiah(total);
+            if (hasVariants) {
+                await initCheckoutLocations();
+            } else {
+                document.getElementById('checkout-submit-btn').disabled = false;
+            }
         }
 
         async function initCheckoutLocations() {
@@ -398,11 +406,7 @@
                 try {
                     const postalData = await scalevGetPostalCodes(selectedLocationId);
                     const codes = postalData.data || [];
-                    if (codes.length > 0) {
-                        postalInput.value = codes[0].postal_code || '';
-                    } else {
-                        postalInput.value = '';
-                    }
+                    postalInput.value = codes.length > 0 ? (codes[0].postal_code || '') : '';
                 } catch {
                     postalInput.value = '';
                 }
@@ -423,17 +427,22 @@
                 }));
 
                 try {
-                    const result = await scalevGetShipping({ items, shipping_location_id: selectedLocationId });
+                    const result = await scalevGetShipping({
+                        items,
+                        shipping_province: selectedProvinceName,
+                        shipping_city: selectedCityName,
+                        shipping_subdistrict: selectedSubdistrictName,
+                        shipping_postal_code: document.getElementById('postal-code').value.trim(),
+                        shipping_location_id: selectedLocationId,
+                    });
                     const options = result.data || [];
                     const container = document.getElementById('shipping-options');
                     container.innerHTML = options.map(opt => {
                         const displayName = `${courierNames[opt.courier_code] || opt.courier_code.toUpperCase()} ${opt.name}`;
                         return `
-                            <label class="flex items-start gap-4 p-4 rounded-2xl border-2 cursor-pointer transition-all hover:border-brand-blue shipping-option ${opt.courier_service_id === selectedCourierServiceId ? 'border-brand-blue bg-brand-blue/5' : 'border-slate-200 dark:border-slate-700'}"
-                                   data-service-id="${opt.courier_service_id}"
-                                   data-warehouse-id="${opt.warehouse_unique_id}"
+                            <label class="flex items-start gap-4 p-4 rounded-2xl border-2 cursor-pointer transition-all hover:border-brand-blue shipping-option border-slate-200 dark:border-slate-700"
                                    data-cost="${opt.cost}">
-                                <input type="radio" name="shipping" class="mt-1 accent-brand-blue" ${opt.courier_service_id === selectedCourierServiceId ? 'checked' : ''}>
+                                <input type="radio" name="shipping" class="mt-1 accent-brand-blue">
                                 <div class="flex-1">
                                     <p class="font-bold text-slate-900 dark:text-white text-sm">${displayName}</p>
                                     <p class="text-xs text-slate-400">Estimasi ${opt.etd}</p>
@@ -454,14 +463,13 @@
                             el.classList.add('border-brand-blue', 'bg-brand-blue/5');
                             el.querySelector('input[type="radio"]').checked = true;
                             selectedShippingCost = parseInt(el.dataset.cost);
-                            selectedCourierServiceId = el.dataset.serviceId;
-                            selectedWarehouseUniqueId = el.dataset.warehouseId;
                             document.getElementById('checkout-shipping-cost').textContent = scalevFormatRupiah(selectedShippingCost);
-                            updateTotal();
+                            const total = cartSubtotal + selectedShippingCost;
+                            document.getElementById('checkout-total').textContent = scalevFormatRupiah(total);
                             document.getElementById('checkout-submit-btn').disabled = false;
                         });
                     });
-                } catch (err) {
+                } catch {
                     document.getElementById('shipping-options').innerHTML = '<p class="text-red-500 text-sm">Gagal memuat opsi pengiriman. Coba lagi.</p>';
                 } finally {
                     cekBtn.disabled = false;
@@ -472,10 +480,8 @@
 
         function resetShipping() {
             selectedShippingCost = 0;
-            selectedCourierServiceId = '';
-            selectedWarehouseUniqueId = '';
             document.getElementById('checkout-shipping-cost').textContent = '-';
-            updateTotal();
+            document.getElementById('checkout-total').textContent = scalevFormatRupiah(cartSubtotal);
             document.getElementById('checkout-submit-btn').disabled = true;
         }
 
@@ -491,8 +497,8 @@
                 if (phone.startsWith('0')) phone = '62' + phone.slice(1);
 
                 const name = document.getElementById('customer-name').value.trim();
-                if (!name) { alert('Nama lengkap harus diisi'); btn.disabled = false; btn.innerHTML = 'Buat Pesanan'; return; }
-                if (!phone || phone.length < 10) { alert('Nomor HP harus diisi dengan benar'); btn.disabled = false; btn.innerHTML = 'Buat Pesanan'; return; }
+                if (!name) { alert('Nama lengkap harus diisi'); btn.disabled = false; btn.innerHTML = '<span class="material-symbols-outlined">shopping_bag_speed</span> Buat Pesanan'; return; }
+                if (!phone || phone.length < 10) { alert('Nomor HP harus diisi dengan benar'); btn.disabled = false; btn.innerHTML = '<span class="material-symbols-outlined">shopping_bag_speed</span> Buat Pesanan'; return; }
 
                 const items = cartData.map(item => ({
                     type: item.type,
@@ -505,27 +511,20 @@
                     customer_name: name,
                     customer_email: document.getElementById('customer-email').value.trim(),
                     customer_phone: phone,
-                    shipping_address: document.getElementById('shipping-address').value.trim(),
-                    shipping_province: selectedProvinceName,
-                    shipping_city: selectedCityName,
-                    shipping_subdistrict: selectedSubdistrictName,
-                    shipping_postal_code: document.getElementById('postal-code').value.trim(),
-                    shipping_location_id: selectedLocationId,
-                    courier_service_id: selectedCourierServiceId,
-                    warehouse_unique_id: selectedWarehouseUniqueId,
                     payment_method: document.getElementById('payment-method').value,
                 };
 
+                if (hasVariants) {
+                    payload.shipping_address = document.getElementById('shipping-address').value.trim();
+                    payload.shipping_province = selectedProvinceName;
+                    payload.shipping_city = selectedCityName;
+                    payload.shipping_subdistrict = selectedSubdistrictName;
+                    payload.shipping_postal_code = document.getElementById('postal-code').value.trim();
+                    payload.shipping_location_id = selectedLocationId;
+                }
+
                 try {
                     const result = await scalevCheckout(payload);
-                    const orders = JSON.parse(localStorage.getItem('scalev_orders') || '[]');
-                    orders.unshift({
-                        secret_slug: result.secret_slug,
-                        order_id: result.order_id,
-                        created_at: new Date().toISOString(),
-                        total: result.gross_revenue,
-                    });
-                    localStorage.setItem('scalev_orders', JSON.stringify(orders));
                     localStorage.removeItem('scalev_guest_token');
                     window.location.href = `order.html?slug=${result.secret_slug}`;
                 } catch (err) {
