@@ -1,0 +1,901 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Hamzah Quran - Pusat Al Quran & IQRO Custom Premium</title>
+    <link rel="icon" type="image/svg+xml" href="img/hamzah-favico.svg">
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            blue: '#1A5FB4',
+                            gold: '#ffc107',
+                        }
+                    },
+                    fontFamily: {
+                        display: ['Plus Jakarta Sans', 'sans-serif'],
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    borderRadius: {
+                        '32': '32px',
+                        '40': '40px',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Custom CSS -->
+    <link href="style.css" rel="stylesheet" />
+
+    <!-- Google Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Plus+Jakarta+Sans:wght@700;800;900&display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-25..0"
+        rel="stylesheet" />
+
+    <!-- Facebook Pixel Code -->
+    <script>
+        !function (f, b, e, v, n, t, s) {
+            if (f.fbq) return; n = f.fbq = function () {
+                n.callMethod ?
+                    n.callMethod.apply(n, arguments) : n.queue.push(arguments)
+            };
+            if (!f._fbq) f._fbq = n; n.push = n; n.loaded = !0; n.version = '2.0';
+            n.queue = []; t = b.createElement(e); t.async = !0;
+            t.src = v; s = b.getElementsByTagName(e)[0];
+            s.parentNode.insertBefore(t, s)
+        }(window, document, 'script',
+            'https://connect.facebook.net/en_US/fbevents.js');
+        fbq('init', 'PASTE_YOUR_PIXEL_ID_HERE');
+        fbq('track', 'PageView');
+    </script>
+    <noscript><img height="1" width="1" style="display:none"
+            src="https://www.facebook.com/tr?id=PASTE_YOUR_PIXEL_ID_HERE&ev=PageView&noscript=1" /></noscript>
+    <!-- End Facebook Pixel Code -->
+</head>
+
+<body>
+    <!-- Top Promo Bar -->
+    <div class="promo-bar font-sans flex items-center justify-center px-4 overflow-hidden h-[44px]">
+        <div class="flex items-center justify-center gap-4 sm:gap-10">
+            <span class="promo-item uppercase">🔥 Disc. up to 20% order via Website</span>
+            <span class="promo-separator hidden sm:inline">•</span>
+            <span class="promo-item uppercase hidden sm:inline">🚚 Free Ongkir (area Pulau Jawa)</span>
+            <span class="promo-separator hidden sm:inline">•</span>
+            <span class="promo-item uppercase hidden sm:inline">📦 Bisa COD ke seluruh Indonesia</span>
+        </div>
+    </div>
+
+    <header class="header-sticky w-full z-50 scrolled">
+        <nav class="max-w-[1200px] mx-auto px-8 md:px-12 py-4 flex items-center justify-between">
+            <!-- Logo -->
+            <a class="flex items-center relative" href="index.html">
+                <img src="img/hamzahcolor.png" alt="Hamzah Quran"
+                    class="h-6 md:h-8 w-auto transition-opacity duration-300 opacity-100 dark:opacity-0">
+                <img src="img/hamzahquran.png" alt="Hamzah Quran"
+                    class="h-6 md:h-8 w-auto absolute top-0 left-0 transition-opacity duration-300 opacity-0 dark:opacity-100 invert">
+            </a>
+
+            <!-- Desktop Navigation -->
+            <ul class="hidden lg:flex items-center space-x-8">
+                <li><a class="nav-link-underline font-sans font-semibold text-brand-blue hover:text-brand-blue dark:text-brand-gold dark:hover:text-white transition-colors duration-300"
+                        href="index.html">Home</a></li>
+                <li><a class="nav-link-underline font-sans font-semibold text-slate-500 hover:text-brand-blue dark:text-slate-400 dark:hover:text-white transition-colors duration-300"
+                        href="produk.html">Produk</a></li>
+                <li><a class="nav-link-underline font-sans font-semibold text-slate-500 hover:text-brand-blue dark:text-slate-400 dark:hover:text-white transition-colors duration-300"
+                        href="cover.html">Katalog Cover</a></li>
+                <li><a class="nav-link-underline font-sans font-semibold text-slate-500 hover:text-brand-blue dark:text-slate-400 dark:hover:text-white transition-colors duration-300"
+                        href="reseller.html">Reseller</a></li>
+                <li><a class="nav-link-underline font-sans font-semibold text-slate-500 hover:text-brand-blue dark:text-slate-400 dark:hover:text-white transition-colors duration-300"
+                        href="bulk-order.html">B2B</a></li>
+            </ul>
+
+            <div class="flex items-center gap-4">
+                <button id="theme-toggle"
+                    class="p-2.5 bg-slate-100 dark:bg-slate-800 rounded-full text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors duration-300 border-0 flex items-center justify-center w-10 h-10 relative overflow-hidden">
+                    <span
+                        class="material-symbols-outlined absolute transition-transform duration-300 rotate-0 dark:-rotate-90 dark:opacity-0">dark_mode</span>
+                    <span
+                        class="material-symbols-outlined absolute transition-transform duration-300 rotate-90 opacity-0 dark:rotate-0 dark:opacity-100">light_mode</span>
+                </button>
+                <a href="cart.html"
+                    class="p-2.5 bg-slate-100 dark:bg-slate-800 rounded-full text-slate-600 dark:text-slate-400 hover:text-brand-blue dark:hover:text-brand-gold transition-colors duration-300 border-0 flex items-center justify-center w-10 h-10 relative">
+                    <span class="material-symbols-outlined">shopping_cart</span>
+                    <span id="nav-cart-badge"
+                        class="absolute -top-1 -right-1 bg-red-500 text-white text-[0.6rem] font-bold w-4 h-4 rounded-full flex items-center justify-center hidden">0</span>
+                </a>
+
+                <!-- Mobile Menu Button -->
+                <button id="mobile-menu-button"
+                    class="lg:hidden p-2 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors duration-300 border-0 flex items-center justify-center">
+                    <span class="material-symbols-outlined">menu</span>
+                </button>
+            </div>
+        </nav>
+
+        <!-- Mobile Menu (Hidden by default) -->
+        <div id="mobile-menu"
+            class="hidden lg:hidden bg-white dark:bg-[#080e16] absolute top-full left-0 w-full border-b dark:border-slate-800 shadow-xl py-6 px-8 md:px-12 animate-fade-in-down transition-colors duration-300 z-[-1]">
+            <ul class="flex flex-col space-y-4">
+                <li><a class="font-sans font-semibold text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white block px-8 md:px-12 py-2 transition-colors duration-300"
+                        href="index.html">Home</a></li>
+                <li><a class="font-sans font-semibold text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white block px-8 md:px-12 py-2 transition-colors duration-300"
+                        href="produk.html">Produk</a></li>
+                <li><a class="font-sans font-semibold text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white block px-8 md:px-12 py-2 transition-colors duration-300"
+                        href="cover.html">Katalog Cover</a></li>
+                <li><a class="font-sans font-semibold text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white block px-8 md:px-12 py-2 transition-colors duration-300"
+                        href="reseller.html">Reseller</a></li>
+                <li><a class="font-sans font-semibold text-slate-500 dark:text-slate-400 hover:text-slate-500 dark:hover:text-white block px-8 md:px-12 py-2 transition-colors duration-300"
+                        href="bulk-order.html">B2B</a></li>
+                <li class="pt-4"><a href="cart.html"
+                        class="block bg-brand-blue dark:bg-white text-white dark:text-black rounded-full px-6 py-3 font-bold shadow-md text-center transition-all duration-300">Lihat
+                        Keranjang</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="hero-section relative overflow-hidden py-20 lg:py-24 mt-5">
+            <div class="grid-bg absolute inset-0 z-0"></div>
+            <div class="max-w-[1200px] mx-auto px-8 md:px-12 relative z-10">
+                <div class="grid grid-cols-1 lg:grid-cols-2 items-center gap-12 lg:gap-20">
+                    <!-- Left -->
+                    <div class="animate-fade-in-up flex flex-col items-center lg:items-start text-center lg:text-left">
+                        <h1
+                            class="text-5xl lg:text-7xl font-display font-black text-slate-900 dark:text-white mb-6 leading-tighter">
+                            Hadiah Bermakna Untuk Yang Tercinta
+                        </h1>
+                        <p class="text-xl text-slate-500 dark:text-slate-400 font-medium mb-10 max-w-lg">
+                            Al Quran & Iqro dengan custom nama. Pilihan hadiah terbaik untuk yang tersayang.
+                        </p>
+                        <div class="flex flex-wrap items-center justify-center lg:justify-start gap-6">
+                            <a href="produk.html"
+                                class="btn-custome inline-block bg-brand-gold dark:bg-brand-blue text-black dark:text-white px-10 py-3.5 rounded-full font-bold shadow-lg hover:scale-105 hover:bg-brand-gold/90 dark:hover:bg-brand-blue/90 transition-transform">
+                                Order Sekarang
+                            </a>
+                            <a href="cover.html"
+                                class="font-bold text-slate-900 dark:text-white flex items-center gap-2 hover:translate-x-1 hover:text-brand-blue dark:hover:text-brand-gold transition-transform">
+                                Lihat Desain Cover <span class="material-symbols-outlined">arrow_forward</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Right: Video Grid -->
+                    <div class="animate-fade-in-right w-full flex justify-center lg:justify-end pt-10 lg:pt-0">
+                        <div class="grid grid-cols-2 gap-4 lg:gap-8 w-full max-w-[580px] items-center">
+                            <!-- Video 1 -->
+                            <div
+                                class="rounded-32 overflow-hidden shadow-2xl media-card aspect-[10/16] transform translate-y-4 lg:translate-y-8">
+                                <video autoplay muted loop playsinline class="w-full h-full object-cover">
+                                    <source src="img/testi-hamzah1vid.mp4" type="video/mp4">
+                                </video>
+                            </div>
+                            <!-- Video 2 -->
+                            <div
+                                class="rounded-32 overflow-hidden shadow-2xl media-card aspect-[10/16] transform -translate-y-4 lg:-translate-y-8">
+                                <video autoplay muted loop playsinline class="w-full h-full object-cover">
+                                    <source src="img/testi-hamzah2vid.mp4" type="video/mp4">
+                                </video>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Stats -->
+        <section class="max-w-[1200px] mx-auto px-8 md:px-12 py-10 lg:py-20">
+            <div
+                class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-32 shadow-xl grid grid-cols-1 md:grid-cols-3 py-10 px-6 text-center -mt-20 lg:-mt-32 relative z-20 gap-10 md:gap-0">
+
+                <div class="md:border-r border-slate-100 dark:border-slate-800">
+                    <h4 class="text-4xl lg:text-5xl font-display font-black mb-1">
+                        <span class="counter" data-target="13000">0</span>+
+                    </h4>
+                    <p class="text-slate-400 uppercase tracking-widest text-xs font-bold">Pcs Terjual</p>
+                </div>
+
+                <div class="md:border-r border-slate-100 dark:border-slate-800">
+                    <h4 class="text-4xl lg:text-5xl font-display font-black mb-1">
+                        <span class="counter" data-target="10000">0</span>+
+                    </h4>
+                    <p class="text-slate-400 uppercase tracking-widest text-xs font-bold">Customer Setia</p>
+                </div>
+
+                <div>
+                    <h4 class="text-4xl lg:text-5xl font-display font-black text-brand-blue dark:text-blue-400 mb-1">
+                        <span class="counter" data-target="4.9" data-decimal="1">0</span>/5
+                    </h4>
+                    <p class="text-slate-400 uppercase tracking-widest text-xs font-bold">Penilaian Produk</p>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Trending Collection -->
+        <section id="trending" class="max-w-[1200px] mx-auto px-8 md:px-12 py-20 lg:py-32 z-20 relative">
+            <div class="text-center mb-12 animate-fade-in-up">
+                <span class="text-xs md:text-sm font-bold tracking-[0.2em] text-slate-500 uppercase mb-3">Trending
+                    Now</span>
+                <h2 class="text-3xl md:text-4xl lg:text-5xl font-display font-black text-slate-900 dark:text-white">
+                    Produk best seller dari kami
+                </h2>
+            </div>
+
+            <div id="trending-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Data akan diisi otomatis dari script.js -->
+            </div>
+
+            <!-- More Products Button -->
+            <div class="mt-16 flex justify-center animate-fade-in-up">
+                <a href="produk.html"
+                    class="px-10 py-4 bg-brand-blue dark:bg-white text-white dark:text-slate-900 rounded-full font-bold hover:bg-brand-gold dark:hover:bg-brand-blue hover:text-black dark:hover:text-white transition-all shadow-lg hover:scale-105 flex items-center gap-3">
+                    <span>Lihat Semua Produk</span>
+                    <span
+                        class="material-symbols-outlined transition-transform group-hover:translate-x-1">arrow_forward</span>
+                </a>
+            </div>
+        </section>
+
+        <!-- Catalog Covers Section -->
+        <section id="catalog"
+            class="max-w-[1200px] mx-auto px-8 md:px-12 py-20 lg:py-32 border-t border-slate-100 dark:border-slate-800">
+            <div class="text-center max-w-3xl mx-auto mb-16 animate-fade-in-up">
+                <h2
+                    class="text-3xl md:text-4xl lg:text-5xl font-display font-black mb-6 leading-tight text-slate-900 dark:text-white">
+                    Pilihan desain dan Al Quran lebih bervariasi
+                </h2>
+                <p class="text-slate-500 dark:text-slate-400 font-medium text-lg">
+                    Cocok untuk anak-anak hingga orang tua
+                </p>
+            </div>
+
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 lg:gap-6 mb-16">
+                <!-- Cover 1 -->
+                <div class="group cursor-pointer animate-fade-in-up">
+                    <div
+                        class="rounded-2xl overflow-hidden aspect-[1/1.2] relative bg-slate-100 dark:bg-slate-800 border border-slate-100 dark:border-slate-800 shadow-sm">
+                        <img src="img/katalog/aesthetic-series-2_comp.jpg" alt="Aesth Sage"
+                            class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                    </div>
+                </div>
+                <!-- Cover 2 -->
+                <div class="group cursor-pointer animate-fade-in-up" style="animation-delay: 50ms;">
+                    <div
+                        class="rounded-2xl overflow-hidden aspect-[1/1.2] relative bg-slate-100 dark:bg-slate-800 border border-slate-100 dark:border-slate-800 shadow-sm">
+                        <img src="img/katalog/floral-wedding-3_comp.jpg" alt="Pink Blossom"
+                            class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                    </div>
+                </div>
+                <!-- Cover 3 -->
+                <div class="group cursor-pointer animate-fade-in-up" style="animation-delay: 100ms;">
+                    <div
+                        class="rounded-2xl overflow-hidden aspect-[1/1.2] relative bg-slate-100 dark:bg-slate-800 border border-slate-100 dark:border-slate-800 shadow-sm">
+                        <img src="img/katalog/muslim-kids-series_comp.jpg" alt="SHQ Dark Grey"
+                            class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                    </div>
+                </div>
+                <!-- Cover 4 -->
+                <div class="group cursor-pointer animate-fade-in-up" style="animation-delay: 150ms;">
+                    <div
+                        class="rounded-2xl overflow-hidden aspect-[1/1.2] relative bg-slate-100 dark:bg-slate-800 border border-slate-100 dark:border-slate-800 shadow-sm">
+                        <img src="img/katalog/ka'bah-series-3_comp.jpg" alt="Ka'bah Black"
+                            class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                    </div>
+                </div>
+                <!-- Cover 5 -->
+                <div class="group cursor-pointer animate-fade-in-up" style="animation-delay: 200ms;">
+                    <div
+                        class="rounded-2xl overflow-hidden aspect-[1/1.2] relative bg-slate-100 dark:bg-slate-800 border border-slate-100 dark:border-slate-800 shadow-sm">
+                        <img src="img/katalog/rocket-3d-series-3_comp.jpg" alt="Astronot 3D"
+                            class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                    </div>
+                </div>
+                <!-- Cover 6 -->
+                <div class="group cursor-pointer animate-fade-in-up" style="animation-delay: 250ms;">
+                    <div
+                        class="rounded-2xl overflow-hidden aspect-[1/1.2] relative bg-slate-100 dark:bg-slate-800 border border-slate-100 dark:border-slate-800 shadow-sm">
+                        <img src="img/katalog/muslim-kids-series-10_comp.jpg" alt="Kufi Blue"
+                            class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                    </div>
+                </div>
+                <!-- Cover 7 -->
+                <div class="group cursor-pointer animate-fade-in-up" style="animation-delay: 300ms;">
+                    <div
+                        class="rounded-2xl overflow-hidden aspect-[1/1.2] relative bg-slate-100 dark:bg-slate-800 border border-slate-100 dark:border-slate-800 shadow-sm">
+                        <img src="img/katalog/kids-junior-7_comp.jpg" alt="Pinky Girl"
+                            class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                    </div>
+                </div>
+                <!-- Cover 8 -->
+                <div class="group cursor-pointer animate-fade-in-up" style="animation-delay: 350ms;">
+                    <div
+                        class="rounded-2xl overflow-hidden aspect-[1/1.2] relative bg-slate-100 dark:bg-slate-800 border border-slate-100 dark:border-slate-800 shadow-sm">
+                        <img src="img/katalog/muslim-kids-series-6_comp.jpg" alt="Aurora"
+                            class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                    </div>
+                </div>
+                <!-- Cover 9 -->
+                <div class="group cursor-pointer animate-fade-in-up" style="animation-delay: 400ms;">
+                    <div
+                        class="rounded-2xl overflow-hidden aspect-[1/1.2] relative bg-slate-100 dark:bg-slate-800 border border-slate-100 dark:border-slate-800 shadow-sm">
+                        <img src="img/katalog/rainbow-series-4_comp.jpg" alt="Rainbow Blue"
+                            class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                    </div>
+                </div>
+                <!-- Cover 10 -->
+                <div class="group cursor-pointer animate-fade-in-up" style="animation-delay: 450ms;">
+                    <div
+                        class="rounded-2xl overflow-hidden aspect-[1/1.2] relative bg-slate-100 dark:bg-slate-800 border border-slate-100 dark:border-slate-800 shadow-sm">
+                        <img src="img/katalog/kids-junior-1_comp.jpg" alt="Rocket Blue"
+                            class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex justify-center animate-fade-in-up" style="animation-delay: 500ms;">
+                <a href="cover.html"
+                    class="px-10 py-4 bg-brand-blue dark:bg-white text-white dark:text-slate-900 rounded-full font-bold hover:bg-brand-gold dark:hover:bg-brand-blue hover:text-black dark:hover:text-white transition-all shadow-lg hover:scale-105 flex items-center gap-3">
+                    Lihat Katalog Cover
+                    <span class="material-symbols-outlined text-xl">arrow_forward</span>
+                </a>
+            </div>
+        </section>
+
+
+        <!-- Why Choose Us -->
+        <section id="why-choose"
+            class="max-w-[1200px] mx-auto px-8 md:px-12 py-20 lg:py-32 border-t border-slate-100 dark:border-slate-800">
+            <div class="text-center max-w-3xl mx-auto mb-16 animate-fade-in-up">
+                <h2
+                    class="text-3xl md:text-4xl lg:text-5xl font-display font-black mb-6 leading-tight text-slate-900 dark:text-white">
+                    Kenapa Ribuan Orang Memilih Hamzah Quran?
+                </h2>
+                <p class="text-slate-500 dark:text-slate-400 font-medium text-lg">
+                    Kami berkomitmen memberikan Al Quran yang terjangkau dan berkualitas untuk semua
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-12 gap-y-16">
+                <!-- Feature 1 -->
+                <div class="feature-card flex flex-col items-start text-left animate-fade-in-up">
+                    <div
+                        class="w-16 h-16 rounded-full bg-blue-50 text-blue-900 dark:bg-slate-800 dark:text-white flex items-center justify-center mb-6">
+                        <span class="material-symbols-outlined text-3xl">menu_book</span>
+                    </div>
+                    <h3 class="text-2xl font-display font-bold text-slate-900 dark:text-white mb-3">Hardcover Premium
+                    </h3>
+                    <p class="text-slate-500 dark:text-slate-400 font-medium leading-relaxed">
+                        Hasil cetak jelas, kertas berkualitas, dan cover kuat. Bukan stiker tempelan
+                    </p>
+                </div>
+
+                <!-- Feature 2 -->
+                <div class="feature-card flex flex-col items-start text-left animate-fade-in-up"
+                    style="animation-delay: 100ms;">
+                    <div
+                        class="w-16 h-16 rounded-full bg-blue-50 text-blue-900 dark:bg-slate-800 dark:text-white flex items-center justify-center mb-6">
+                        <span class="material-symbols-outlined text-3xl">schedule</span>
+                    </div>
+                    <h3 class="text-2xl font-display font-bold text-slate-900 dark:text-white mb-3">Proses Cepat</h3>
+                    <p class="text-slate-500 dark:text-slate-400 font-medium leading-relaxed">
+                        Hanya 2-3 hari setelah desain disetujui
+                    </p>
+                </div>
+
+                <!-- Feature 3 -->
+                <div class="feature-card flex flex-col items-start text-left animate-fade-in-up"
+                    style="animation-delay: 200ms;">
+                    <div
+                        class="w-16 h-16 rounded-full bg-blue-50 text-blue-900 dark:bg-slate-800 dark:text-white flex items-center justify-center mb-6">
+                        <span class="material-symbols-outlined text-3xl">person</span>
+                    </div>
+                    <h3 class="text-2xl font-display font-bold text-slate-900 dark:text-white mb-3">Tim Professional
+                    </h3>
+                    <p class="text-slate-500 dark:text-slate-400 font-medium leading-relaxed">
+                        Siap melayani pesanan besar dengan cepat dan berkualitas
+                    </p>
+                </div>
+
+                <!-- Feature 4 -->
+                <div class="feature-card flex flex-col items-start text-left animate-fade-in-up"
+                    style="animation-delay: 300ms;">
+                    <div
+                        class="w-16 h-16 rounded-full bg-blue-50 text-blue-900 dark:bg-slate-800 dark:text-white flex items-center justify-center mb-6">
+                        <span class="material-symbols-outlined text-3xl">verified_user</span>
+                    </div>
+                    <h3 class="text-2xl font-display font-bold text-slate-900 dark:text-white mb-3">Garansi Ganti Baru
+                    </h3>
+                    <p class="text-slate-500 dark:text-slate-400 font-medium leading-relaxed">
+                        Gratis penggantian jika terdapat salah cetak maupun cacat dari pabrik
+                    </p>
+                </div>
+
+                <!-- Feature 5 -->
+                <div class="feature-card flex flex-col items-start text-left animate-fade-in-up"
+                    style="animation-delay: 400ms;">
+                    <div
+                        class="w-16 h-16 rounded-full bg-blue-50 text-blue-900 dark:bg-slate-800 dark:text-white flex items-center justify-center mb-6">
+                        <span class="material-symbols-outlined text-3xl">text_fields</span>
+                    </div>
+                    <h3 class="text-2xl font-display font-bold text-slate-900 dark:text-white mb-3">Desain Custom</h3>
+                    <p class="text-slate-500 dark:text-slate-400 font-medium leading-relaxed">
+                        Nama dicetak langsung di cover sesuai permintaan
+                    </p>
+                </div>
+
+                <!-- Feature 6 -->
+                <div class="feature-card flex flex-col items-start text-left animate-fade-in-up"
+                    style="animation-delay: 500ms;">
+                    <div
+                        class="w-16 h-16 rounded-full bg-blue-50 text-blue-900 dark:bg-slate-800 dark:text-white flex items-center justify-center mb-6">
+                        <span class="material-symbols-outlined text-3xl">local_shipping</span>
+                    </div>
+                    <h3 class="text-2xl font-display font-bold text-slate-900 dark:text-white mb-3">Pengiriman Nasional
+                    </h3>
+                    <p class="text-slate-500 dark:text-slate-400 font-medium leading-relaxed">
+                        Melayani pengiriman ke Seluruh Indonesia. Gratis Ongkir untuk area Pulau Jawa
+                    </p>
+                </div>
+            </div>
+            <!-- Testimonials -->
+            <section id="testimonials" class="py-20 lg:py-32 overflow-hidden">
+                <div class="max-w-[1200px] mx-auto px-8 md:px-12 mb-16 flex flex-col items-center gap-4 text-center">
+                    <div class="max-w-2xl mx-auto">
+                        <span
+                            class="text-xs md:text-sm font-bold tracking-[0.2em] text-slate-500 uppercase mb-3 block">Testimonials</span>
+                        <h2
+                            class="text-3xl md:text-4xl lg:text-5xl font-display font-black text-slate-900 dark:text-white">
+                            Trusted by Over 10k+ Satisfied Customers
+                        </h2>
+                    </div>
+                    <!-- Navigation Buttons (Hidden but kept for structure) -->
+                    <div class="flex gap-4 mb-4 nav-hidden">
+                        <button id="prev-testi" class="nav-btn">
+                            <span class="material-symbols-outlined">west</span>
+                        </button>
+                        <button id="next-testi" class="nav-btn">
+                            <span class="material-symbols-outlined">east</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="relative flex overflow-hidden">
+                    <div id="testi-track" class="testimonials-track">
+                        <!-- Testimonial 1 -->
+                        <div class="testimonial-card">
+                            <video autoplay muted loop playsinline>
+                                <source src="img/testi-hamzah1vid.mp4" type="video/mp4">
+                            </video>
+                            <div class="testimonial-overlay">
+                                <p class="testi-text">"Maa syaa Allah, Al Quran-nya bagus banget! Cover-nya premium,
+                                    cetakan nama-nya juga rapih. Cocok banget buat kado."</p>
+                                <div class="testi-footer">
+                                    <div class="testi-info">
+                                        <h4>Aisha Rahma</h4>
+                                        <p>Verified Buyer</p>
+                                    </div>
+                                    <span class="platform-mini-badge platform-shopee">Shopee</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Testimonial 2 -->
+                        <div class="testimonial-card">
+                            <img src="img/testi-hamzah2.webp" alt="Testimonial">
+                            <div class="testimonial-overlay">
+                                <p class="testi-text">"Pengiriman cepat se-Indonesia. Packing sangat aman pake bubble
+                                    wrap tebal. Barangnya sampai tanpa cacat sedikitpun."</p>
+                                <div class="testi-footer">
+                                    <div class="testi-info">
+                                        <h4>Budi Santoso</h4>
+                                        <p>Jakarta Selatan</p>
+                                    </div>
+                                    <span class="platform-mini-badge platform-tokopedia">Tokopedia</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Testimonial 3 -->
+                        <div class="testimonial-card">
+                            <img src="img/testi-hamzah3.webp" alt="Testimonial">
+                            <div class="testimonial-overlay">
+                                <p class="testi-text">"Admin-nya ramah banget pas konsultasi desain. Proses pengerjaan
+                                    juga kilat, cuma 2 hari udah dikirim. Berkah selalu ya."</p>
+                                <div class="testi-footer">
+                                    <div class="testi-info">
+                                        <h4>Siti Aminah</h4>
+                                        <p>Surabaya</p>
+                                    </div>
+                                    <span class="platform-mini-badge platform-wa">WhatsApp</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Testimonial 4 -->
+                        <div class="testimonial-card">
+                            <img src="img/testi-hamzah1.webp" alt="Testimonial">
+                            <div class="testimonial-overlay">
+                                <p class="testi-text">"Kualitas kertasnya jempolan, tidak tembus tinta dan warnanya adem
+                                    di mata. Sangat puas dengan layanan Hamzah Quran."</p>
+                                <div class="testi-footer">
+                                    <div class="testi-info">
+                                        <h4>Rizky Febrian</h4>
+                                        <p>Bandung Buyer</p>
+                                    </div>
+                                    <span class="platform-mini-badge platform-shopee">Shopee</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Clones (Duplicate for animation) -->
+                        <!-- Testimonial 1 Clone -->
+                        <div class="testimonial-card">
+                            <video autoplay muted loop playsinline>
+                                <source src="img/testi-hamzah1vid.mp4" type="video/mp4">
+                            </video>
+                            <div class="testimonial-overlay">
+                                <p class="testi-text">"Maa syaa Allah, Al Quran-nya bagus banget! Cover-nya premium,
+                                    cetakan nama-nya juga rapih. Cocok banget buat kado."</p>
+                                <div class="testi-footer">
+                                    <div class="testi-info">
+                                        <h4>Aisha Rahma</h4>
+                                        <p>Verified Buyer</p>
+                                    </div>
+                                    <span class="platform-mini-badge platform-shopee">Shopee</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Testimonial 2 Clone -->
+                        <div class="testimonial-card">
+                            <img src="img/testi-hamzah2.webp" alt="Testimonial">
+                            <div class="testimonial-overlay">
+                                <p class="testi-text">"Pengiriman cepat se-Indonesia. Packing sangat aman pake bubble
+                                    wrap tebal. Barangnya sampai tanpa cacat sedikitpun."</p>
+                                <div class="testi-footer">
+                                    <div class="testi-info">
+                                        <h4>Budi Santoso</h4>
+                                        <p>Jakarta Selatan</p>
+                                    </div>
+                                    <span class="platform-mini-badge platform-tokopedia">Tokopedia</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Testimonial 3 Clone -->
+                        <div class="testimonial-card">
+                            <img src="img/testi-hamzah3.webp" alt="Testimonial">
+                            <div class="testimonial-overlay">
+                                <p class="testi-text">"Admin-nya ramah banget pas konsultasi desain. Proses pengerjaan
+                                    juga kilat, cuma 2 hari udah dikirim. Berkah selalu ya."</p>
+                                <div class="testi-footer">
+                                    <div class="testi-info">
+                                        <h4>Siti Aminah</h4>
+                                        <p>Surabaya</p>
+                                    </div>
+                                    <span class="platform-mini-badge platform-wa">WhatsApp</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Testimonial 4 Clone -->
+                        <div class="testimonial-card">
+                            <img src="img/testi-hamzah1.webp" alt="Testimonial">
+                            <div class="testimonial-overlay">
+                                <p class="testi-text">"Kualitas kertasnya jempolan, tidak tembus tinta dan warnanya adem
+                                    di mata. Sangat puas dengan layanan Hamzah Quran."</p>
+                                <div class="testi-footer">
+                                    <div class="testi-info">
+                                        <h4>Rizky Febrian</h4>
+                                        <p>Bandung Buyer</p>
+                                    </div>
+                                    <span class="platform-mini-badge platform-shopee">Shopee</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- FAQ -->
+            <section id="faq"
+                class="max-w-[1200px] mx-auto px-2 md:px-12 py-20 lg:py-32 border-t border-slate-100 dark:border-slate-800">
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-12 lg:gap-20">
+                    <div class="animate-fade-in-up lg:sticky lg:top-32 h-fit">
+                        <h2
+                            class="text-4xl lg:text-5xl font-display font-black mb-4 leading-tight text-center lg:text-left">
+                            Ada Pertanyaan?
+                        </h2>
+                        <p class="text-slate-500 dark:text-slate-400 font-medium text-center lg:text-left">Jawabannya
+                            ada di sini.</p>
+                    </div>
+                    <div class="lg:col-span-2 space-y-4">
+                        <!-- FAQ Item 1 -->
+                        <div
+                            class="faq-item group bg-slate-50 dark:bg-slate-900/50 rounded-2xl overflow-hidden border border-transparent hover:border-slate-200 dark:hover:border-slate-700 transition-all">
+                            <button class="faq-trigger w-full flex items-center justify-between p-6 text-left"
+                                onclick="this.parentElement.classList.toggle('active')">
+                                <span class="text-lg font-display font-bold dark:text-white">Berapa lama proses
+                                    pengerjaannya?</span>
+                                <span
+                                    class="material-symbols-outlined transition-transform duration-300 group-[.active]:rotate-180">expand_more</span>
+                            </button>
+                            <div
+                                class="faq-content max-h-0 overflow-hidden transition-all duration-300 group-[.active]:max-h-40">
+                                <div class="p-6 pt-0 text-slate-500 dark:text-slate-400 font-medium leading-relaxed">
+                                    Proses pengerjaan biasanya memakan waktu 2-3 hari kerja setelah desain disetujui,
+                                    tergantung pada jumlah pesanan.
+                                </div>
+                            </div>
+                        </div>
+                        <!-- FAQ Item 2 -->
+                        <div
+                            class="faq-item group bg-slate-50 dark:bg-slate-900/50 rounded-2xl overflow-hidden border border-transparent hover:border-slate-200 dark:hover:border-slate-700 transition-all">
+                            <button class="faq-trigger w-full flex items-center justify-between p-6 text-left"
+                                onclick="this.parentElement.classList.toggle('active')">
+                                <span class="text-lg font-display font-bold dark:text-white">Bisa pesan satuan?</span>
+                                <span
+                                    class="material-symbols-outlined transition-transform duration-300 group-[.active]:rotate-180">expand_more</span>
+                            </button>
+                            <div
+                                class="faq-content max-h-0 overflow-hidden transition-all duration-300 group-[.active]:max-h-40">
+                                <div class="p-6 pt-0 text-slate-500 dark:text-slate-400 font-medium leading-relaxed">
+                                    Tentu bisa. Kami melayani pesanan satuan untuk Al-Quran, Iqro dan Juz Amma custom
+                                    nama.
+                                </div>
+                            </div>
+                        </div>
+                        <!-- FAQ Item 3 -->
+                        <div
+                            class="faq-item group bg-slate-50 dark:bg-slate-900/50 rounded-2xl overflow-hidden border border-transparent hover:border-slate-200 dark:hover:border-slate-700 transition-all">
+                            <button class="faq-trigger w-full flex items-center justify-between p-6 text-left"
+                                onclick="this.parentElement.classList.toggle('active')">
+                                <span class="text-lg font-display font-bold dark:text-white">Apakah tersedia gratis
+                                    ongkir?</span>
+                                <span
+                                    class="material-symbols-outlined transition-transform duration-300 group-[.active]:rotate-180">expand_more</span>
+                            </button>
+                            <div
+                                class="faq-content max-h-0 overflow-hidden transition-all duration-300 group-[.active]:max-h-40">
+                                <div class="p-6 pt-0 text-slate-500 dark:text-slate-400 font-medium leading-relaxed">
+                                    Pengiriman ke seluruh pulau Jawa gratis ongkir. Untuk area luar Jawa, ongkir akan
+                                    ditambahkan sesuai dengan biaya pengiriman dikurangi subsidi ongkir dari kami.
+                                </div>
+                            </div>
+                        </div>
+                        <!-- FAQ Item 4 -->
+                        <div
+                            class="faq-item group bg-slate-50 dark:bg-slate-900/50 rounded-2xl overflow-hidden border border-transparent hover:border-slate-200 dark:hover:border-slate-700 transition-all">
+                            <button class="faq-trigger w-full flex items-center justify-between p-6 text-left"
+                                onclick="this.parentElement.classList.toggle('active')">
+                                <span class="text-lg font-display font-bold dark:text-white">Bagaimana jika pesanan
+                                    tidak sesuai?</span>
+                                <span
+                                    class="material-symbols-outlined transition-transform duration-300 group-[.active]:rotate-180">expand_more</span>
+                            </button>
+                            <div
+                                class="faq-content max-h-0 overflow-hidden transition-all duration-300 group-[.active]:max-h-40">
+                                <div class="p-6 pt-0 text-slate-500 dark:text-slate-400 font-medium leading-relaxed">
+                                    Kami menyediakan garansi ganti baru 100% gratis apabila terdapat kesalahan cetak
+                                    dari kami maupun cacat produksi.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Our Partners Section -->
+            <section
+                class="max-w-[1200px] mx-auto px-8 md:px-12 py-20 lg:py-32 border-t border-slate-100 dark:border-slate-800">
+                <div class="text-center mb-16 animate-fade-in-up">
+                    <h2 class="text-3xl md:text-4xl font-display font-black text-slate-900 dark:text-white">
+                        Partner Kami
+                    </h2>
+                </div>
+
+                <div class="flex flex-wrap items-center justify-center gap-8 md:gap-16 opacity-100 dark:opacity-80">
+                    <!-- Partner 1: Lion Parcel -->
+                    <div class="group transition-all duration-300 opacity-60 grayscale hover:grayscale-0">
+                        <img src="img/lionparcel.png" alt="Lion Parcel"
+                            class="h-6 md:h-8 w-auto object-contain dark:brightness-0 dark:invert">
+                    </div>
+                    <!-- Partner 2: Lincah -->
+                    <div class="group transition-all duration-300 opacity-60 grayscale hover:grayscale-0">
+                        <img src="img/lincah.png" alt="Lincah"
+                            class="h-8 md:h-12 w-auto object-contain dark:brightness-0 dark:invert">
+                    </div>
+                    <!-- Partner 3: SSS -->
+                    <div class="group transition-all duration-300 opacity-60 grayscale hover:grayscale-0">
+                        <img src="img/sss.png" alt="Syari Sentra Solusi"
+                            class="h-8 md:h-10 w-auto object-contain dark:brightness-0 dark:invert">
+                    </div>
+                    <!-- Partner 4: Alfatih Quran -->
+                    <div class="group transition-all duration-300 opacity-60 grayscale hover:grayscale-0">
+                        <img src="img/alfatihquran.png" alt="Alfatih Quran"
+                            class="h-6 md:h-8 w-auto object-contain dark:brightness-0 dark:invert">
+                    </div>
+                    <!-- Partner 5: Kamil Pustaka -->
+                    <div class="group transition-all duration-300 opacity-60 grayscale hover:grayscale-0">
+                        <img src="img/kamilpustaka.png" alt="Kamil Pustaka"
+                            class="h-6 md:h-8 w-auto object-contain dark:brightness-0 dark:invert">
+                    </div>
+                </div>
+            </section>
+    </main>
+
+    <!-- Floating WhatsApp Button -->
+    <div class="fixed bottom-6 right-6 z-[60] group/wa">
+        <!-- Tooltip -->
+        <span
+            class="absolute right-full mr-4 top-1/2 -translate-y-1/2 whitespace-nowrap bg-[#20bd5a] text-white text-xs font-bold px-4 py-2 rounded-xl opacity-0 translate-x-4 pointer-events-none transition-all duration-300 group-hover/wa:opacity-100 group-hover/wa:translate-x-0 shadow-xl">
+            Hubungi kami di WhatsApp
+        </span>
+        <!-- Button -->
+        <a href="https://wa.me/6285155060816" target="_blank" rel="noopener noreferrer"
+            class="relative flex items-center justify-center w-14 h-14 bg-[#25D366] text-white rounded-full shadow-lg hover:-translate-y-1 hover:shadow-xl hover:bg-[#20bd5a] transition-all duration-300">
+
+            <img src="img/wa-logo.svg" alt="WhatsApp" class="w-8 h-8 invert brightness-0">
+        </a>
+    </div>
+
+    <!-- Dynamic CTA Grid Inspired by Experience Gradient -->
+    <section class="max-w-[1200px] mx-auto px-8 md:px-12 py-32">
+        <div
+            class="relative rounded-40 py-24 px-8 text-center overflow-hidden bg-gradient-to-br from-slate-900 via-brand-blue/90 to-brand-blue dark:from-brand-blue/80 dark:to-brand-blue border border-white dark:border-slate-800">
+            <div class="relative z-10 max-w-3xl mx-auto">
+                <h2 class="text-3xl md:text-5xl font-display font-black text-white dark:text-white mb-8 leading-tight">
+                    Solusi Souvenir Islami yang Berkesan & Bermanfaat</h2>
+                <p class="text-white dark:text-slate-100 text-lg mb-12 font-medium">Bebas custom nama dan desain
+                    cover untuk hadiah, wakaf, atau instansi. Hubungi tim kami untuk penawaran harga terbaik.</p>
+                <a href="bulk-order.html"
+                    class="bg-brand-gold dark:bg-brand-gold text-black dark:text-black px-12 py-5 rounded-full font-bold shadow-2xl hover:scale-105 transition-all inline-flex items-center gap-3">
+                    Dapatkan Penawaran
+                    <span class="material-symbols-outlined">east</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="w-full bg-[#0055AA] text-white pt-20 pb-10">
+        <div class="max-w-[1200px] mx-auto px-8 md:px-12">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8 mb-16">
+                <!-- Column 1: Brand Info -->
+                <div class="flex flex-col items-start text-left space-y-6">
+                    <img src="img/hamzahquran.png" alt="Hamzah Quran" class="h-8 w-auto invert brightness-0">
+                    <h3 class="text-xl font-display font-black">Sahabat Setia Ibadahmu</h3>
+                    <p class="text-white/80 text-sm leading-relaxed max-w-xs">
+                        Hamzah Quran menyediakaan Al Quran custom berkualitas tinggi dengan desain eksklusif. Setiap
+                        Al Quran kami dibuat dengan penuh ketelitian dan kecintaan untuk menemani ibadah sehari-hari
+                        Anda.
+                    </p>
+                </div>
+
+                <!-- Column 2: Kontak Kami -->
+                <div class="space-y-6">
+                    <h4 class="text-lg font-bold">Kontak Kami</h4>
+                    <div class="space-y-4">
+                        <div class="flex items-start gap-3">
+                            <div class="flex flex-col">
+                                <span class="text-xs font-medium opacity-60">Alamat Toko</span>
+                                <p class="text-sm">Jl. Murjaya Rt 04/05, Jurangmangu Barat, Pondok Aren, Tangerang
+                                    Selatan 15223</p>
+                            </div>
+                        </div>
+                        <div class="flex flex-col">
+                            <span class="text-xs font-medium opacity-60">WhatsApp</span>
+                            <a href="https://wa.me/6285155060816" target="_blank" class="text-sm">0851 5506 0816</a>
+                        </div>
+                        <div class="flex flex-col">
+                            <span class="text-xs font-medium opacity-60">Email</span>
+                            <a href="mailto:admin.hamzahquran@gmail.com" class="text-sm">admin.hamzahquran@gmail.com</a>
+                        </div>
+                        <div class="flex flex-col">
+                            <span class="text-xs font-medium opacity-60">Layanan Pelanggan</span>
+                            <p class="text-[11px] leading-relaxed">
+                                Senin - Jumat: 08.00 - 17.00 WIB<br>
+                                Sabtu: 09.00 - 15.00 WIB
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Column 3: Metode Pembayaran -->
+                <div class="space-y-6">
+                    <h4 class="text-lg font-bold">Metode Pembayaran</h4>
+                    <div class="grid grid-cols-6 lg:grid-cols-4 gap-2">
+                        <!-- Simulated Payment Icons using stylized boxes as per image -->
+                        <div
+                            class="bg-white rounded h-7 flex items-center justify-center p-1 shadow-sm hover:scale-105 transition-transform">
+                            <img src="img/bank/bca.svg" alt="BCA" class="h-3 w-auto">
+                        </div>
+                        <div
+                            class="bg-white rounded h-7 flex items-center justify-center p-1 shadow-sm hover:scale-105 transition-transform">
+                            <img src="img/bank/bsi.svg" alt="BSI" class="h-3 w-auto">
+                        </div>
+                        <div
+                            class="bg-white rounded h-7 flex items-center justify-center p-1 shadow-sm hover:scale-105 transition-transform">
+                            <img src="img/bank/qris.svg" alt="QRIS" class="h-3 w-auto">
+                        </div>
+                        <div
+                            class="bg-white rounded h-7 flex items-center justify-center p-1 shadow-sm hover:scale-105 transition-transform">
+                            <img src="img/bank/mandiri.svg" alt="Mandiri" class="h-3 w-auto">
+                        </div>
+                        <div
+                            class="bg-white rounded h-7 flex items-center justify-center p-1 shadow-sm hover:scale-105 transition-transform">
+                            <img src="img/bank/bni.svg" alt="BNI" class="h-3 w-auto">
+                        </div>
+                        <div
+                            class="bg-white rounded h-7 flex items-center justify-center p-1 shadow-sm hover:scale-105 transition-transform">
+                            <img src="img/bank/bri.svg" alt="BRI" class="h-3 w-auto">
+                        </div>
+                        <div
+                            class="bg-white rounded h-7 flex items-center justify-center p-1 shadow-sm hover:scale-105 transition-transform">
+                            <img src="img/bank/jago.svg" alt="Jago" class="h-3 w-auto">
+                        </div>
+                        <div
+                            class="bg-white rounded h-7 flex items-center justify-center p-1 shadow-sm hover:scale-105 transition-transform">
+                            <span class="text-[1rem] font-black text-blue-900 leading-none">COD</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Column 4: Metode Pengiriman -->
+                <div class="space-y-6">
+                    <h4 class="text-lg font-bold">Metode Pengiriman</h4>
+                    <div class="flex flex-wrap gap-2 mb-4">
+                        <div
+                            class="bg-white rounded h-8 w-14 flex items-center justify-center p-1 shadow-sm hover:scale-105 transition-transform">
+                            <img src="img/lionparcel.png" alt="Lion Parcel" class="h-3 w-auto">
+                        </div>
+                        <div
+                            class="bg-white rounded h-8 w-14 flex items-center justify-center p-1 shadow-sm hover:scale-105 transition-transform">
+                            <img src="img/jne.png" alt="JNE" class="h-3 w-auto">
+                        </div>
+                    </div>
+                    <div class="pt-4 border-t border-white/20">
+                        <p class="text-[10px] opacity-60 mb-2 uppercase font-bold tracking-widest">Powered by</p>
+                        <img src="img/lincah.png" alt="Lincah" class="h-5 w-auto invert brightness-0">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bottom Copyright Bar -->
+            <div class="pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4">
+                <p class="text-xs opacity-60">© 2026 Hamzah Quran. All rights reserved.</p>
+                <p class="text-xs text-white/60 flex items-center gap-4">Developed by <a href="https://rgdigilabs.com"
+                        target="_blank"><img src="img/rg-digilabs.png" alt="rg! Digilabs"
+                            class="h-6 w-auto opacity-60 hover:opacity-100 transition-opacity duration-300"></a></p>
+            </div>
+        </div>
+    </footer>
+
+
+    <!-- Scroll to Top Button -->
+    <button id="scrollToTop"
+        class="fixed bottom-6 left-6 z-[60] w-12 h-12 bg-white/60 backdrop-blur-lg dark:bg-slate/30 text-brand-blue dark:text-brand-gold rounded-full shadow-lg border border-slate-100 dark:border-slate-700 flex items-center justify-center opacity-0 translate-y-10 pointer-events-none transition-all duration-500">
+        <span class="material-symbols-outlined">arrow_upward</span>
+    </button>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/lenis@1.1.20/dist/lenis.min.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>

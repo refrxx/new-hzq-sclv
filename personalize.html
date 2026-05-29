@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Personalisasi Al-Quran - Hamzah Quran</title>
+    <link rel="icon" type="image/svg+xml" href="img/hamzah-favico.svg">
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            blue: '#1A5FB4',
+                            gold: '#ffc107',
+                        }
+                    },
+                    fontFamily: {
+                        display: ['Plus Jakarta Sans', 'sans-serif'],
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Custom CSS -->
+    <link href="style.css" rel="stylesheet" />
+
+    <!-- Google Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@700;800;900&display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-25..0"
+        rel="stylesheet" />
+</head>
+
+<body class="bg-white dark:bg-[#080e16] transition-colors duration-300">
+    <!-- Top Promo Bar -->
+    <div class="promo-bar font-sans flex items-center justify-center px-4 overflow-hidden h-[44px]">
+        <div class="flex items-center justify-center gap-4 sm:gap-10">
+            <span class="promo-item uppercase">🔥 Disc. up to 20% order via Website</span>
+            <span class="promo-separator hidden sm:inline">•</span>
+            <span class="promo-item uppercase hidden sm:inline">🚚 Free Ongkir (area Pulau Jawa)</span>
+            <span class="promo-separator hidden sm:inline">•</span>
+            <span class="promo-item uppercase hidden sm:inline">📦 Bisa COD ke seluruh Indonesia</span>
+        </div>
+    </div>
+
+    <header class="header-sticky w-full z-50 scrolled">
+        <nav class="max-w-[1200px] mx-auto px-8 md:px-12 py-4 flex items-center justify-between">
+            <!-- Logo -->
+            <a class="flex items-center relative" href="index.html">
+                <img src="img/hamzahcolor.png" alt="Hamzah Quran"
+                    class="h-6 md:h-8 w-auto transition-opacity duration-300 opacity-100 dark:opacity-0">
+                <img src="img/hamzahquran.png" alt="Hamzah Quran"
+                    class="h-6 md:h-8 w-auto absolute top-0 left-0 transition-opacity duration-300 opacity-0 dark:opacity-100 invert">
+            </a>
+
+            <!-- Desktop Navigation -->
+            <ul class="hidden lg:flex items-center space-x-8">
+                <li><a class="nav-link-underline font-sans font-semibold text-slate-500 hover:text-brand-blue dark:text-slate-400 dark:hover:text-white transition-colors duration-300"
+                        href="index.html">Home</a></li>
+                <li><a class="nav-link-underline font-sans font-semibold text-slate-500 hover:text-brand-blue dark:text-slate-400 dark:hover:text-white transition-colors duration-300"
+                        href="produk.html">Produk</a></li>
+                <li><a class="nav-link-underline font-sans font-semibold text-slate-500 hover:text-brand-blue dark:text-slate-400 dark:hover:text-white transition-colors duration-300"
+                        href="cover.html">Katalog Cover</a></li>
+                <li><a class="nav-link-underline font-sans font-semibold text-slate-500 hover:text-brand-blue dark:text-slate-400 dark:hover:text-white transition-colors duration-300"
+                        href="reseller.html">Reseller</a></li>
+                <li><a class="nav-link-underline font-sans font-semibold text-slate-500 hover:text-brand-blue dark:text-slate-400 dark:hover:text-white transition-colors duration-300"
+                        href="bulk-order.html">B2B</a></li>
+            </ul>
+
+            <div class="flex items-center gap-4">
+                <button id="theme-toggle"
+                    class="p-2.5 bg-slate-100 dark:bg-slate-800 rounded-full text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors duration-300 border-0 flex items-center justify-center w-10 h-10 relative overflow-hidden">
+                    <span
+                        class="material-symbols-outlined absolute transition-transform duration-300 rotate-0 dark:-rotate-90 dark:opacity-0">dark_mode</span>
+                    <span
+                        class="material-symbols-outlined absolute transition-transform duration-300 rotate-90 opacity-0 dark:rotate-0 dark:opacity-100">light_mode</span>
+                </button>
+                <a href="cart.html"
+                    class="p-2.5 bg-slate-100 dark:bg-slate-800 rounded-full text-slate-600 dark:text-slate-400 hover:text-brand-blue dark:hover:text-brand-gold transition-colors duration-300 border-0 flex items-center justify-center w-10 h-10 relative">
+                    <span class="material-symbols-outlined">shopping_cart</span>
+                    <span id="nav-cart-badge"
+                        class="absolute -top-1 -right-1 bg-red-500 text-white text-[0.6rem] font-bold w-4 h-4 rounded-full flex items-center justify-center hidden">0</span>
+                </a>
+
+                <!-- Mobile Menu Button -->
+                <button id="mobile-menu-button"
+                    class="lg:hidden p-2 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors duration-300 border-0 flex items-center justify-center">
+                    <span class="material-symbols-outlined">menu</span>
+                </button>
+            </div>
+        </nav>
+
+        <!-- Mobile Menu (Hidden by default) -->
+        <div id="mobile-menu"
+            class="hidden lg:hidden bg-white dark:bg-[#080e16] absolute top-full left-0 w-full border-b dark:border-slate-800 shadow-xl py-6 px-8 md:px-12 animate-fade-in-down transition-colors duration-300 z-[-1]">
+            <ul class="flex flex-col space-y-4">
+                <li><a class="font-sans font-semibold text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white block px-8 md:px-12 py-2 transition-colors duration-300"
+                        href="index.html">Home</a></li>
+                <li><a class="font-sans font-semibold text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white block px-8 md:px-12 py-2 transition-colors duration-300"
+                        href="produk.html">Produk</a></li>
+                <li><a class="font-sans font-semibold text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white block px-8 md:px-12 py-2 transition-colors duration-300"
+                        href="cover.html">Katalog Cover</a></li>
+                <li><a class="font-sans font-semibold text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white block px-8 md:px-12 py-2 transition-colors duration-300"
+                        href="reseller.html">Reseller</a></li>
+                <li><a class="font-sans font-semibold text-slate-500 dark:text-slate-400 hover:text-slate-500 dark:hover:text-white block px-8 md:px-12 py-2 transition-colors duration-300"
+                        href="bulk-order.html">B2B</a></li>
+                <li class="pt-4"><a href="cart.html"
+                        class="block bg-brand-blue dark:bg-white text-white dark:text-black rounded-full px-6 py-3 font-bold shadow-md text-center transition-all duration-300">Lihat
+                        Keranjang</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <main class="max-w-[1200px] mx-auto px-8 md:px-12 py-12 pb-32 animate-fade-in-up">
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
+            <!-- Left: Product Summary Sticky -->
+            <div class="lg:col-span-4">
+                <div
+                    class="lg:sticky lg:top-32 bg-white dark:bg-slate-900/50 p-4 lg:p-0 rounded-[2rem] lg:rounded-none border lg:border-0 border-slate-100 dark:border-slate-800 shadow-md lg:shadow-none mb-8 lg:mb-0">
+                    <div class="flex lg:flex-col items-center lg:items-start gap-5 lg:gap-0">
+                        <!-- Product Image -->
+                        <div
+                            class="w-20 h-20 lg:w-full lg:h-auto lg:aspect-square rounded-2xl lg:rounded-3xl overflow-hidden bg-slate-50 dark:bg-slate-800 lg:mb-6 shadow-sm lg:shadow-lg border border-slate-100 dark:border-slate-800 shrink-0 transition-all">
+                            <img id="personalize-product-img" src="" class="w-full h-full object-cover">
+                        </div>
+
+                        <!-- Product Info -->
+                        <div class="flex-1 space-y-1 lg:space-y-4">
+                            <div id="personalize-product-category"
+                                class="text-brand-blue dark:text-brand-gold font-bold tracking-[0.2em] uppercase text-[0.6rem] lg:text-[0.65rem] opacity-70">
+                                CATEGORY</div>
+                            <h2 id="personalize-product-name"
+                                class="text-lg lg:text-3xl font-display font-black text-slate-900 dark:text-white leading-tight">
+                                Product Name</h2>
+                            <div
+                                class="flex items-center justify-between lg:pt-4 lg:border-t border-slate-100 dark:border-slate-800">
+                                <span class="hidden lg:inline text-slate-400 font-medium text-sm">Harga</span>
+                                <span id="personalize-product-price"
+                                    class="text-lg lg:text-2xl font-black text-brand-blue dark:text-brand-gold">Rp0</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right: Customization Form -->
+            <div class="lg:col-span-8">
+                <!-- Title Section -->
+                <div>
+                    <h1
+                        class="text-2xl lg:text-5xl font-display font-black text-slate-900 dark:text-white mb-4 leading-tight">
+                        Detail Custom Nama</h1>
+                    <p class="text-lg text-slate-500 dark:text-slate-400 max-w-xl">Kamu bisa custom nama dan ucapan
+                        sesuai keinginanmu.</p>
+                </div>
+
+                <!-- Input Personalization -->
+                <div class="py-4 space-y-8">
+                    <div>
+                        <label for="custom-name-input"
+                            class="flex items-center gap-2 text-sm font-bold uppercase tracking-widest text-brand-blue dark:text-brand-gold mb-6">
+                            <span
+                                class="material-symbols-outlined text-brand-blue dark:text-brand-gold text-[1.4rem]">badge</span>
+                            Langkah 1: Tulis Nama
+                        </label>
+                        <input type="text" id="custom-name-input" placeholder="Tulis nama Anda (Contoh: Ahmad Zaki)"
+                            maxlength="50"
+                            class="w-full px-6 py-5 rounded-2xl border-2 border-slate-100 dark:border-slate-800 bg-slate-50 dark:bg-slate-900/50 text-slate-900 dark:text-white font-bold text-xl placeholder:text-[16px] placeholder:font-medium placeholder:text-base dark:placeholder:text-slate-600 focus:border-brand-blue dark:focus:border-brand-gold focus:ring-8 focus:ring-brand-blue/5 dark:focus:ring-brand-gold/5 outline-none transition-all">
+                        <div class="mt-4 flex items-start gap-2 text-sm text-slate-400">
+                            <span class="material-symbols-outlined text-[1.1rem] mt-0.5">info</span>
+                            <p>Nama ini akan dicetak langsung pada cover Al-Quran. Mohon pastikan ejaan sudah benar
+                                (Maksimal 50 karakter).</p>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 pt-4">
+                        <!-- Custom Greeting (Optional) -->
+                        <div>
+                            <label for="custom-note-input"
+                                class="flex items-center gap-2 text-[0.7rem] font-bold uppercase tracking-[0.2em] text-slate-400 mb-4">
+                                <span class="material-symbols-outlined text-[1.1rem]">edit_note</span>
+                                Ucapan / Note (Opsional)
+                            </label>
+                            <textarea id="custom-note-input" rows="3" placeholder="Contoh: Barakaallahu fiik..."
+                                class="w-full px-5 py-4 rounded-xl border-2 border-slate-100 dark:border-slate-800 bg-slate-50 dark:bg-slate-900/50 text-slate-900 dark:text-white font-medium text-lg placeholder:text-base focus:border-brand-blue dark:focus:border-brand-gold outline-none transition-all resize-none"></textarea>
+                        </div>
+
+                        <!-- Font Request (Optional) -->
+                        <div>
+                            <label for="custom-font-input"
+                                class="flex items-center gap-2 text-[0.7rem] font-bold uppercase tracking-[0.2em] text-slate-400 mb-4">
+                                <span class="material-symbols-outlined text-[1.1rem]">font_download</span>
+                                Request Font (Opsional)
+                            </label>
+                            <input type="text" id="custom-font-input" placeholder="Contoh: Arial, Italic, Bold..."
+                                class="w-full px-5 py-4 rounded-xl border-2 border-slate-100 dark:border-slate-800 bg-slate-50 dark:bg-slate-900/50 text-slate-900 dark:text-white font-medium text-lg placeholder:text-base focus:border-brand-blue dark:focus:border-brand-gold outline-none transition-all">
+                            <p class="mt-3 text-[0.75rem] text-slate-400">Berikan instruksi gaya tulisan jika ada
+                                keinginan khusus.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Cover Selection -->
+                <div class="py-4">
+                    <div class="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-8">
+                        <label
+                            class="flex items-center gap-2 text-sm font-bold uppercase tracking-widest text-brand-blue dark:text-brand-gold">
+                            <span
+                                class="material-symbols-outlined text-brand-blue dark:text-brand-gold text-[1.4rem]">palette</span>
+                            Langkah 2: Pilih Desain Cover
+                        </label>
+
+
+                        <!-- Category Filter Tabs -->
+                        <div id="modal-cover-filters" class="flex flex-wrap gap-2 mt-4 md:mt-0">
+                            <!-- Filters will be rendered by JS -->
+                        </div>
+                    </div>
+
+                    <!-- Cover Grid -->
+                    <div id="modal-cover-grid" class="grid grid-cols-2 md:grid-cols-4 gap-4 px-1 py-1">
+                        <!-- Cover cards will be rendered by JS -->
+                    </div>
+
+                    <!-- Selected Cover Floating Preview -->
+                    <div id="selected-cover-preview"
+                        class="hidden mt-8 p-6 rounded-[2rem] bg-brand-blue/5 dark:bg-brand-gold/5 border-2 border-brand-blue/20 dark:border-brand-gold/20 flex items-center gap-6 animate-zoom-in">
+                        <div
+                            class="w-20 h-28 rounded-2xl overflow-hidden shrink-0 shadow-2xl border-2 border-brand-blue dark:border-brand-gold">
+                            <img id="selected-cover-img" src="" class="w-full h-full object-cover">
+                        </div>
+                        <div class="flex-1 min-w-0">
+                            <p
+                                class="text-xs text-brand-blue dark:text-brand-gold font-bold uppercase tracking-widest mb-1">
+                                Cover Terpilih</p>
+                            <p id="selected-cover-name"
+                                class="text-lg font-display font-bold text-slate-900 dark:text-white truncate"></p>
+                            <p id="selected-cover-category"
+                                class="text-sm font-medium text-slate-500 dark:text-slate-400"></p>
+                        </div>
+                        <button id="remove-cover-selection"
+                            class="w-12 h-12 rounded-full bg-white dark:bg-slate-800 shadow-lg flex items-center justify-center text-red-400 hover:text-red-500 transition-all active:scale-95">
+                            <span class="material-symbols-outlined">close</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- End of Actions -->
+            </div>
+        </div>
+        </div>
+    </main>
+
+    <!-- Final Action Sticky Bar -->
+    <div
+        class="fixed bottom-0 left-0 w-full bg-white/95 dark:bg-[#080e16]/95 backdrop-blur-md border-t border-slate-100 dark:border-slate-800 p-4 z-50 shadow-[0_-10px_30px_rgba(0,0,0,0.08)]">
+        <div class="max-w-[600px] mx-auto">
+            <div class="flex gap-3">
+                <a href="javascript:void(0)" onclick="history.back()"
+                    class="flex items-center justify-center w-14 h-14 bg-slate-100 dark:bg-slate-800 rounded-2xl text-slate-600 dark:text-slate-400 hover:bg-slate-200 transition-all active:scale-95">
+                    <span class="material-symbols-outlined">arrow_back</span>
+                </a>
+                <button id="confirm-add-to-cart"
+                    class="flex-1 bg-brand-blue dark:bg-brand-gold text-white dark:text-black py-4 rounded-2xl font-bold shadow-lg flex items-center justify-center gap-3 active:scale-[0.98] transition-all">
+                    <span class="material-symbols-outlined">shopping_cart_checkout</span>
+                    <span>Tambahkan ke Keranjang</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Custom JS -->
+    <script src="script.js"></script>
+</body>
+
+</html>

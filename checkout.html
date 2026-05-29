@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Checkout - Hamzah Quran</title>
+    <link rel="icon" type="image/svg+xml" href="img/hamzah-favico.svg">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: { brand: { blue: '#1A5FB4', gold: '#ffc107' } },
+                    fontFamily: { display: ['Plus Jakarta Sans', 'sans-serif'], sans: ['Inter', 'sans-serif'] },
+                    borderRadius: { '32': '32px', '40': '40px' }
+                }
+            }
+        }
+    </script>
+    <link href="style.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@700;800;900&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-25..0" rel="stylesheet" />
+</head>
+<body class="bg-[#fcfdfd] dark:bg-[#080e16] transition-colors duration-300">
+    <div class="promo-bar font-sans flex items-center justify-center px-4 overflow-hidden h-[44px]">
+        <div class="flex items-center justify-center gap-4 sm:gap-10">
+            <span class="promo-item uppercase">🔥 Disc. up to 20% order via Website</span>
+            <span class="promo-separator hidden sm:inline">•</span>
+            <span class="promo-item uppercase hidden sm:inline">🚚 Free Ongkir (area Pulau Jawa)</span>
+            <span class="promo-separator hidden sm:inline">•</span>
+            <span class="promo-item uppercase hidden sm:inline">📦 Bisa COD ke seluruh Indonesia</span>
+        </div>
+    </div>
+
+    <header class="header-sticky w-full z-50 scrolled">
+        <nav class="max-w-[1200px] mx-auto px-8 md:px-12 py-4 flex items-center justify-between">
+            <a class="flex items-center relative" href="index.html">
+                <img src="img/hamzahcolor.png" alt="Hamzah Quran" class="h-6 md:h-8 w-auto transition-opacity duration-300 opacity-100 dark:opacity-0">
+                <img src="img/hamzahquran.png" alt="Hamzah Quran" class="h-6 md:h-8 w-auto absolute top-0 left-0 transition-opacity duration-300 opacity-0 dark:opacity-100 invert">
+            </a>
+            <ul class="hidden lg:flex items-center space-x-8">
+                <li><a class="nav-link-underline font-sans font-semibold text-slate-500 hover:text-brand-blue dark:text-slate-400 dark:hover:text-white transition-colors duration-300" href="index.html">Home</a></li>
+                <li><a class="nav-link-underline font-sans font-semibold text-slate-500 hover:text-brand-blue dark:text-slate-400 dark:hover:text-white transition-colors duration-300" href="produk.html">Produk</a></li>
+                <li><a class="nav-link-underline font-sans font-semibold text-slate-500 hover:text-brand-blue dark:text-slate-400 dark:hover:text-white transition-colors duration-300" href="cover.html">Katalog Cover</a></li>
+                <li><a class="nav-link-underline font-sans font-semibold text-slate-500 hover:text-brand-blue dark:text-slate-400 dark:hover:text-white transition-colors duration-300" href="reseller.html">Reseller</a></li>
+                <li><a class="nav-link-underline font-sans font-semibold text-slate-500 hover:text-brand-blue dark:text-slate-400 dark:hover:text-white transition-colors duration-300" href="bulk-order.html">B2B</a></li>
+            </ul>
+            <div class="flex items-center gap-4">
+                <button id="theme-toggle" class="p-2.5 bg-slate-100 dark:bg-slate-800 rounded-full text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors duration-300 border-0 flex items-center justify-center w-10 h-10 relative overflow-hidden">
+                    <span class="material-symbols-outlined absolute transition-transform duration-300 rotate-0 dark:-rotate-90 dark:opacity-0">dark_mode</span>
+                    <span class="material-symbols-outlined absolute transition-transform duration-300 rotate-90 opacity-0 dark:rotate-0 dark:opacity-100">light_mode</span>
+                </button>
+                <a href="cart.html" class="p-2.5 bg-slate-100 dark:bg-slate-800 rounded-full text-slate-600 dark:text-slate-400 hover:text-brand-blue dark:hover:text-brand-gold transition-colors duration-300 border-0 flex items-center justify-center w-10 h-10 relative">
+                    <span class="material-symbols-outlined">shopping_cart</span>
+                    <span id="nav-cart-badge" class="absolute -top-1 -right-1 bg-red-500 text-white text-[0.6rem] font-bold w-4 h-4 rounded-full flex items-center justify-center hidden">0</span>
+                </a>
+                <button id="mobile-menu-button" class="lg:hidden p-2 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors duration-300 border-0 flex items-center justify-center">
+                    <span class="material-symbols-outlined">menu</span>
+                </button>
+            </div>
+        </nav>
+        <div id="mobile-menu" class="hidden lg:hidden bg-white dark:bg-[#080e16] absolute top-full left-0 w-full border-b dark:border-slate-800 shadow-xl py-6 px-8 md:px-12 animate-fade-in-down transition-colors duration-300 z-[-1]">
+            <ul class="flex flex-col space-y-4">
+                <li><a class="font-sans font-semibold text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white block px-8 md:px-12 py-2 transition-colors duration-300" href="index.html">Home</a></li>
+                <li><a class="font-sans font-semibold text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white block px-8 md:px-12 py-2 transition-colors duration-300" href="produk.html">Produk</a></li>
+                <li><a class="font-sans font-semibold text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white block px-8 md:px-12 py-2 transition-colors duration-300" href="cover.html">Katalog Cover</a></li>
+                <li><a class="font-sans font-semibold text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white block px-8 md:px-12 py-2 transition-colors duration-300" href="reseller.html">Reseller</a></li>
+                <li><a class="font-sans font-semibold text-slate-500 dark:text-slate-400 hover:text-slate-500 dark:hover:text-white block px-8 md:px-12 py-2 transition-colors duration-300" href="bulk-order.html">B2B</a></li>
+                <li class="pt-4"><a href="cart.html" class="block bg-brand-blue dark:bg-white text-white dark:text-black rounded-full px-6 py-3 font-bold shadow-md text-center transition-all duration-300">Lihat Keranjang</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <main class="pt-12 lg:pt-12 pb-32 min-h-screen">
+        <section class="max-w-[1200px] mx-auto px-8 md:px-12">
+            <h1 class="text-2xl font-display font-black text-slate-900 dark:text-white mb-10 animate-fade-in-up">Checkout</h1>
+
+            <div class="grid grid-cols-1 xl:grid-cols-3 gap-8 xl:gap-12">
+                <div class="xl:col-span-2 space-y-8 animate-fade-in-up" style="animation-delay: 100ms">
+                    <!-- Section 1: Data Penerima -->
+                    <div class="bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-32 p-6 md:p-8 shadow-sm">
+                        <h2 class="text-xl font-bold text-slate-900 dark:text-white mb-6 border-b border-slate-100 dark:border-slate-800 pb-4">Data Penerima</h2>
+                        <div class="space-y-5">
+                            <div>
+                                <label class="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-2">Nama Lengkap <span class="text-red-500">*</span></label>
+                                <input type="text" id="customer-name" required
+                                    class="w-full bg-slate-50 dark:bg-slate-800 border-none rounded-xl px-4 py-3 text-slate-900 dark:text-white focus:ring-2 focus:ring-brand-blue outline-none transition-all"
+                                    placeholder="Nama lengkap penerima">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-2">Nomor HP <span class="text-red-500">*</span></label>
+                                <input type="tel" id="customer-phone" required
+                                    class="w-full bg-slate-50 dark:bg-slate-800 border-none rounded-xl px-4 py-3 text-slate-900 dark:text-white focus:ring-2 focus:ring-brand-blue outline-none transition-all"
+                                    placeholder="Contoh: 08123456789">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-2">Email <span class="text-slate-400">(opsional)</span></label>
+                                <input type="email" id="customer-email"
+                                    class="w-full bg-slate-50 dark:bg-slate-800 border-none rounded-xl px-4 py-3 text-slate-900 dark:text-white focus:ring-2 focus:ring-brand-blue outline-none transition-all"
+                                    placeholder="email@contoh.com">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Section 2: Alamat -->
+                    <div class="bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-32 p-6 md:p-8 shadow-sm">
+                        <h2 class="text-xl font-bold text-slate-900 dark:text-white mb-6 border-b border-slate-100 dark:border-slate-800 pb-4">Alamat Pengiriman</h2>
+                        <div class="space-y-5">
+                            <div>
+                                <label class="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-2">Alamat Lengkap <span class="text-red-500">*</span></label>
+                                <textarea id="shipping-address" required rows="2"
+                                    class="w-full bg-slate-50 dark:bg-slate-800 border-none rounded-xl px-4 py-3 text-slate-900 dark:text-white focus:ring-2 focus:ring-brand-blue outline-none transition-all resize-none"
+                                    placeholder="Nama jalan, nomor, gedung, dll"></textarea>
+                            </div>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                                <div>
+                                    <label class="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-2">Provinsi</label>
+                                    <div class="relative">
+                                        <select id="checkout-province"
+                                            class="w-full bg-slate-50 dark:bg-slate-800 border-none rounded-xl px-4 py-3 text-slate-900 dark:text-white focus:ring-2 focus:ring-brand-blue outline-none transition-all appearance-none cursor-pointer pr-10">
+                                            <option value="" disabled selected>Pilih Provinsi</option>
+                                        </select>
+                                        <span class="material-symbols-outlined absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-slate-400 text-sm">expand_more</span>
+                                    </div>
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-2">Kota/Kabupaten</label>
+                                    <div class="relative">
+                                        <select id="checkout-city" disabled
+                                            class="w-full bg-slate-50 dark:bg-slate-800 border-none rounded-xl px-4 py-3 text-slate-900 dark:text-white focus:ring-2 focus:ring-brand-blue outline-none transition-all appearance-none cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed pr-10">
+                                            <option value="" disabled selected>Pilih Kota/Kabupaten</option>
+                                        </select>
+                                        <span class="material-symbols-outlined absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-slate-400 text-sm">expand_more</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                                <div>
+                                    <label class="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-2">Kecamatan</label>
+                                    <div class="relative">
+                                        <select id="checkout-subdistrict" disabled
+                                            class="w-full bg-slate-50 dark:bg-slate-800 border-none rounded-xl px-4 py-3 text-slate-900 dark:text-white focus:ring-2 focus:ring-brand-blue outline-none transition-all appearance-none cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed pr-10">
+                                            <option value="" disabled selected>Pilih Kecamatan</option>
+                                        </select>
+                                        <span class="material-symbols-outlined absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-slate-400 text-sm">expand_more</span>
+                                    </div>
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-2">Kode Pos</label>
+                                    <input type="text" id="postal-code" readonly
+                                        class="w-full bg-slate-50 dark:bg-slate-800 border-none rounded-xl px-4 py-3 text-slate-900 dark:text-white outline-none transition-all"
+                                        placeholder="Otomatis terisi">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Section 3: Opsi Pengiriman -->
+                    <div class="bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-32 p-6 md:p-8 shadow-sm">
+                        <h2 class="text-xl font-bold text-slate-900 dark:text-white mb-6 border-b border-slate-100 dark:border-slate-800 pb-4">Opsi Pengiriman</h2>
+                        <div id="shipping-section">
+                            <p class="text-slate-500 dark:text-slate-400 text-sm mb-4">Pilih provinsi, kota, dan kecamatan terlebih dahulu, lalu klik "Cek Ongkir".</p>
+                            <button id="cek-ongkir-btn" disabled
+                                class="bg-brand-blue text-white px-8 py-3 rounded-full font-bold text-sm hover:bg-brand-blue/90 transition-all disabled:opacity-50 disabled:cursor-not-allowed">
+                                <span class="flex items-center gap-2">
+                                    <span class="material-symbols-outlined text-[1.1rem]">local_shipping</span>
+                                    Cek Ongkir
+                                </span>
+                            </button>
+                            <div id="shipping-options" class="mt-6 space-y-3">
+                                <!-- Shipping options will be rendered here -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Section 4: Pembayaran -->
+                    <div class="bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-32 p-6 md:p-8 shadow-sm">
+                        <h2 class="text-xl font-bold text-slate-900 dark:text-white mb-6 border-b border-slate-100 dark:border-slate-800 pb-4">Metode Pembayaran</h2>
+                        <div class="relative">
+                            <select id="payment-method" required
+                                class="w-full bg-slate-50 dark:bg-slate-800 border-none rounded-xl px-4 py-3 text-slate-900 dark:text-white focus:ring-2 focus:ring-brand-blue outline-none transition-all appearance-none cursor-pointer pr-10">
+                                <option value="bank_transfer" selected>Transfer Bank</option>
+                            </select>
+                            <span class="material-symbols-outlined absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-slate-400 text-sm">payments</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Summary -->
+                <div class="xl:col-span-1">
+                    <div class="bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-32 p-6 md:p-8 shadow-sm sticky top-32 animate-fade-in-up" style="animation-delay: 200ms">
+                        <h2 class="text-xl font-bold text-slate-900 dark:text-white mb-6 border-b border-slate-100 dark:border-slate-800 pb-4">Ringkasan Belanja</h2>
+                        <div id="checkout-summary-items" class="space-y-4 mb-6">
+                            <!-- Items will be rendered here -->
+                            <p class="text-slate-400 text-sm">Memuat keranjang...</p>
+                        </div>
+                        <div class="h-px w-full bg-slate-100 dark:bg-slate-800 my-4"></div>
+                        <div class="space-y-3 text-sm font-medium">
+                            <div class="flex justify-between text-slate-500 dark:text-slate-400">
+                                <span>Subtotal</span>
+                                <span id="checkout-subtotal" class="font-bold text-slate-900 dark:text-white">Rp0</span>
+                            </div>
+                            <div class="flex justify-between text-slate-500 dark:text-slate-400">
+                                <span>Ongkos Kirim</span>
+                                <span id="checkout-shipping-cost" class="font-bold text-slate-900 dark:text-white">-</span>
+                            </div>
+                            <div class="h-px w-full bg-slate-100 dark:bg-slate-800 my-4"></div>
+                            <div class="flex justify-between items-center">
+                                <span class="font-bold text-lg text-slate-900 dark:text-white">Total</span>
+                                <span id="checkout-total" class="font-black text-2xl text-brand-blue dark:text-brand-gold">Rp0</span>
+                            </div>
+                        </div>
+                        <button id="checkout-submit-btn" disabled
+                            class="w-full mt-6 bg-green-600 text-white py-4 rounded-xl font-bold shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed">
+                            <span class="material-symbols-outlined">shopping_bag_speed</span>
+                            Buat Pesanan
+                        </button>
+                        <div class="mt-4 text-center">
+                            <span class="text-[10px] text-slate-400 uppercase tracking-widest font-bold">Aman • Terpercaya • Cepat</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="w-full bg-[#0055AA] text-white pt-20 pb-10">
+        <div class="max-w-[1200px] mx-auto px-8 md:px-12">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8 mb-16">
+                <div class="flex flex-col items-start text-left space-y-6">
+                    <img src="img/hamzahquran.png" alt="Hamzah Quran" class="h-8 w-auto invert brightness-0">
+                    <h3 class="text-xl font-display font-black">Sahabat Setia Ibadahmu</h3>
+                    <p class="text-white/80 text-sm leading-relaxed max-w-xs">Hamzah Quran menyediakaan Al Quran custom berkualitas tinggi dengan desain eksklusif.</p>
+                </div>
+                <div class="space-y-6">
+                    <h4 class="text-lg font-bold">Kontak Kami</h4>
+                    <div class="space-y-4">
+                        <div class="flex flex-col">
+                            <span class="text-xs font-medium opacity-60">Alamat Toko</span>
+                            <p class="text-sm">Jl. Murjaya Rt 04/05, Jurangmangu Barat, Pondok Aren, Tangerang Selatan 15223</p>
+                        </div>
+                        <div class="flex flex-col">
+                            <span class="text-xs font-medium opacity-60">WhatsApp</span>
+                            <a href="https://wa.me/6285155060816" target="_blank" class="text-sm">0851 5506 0816</a>
+                        </div>
+                        <div class="flex flex-col">
+                            <span class="text-xs font-medium opacity-60">Email</span>
+                            <a href="mailto:admin.hamzahquran@gmail.com" class="text-sm">admin.hamzahquran@gmail.com</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="space-y-6">
+                    <h4 class="text-lg font-bold">Metode Pembayaran</h4>
+                    <div class="grid grid-cols-6 lg:grid-cols-4 gap-2">
+                        <div class="bg-white rounded h-7 flex items-center justify-center p-1 shadow-sm"><img src="img/bank/bca.svg" alt="BCA" class="h-3 w-auto"></div>
+                        <div class="bg-white rounded h-7 flex items-center justify-center p-1 shadow-sm"><img src="img/bank/bsi.svg" alt="BSI" class="h-3 w-auto"></div>
+                        <div class="bg-white rounded h-7 flex items-center justify-center p-1 shadow-sm"><img src="img/bank/qris.svg" alt="QRIS" class="h-3 w-auto"></div>
+                        <div class="bg-white rounded h-7 flex items-center justify-center p-1 shadow-sm"><img src="img/bank/mandiri.svg" alt="Mandiri" class="h-3 w-auto"></div>
+                        <div class="bg-white rounded h-7 flex items-center justify-center p-1 shadow-sm"><img src="img/bank/bni.svg" alt="BNI" class="h-3 w-auto"></div>
+                        <div class="bg-white rounded h-7 flex items-center justify-center p-1 shadow-sm"><img src="img/bank/bri.svg" alt="BRI" class="h-3 w-auto"></div>
+                        <div class="bg-white rounded h-7 flex items-center justify-center p-1 shadow-sm"><img src="img/bank/jago.svg" alt="Jago" class="h-3 w-auto"></div>
+                        <div class="bg-white rounded h-7 flex items-center justify-center p-1 shadow-sm"><span class="text-[1rem] font-black text-blue-900 leading-none">COD</span></div>
+                    </div>
+                </div>
+                <div class="space-y-6">
+                    <h4 class="text-lg font-bold">Metode Pengiriman</h4>
+                    <div class="flex flex-wrap gap-2 mb-4">
+                        <div class="bg-white rounded h-8 w-14 flex items-center justify-center p-1 shadow-sm"><img src="img/lionparcel.png" alt="Lion Parcel" class="h-3 w-auto"></div>
+                        <div class="bg-white rounded h-8 w-14 flex items-center justify-center p-1 shadow-sm"><img src="img/jne.png" alt="JNE" class="h-3 w-auto"></div>
+                    </div>
+                    <div class="pt-4 border-t border-white/20">
+                        <p class="text-[10px] opacity-60 mb-2 uppercase font-bold tracking-widest">Powered by</p>
+                        <img src="img/lincah.png" alt="Lincah" class="h-5 w-auto invert brightness-0">
+                    </div>
+                </div>
+            </div>
+            <div class="pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4">
+                <p class="text-xs opacity-60">© 2026 Hamzah Quran. All rights reserved.</p>
+                <p class="text-xs text-white/60 flex items-center gap-4">Developed by <a href="https://rgdigilabs.com" target="_blank"><img src="img/rg-digilabs.png" alt="rg! Digilabs" class="h-6 w-auto opacity-60 hover:opacity-100 transition-opacity duration-300"></a></p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://unpkg.com/lenis@1.1.20/dist/lenis.min.js"></script>
+    <script src="scalev.js"></script>
+    <script src="script.js"></script>
+    <script>
+        const courierNames = { jnt: 'J&T', jne: 'JNE', anteraja: 'AnterAja', sicepat: 'SiCepat', self_courier: 'Kurir Toko' };
+
+        let selectedProvinceName = '';
+        let selectedCityName = '';
+        let selectedSubdistrictName = '';
+        let selectedLocationId = '';
+        let selectedShippingCost = 0;
+        let selectedCourierServiceId = '';
+        let selectedWarehouseUniqueId = '';
+        let cartData = [];
+        let cartSubtotal = 0;
+
+        async function initCheckout() {
+            const cart = await scalevGetCart();
+            cartData = cart.items || [];
+
+            if (!cartData.length) {
+                window.location.href = 'cart.html';
+                return;
+            }
+
+            const summaryContainer = document.getElementById('checkout-summary-items');
+            cartSubtotal = 0;
+
+            summaryContainer.innerHTML = cartData.map(item => {
+                let name = item.product_name || item.variant_name || item.bundle_name || 'Produk';
+                const price = parseFloat(item.price || '0');
+                const qty = item.quantity || 1;
+                const total = price * qty;
+                cartSubtotal += total;
+                return `
+                    <div class="flex items-start gap-3">
+                        <div class="flex-1 min-w-0">
+                            <p class="text-sm font-semibold text-slate-900 dark:text-white line-clamp-1">${name}</p>
+                            <p class="text-xs text-slate-400">${qty} x ${scalevFormatRupiah(price)}</p>
+                        </div>
+                        <p class="text-sm font-bold text-slate-900 dark:text-white shrink-0">${scalevFormatRupiah(total)}</p>
+                    </div>
+                `;
+            }).join('');
+
+            document.getElementById('checkout-subtotal').textContent = scalevFormatRupiah(cartSubtotal);
+            updateTotal();
+
+            // Init locations
+            await initCheckoutLocations();
+        }
+
+        function updateTotal() {
+            const total = cartSubtotal + selectedShippingCost;
+            document.getElementById('checkout-total').textContent = scalevFormatRupiah(total);
+        }
+
+        async function initCheckoutLocations() {
+            const provinceSelect = document.getElementById('checkout-province');
+            const citySelect = document.getElementById('checkout-city');
+            const subdistrictSelect = document.getElementById('checkout-subdistrict');
+            const cekBtn = document.getElementById('cek-ongkir-btn');
+            const postalInput = document.getElementById('postal-code');
+
+            const provinces = await scalevGetProvinces();
+            provinces.forEach(p => {
+                const opt = document.createElement('option');
+                opt.value = p.id;
+                opt.textContent = p.name;
+                provinceSelect.appendChild(opt);
+            });
+
+            provinceSelect.addEventListener('change', async () => {
+                citySelect.innerHTML = '<option value="" disabled selected>Memuat...</option>';
+                citySelect.disabled = false;
+                selectedProvinceName = provinceSelect.options[provinceSelect.selectedIndex].text;
+                const cities = await scalevGetCities(provinceSelect.value);
+                citySelect.innerHTML = '<option value="" disabled selected>Pilih Kota/Kabupaten</option>';
+                cities.forEach(c => {
+                    const opt = document.createElement('option');
+                    opt.value = c.id;
+                    opt.textContent = c.name;
+                    citySelect.appendChild(opt);
+                });
+                subdistrictSelect.innerHTML = '<option value="" disabled selected>Pilih Kecamatan</option>';
+                subdistrictSelect.disabled = true;
+                postalInput.value = '';
+                document.getElementById('shipping-options').innerHTML = '';
+                cekBtn.disabled = true;
+                resetShipping();
+            });
+
+            citySelect.addEventListener('change', async () => {
+                subdistrictSelect.innerHTML = '<option value="" disabled selected>Memuat...</option>';
+                subdistrictSelect.disabled = false;
+                selectedCityName = citySelect.options[citySelect.selectedIndex].text;
+                const subdistricts = await scalevGetSubdistricts(citySelect.value);
+                subdistrictSelect.innerHTML = '<option value="" disabled selected>Pilih Kecamatan</option>';
+                subdistricts.forEach(s => {
+                    const opt = document.createElement('option');
+                    opt.value = s.id;
+                    opt.textContent = s.name;
+                    opt.dataset.postalCode = s.postal_code || '';
+                    subdistrictSelect.appendChild(opt);
+                });
+                document.getElementById('shipping-options').innerHTML = '';
+                cekBtn.disabled = true;
+                resetShipping();
+            });
+
+            subdistrictSelect.addEventListener('change', () => {
+                const selected = subdistrictSelect.options[subdistrictSelect.selectedIndex];
+                selectedSubdistrictName = selected.text;
+                selectedLocationId = selected.value;
+                postalInput.value = selected.dataset.postalCode || '';
+                cekBtn.disabled = false;
+                document.getElementById('shipping-options').innerHTML = '';
+                resetShipping();
+            });
+
+            cekBtn.addEventListener('click', async () => {
+                if (!cartData.length) return;
+                cekBtn.disabled = true;
+                cekBtn.innerHTML = '<span class="material-symbols-outlined animate-spin text-[1.1rem]">progress_activity</span> Memuat...';
+
+                const items = cartData.map(item => ({
+                    type: item.type,
+                    [item.type === 'bundle_price_option' ? 'bundle_price_option_id' : 'variant_id']: item.type === 'bundle_price_option' ? item.bundle_price_option_id : item.variant_id,
+                    quantity: item.quantity,
+                }));
+
+                try {
+                    const result = await scalevGetShipping({ items, shipping_location_id: selectedLocationId });
+                    const options = result.data || [];
+                    const container = document.getElementById('shipping-options');
+                    container.innerHTML = options.map(opt => {
+                        const displayName = `${courierNames[opt.courier_code] || opt.courier_code.toUpperCase()} ${opt.name}`;
+                        return `
+                            <label class="flex items-start gap-4 p-4 rounded-2xl border-2 cursor-pointer transition-all hover:border-brand-blue shipping-option ${opt.courier_service_id === selectedCourierServiceId ? 'border-brand-blue bg-brand-blue/5' : 'border-slate-200 dark:border-slate-700'}"
+                                   data-service-id="${opt.courier_service_id}"
+                                   data-warehouse-id="${opt.warehouse_unique_id}"
+                                   data-cost="${opt.cost}">
+                                <input type="radio" name="shipping" class="mt-1 accent-brand-blue" ${opt.courier_service_id === selectedCourierServiceId ? 'checked' : ''}>
+                                <div class="flex-1">
+                                    <p class="font-bold text-slate-900 dark:text-white text-sm">${displayName}</p>
+                                    <p class="text-xs text-slate-400">Estimasi ${opt.etd}</p>
+                                </div>
+                                <p class="font-bold text-brand-blue dark:text-brand-gold shrink-0">${scalevFormatRupiah(opt.cost)}</p>
+                            </label>
+                        `;
+                    }).join('');
+
+                    container.querySelectorAll('.shipping-option').forEach(el => {
+                        el.addEventListener('click', () => {
+                            container.querySelectorAll('.shipping-option').forEach(o => {
+                                o.classList.remove('border-brand-blue', 'bg-brand-blue/5');
+                                o.classList.add('border-slate-200', 'dark:border-slate-700');
+                                o.querySelector('input[type="radio"]').checked = false;
+                            });
+                            el.classList.remove('border-slate-200', 'dark:border-slate-700');
+                            el.classList.add('border-brand-blue', 'bg-brand-blue/5');
+                            el.querySelector('input[type="radio"]').checked = true;
+                            selectedShippingCost = parseInt(el.dataset.cost);
+                            selectedCourierServiceId = el.dataset.serviceId;
+                            selectedWarehouseUniqueId = el.dataset.warehouseId;
+                            document.getElementById('checkout-shipping-cost').textContent = scalevFormatRupiah(selectedShippingCost);
+                            updateTotal();
+                            document.getElementById('checkout-submit-btn').disabled = false;
+                        });
+                    });
+                } catch (err) {
+                    document.getElementById('shipping-options').innerHTML = '<p class="text-red-500 text-sm">Gagal memuat opsi pengiriman. Coba lagi.</p>';
+                } finally {
+                    cekBtn.disabled = false;
+                    cekBtn.innerHTML = '<span class="flex items-center gap-2"><span class="material-symbols-outlined text-[1.1rem]">local_shipping</span>Cek Ongkir</span>';
+                }
+            });
+        }
+
+        function resetShipping() {
+            selectedShippingCost = 0;
+            selectedCourierServiceId = '';
+            selectedWarehouseUniqueId = '';
+            document.getElementById('checkout-shipping-cost').textContent = '-';
+            updateTotal();
+            document.getElementById('checkout-submit-btn').disabled = true;
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            initCheckout();
+
+            document.getElementById('checkout-submit-btn').addEventListener('click', async () => {
+                const btn = document.getElementById('checkout-submit-btn');
+                btn.disabled = true;
+                btn.innerHTML = '<span class="material-symbols-outlined animate-spin">progress_activity</span> Memproses...';
+
+                let phone = document.getElementById('customer-phone').value.replace(/\D/g, '');
+                if (phone.startsWith('0')) phone = '62' + phone.slice(1);
+
+                const name = document.getElementById('customer-name').value.trim();
+                if (!name) { alert('Nama lengkap harus diisi'); btn.disabled = false; btn.innerHTML = 'Buat Pesanan'; return; }
+                if (!phone || phone.length < 10) { alert('Nomor HP harus diisi dengan benar'); btn.disabled = false; btn.innerHTML = 'Buat Pesanan'; return; }
+
+                const items = cartData.map(item => ({
+                    type: item.type,
+                    [item.type === 'bundle_price_option' ? 'bundle_price_option_id' : 'variant_id']: item.type === 'bundle_price_option' ? item.bundle_price_option_id : item.variant_id,
+                    quantity: item.quantity,
+                }));
+
+                const payload = {
+                    items,
+                    customer_name: name,
+                    customer_email: document.getElementById('customer-email').value.trim(),
+                    customer_phone: phone,
+                    shipping_address: document.getElementById('shipping-address').value.trim(),
+                    shipping_province: selectedProvinceName,
+                    shipping_city: selectedCityName,
+                    shipping_subdistrict: selectedSubdistrictName,
+                    shipping_postal_code: document.getElementById('postal-code').value.trim(),
+                    shipping_location_id: selectedLocationId,
+                    courier_service_id: selectedCourierServiceId,
+                    warehouse_unique_id: selectedWarehouseUniqueId,
+                    payment_method: document.getElementById('payment-method').value,
+                };
+
+                try {
+                    const result = await scalevCheckout(payload);
+                    const orders = JSON.parse(localStorage.getItem('scalev_orders') || '[]');
+                    orders.unshift({
+                        secret_slug: result.secret_slug,
+                        order_id: result.order_id,
+                        created_at: new Date().toISOString(),
+                        total: result.gross_revenue,
+                    });
+                    localStorage.setItem('scalev_orders', JSON.stringify(orders));
+                    localStorage.removeItem('scalev_guest_token');
+                    window.location.href = `order.html?slug=${result.secret_slug}`;
+                } catch (err) {
+                    alert('Gagal memproses pesanan: ' + err.message);
+                    btn.disabled = false;
+                    btn.innerHTML = '<span class="material-symbols-outlined">shopping_bag_speed</span> Buat Pesanan';
+                }
+            });
+
+            document.getElementById('customer-phone').addEventListener('input', function () {
+                this.value = this.value.replace(/[^0-9]/g, '');
+            });
+        });
+    </script>
+</body>
+</html>

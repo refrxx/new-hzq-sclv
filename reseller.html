@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Pendaftaran Reseller - Hamzah Quran</title>
+    <link rel="icon" type="image/svg+xml" href="img/hamzah-favico.svg">
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            blue: '#1A5FB4',
+                            gold: '#ffc107',
+                        }
+                    },
+                    fontFamily: {
+                        display: ['Plus Jakarta Sans', 'sans-serif'],
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    borderRadius: {
+                        '32': '32px',
+                        '40': '40px',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Custom CSS -->
+    <link href="style.css" rel="stylesheet" />
+
+    <!-- Google Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@700;800;900&display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-25..0"
+        rel="stylesheet" />
+</head>
+
+<body class="bg-white dark:bg-[#080e16] transition-colors duration-300">
+    <!-- Top Promo Bar -->
+    <div class="promo-bar font-sans flex items-center justify-center px-4 overflow-hidden h-[44px]">
+        <div class="flex items-center justify-center gap-4 sm:gap-10">
+            <span class="promo-item uppercase">🔥 Disc. up to 20% order via Website</span>
+            <span class="promo-separator hidden sm:inline">•</span>
+            <span class="promo-item uppercase hidden sm:inline">🚚 Free Ongkir (area Pulau Jawa)</span>
+            <span class="promo-separator hidden sm:inline">•</span>
+            <span class="promo-item uppercase hidden sm:inline">📦 Bisa COD ke seluruh Indonesia</span>
+        </div>
+    </div>
+
+    <header class="header-sticky w-full z-50 scrolled">
+        <nav class="max-w-[1200px] mx-auto px-8 md:px-12 py-4 flex items-center justify-between">
+            <!-- Logo -->
+            <a class="flex items-center relative" href="index.html">
+                <img src="img/hamzahcolor.png" alt="Hamzah Quran"
+                    class="h-6 md:h-8 w-auto transition-opacity duration-300 opacity-100 dark:opacity-0">
+                <img src="img/hamzahquran.png" alt="Hamzah Quran"
+                    class="h-6 md:h-8 w-auto absolute top-0 left-0 transition-opacity duration-300 opacity-0 dark:opacity-100 invert">
+            </a>
+
+            <!-- Desktop Navigation -->
+            <ul class="hidden lg:flex items-center space-x-8">
+                <li><a class="nav-link-underline font-sans font-semibold text-slate-500 hover:text-brand-blue dark:text-slate-400 dark:hover:text-white transition-colors duration-300"
+                        href="index.html">Home</a></li>
+                <li><a class="nav-link-underline font-sans font-semibold text-slate-500 hover:text-brand-blue dark:text-slate-400 dark:hover:text-white transition-colors duration-300"
+                        href="produk.html">Produk</a></li>
+                <li><a class="nav-link-underline font-sans font-semibold text-slate-500 hover:text-brand-blue dark:text-slate-400 dark:hover:text-white transition-colors duration-300"
+                        href="cover.html">Katalog Cover</a></li>
+                <li><a class="nav-link-underline font-sans font-semibold text-brand-blue hover:text-brand-blue dark:text-brand-gold dark:hover:text-white transition-colors duration-300"
+                        href="reseller.html">Reseller</a></li>
+                <li><a class="nav-link-underline font-sans font-semibold text-slate-500 hover:text-brand-blue dark:text-slate-400 dark:hover:text-white transition-colors duration-300"
+                        href="bulk-order.html">B2B</a></li>
+            </ul>
+
+            <div class="flex items-center gap-4">
+                <button id="theme-toggle"
+                    class="p-2.5 bg-slate-100 dark:bg-slate-800 rounded-full text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors duration-300 border-0 flex items-center justify-center w-10 h-10 relative overflow-hidden">
+                    <span
+                        class="material-symbols-outlined absolute transition-transform duration-300 rotate-0 dark:-rotate-90 dark:opacity-0">dark_mode</span>
+                    <span
+                        class="material-symbols-outlined absolute transition-transform duration-300 rotate-90 opacity-0 dark:rotate-0 dark:opacity-100">light_mode</span>
+                </button>
+                <a href="cart.html"
+                    class="p-2.5 bg-slate-100 dark:bg-slate-800 rounded-full text-slate-600 dark:text-slate-400 hover:text-brand-blue dark:hover:text-brand-gold transition-colors duration-300 border-0 flex items-center justify-center w-10 h-10 relative">
+                    <span class="material-symbols-outlined">shopping_cart</span>
+                    <span id="nav-cart-badge"
+                        class="absolute -top-1 -right-1 bg-red-500 text-white text-[0.6rem] font-bold w-4 h-4 rounded-full flex items-center justify-center hidden">0</span>
+                </a>
+
+                <!-- Mobile Menu Button -->
+                <button id="mobile-menu-button"
+                    class="lg:hidden p-2 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors duration-300 border-0 flex items-center justify-center">
+                    <span class="material-symbols-outlined">menu</span>
+                </button>
+            </div>
+        </nav>
+
+        <!-- Mobile Menu (Hidden by default) -->
+        <div id="mobile-menu"
+            class="hidden lg:hidden bg-white dark:bg-[#080e16] absolute top-full left-0 w-full border-b dark:border-slate-800 shadow-xl py-6 px-8 md:px-12 animate-fade-in-down transition-colors duration-300 z-[-1]">
+            <ul class="flex flex-col space-y-4">
+                <li><a class="font-sans font-semibold text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white block px-8 md:px-12 py-2 transition-colors duration-300"
+                        href="index.html">Home</a></li>
+                <li><a class="font-sans font-semibold text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white block px-8 md:px-12 py-2 transition-colors duration-300"
+                        href="produk.html">Produk</a></li>
+                <li><a class="font-sans font-semibold text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white block px-8 md:px-12 py-2 transition-colors duration-300"
+                        href="cover.html">Katalog Cover</a></li>
+                <li><a class="font-sans font-semibold text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white block px-8 md:px-12 py-2 transition-colors duration-300"
+                        href="reseller.html">Reseller</a></li>
+                <li><a class="font-sans font-semibold text-slate-500 dark:text-slate-400 hover:text-slate-500 dark:hover:text-white block px-8 md:px-12 py-2 transition-colors duration-300"
+                        href="bulk-order.html">B2B</a></li>
+                <li class="pt-4"><a href="cart.html"
+                        class="block bg-brand-blue dark:bg-white text-white dark:text-black rounded-full px-6 py-3 font-bold shadow-md text-center transition-all duration-300">Lihat
+                        Keranjang</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <main class="pt-12 pb-12 lg:pt-12 lg:pb-20">
+        <section class="max-w-[1200px] mx-auto px-8 md:px-12">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-20 items-start">
+                <div class="animate-fade-in-up">
+                    <span
+                        class="text-xs md:text-sm font-bold tracking-[0.2em] text-brand-blue dark:text-brand-gold uppercase mb-4 block">Join
+                        Our Family</span>
+                    <h1
+                        class="text-4xl md:text-6xl font-display font-black text-slate-900 dark:text-white mb-8 leading-tight">
+                        Bangun <span class="text-brand-blue dark:text-brand-gold">Brand Al-Quran</span> Anda Sendiri
+                    </h1>
+                    <p class="text-slate-500 dark:text-slate-400 text-lg mb-12 font-medium leading-relaxed">
+                        Terima beres dengan sistem White Label. Anda fokus jualan dengan brand sendiri, kami yang
+                        produksi. Harga jual? Anda yang tentukan sendiri!
+                    </p>
+
+                    <ul class="space-y-6 mb-12">
+                        <li class="flex items-start gap-4">
+                            <span
+                                class="w-10 h-10 shrink-0 rounded-full bg-brand-blue/10 flex items-center justify-center text-brand-blue dark:text-brand-gold">
+                                <span class="material-symbols-outlined">sell</span>
+                            </span>
+                            <div>
+                                <span class="text-slate-900 dark:text-white font-bold block mb-1">Bebas Pakai Brand
+                                    Sendiri</span>
+                                <span class="text-slate-500 dark:text-slate-400 text-sm">Tanpa embel-embel Hamzah Quran
+                                    di produk.</span>
+                            </div>
+                        </li>
+                        <li class="flex items-start gap-4">
+                            <span
+                                class="w-10 h-10 shrink-0 rounded-full bg-brand-blue/10 flex items-center justify-center text-brand-blue dark:text-brand-gold">
+                                <span class="material-symbols-outlined">payments</span>
+                            </span>
+                            <div>
+                                <span class="text-slate-900 dark:text-white font-bold block mb-1">Kontrol Harga
+                                    100%</span>
+                                <span class="text-slate-500 dark:text-slate-400 text-sm">Tidak ada harga eceran
+                                    tertinggi (HET) dari kami. Keuntungan sepenuhnya milik Anda.</span>
+                            </div>
+                        </li>
+                        <li class="flex items-start gap-4">
+                            <span
+                                class="w-10 h-10 shrink-0 rounded-full bg-brand-blue/10 flex items-center justify-center text-brand-blue dark:text-brand-gold">
+                                <span class="material-symbols-outlined">palette</span>
+                            </span>
+                            <div>
+                                <span class="text-slate-900 dark:text-white font-bold block mb-1">Desain Custom Tanpa
+                                    Batas</span>
+                                <span class="text-slate-500 dark:text-slate-400 text-sm">Bisa pakai desain cover dari
+                                    Anda atau tim kami bantu buatkan.</span>
+                            </div>
+                        </li>
+                        <li class="flex items-start gap-4">
+                            <span
+                                class="w-10 h-10 shrink-0 rounded-full bg-brand-blue/10 flex items-center justify-center text-brand-blue dark:text-brand-gold">
+                                <span class="material-symbols-outlined">speed</span>
+                            </span>
+                            <div>
+                                <span class="text-slate-900 dark:text-white font-bold block mb-1">Produksi Skala Besar &
+                                    Cepat</span>
+                                <span class="text-slate-500 dark:text-slate-400 text-sm">Dukungan mesin cetak modern
+                                    untuk memenuhi kebutuhan brand Anda.</span>
+                            </div>
+                        </li>
+                    </ul>
+
+
+                </div>
+
+                <div class="animate-fade-in-right">
+                    <div
+                        class="bg-slate-50 dark:bg-slate-900/50 p-8 md:p-12 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-xl">
+                        <h2 class="text-2xl font-display font-black text-slate-900 dark:text-white mb-8">Formulir
+                            Pendaftaran</h2>
+                        <form id="resellerForm" class="space-y-6">
+                            <div class="space-y-2">
+                                <label class="text-sm font-bold text-slate-500 uppercase tracking-wider">Nama
+                                    Lengkap</label>
+                                <input type="text" id="reseller-name" placeholder="Masukkan nama" required
+                                    class="w-full bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-2xl px-6 py-4 focus:outline-none focus:ring-2 focus:ring-brand-blue transition-all">
+                            </div>
+
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div class="space-y-2">
+                                    <label class="text-sm font-bold text-slate-500 uppercase tracking-wider">Kota
+                                        Domisili</label>
+                                    <input type="text" id="reseller-city" placeholder="Contoh: Bandung" required
+                                        class="w-full bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-2xl px-6 py-4 focus:outline-none focus:ring-2 focus:ring-brand-blue transition-all">
+                                </div>
+                                <div class="space-y-2">
+                                    <label class="text-sm font-bold text-slate-500 uppercase tracking-wider">Brand
+                                        Anda</label>
+                                    <input type="text" id="reseller-brand" placeholder="Contoh: Hamzah" required
+                                        class="w-full bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-2xl px-6 py-4 focus:outline-none focus:ring-2 focus:ring-brand-blue transition-all">
+                                </div>
+                            </div>
+
+                            <div class="space-y-2">
+                                <label class="text-sm font-bold text-slate-500 uppercase tracking-wider">Pilihan
+                                    Skema</label>
+                                <select id="reseller-scheme" required
+                                    class="w-full bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-2xl px-6 py-4 focus:outline-none focus:ring-2 focus:ring-brand-blue transition-all">
+                                    <option value="">Pilih Skema</option>
+                                    <option value="Reseller">Kirim Sendiri (Self Distribute)</option>
+                                    <option value="Marketer">Kirim Langsung dari Pusat (Direct to Buyer)</option>
+                                </select>
+                            </div>
+
+                            <div class="space-y-2">
+                                <label class="text-sm font-bold text-slate-500 uppercase tracking-wider">Alasan
+                                    Bergabung</label>
+                                <textarea id="reseller-reason" placeholder="Berikan alasan singkat Anda bergabung"
+                                    rows="3" required
+                                    class="w-full bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-2xl px-6 py-4 focus:outline-none focus:ring-2 focus:ring-brand-blue transition-all"></textarea>
+                            </div>
+
+                            <button type="submit"
+                                class="w-full bg-brand-blue dark:bg-white text-white dark:text-black py-5 rounded-2xl font-bold shadow-lg hover:bg-brand-gold dark:hover:bg-brand-blue hover:text-black dark:hover:text-white transition-all transform hover:scale-[1.02]">
+                                Kirim Pendaftaran Ke WhatsApp
+                            </button>
+                        </form>
+
+
+
+                        <script>
+                            document.getElementById('resellerForm').addEventListener('submit', function (e) {
+                                e.preventDefault();
+
+                                const name = document.getElementById('reseller-name').value;
+                                const city = document.getElementById('reseller-city').value;
+                                const job = document.getElementById('reseller-job').value;
+                                const scheme = document.getElementById('reseller-scheme').value;
+                                const reason = document.getElementById('reseller-reason').value;
+
+                                const waNumber = "6285155060816";
+                                const message = `Halo Admin Hamzah Quran, saya ingin mendaftar sebagai *${scheme}*.%0A%0A` +
+                                    `*Nama:* ${name}%0A` +
+                                    `*Kota Domisili:* ${city}%0A` +
+                                    `*Pekerjaan:* ${job}%0A` +
+                                    `*Skema:* ${scheme}%0A` +
+                                    `*Alasan bergabung:* ${reason}%0A%0A` +
+                                    `Mohon informasi lebih lanjut. Terima kasih.`;
+
+                                const waUrl = `https://api.whatsapp.com/send?phone=${waNumber}&text=${message}`;
+
+                                window.open(waUrl, '_blank');
+                            });
+                        </script>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="max-w-[1200px] mx-auto px-8 md:px-12">
+            <!-- Perbandingan Skema -->
+            <div class="mt-20">
+                <h3
+                    class="text-2xl font-display font-black mb-10 flex items-center gap-3 text-slate-900 dark:text-white justify-center">
+                    <span class="material-symbols-outlined text-brand-blue dark:text-brand-gold">compare_arrows</span>
+                    Perbandingan Skema
+                </h3>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <!-- Skema: Kirim Sendiri -->
+                    <div
+                        class="bg-white dark:bg-slate-900 rounded-3xl p-8 border border-slate-100 dark:border-slate-800 shadow-sm hover:shadow-md transition-shadow">
+                        <div class="flex items-center gap-4 mb-8">
+                            <div
+                                class="w-12 h-12 bg-brand-blue/10 dark:bg-brand-blue/20 rounded-2xl flex items-center justify-center text-brand-blue">
+                                <span class="material-symbols-outlined">local_shipping</span>
+                            </div>
+                            <h4 class="text-2xl font-display font-black text-slate-900 dark:text-white">Kirim Sendiri
+                            </h4>
+                        </div>
+
+                        <ul class="space-y-6">
+                            <li class="flex flex-col gap-1 leading-relaxed">
+                                <span class="text-[0.65rem] font-bold uppercase tracking-[0.1em] text-slate-400">Alur
+                                    Pengiriman</span>
+                                <p class="text-slate-600 dark:text-slate-400 font-medium text-sm">Produk dikirim ke
+                                    alamat Mitra</p>
+                            </li>
+                            <li class="flex flex-col gap-1 leading-relaxed">
+                                <span
+                                    class="text-[0.65rem] font-bold uppercase tracking-[0.1em] text-slate-400">Kebebasan
+                                    Packing</span>
+                                <p class="text-slate-600 dark:text-slate-400 font-medium text-sm">Sangat Bebas. Bisa
+                                    tambah freebies/kartu ucapan sendiri.</p>
+                            </li>
+                            <li class="flex flex-col gap-1 leading-relaxed">
+                                <span
+                                    class="text-[0.65rem] font-bold uppercase tracking-[0.1em] text-slate-400">Domisili
+                                    Mitra</span>
+                                <p class="text-slate-600 dark:text-slate-400 font-medium text-sm">Disarankan: Tangsel
+                                    &
+                                    Sekitarnya (Hemat Ongkir)</p>
+                            </li>
+                            <li class="flex flex-col gap-1 leading-relaxed">
+                                <span class="text-[0.65rem] font-bold uppercase tracking-[0.1em] text-slate-400">Manfaat
+                                    Utama</span>
+                                <p class="text-slate-600 dark:text-slate-400 font-medium text-sm">Kontrol penuh
+                                    terhadap unboxing experience.</p>
+                            </li>
+                            <li class="flex flex-col gap-1 leading-relaxed">
+                                <span class="text-[0.65rem] font-bold uppercase tracking-[0.1em] text-slate-400">Biaya
+                                    Layanan</span>
+                                <p class="text-slate-600 dark:text-slate-400 font-medium text-sm">Hanya biaya produksi
+                                    & ongkir ke Mitra.</p>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Skema: Kirim Langsung -->
+                    <div
+                        class="bg-white dark:bg-slate-900 rounded-3xl p-8 border border-slate-100 dark:border-slate-800 shadow-sm hover:shadow-md transition-shadow">
+                        <div class="flex items-center gap-4 mb-8">
+                            <div
+                                class="w-12 h-12 bg-brand-gold/10 dark:bg-brand-gold/20 rounded-2xl flex items-center justify-center text-orange-600 dark:text-brand-gold">
+                                <span class="material-symbols-outlined">bolt</span>
+                            </div>
+                            <h4 class="text-2xl font-display font-black text-slate-900 dark:text-white">Kirim Langsung
+                            </h4>
+                        </div>
+
+                        <ul class="space-y-6">
+                            <li class="flex flex-col gap-1 leading-relaxed">
+                                <span class="text-[0.65rem] font-bold uppercase tracking-[0.1em] text-slate-400">Alur
+                                    Pengiriman</span>
+                                <p class="text-slate-600 dark:text-slate-400 font-medium text-sm">Produk langsung
+                                    dikirim ke alamat Buyer</p>
+                            </li>
+                            <li class="flex flex-col gap-1 leading-relaxed">
+                                <span
+                                    class="text-[0.65rem] font-bold uppercase tracking-[0.1em] text-slate-400">Kebebasan
+                                    Packing</span>
+                                <p class="text-slate-600 dark:text-slate-400 font-medium text-sm">Standard Pusat
+                                    (Include Box & Bubble Wrap).</p>
+                            </li>
+                            <li class="flex flex-col gap-1 leading-relaxed">
+                                <span
+                                    class="text-[0.65rem] font-bold uppercase tracking-[0.1em] text-slate-400">Domisili
+                                    Mitra</span>
+                                <p class="text-slate-600 dark:text-slate-400 font-medium text-sm">Cocok untuk Mitra
+                                    Luar Kota / Luar Jawa.</p>
+                            </li>
+                            <li class="flex flex-col gap-1 leading-relaxed">
+                                <span class="text-[0.65rem] font-bold uppercase tracking-[0.1em] text-slate-400">Manfaat
+                                    Utama</span>
+                                <p class="text-slate-600 dark:text-slate-400 font-medium text-sm">Praktis, tidak perlu
+                                    stok dan tidak perlu packing.</p>
+                            </li>
+                            <li class="flex flex-col gap-1 leading-relaxed">
+                                <span class="text-[0.65rem] font-bold uppercase tracking-[0.1em] text-slate-400">Biaya
+                                    Layanan</span>
+                                <p class="text-slate-600 dark:text-slate-400 font-medium text-sm">Biaya produksi +
+                                    Jasa
+                                    Fulfillment (Packing & Drop).</p>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="w-full bg-[#0055AA] text-white pt-20 pb-10">
+        <div class="max-w-[1200px] mx-auto px-8 md:px-12">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8 mb-16">
+                <!-- Column 1: Brand Info -->
+                <div class="flex flex-col items-start text-left space-y-6">
+                    <img src="img/hamzahquran.png" alt="Hamzah Quran" class="h-8 w-auto invert brightness-0">
+                    <h3 class="text-xl font-display font-black">Sahabat Setia Ibadahmu</h3>
+                    <p class="text-white/80 text-sm leading-relaxed max-w-xs">
+                        Hamzah Quran menyediakaan Al Quran custom berkualitas tinggi dengan desain eksklusif. Setiap
+                        Al Quran kami dibuat dengan penuh ketelitian dan kecintaan untuk menemani ibadah sehari-hari
+                        Anda.
+                    </p>
+                </div>
+
+                <!-- Column 2: Kontak Kami -->
+                <div class="space-y-6">
+                    <h4 class="text-lg font-bold">Kontak Kami</h4>
+                    <div class="space-y-4">
+                        <div class="flex items-start gap-3">
+                            <div class="flex flex-col">
+                                <span class="text-xs font-medium opacity-60">Alamat Toko</span>
+                                <p class="text-sm">Jl. Murjaya Rt 04/05, Jurangmangu Barat, Pondok Aren, Tangerang
+                                    Selatan 15223</p>
+                            </div>
+                        </div>
+                        <div class="flex flex-col">
+                            <span class="text-xs font-medium opacity-60">WhatsApp</span>
+                            <a href="https://wa.me/6285155060816" target="_blank" class="text-sm">0851 5506 0816</a>
+                        </div>
+                        <div class="flex flex-col">
+                            <span class="text-xs font-medium opacity-60">Email</span>
+                            <a href="mailto:admin.hamzahquran@gmail.com" class="text-sm">admin.hamzahquran@gmail.com</a>
+                        </div>
+                        <div class="flex flex-col">
+                            <span class="text-xs font-medium opacity-60">Layanan Pelanggan</span>
+                            <p class="text-[11px] leading-relaxed">
+                                Senin - Jumat: 08.00 - 17.00 WIB<br>
+                                Sabtu: 09.00 - 15.00 WIB
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Column 3: Metode Pembayaran -->
+                <div class="space-y-6">
+                    <h4 class="text-lg font-bold">Metode Pembayaran</h4>
+                    <div class="grid grid-cols-6 lg:grid-cols-4 gap-2">
+                        <!-- Simulated Payment Icons using stylized boxes as per image -->
+                        <div
+                            class="bg-white rounded h-7 flex items-center justify-center p-1 shadow-sm hover:scale-105 transition-transform">
+                            <img src="img/bank/bca.svg" alt="BCA" class="h-3 w-auto">
+                        </div>
+                        <div
+                            class="bg-white rounded h-7 flex items-center justify-center p-1 shadow-sm hover:scale-105 transition-transform">
+                            <img src="img/bank/bsi.svg" alt="BSI" class="h-3 w-auto">
+                        </div>
+                        <div
+                            class="bg-white rounded h-7 flex items-center justify-center p-1 shadow-sm hover:scale-105 transition-transform">
+                            <img src="img/bank/qris.svg" alt="QRIS" class="h-3 w-auto">
+                        </div>
+                        <div
+                            class="bg-white rounded h-7 flex items-center justify-center p-1 shadow-sm hover:scale-105 transition-transform">
+                            <img src="img/bank/mandiri.svg" alt="Mandiri" class="h-3 w-auto">
+                        </div>
+                        <div
+                            class="bg-white rounded h-7 flex items-center justify-center p-1 shadow-sm hover:scale-105 transition-transform">
+                            <img src="img/bank/bni.svg" alt="BNI" class="h-3 w-auto">
+                        </div>
+                        <div
+                            class="bg-white rounded h-7 flex items-center justify-center p-1 shadow-sm hover:scale-105 transition-transform">
+                            <img src="img/bank/bri.svg" alt="BRI" class="h-3 w-auto">
+                        </div>
+                        <div
+                            class="bg-white rounded h-7 flex items-center justify-center p-1 shadow-sm hover:scale-105 transition-transform">
+                            <img src="img/bank/jago.svg" alt="Jago" class="h-3 w-auto">
+                        </div>
+                        <div
+                            class="bg-white rounded h-7 flex items-center justify-center p-1 shadow-sm hover:scale-105 transition-transform">
+                            <span class="text-[1rem] font-black text-blue-900 leading-none">COD</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Column 4: Metode Pengiriman -->
+                <div class="space-y-6">
+                    <h4 class="text-lg font-bold">Metode Pengiriman</h4>
+                    <div class="flex flex-wrap gap-2 mb-4">
+                        <div
+                            class="bg-white rounded h-8 w-14 flex items-center justify-center p-1 shadow-sm hover:scale-105 transition-transform">
+                            <img src="img/lionparcel.png" alt="Lion Parcel" class="h-3 w-auto">
+                        </div>
+                        <div
+                            class="bg-white rounded h-8 w-14 flex items-center justify-center p-1 shadow-sm hover:scale-105 transition-transform">
+                            <img src="img/jne.png" alt="JNE" class="h-3 w-auto">
+                        </div>
+                    </div>
+                    <div class="pt-4 border-t border-white/20">
+                        <p class="text-[10px] opacity-60 mb-2 uppercase font-bold tracking-widest">Powered by</p>
+                        <img src="img/lincah.png" alt="Lincah" class="h-5 w-auto invert brightness-0">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bottom Copyright Bar -->
+            <div class="pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4">
+                <p class="text-xs opacity-60">© 2026 Hamzah Quran. All rights reserved.</p>
+                <p class="text-xs text-white/60 flex items-center gap-4">Developed by <a href="https://rgdigilabs.com"
+                        target="_blank"><img src="img/rg-digilabs.png" alt="rg! Digilabs"
+                            class="h-6 w-auto opacity-60 hover:opacity-100 transition-opacity duration-300"></a></p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/lenis@1.1.20/dist/lenis.min.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>
