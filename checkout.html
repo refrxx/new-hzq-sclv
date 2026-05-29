@@ -346,7 +346,7 @@
             const cekBtn = document.getElementById('cek-ongkir-btn');
             const postalInput = document.getElementById('postal-code');
 
-            const provinces = await scalevGetProvinces();
+            const provinces = (await scalevGetProvinces()).data || [];
             provinces.forEach(p => {
                 const opt = document.createElement('option');
                 opt.value = p.id;
@@ -358,7 +358,7 @@
                 citySelect.innerHTML = '<option value="" disabled selected>Memuat...</option>';
                 citySelect.disabled = false;
                 selectedProvinceName = provinceSelect.options[provinceSelect.selectedIndex].text;
-                const cities = await scalevGetCities(provinceSelect.value);
+                const cities = (await scalevGetCities(provinceSelect.value)).data || [];
                 citySelect.innerHTML = '<option value="" disabled selected>Pilih Kota/Kabupaten</option>';
                 cities.forEach(c => {
                     const opt = document.createElement('option');
@@ -378,7 +378,7 @@
                 subdistrictSelect.innerHTML = '<option value="" disabled selected>Memuat...</option>';
                 subdistrictSelect.disabled = false;
                 selectedCityName = citySelect.options[citySelect.selectedIndex].text;
-                const subdistricts = await scalevGetSubdistricts(citySelect.value);
+                const subdistricts = (await scalevGetSubdistricts(citySelect.value)).data || [];
                 subdistrictSelect.innerHTML = '<option value="" disabled selected>Pilih Kecamatan</option>';
                 subdistricts.forEach(s => {
                     const opt = document.createElement('option');
