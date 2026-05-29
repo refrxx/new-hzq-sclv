@@ -148,9 +148,13 @@
                                 </div>
                                 <div>
                                     <label class="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-2">Kode Pos</label>
-                                    <input type="text" id="postal-code" readonly
-                                        class="w-full bg-slate-50 dark:bg-slate-800 border-none rounded-xl px-4 py-3 text-slate-900 dark:text-white outline-none transition-all"
-                                        placeholder="Otomatis terisi">
+                                    <div class="relative">
+                                        <select id="postal-code"
+                                            class="w-full bg-slate-50 dark:bg-slate-800 border-none rounded-xl px-4 py-3 text-slate-900 dark:text-white focus:ring-2 focus:ring-brand-blue outline-none transition-all appearance-none cursor-pointer pr-10">
+                                            <option value="" disabled selected>Pilih Kecamatan dulu</option>
+                                        </select>
+                                        <span class="material-symbols-outlined absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-slate-400 text-sm">expand_more</span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -444,9 +448,16 @@
                 try {
                     const postalData = await scalevGetPostalCodes(selectedLocationId);
                     const codes = postalData.data || [];
-                    postalInput.value = codes.length > 0 ? (codes[0].postal_code || '') : '';
+                    postalInput.innerHTML = '<option value="" disabled selected>Pilih Kode Pos</option>';
+                    codes.forEach(c => {
+                        const opt = document.createElement('option');
+                        opt.value = c.postal_code || '';
+                        opt.textContent = c.postal_code || '-';
+                        postalInput.appendChild(opt);
+                    });
+                    if (codes.length === 1) postalInput.value = codes[0].postal_code || '';
                 } catch {
-                    postalInput.value = '';
+                    postalInput.innerHTML = '<option value="" disabled selected>Gagal memuat</option>';
                 }
                 cekBtn.disabled = false;
                 document.getElementById('shipping-options').innerHTML = '';
