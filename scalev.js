@@ -64,6 +64,14 @@ window.scalevGetShipping = (payload) => scalevFetch('/public/checkout/shipping-o
   body: JSON.stringify(payload),
 });
 
+window.scalevGetCheckoutSummary = (payload) => scalevFetch('/public/checkout/summary', {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify(payload),
+});
+
+window.scalevGetStore = () => scalevFetch('/');
+
 window.scalevCheckout = (payload) => scalevFetch('/public/checkout', {
   method: 'POST',
   headers: { 'Content-Type': 'application/json' },
