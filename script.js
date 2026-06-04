@@ -153,6 +153,51 @@ const ONGKIR_ZONA = {
     'Papua': 100000,
 };
 
+const PROVINSI_ZONA = {
+    'DKI Jakarta': 'Jawa',
+    'Jawa Barat': 'Jawa',
+    'Jawa Tengah': 'Jawa',
+    'DI Yogyakarta': 'Jawa',
+    'Jawa Timur': 'Jawa',
+    'Banten': 'Jawa',
+    'Bali': 'Bali, NTB & NTT',
+    'Nusa Tenggara Barat': 'Bali, NTB & NTT',
+    'Nusa Tenggara Timur': 'Bali, NTB & NTT',
+    'Aceh': 'Sumatera',
+    'Sumatera Utara': 'Sumatera',
+    'Sumatera Barat': 'Sumatera',
+    'Riau': 'Sumatera',
+    'Kepulauan Riau': 'Sumatera',
+    'Jambi': 'Sumatera',
+    'Sumatera Selatan': 'Sumatera',
+    'Bangka Belitung': 'Sumatera',
+    'Bengkulu': 'Sumatera',
+    'Lampung': 'Sumatera',
+    'Kalimantan Barat': 'Kalimantan',
+    'Kalimantan Tengah': 'Kalimantan',
+    'Kalimantan Selatan': 'Kalimantan',
+    'Kalimantan Timur': 'Kalimantan',
+    'Kalimantan Utara': 'Kalimantan',
+    'Sulawesi Selatan': 'Sulawesi Selatan',
+    'Sulawesi Utara': 'Sulawesi Lainnya',
+    'Sulawesi Tengah': 'Sulawesi Lainnya',
+    'Sulawesi Tenggara': 'Sulawesi Lainnya',
+    'Gorontalo': 'Sulawesi Lainnya',
+    'Sulawesi Barat': 'Sulawesi Lainnya',
+    'Maluku': 'Maluku',
+    'Maluku Utara': 'Maluku',
+    'Papua': 'Papua',
+    'Papua Barat': 'Papua',
+    'Papua Tengah': 'Papua',
+    'Papua Pegunungan': 'Papua',
+    'Papua Selatan': 'Papua',
+    'Papua Barat Daya': 'Papua',
+};
+
+function getZonaDariProvinsi(provinceName) {
+    return PROVINSI_ZONA[provinceName] || '';
+}
+
 const COVER_DESIGNS = [
     { id: 1, name: "Aesthetic Violet", category: "Aesthetic", img: "img/cover/aesthetic-series-1.jpg" },
     { id: 2, name: "Aesthetic Soft Pink", category: "Aesthetic", img: "img/cover/aesthetic-series-2.jpg" },
@@ -1367,14 +1412,12 @@ function initCart() {
             const district = getSelectText('district');
             const subdistrict = getSelectText('subdistrict');
 
-            const zoneSelect = document.getElementById('shipping-zone');
-            const zoneName = zoneSelect?.value || '';
+            const zoneName = getZonaDariSelect();
             const ongkirPrice = ONGKIR_ZONA[zoneName] ?? 0;
 
             if (!name) return showFieldError('cust-name');
             if (!phone) return showFieldError('cust-phone');
             if (!address) return showFieldError('cust-address');
-            if (!zoneName) return showFieldError('shipping-zone', 'Pilih zona pengiriman');
             if (!document.getElementById('payment-method').value) return showFieldError('payment-method');
 
             const formatPrice = (amount) => `Rp${amount.toLocaleString('id-ID')}`;
@@ -1492,7 +1535,7 @@ function initCart() {
     // Attach listeners
     const formFields = [
         'cust-name', 'cust-phone', 'cust-address', 'cust-province',
-        'cust-city', 'cust-district', 'cust-subdistrict', 'shipping-zone', 'payment-method'
+        'cust-city', 'cust-district', 'cust-subdistrict', 'payment-method'
     ];
     formFields.forEach(id => {
         const el = document.getElementById(id);
@@ -1576,12 +1619,19 @@ async function initRegionalAPI() {
 }
 
 function initShippingZone() {
-    const zoneSelect = document.getElementById('shipping-zone');
-    if (!zoneSelect) return;
+    const provinceSelect = document.getElementById('cust-province');
+    if (!provinceSelect) return;
 
-    zoneSelect.addEventListener('change', () => {
+    provinceSelect.addEventListener('change', () => {
         updateGrandTotal();
     });
+}
+
+function getZonaDariSelect() {
+    const provinceSelect = document.getElementById('cust-province');
+    const provinceText = provinceSelect?.options[provinceSelect.selectedIndex]?.text || '';
+    if (!provinceText || provinceText.includes('Pilih') || provinceText.includes('Memuat')) return '';
+    return getZonaDariProvinsi(provinceText);
 }
 
 function updateGrandTotal() {
@@ -1590,8 +1640,7 @@ function updateGrandTotal() {
 
     const subtotal = cart.reduce((sum, item) => sum + (parsePrice(item.priceWa || item.priceCrt) * item.qty), 0);
 
-    const zoneSelect = document.getElementById('shipping-zone');
-    const zoneName = zoneSelect?.value || '';
+    const zoneName = getZonaDariSelect();
     const ongkirPrice = ONGKIR_ZONA[zoneName] ?? 0;
     const grandTotal = subtotal + ongkirPrice;
 
