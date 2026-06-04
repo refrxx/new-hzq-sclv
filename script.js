@@ -1680,6 +1680,8 @@ function updateGrandTotal() {
 
         if (totalEl) totalEl.textContent = formatPrice(grandTotal);
     });
+
+    document.querySelectorAll('.cart-total:not([id])').forEach(el => el.textContent = formatPrice(grandTotal));
 }
 
 function updateCartTotalUI() {
@@ -1693,9 +1695,6 @@ function updateCartTotalUI() {
 
     const discountAmount = normalSubtotal - finalSubtotal;
     const totalQty = cart.reduce((sum, item) => sum + item.qty, 0);
-
-    const totals = document.querySelectorAll('.cart-total');
-    totals.forEach(el => el.textContent = `Rp${finalSubtotal.toLocaleString('id-ID')}`);
 
     const subtotals = document.querySelectorAll('.cart-subtotal');
     subtotals.forEach(el => el.textContent = `Rp${finalSubtotal.toLocaleString('id-ID')}`);
