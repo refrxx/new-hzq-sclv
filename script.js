@@ -1452,17 +1452,20 @@ function initCart() {
             const pmEl = document.getElementById('payment-method');
             const paymentMethodText = pmEl ? pmEl.options[pmEl.selectedIndex]?.text : 'Transfer Bank';
 
-            const grandTotal = subtotal + ongkirPrice;
+            const paymentMethodValue = document.getElementById('payment-method')?.value || 'transfer';
+            const codFee = paymentMethodValue === 'cod' ? Math.round((subtotal + ongkirPrice) * 0.04) : 0;
+            const grandTotal = subtotal + ongkirPrice + codFee;
 
             message += `==============\n`;
             message += `*SUBTOTAL: ${formatPrice(subtotal)}*\n`;
             message += `*Zona Pengiriman:* ${zoneName}\n`;
             message += `*Ongkos Kirim:* ${ongkirPrice === 0 ? 'Gratis 🎉' : formatPrice(ongkirPrice)}\n`;
-            message += `*Total + Ongkir:* ${formatPrice(grandTotal)}\n\n`;
+            if (codFee > 0) {
+                message += `*Biaya Admin COD (4%):* ${formatPrice(codFee)}\n`;
+            }
+            message += `*TOTAL PEMBAYARAN:* ${formatPrice(grandTotal)}\n\n`;
 
             message += `*Metode Pembayaran:* ${paymentMethodText}\n\n`;
-
-            const paymentMethodValue = document.getElementById('payment-method')?.value || 'transfer';
 
             // === TELEGRAM NOTIFICATION via Worker ===
             try {
@@ -1487,9 +1490,7 @@ function initCart() {
                 subtotal,
                 ongkir: ongkirPrice,
                 zona: zoneName,
-                grandTotal,
-                paymentMethod: paymentMethodValue,
-                subtotal,
+                codFee,
                 grandTotal,
                 cart: cart.map(item => ({
                     name: item.name,
@@ -1621,10 +1622,10 @@ async function initRegionalAPI() {
 function initShippingZone() {
     const provinceSelect = document.getElementById('cust-province');
     if (!provinceSelect) return;
+    provinceSelect.addEventListener('change', () => updateGrandTotal());
 
-    provinceSelect.addEventListener('change', () => {
-        updateGrandTotal();
-    });
+    const paymentMethod = document.getElementById('payment-method');
+    if (paymentMethod) paymentMethod.addEventListener('change', () => updateGrandTotal());
 }
 
 function getZonaDariSelect() {
@@ -1632,6 +1633,10 @@ function getZonaDariSelect() {
     const provinceText = provinceSelect?.options[provinceSelect.selectedIndex]?.text || '';
     if (!provinceText || provinceText.includes('Pilih') || provinceText.includes('Memuat')) return '';
     return getZonaDariProvinsi(provinceText);
+}
+
+function isCOD() {
+    return document.getElementById('payment-method')?.value === 'cod';
 }
 
 function updateGrandTotal() {
@@ -1642,18 +1647,21 @@ function updateGrandTotal() {
 
     const zoneName = getZonaDariSelect();
     const ongkirPrice = ONGKIR_ZONA[zoneName] ?? 0;
-    const grandTotal = subtotal + ongkirPrice;
+    const codFee = isCOD() ? Math.round((subtotal + ongkirPrice) * 0.04) : 0;
+    const grandTotal = subtotal + ongkirPrice + codFee;
 
     const rows = [
-        { rowId: 'ongkir-summary-row', labelId: 'ongkir-summary-label', priceId: 'ongkir-summary-price', totalId: 'grand-total' },
-        { rowId: 'ongkir-summary-row-mobile', labelId: 'ongkir-summary-label-mobile', priceId: 'ongkir-summary-price-mobile', totalId: 'grand-total-mobile' },
+        { rowId: 'ongkir-summary-row', labelId: 'ongkir-summary-label', priceId: 'ongkir-summary-price', totalId: 'grand-total', codRowId: 'cod-fee-row', codPriceId: 'cod-fee-price' },
+        { rowId: 'ongkir-summary-row-mobile', labelId: 'ongkir-summary-label-mobile', priceId: 'ongkir-summary-price-mobile', totalId: 'grand-total-mobile', codRowId: 'cod-fee-row-mobile', codPriceId: 'cod-fee-price-mobile' },
     ];
 
-    rows.forEach(({ rowId, labelId, priceId, totalId }) => {
+    rows.forEach(({ rowId, labelId, priceId, totalId, codRowId, codPriceId }) => {
         const row = document.getElementById(rowId);
         const label = document.getElementById(labelId);
         const priceEl = document.getElementById(priceId);
         const totalEl = document.getElementById(totalId);
+        const codRow = document.getElementById(codRowId);
+        const codPriceEl = document.getElementById(codPriceId);
 
         if (zoneName && row) {
             row.classList.remove('hidden');
@@ -1661,6 +1669,13 @@ function updateGrandTotal() {
             if (priceEl) priceEl.textContent = ongkirPrice === 0 ? 'Gratis 🎉' : formatPrice(ongkirPrice);
         } else if (row) {
             row.classList.add('hidden');
+        }
+
+        if (codFee > 0 && codRow) {
+            codRow.classList.remove('hidden');
+            if (codPriceEl) codPriceEl.textContent = formatPrice(codFee);
+        } else if (codRow) {
+            codRow.classList.add('hidden');
         }
 
         if (totalEl) totalEl.textContent = formatPrice(grandTotal);

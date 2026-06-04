@@ -176,7 +176,7 @@
         const order = JSON.parse(orderJson);
         sessionStorage.removeItem('hq_order');
 
-        const { name, phone, address, paymentMethod, subtotal, ongkir, zona, grandTotal, cart } = order;
+        const { name, phone, address, paymentMethod, subtotal, ongkir, zona, codFee, grandTotal, cart } = order;
 
         const formatPrice = (amount) => `Rp${Number(amount).toLocaleString('id-ID')}`;
 
@@ -278,6 +278,7 @@
                     <p class="text-sm text-slate-500 dark:text-slate-400">Total yang harus dibayar</p>
                     <p class="text-3xl md:text-4xl font-black text-brand-blue dark:text-brand-gold mt-1">${formatPrice(grandTotal || subtotal)}</p>
                     ${ongkir > 0 ? `<p class="text-xs text-slate-400 mt-1">Termasuk ongkos kirim ${formatPrice(ongkir)} (${zona})</p>` : ''}
+                    ${codFee > 0 ? `<p class="text-xs text-slate-400 mt-1">Biaya admin COD 4%: ${formatPrice(codFee)}</p>` : ''}
                 </div>
             </div>
 
@@ -305,6 +306,10 @@
                     ${ongkir > 0 ? `<div class="flex">
                         <span class="text-slate-500 dark:text-slate-400 w-28 shrink-0">Ongkir</span>
                         <span class="font-semibold text-slate-900 dark:text-white">${formatPrice(ongkir)}</span>
+                    </div>` : ''}
+                    ${codFee > 0 ? `<div class="flex">
+                        <span class="text-slate-500 dark:text-slate-400 w-28 shrink-0">COD Fee</span>
+                        <span class="font-semibold text-slate-900 dark:text-white">${formatPrice(codFee)}</span>
                     </div>` : ''}
                     <div class="flex">
                         <span class="text-slate-500 dark:text-slate-400 w-28 shrink-0">Pembayaran</span>
