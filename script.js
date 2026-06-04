@@ -1571,23 +1571,11 @@ async function initRegionalAPI() {
     }
 
     const provinces = await fetchData('/provinces');
-    const grouped = {};
-    provinces.forEach(p => {
-        const zona = getZonaDariProvinsi(p.name);
-        if (!grouped[zona]) grouped[zona] = [];
-        grouped[zona].push(p);
-    });
-    Object.keys(ONGKIR_ZONA).forEach(zona => {
-        if (!grouped[zona]?.length) return;
-        const group = document.createElement('optgroup');
-        group.label = `----- ${zona} -----`;
-        grouped[zona].forEach(p => {
-            const opt = document.createElement('option');
-            opt.value = p.id;
-            opt.textContent = p.name;
-            group.appendChild(opt);
-        });
-        provinceSelect.appendChild(group);
+    provinces.sort((a, b) => a.name.localeCompare(b.name, 'id')).forEach(p => {
+        const opt = document.createElement('option');
+        opt.value = p.id;
+        opt.textContent = p.name;
+        provinceSelect.appendChild(opt);
     });
 
     provinceSelect.addEventListener('change', async () => {
