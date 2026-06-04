@@ -154,10 +154,10 @@ const ONGKIR_ZONA = {
 };
 
 const PROVINSI_ZONA = {
-    'DKI Jakarta': 'Jawa',
+    'Dki Jakarta': 'Jawa',
     'Jawa Barat': 'Jawa',
     'Jawa Tengah': 'Jawa',
-    'DI Yogyakarta': 'Jawa',
+    'Daerah Istimewa Yogyakarta': 'Jawa',
     'Jawa Timur': 'Jawa',
     'Banten': 'Jawa',
     'Bali': 'Bali, NTB & NTT',
@@ -170,7 +170,7 @@ const PROVINSI_ZONA = {
     'Kepulauan Riau': 'Sumatera',
     'Jambi': 'Sumatera',
     'Sumatera Selatan': 'Sumatera',
-    'Bangka Belitung': 'Sumatera',
+    'Kepulauan Bangka Belitung': 'Sumatera',
     'Bengkulu': 'Sumatera',
     'Lampung': 'Sumatera',
     'Kalimantan Barat': 'Kalimantan',
@@ -1571,11 +1571,23 @@ async function initRegionalAPI() {
     }
 
     const provinces = await fetchData('/provinces');
+    const grouped = {};
     provinces.forEach(p => {
-        const opt = document.createElement('option');
-        opt.value = p.id;
-        opt.textContent = p.name;
-        provinceSelect.appendChild(opt);
+        const zona = getZonaDariProvinsi(p.name);
+        if (!grouped[zona]) grouped[zona] = [];
+        grouped[zona].push(p);
+    });
+    Object.keys(ONGKIR_ZONA).forEach(zona => {
+        if (!grouped[zona]?.length) return;
+        const group = document.createElement('optgroup');
+        group.label = `----- ${zona} -----`;
+        grouped[zona].forEach(p => {
+            const opt = document.createElement('option');
+            opt.value = p.id;
+            opt.textContent = p.name;
+            group.appendChild(opt);
+        });
+        provinceSelect.appendChild(group);
     });
 
     provinceSelect.addEventListener('change', async () => {
@@ -1657,7 +1669,7 @@ function updateGrandTotal() {
 
         if (zoneName && row) {
             row.classList.remove('hidden');
-            if (label) label.textContent = `Ongkir (${zoneName})`;
+            if (label) label.textContent = `Ongkir Flat ${zoneName}`;
             if (priceEl) priceEl.textContent = ongkirPrice === 0 ? 'Gratis 🎉' : formatPrice(ongkirPrice);
         } else if (row) {
             row.classList.add('hidden');
