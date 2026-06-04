@@ -63,6 +63,7 @@
     <noscript><img height="1" width="1" style="display:none"
             src="https://www.facebook.com/tr?id=PASTE_YOUR_PIXEL_ID_HERE&ev=PageView&noscript=1" /></noscript>
     <!-- End Facebook Pixel Code -->
+    <script>!function(){var e=localStorage.getItem('theme')==='dark';document.documentElement.classList.toggle('dark',e)}();</script>
 </head>
 
 <body class="bg-white dark:bg-[#080e16] transition-colors duration-300">
@@ -102,13 +103,11 @@
             </ul>
 
             <div class="flex items-center gap-4">
-                <button id="theme-toggle"
-                    class="p-2.5 bg-slate-100 dark:bg-slate-800 rounded-full text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors duration-300 border-0 flex items-center justify-center w-10 h-10 relative overflow-hidden">
-                    <span
-                        class="material-symbols-outlined absolute transition-transform duration-300 rotate-0 dark:-rotate-90 dark:opacity-0">dark_mode</span>
-                    <span
-                        class="material-symbols-outlined absolute transition-transform duration-300 rotate-90 opacity-0 dark:rotate-0 dark:opacity-100">light_mode</span>
-                </button>
+                <a href="pesanan-saya.html"
+                    class="p-2.5 bg-slate-100 dark:bg-slate-800 rounded-full text-slate-600 dark:text-slate-400 hover:text-brand-blue dark:hover:text-brand-gold transition-colors duration-300 flex items-center justify-center w-10 h-10 relative"
+                    title="Pesanan Saya">
+                    <span class="material-symbols-outlined">receipt_long</span>
+                </a>
                 <a href="cart.html"
                     class="p-2.5 bg-slate-100 dark:bg-slate-800 rounded-full text-slate-600 dark:text-slate-400 hover:text-brand-blue dark:hover:text-brand-gold transition-colors duration-300 border-0 flex items-center justify-center w-10 h-10 relative">
                     <span class="material-symbols-outlined">shopping_cart</span>
@@ -138,6 +137,18 @@
                         href="reseller.html">Reseller</a></li>
                 <li><a class="font-sans font-semibold text-slate-500 dark:text-slate-400 hover:text-slate-500 dark:hover:text-white block px-8 md:px-12 py-2 transition-colors duration-300"
                         href="bulk-order.html">B2B</a></li>
+                <li class="border-t border-slate-100 dark:border-slate-800 pt-4">
+                    <div class="flex items-center justify-between px-8 md:px-12 py-2">
+                        <span class="font-sans font-semibold text-slate-500 dark:text-slate-400">Aktifkan Dark Mode</span>
+                        <button id="theme-toggle-mobile"
+                            class="relative inline-flex items-center w-12 h-6 rounded-full transition-colors duration-300 focus:outline-none border-0"
+                            style="background: var(--toggle-bg, #cbd5e1);"
+                            aria-label="Toggle dark mode">
+                            <span id="theme-toggle-mobile-knob"
+                                class="inline-block w-5 h-5 bg-white rounded-full shadow transform transition-transform duration-300 translate-x-0.5"></span>
+                        </button>
+                    </div>
+                </li>
                 <li class="pt-4"><a href="cart.html"
                         class="block bg-brand-blue dark:bg-white text-white dark:text-black rounded-full px-6 py-3 font-bold shadow-md text-center transition-all duration-300">Lihat
                         Keranjang</a></li>
@@ -344,8 +355,14 @@
 
     <!-- Scripts -->
     <script src="https://unpkg.com/lenis@1.1.20/dist/lenis.min.js"></script>
-    <script src="scalev.js"></script>
     <script src="script.js"></script>
+    <script>
+    document.addEventListener('DOMContentLoaded',function(){
+        var t=document.getElementById('theme-toggle');if(t){t.addEventListener('click',function(){var e=!document.documentElement.classList.contains('dark');document.documentElement.classList.toggle('dark',e);localStorage.setItem('theme',e?'dark':'light')})}
+        var h=document.querySelector('.header-sticky');if(h){!function s(){window.scrollY>10?h.classList.add('scrolled'):h.classList.remove('scrolled');window.addEventListener('scroll',s)}()}
+        var b=document.getElementById('mobile-menu-button'),m=document.getElementById('mobile-menu');if(b&&m){b.addEventListener('click',function(){m.classList.toggle('hidden')});m.querySelectorAll('a').forEach(function(l){l.addEventListener('click',function(){m.classList.add('hidden')})})}
+    });
+    </script>
 </body>
 
 </html>
