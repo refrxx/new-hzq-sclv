@@ -374,14 +374,14 @@
                                 ${productsHtml}
                             </div>
                             <!-- Total & Method side by side -->
-                                ${order.courierName ? `
+                                ${order.zona ? `
                                 <div class="flex items-center justify-between text-sm mb-2 pb-2 border-b border-slate-100 dark:border-slate-800">
-                                    <span class="text-slate-500 dark:text-slate-400">Kurir</span>
-                                    <span class="font-semibold text-slate-700 dark:text-slate-300">${order.courierName} (${order.courierService || '-'})</span>
+                                    <span class="text-slate-500 dark:text-slate-400">Zona</span>
+                                    <span class="font-semibold text-slate-700 dark:text-slate-300">${order.zona}</span>
                                 </div>
                                 <div class="flex items-center justify-between text-sm mb-2">
                                     <span class="text-slate-500 dark:text-slate-400">Ongkos Kirim</span>
-                                    <span class="font-semibold text-slate-700 dark:text-slate-300">Rp${Number(order.ongkirPrice || 0).toLocaleString('id-ID')}</span>
+                                    <span class="font-semibold text-slate-700 dark:text-slate-300">${order.ongkir === 0 ? 'Gratis 🎉' : `Rp${Number(order.ongkir).toLocaleString('id-ID')}`}</span>
                                 </div>
                                 ` : ''}
                                 <div class="flex items-center justify-between mb-5">

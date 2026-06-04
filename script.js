@@ -142,8 +142,16 @@ const GLOBAL_PRODUCTS = [
     },
 ];
 
-const WORKER_URL = 'https://hamzahquran-shipping.refry-galiztan.workers.dev';
-const ORIGIN_AREA_ID = 'IDNP3IDNC446IDND5630IDZ15223'; // Pondok Aren, Tangerang Selatan — alamat Hamzah Quran
+const ONGKIR_ZONA = {
+    'Jawa': 0,
+    'Bali, NTB & NTT': 10000,
+    'Sumatera': 25000,
+    'Kalimantan': 25000,
+    'Sulawesi Selatan': 25000,
+    'Sulawesi Lainnya': 40000,
+    'Maluku': 50000,
+    'Papua': 100000,
+};
 
 const COVER_DESIGNS = [
     { id: 1, name: "Aesthetic Violet", category: "Aesthetic", img: "img/cover/aesthetic-series-1.jpg" },
@@ -1346,16 +1354,27 @@ function initCart() {
             const name = document.getElementById('cust-name').value.trim();
             const phone = document.getElementById('cust-phone').value.trim();
             const address = document.getElementById('cust-address').value.trim();
-            const areaId = document.getElementById('cust-area-id')?.value || '';
-            const areaName = document.getElementById('cust-area-name')?.value || '';
-            const ongkirPrice = parseInt(document.getElementById('selected-courier-price')?.value || '0');
-            const courierName = document.getElementById('selected-courier-name')?.value || '';
-            const courierService = document.getElementById('selected-courier-service')?.value || '';
+            const getSelectText = (id) => {
+                const el = document.getElementById('cust-' + id);
+                if (!el || el.selectedIndex <= 0) return '';
+                const text = el.options[el.selectedIndex].text;
+                if (text.includes('Pilih ') || text.includes('Memuat')) return '';
+                return text;
+            };
+
+            const province = getSelectText('province');
+            const city = getSelectText('city');
+            const district = getSelectText('district');
+            const subdistrict = getSelectText('subdistrict');
+
+            const zoneSelect = document.getElementById('shipping-zone');
+            const zoneName = zoneSelect?.value || '';
+            const ongkirPrice = ONGKIR_ZONA[zoneName] ?? 0;
 
             if (!name) return showFieldError('cust-name');
             if (!phone) return showFieldError('cust-phone');
             if (!address) return showFieldError('cust-address');
-            if (!areaId) return showFieldError('cust-area-name');
+            if (!zoneName) return showFieldError('shipping-zone', 'Pilih zona pengiriman');
             if (!document.getElementById('payment-method').value) return showFieldError('payment-method');
 
             const formatPrice = (amount) => `Rp${amount.toLocaleString('id-ID')}`;
@@ -1367,11 +1386,9 @@ function initCart() {
             message += `- Nama: ${name}\n`;
             message += `- No. WA: ${phone}\n`;
             message += `- Alamat: ${address}\n`;
-            if (areaName) message += `- Wilayah: ${areaName}\n`;
-
-            if (courierName && ongkirPrice > 0) {
-                message += `- Kurir: ${courierName} (${courierService})\n`;
-                message += `- Ongkos Kirim: ${formatPrice(ongkirPrice)}\n`;
+            const regionParts = [subdistrict, district, city, province].filter(p => p !== '');
+            if (regionParts.length > 0) {
+                message += `- Wilayah: ${regionParts.join(', ')}\n`;
             }
             message += `\n`;
 
@@ -1396,10 +1413,9 @@ function initCart() {
 
             message += `==============\n`;
             message += `*SUBTOTAL: ${formatPrice(subtotal)}*\n`;
-            if (ongkirPrice > 0) {
-                message += `*ONGKIR: ${formatPrice(ongkirPrice)}*\n`;
-            }
-            message += `*TOTAL PEMBAYARAN: ${formatPrice(grandTotal)}*\n\n`;
+            message += `*Zona Pengiriman:* ${zoneName}\n`;
+            message += `*Ongkos Kirim:* ${ongkirPrice === 0 ? 'Gratis 🎉' : formatPrice(ongkirPrice)}\n`;
+            message += `*Total + Ongkir:* ${formatPrice(grandTotal)}\n\n`;
 
             message += `*Metode Pembayaran:* ${paymentMethodText}\n\n`;
 
@@ -1407,7 +1423,7 @@ function initCart() {
 
             // === TELEGRAM NOTIFICATION via Worker ===
             try {
-                await fetch(`${WORKER_URL}/notify`, {
+                await fetch(`https://hamzahquran-shipping.refry-galiztan.workers.dev/notify`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({
@@ -1424,10 +1440,11 @@ function initCart() {
                 name,
                 phone,
                 address,
-                areaName,
-                courierName,
-                courierService,
-                ongkirPrice,
+                paymentMethod: paymentMethodValue,
+                subtotal,
+                ongkir: ongkirPrice,
+                zona: zoneName,
+                grandTotal,
                 paymentMethod: paymentMethodValue,
                 subtotal,
                 grandTotal,
@@ -1474,7 +1491,8 @@ function initCart() {
 
     // Attach listeners
     const formFields = [
-        'cust-name', 'cust-phone', 'cust-address', 'payment-method'
+        'cust-name', 'cust-phone', 'cust-address', 'cust-province',
+        'cust-city', 'cust-district', 'cust-subdistrict', 'shipping-zone', 'payment-method'
     ];
     formFields.forEach(id => {
         const el = document.getElementById(id);
@@ -1484,199 +1502,120 @@ function initCart() {
         }
     });
 
-    initAreaSearch();
+    initShippingZone();
+    initRegionalAPI();
 }
 
-async function initAreaSearch() {
-    const input = document.getElementById('area-search-input');
-    const resultsBox = document.getElementById('area-search-results');
-    const areaIdField = document.getElementById('cust-area-id');
-    const areaNameField = document.getElementById('cust-area-name');
-    const ongkirSection = document.getElementById('ongkir-section');
+async function initRegionalAPI() {
+    const provinceSelect = document.getElementById('cust-province');
+    const citySelect = document.getElementById('cust-city');
+    const districtSelect = document.getElementById('cust-district');
+    const villageSelect = document.getElementById('cust-subdistrict');
 
-    if (!input) return;
+    if (!provinceSelect) return;
 
-    let debounceTimer;
+    const baseUrl = 'https://api-regional-indonesia.vercel.app/api';
 
-    input.addEventListener('input', () => {
-        clearTimeout(debounceTimer);
-        const query = input.value.trim();
-
-        if (query.length < 3) {
-            resultsBox.classList.add('hidden');
-            resultsBox.innerHTML = '';
-            return;
+    async function fetchData(endpoint) {
+        try {
+            const res = await fetch(`${baseUrl}${endpoint}`);
+            const json = await res.json();
+            return json.data || [];
+        } catch (err) {
+            console.error('API Regional Error:', err);
+            return [];
         }
-
-        debounceTimer = setTimeout(async () => {
-            try {
-                const res = await fetch(`${WORKER_URL}/search-area?input=${encodeURIComponent(query)}`);
-                const data = await res.json();
-
-                resultsBox.innerHTML = '';
-
-                if (!data.areas || data.areas.length === 0) {
-                    resultsBox.innerHTML = '<div class="px-4 py-3 text-sm text-slate-400">Area tidak ditemukan</div>';
-                    resultsBox.classList.remove('hidden');
-                    return;
-                }
-
-                data.areas.slice(0, 8).forEach(area => {
-                    const item = document.createElement('div');
-                    item.className = 'px-4 py-3 text-sm text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-700 cursor-pointer border-b border-slate-100 dark:border-slate-700 last:border-0';
-                    item.textContent = area.name;
-                    item.addEventListener('click', () => {
-                        input.value = area.name;
-                        areaIdField.value = area.id;
-                        areaNameField.value = area.name;
-                        resultsBox.classList.add('hidden');
-                        fetchOngkir(area.id);
-                    });
-                    resultsBox.appendChild(item);
-                });
-
-                resultsBox.classList.remove('hidden');
-            } catch (err) {
-                console.error('Area search error:', err);
-            }
-        }, 500);
-    });
-
-    document.addEventListener('click', (e) => {
-        if (!document.getElementById('area-search-wrapper')?.contains(e.target)) {
-            resultsBox.classList.add('hidden');
-        }
-    });
-}
-
-async function fetchOngkir(destinationAreaId) {
-    const ongkirSection = document.getElementById('ongkir-section');
-    const ongkirLoading = document.getElementById('ongkir-loading');
-    const ongkirList = document.getElementById('ongkir-list');
-
-    ongkirSection.classList.remove('hidden');
-    ongkirLoading.classList.remove('hidden');
-    ongkirList.innerHTML = '';
-
-    document.getElementById('selected-courier-name').value = '';
-    document.getElementById('selected-courier-price').value = '';
-    document.getElementById('selected-courier-service').value = '';
-    updateGrandTotal();
-
-    const totalWeight = cart.reduce((sum, item) => {
-        const product = GLOBAL_PRODUCTS.find(p => p.id === item.id);
-        return sum + ((product?.weight || 500) * item.qty);
-    }, 0);
-
-    const parsePrice = (p) => parseFloat(p.replace(/[^0-9]/g, ''));
-    const totalValue = cart.reduce((sum, item) => {
-        return sum + (parsePrice(item.priceWa || item.priceCrt) * item.qty);
-    }, 0);
-
-    const items = cart.map(item => {
-        const product = GLOBAL_PRODUCTS.find(p => p.id === item.id);
-        return {
-            name: item.name,
-            value: parsePrice(item.priceWa || item.priceCrt),
-            weight: product?.weight || 500,
-            quantity: item.qty
-        };
-    });
-
-    try {
-        const res = await fetch(`${WORKER_URL}/rates`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-                origin_area_id: ORIGIN_AREA_ID,
-                destination_area_id: destinationAreaId,
-                couriers: 'jne,lion_parcel',
-                items
-            })
-        });
-
-        const data = await res.json();
-        ongkirLoading.classList.add('hidden');
-
-        if (!data.pricing || data.pricing.length === 0) {
-            ongkirList.innerHTML = '<div class="text-sm text-red-500">Ongkir tidak tersedia untuk area ini.</div>';
-            return;
-        }
-
-        data.pricing.forEach((option, index) => {
-            const formatPrice = (n) => `Rp${n.toLocaleString('id-ID')}`;
-            const card = document.createElement('label');
-            card.className = 'flex items-center justify-between border border-slate-200 dark:border-slate-700 rounded-xl px-4 py-3 cursor-pointer hover:border-brand-blue dark:hover:border-brand-blue transition has-[:checked]:border-brand-blue has-[:checked]:bg-blue-50 dark:has-[:checked]:bg-blue-950';
-            card.innerHTML = `
-                <div class="flex items-center gap-3">
-                    <input type="radio" name="courier-option" value="${option.price}" 
-                        data-name="${option.courier_name}" 
-                        data-service="${option.courier_service_name}"
-                        class="accent-brand-blue" />
-                    <div>
-                        <div class="font-semibold text-sm text-slate-800 dark:text-slate-100">
-                            ${option.courier_name} - ${option.courier_service_name}
-                        </div>
-                        <div class="text-xs text-slate-400">${option.duration}</div>
-                    </div>
-                </div>
-                <div class="font-bold text-brand-blue">${formatPrice(option.price)}</div>
-            `;
-            ongkirList.appendChild(card);
-        });
-
-        ongkirList.querySelectorAll('input[name="courier-option"]').forEach(radio => {
-            radio.addEventListener('change', () => {
-                document.getElementById('selected-courier-price').value = radio.value;
-                document.getElementById('selected-courier-name').value = radio.dataset.name;
-                document.getElementById('selected-courier-service').value = radio.dataset.service;
-                updateGrandTotal();
-            });
-        });
-
-    } catch (err) {
-        ongkirLoading.classList.add('hidden');
-        ongkirList.innerHTML = '<div class="text-sm text-red-500">Gagal mengambil data ongkir. Coba lagi.</div>';
-        console.error('Ongkir error:', err);
     }
+
+    const provinces = await fetchData('/provinces');
+    provinces.forEach(p => {
+        const opt = document.createElement('option');
+        opt.value = p.id;
+        opt.textContent = p.name;
+        provinceSelect.appendChild(opt);
+    });
+
+    provinceSelect.addEventListener('change', async () => {
+        citySelect.innerHTML = '<option value="" disabled selected>Memuat...</option>';
+        citySelect.disabled = false;
+        const cities = await fetchData(`/cities/${provinceSelect.value}`);
+        citySelect.innerHTML = '<option value="" disabled selected>Pilih Kota/Kabupaten</option>';
+        cities.forEach(c => {
+            const opt = document.createElement('option');
+            opt.value = c.id;
+            opt.textContent = c.name;
+            citySelect.appendChild(opt);
+        });
+    });
+
+    citySelect.addEventListener('change', async () => {
+        districtSelect.innerHTML = '<option value="" disabled selected>Memuat...</option>';
+        districtSelect.disabled = false;
+        const districts = await fetchData(`/districts/${citySelect.value}`);
+        districtSelect.innerHTML = '<option value="" disabled selected>Pilih Kecamatan</option>';
+        districts.forEach(d => {
+            const opt = document.createElement('option');
+            opt.value = d.id;
+            opt.textContent = d.name;
+            districtSelect.appendChild(opt);
+        });
+    });
+
+    districtSelect.addEventListener('change', async () => {
+        villageSelect.innerHTML = '<option value="" disabled selected>Memuat...</option>';
+        villageSelect.disabled = false;
+        const villages = await fetchData(`/villages/${districtSelect.value}`);
+        villageSelect.innerHTML = '<option value="" disabled selected>Pilih Kelurahan/Desa</option>';
+        villages.forEach(v => {
+            const opt = document.createElement('option');
+            opt.value = v.id;
+            opt.textContent = v.name;
+            villageSelect.appendChild(opt);
+        });
+    });
+}
+
+function initShippingZone() {
+    const zoneSelect = document.getElementById('shipping-zone');
+    if (!zoneSelect) return;
+
+    zoneSelect.addEventListener('change', () => {
+        updateGrandTotal();
+    });
 }
 
 function updateGrandTotal() {
-    const parsePrice = (p) => parseFloat(p.replace(/[^0-9]/g, ''));
+    const parsePrice = (p) => parseFloat(String(p).replace(/[^0-9]/g, ''));
     const formatPrice = (n) => `Rp${n.toLocaleString('id-ID')}`;
 
     const subtotal = cart.reduce((sum, item) => sum + (parsePrice(item.priceWa || item.priceCrt) * item.qty), 0);
-    const ongkirPrice = parseInt(document.getElementById('selected-courier-price')?.value || '0');
+
+    const zoneSelect = document.getElementById('shipping-zone');
+    const zoneName = zoneSelect?.value || '';
+    const ongkirPrice = ONGKIR_ZONA[zoneName] ?? 0;
     const grandTotal = subtotal + ongkirPrice;
 
-    const updateSummary = (prefix) => {
-        const row = document.getElementById(`ongkir-summary-row${prefix}`);
-        const label = document.getElementById(`ongkir-summary-label${prefix}`);
-        const price = document.getElementById(`ongkir-summary-price${prefix}`);
-        const grandRow = document.getElementById(`grand-total-row${prefix}`);
-        const grandEl = document.getElementById(`grand-total${prefix}`);
+    const rows = [
+        { rowId: 'ongkir-summary-row', labelId: 'ongkir-summary-label', priceId: 'ongkir-summary-price', totalId: 'grand-total' },
+        { rowId: 'ongkir-summary-row-mobile', labelId: 'ongkir-summary-label-mobile', priceId: 'ongkir-summary-price-mobile', totalId: 'grand-total-mobile' },
+    ];
 
-        if (ongkirPrice > 0 && row) {
-            const courierName = document.getElementById('selected-courier-name')?.value || 'Ongkos Kirim';
+    rows.forEach(({ rowId, labelId, priceId, totalId }) => {
+        const row = document.getElementById(rowId);
+        const label = document.getElementById(labelId);
+        const priceEl = document.getElementById(priceId);
+        const totalEl = document.getElementById(totalId);
+
+        if (zoneName && row) {
             row.classList.remove('hidden');
-            if (label) label.textContent = courierName;
-            if (price) price.textContent = formatPrice(ongkirPrice);
+            if (label) label.textContent = `Ongkir (${zoneName})`;
+            if (priceEl) priceEl.textContent = ongkirPrice === 0 ? 'Gratis 🎉' : formatPrice(ongkirPrice);
         } else if (row) {
             row.classList.add('hidden');
         }
 
-        if (grandEl) {
-            if (ongkirPrice > 0) {
-                grandEl.textContent = formatPrice(grandTotal);
-                if (grandRow) grandRow.classList.remove('hidden');
-            } else {
-                if (grandRow) grandRow.classList.add('hidden');
-            }
-        }
-    };
-
-    updateSummary('');
-    updateSummary('-mobile');
+        if (totalEl) totalEl.textContent = formatPrice(grandTotal);
+    });
 }
 
 function updateCartTotalUI() {
