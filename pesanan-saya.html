@@ -338,7 +338,7 @@
                 const paymentMethodLabels = {
                     'transfer': 'Transfer Bank',
                     'qris': 'QRIS',
-                    'cod': 'COD'
+                    'cod': 'Bayar di Rumah'
                 };
                 const paymentLabel = paymentMethodLabels[order.paymentMethod] || order.paymentMethod;
 
@@ -374,21 +374,20 @@
                                 ${productsHtml}
                             </div>
                             <!-- Total & Method side by side -->
-                                ${order.zona ? `
+                                ${order.courier ? `
                                 <div class="flex items-center justify-between text-sm mb-2 pb-2 border-b border-slate-100 dark:border-slate-800">
-                                    <span class="text-slate-500 dark:text-slate-400">Zona</span>
-                                    <span class="font-semibold text-slate-700 dark:text-slate-300">${order.zona}</span>
-                                </div>
+                                    <span class="text-slate-500 dark:text-slate-400">Kurir</span>
+                                    <span class="font-semibold text-slate-700 dark:text-slate-300">${order.courier}</span>
+                                </div>` : ''}
                                 <div class="flex items-center justify-between text-sm mb-2">
                                     <span class="text-slate-500 dark:text-slate-400">Ongkos Kirim</span>
                                     <span class="font-semibold text-slate-700 dark:text-slate-300">${order.ongkir === 0 ? 'Gratis 🎉' : `Rp${Number(order.ongkir).toLocaleString('id-ID')}`}</span>
                                 </div>
                                 ${order.codFee > 0 ? `
                                 <div class="flex items-center justify-between text-sm mb-2">
-                                    <span class="text-slate-500 dark:text-slate-400">Biaya Admin COD (4%)</span>
+                                    <span class="text-slate-500 dark:text-slate-400">Biaya Admin Bayar di Rumah (4%)</span>
                                     <span class="font-semibold text-slate-700 dark:text-slate-300">Rp${Number(order.codFee).toLocaleString('id-ID')}</span>
                                 </div>
-                                ` : ''}
                                 ` : ''}
                                 <div class="flex items-center justify-between mb-5">
                                     <div class="flex items-center gap-2">

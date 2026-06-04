@@ -142,61 +142,10 @@ const GLOBAL_PRODUCTS = [
     },
 ];
 
-const ONGKIR_ZONA = {
-    'Jawa': 0,
-    'Bali, NTB & NTT': 10000,
-    'Sumatera': 25000,
-    'Kalimantan': 25000,
-    'Sulawesi Selatan': 25000,
-    'Sulawesi': 40000,
-    'Maluku': 50000,
-    'Papua': 100000,
-};
-
-const PROVINSI_ZONA = {
-    'Dki Jakarta': 'Jawa',
-    'Jawa Barat': 'Jawa',
-    'Jawa Tengah': 'Jawa',
-    'Daerah Istimewa Yogyakarta': 'Jawa',
-    'Jawa Timur': 'Jawa',
-    'Banten': 'Jawa',
-    'Bali': 'Bali, NTB & NTT',
-    'Nusa Tenggara Barat': 'Bali, NTB & NTT',
-    'Nusa Tenggara Timur': 'Bali, NTB & NTT',
-    'Aceh': 'Sumatera',
-    'Sumatera Utara': 'Sumatera',
-    'Sumatera Barat': 'Sumatera',
-    'Riau': 'Sumatera',
-    'Kepulauan Riau': 'Sumatera',
-    'Jambi': 'Sumatera',
-    'Sumatera Selatan': 'Sumatera',
-    'Kepulauan Bangka Belitung': 'Sumatera',
-    'Bengkulu': 'Sumatera',
-    'Lampung': 'Sumatera',
-    'Kalimantan Barat': 'Kalimantan',
-    'Kalimantan Tengah': 'Kalimantan',
-    'Kalimantan Selatan': 'Kalimantan',
-    'Kalimantan Timur': 'Kalimantan',
-    'Kalimantan Utara': 'Kalimantan',
-    'Sulawesi Selatan': 'Sulawesi Selatan',
-    'Sulawesi Utara': 'Sulawesi',
-    'Sulawesi Tengah': 'Sulawesi',
-    'Sulawesi Tenggara': 'Sulawesi',
-    'Gorontalo': 'Sulawesi',
-    'Sulawesi Barat': 'Sulawesi',
-    'Maluku': 'Maluku',
-    'Maluku Utara': 'Maluku',
-    'Papua': 'Papua',
-    'Papua Barat': 'Papua',
-    'Papua Tengah': 'Papua',
-    'Papua Pegunungan': 'Papua',
-    'Papua Selatan': 'Papua',
-    'Papua Barat Daya': 'Papua',
-};
-
-function getZonaDariProvinsi(provinceName) {
-    return PROVINSI_ZONA[provinceName] || '';
-}
+let destinationAreaId = null;
+let selectedCourierPrice = 0;
+let selectedCourierName = '';
+let selectedCourierService = '';
 
 const COVER_DESIGNS = [
     { id: 1, name: "Aesthetic Violet", category: "Aesthetic", img: "img/cover/aesthetic-series-1.jpg" },
@@ -1412,13 +1361,16 @@ function initCart() {
             const district = getSelectText('district');
             const subdistrict = getSelectText('subdistrict');
 
-            const zoneName = getZonaDariSelect();
-            const ongkirPrice = ONGKIR_ZONA[zoneName] ?? 0;
+            const courierPrice = selectedCourierPrice || 0;
+            const courierLabel = selectedCourierName ? `${selectedCourierName} ${selectedCourierService}` : '';
 
             if (!name) return showFieldError('cust-name');
             if (!phone) return showFieldError('cust-phone');
             if (!address) return showFieldError('cust-address');
-            if (!document.getElementById('payment-method').value) return showFieldError('payment-method');
+            if (!document.querySelector('input[name="payment-method"]:checked')) {
+                showFieldError('cust-name');
+                return showAlert('Pilih Pembayaran', 'Silakan pilih metode pembayaran.', 'info');
+            }
 
             const formatPrice = (amount) => `Rp${amount.toLocaleString('id-ID')}`;
             const parsePrice = (p) => parseFloat(p.replace(/[^0-9]/g, ''));
@@ -1449,27 +1401,27 @@ function initCart() {
                 message += `   ${c.qty} x ${formatPrice(priceNum)} = ${formatPrice(totalItem)}\n`;
             });
 
-            const pmEl = document.getElementById('payment-method');
-            const paymentMethodText = pmEl ? pmEl.options[pmEl.selectedIndex]?.text : 'Transfer Bank';
+            const paymentRadio = document.querySelector('input[name="payment-method"]:checked');
+            const paymentMethodValue = paymentRadio?.value || 'transfer';
+            const paymentLabels = { transfer: 'Transfer Bank', qris: 'QRIS', cod: 'Bayar di Rumah' };
+            const paymentMethodText = paymentLabels[paymentMethodValue] || 'Transfer Bank';
 
-            const paymentMethodValue = document.getElementById('payment-method')?.value || 'transfer';
-            const codFee = paymentMethodValue === 'cod' ? Math.round((subtotal + ongkirPrice) * 0.04) : 0;
-            const grandTotal = subtotal + ongkirPrice + codFee;
+            const codFee = paymentMethodValue === 'cod' ? Math.round((subtotal + courierPrice) * 0.04) : 0;
+            const grandTotal = subtotal + courierPrice + codFee;
 
             message += `==============\n`;
             message += `*SUBTOTAL: ${formatPrice(subtotal)}*\n`;
-            message += `*Zona Pengiriman:* ${zoneName}\n`;
-            message += `*Ongkos Kirim:* ${ongkirPrice === 0 ? 'Gratis 🎉' : formatPrice(ongkirPrice)}\n`;
+            message += `*Ongkos Kirim:* ${courierLabel ? `${courierLabel} — ${courierPrice === 0 ? 'Gratis 🎉' : formatPrice(courierPrice)}` : courierPrice === 0 ? 'Gratis 🎉' : formatPrice(courierPrice)}\n`;
             if (codFee > 0) {
-                message += `*Biaya Admin COD (4%):* ${formatPrice(codFee)}\n`;
+                message += `*Biaya Admin Bayar di Rumah (4%):* ${formatPrice(codFee)}\n`;
             }
             message += `*TOTAL PEMBAYARAN:* ${formatPrice(grandTotal)}\n\n`;
 
             message += `*Metode Pembayaran:* ${paymentMethodText}\n\n`;
 
-            // === TELEGRAM NOTIFICATION via Worker ===
+            // === TELEGRAM NOTIFICATION ===
             try {
-                await fetch(`https://hamzahquran-shipping.refry-galiztan.workers.dev/notify`, {
+                await fetch('/api/notify', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({
@@ -1478,7 +1430,7 @@ function initCart() {
                     })
                 });
             } catch(err) {
-                console.error('Worker notify error:', err);
+                console.error('Telegram notify error:', err);
             }
 
             // === SIMPAN ORDER KE SESSION STORAGE ===
@@ -1488,8 +1440,8 @@ function initCart() {
                 address,
                 paymentMethod: paymentMethodValue,
                 subtotal,
-                ongkir: ongkirPrice,
-                zona: zoneName,
+                ongkir: courierPrice,
+                courier: courierLabel,
                 codFee,
                 grandTotal,
                 cart: cart.map(item => ({
@@ -1536,7 +1488,7 @@ function initCart() {
     // Attach listeners
     const formFields = [
         'cust-name', 'cust-phone', 'cust-address', 'cust-province',
-        'cust-city', 'cust-district', 'cust-subdistrict', 'payment-method'
+        'cust-city', 'cust-district', 'cust-subdistrict'
     ];
     formFields.forEach(id => {
         const el = document.getElementById(id);
@@ -1546,7 +1498,14 @@ function initCart() {
         }
     });
 
-    initShippingZone();
+    document.querySelectorAll('input[name="payment-method"]').forEach(el => {
+        el.addEventListener('change', () => {
+            updateCheckoutButtonState();
+            updateGrandTotal();
+        });
+    });
+
+    initBiteship();
     initRegionalAPI();
 }
 
@@ -1619,24 +1578,8 @@ async function initRegionalAPI() {
     });
 }
 
-function initShippingZone() {
-    const provinceSelect = document.getElementById('cust-province');
-    if (!provinceSelect) return;
-    provinceSelect.addEventListener('change', () => updateGrandTotal());
-
-    const paymentMethod = document.getElementById('payment-method');
-    if (paymentMethod) paymentMethod.addEventListener('change', () => updateGrandTotal());
-}
-
-function getZonaDariSelect() {
-    const provinceSelect = document.getElementById('cust-province');
-    const provinceText = provinceSelect?.options[provinceSelect.selectedIndex]?.text || '';
-    if (!provinceText || provinceText.includes('Pilih') || provinceText.includes('Memuat')) return '';
-    return getZonaDariProvinsi(provinceText);
-}
-
 function isCOD() {
-    return document.getElementById('payment-method')?.value === 'cod';
+    return document.querySelector('input[name="payment-method"]:checked')?.value === 'cod';
 }
 
 function updateGrandTotal() {
@@ -1645,8 +1588,7 @@ function updateGrandTotal() {
 
     const subtotal = cart.reduce((sum, item) => sum + (parsePrice(item.priceWa || item.priceCrt) * item.qty), 0);
 
-    const zoneName = getZonaDariSelect();
-    const ongkirPrice = ONGKIR_ZONA[zoneName] ?? 0;
+    const ongkirPrice = selectedCourierPrice || 0;
     const codFee = isCOD() ? Math.round((subtotal + ongkirPrice) * 0.04) : 0;
     const grandTotal = subtotal + ongkirPrice + codFee;
 
@@ -1663,9 +1605,11 @@ function updateGrandTotal() {
         const codRow = document.getElementById(codRowId);
         const codPriceEl = document.getElementById(codPriceId);
 
-        if (zoneName && row) {
+        const courierLabelText = selectedCourierName ? `${selectedCourierName} ${selectedCourierService}` : '';
+
+        if (selectedCourierName && row) {
             row.classList.remove('hidden');
-            if (label) label.textContent = `Ongkir Flat ${zoneName}`;
+            if (label) label.textContent = courierLabelText;
             if (priceEl) priceEl.textContent = ongkirPrice === 0 ? 'Gratis 🎉' : formatPrice(ongkirPrice);
         } else if (row) {
             row.classList.add('hidden');
@@ -1682,6 +1626,159 @@ function updateGrandTotal() {
     });
 
     document.querySelectorAll('.cart-total:not([id])').forEach(el => el.textContent = formatPrice(grandTotal));
+}
+
+// === BITESHIP ===
+function getCartWeight() {
+    return cart.reduce((sum, item) => sum + (item.weight || 850) * item.qty, 0);
+}
+
+function getCartValue() {
+    const parsePrice = (p) => parseFloat(String(p).replace(/[^0-9]/g, ''));
+    return cart.reduce((sum, item) => sum + (parsePrice(item.priceWa || item.priceCrt) * item.qty), 0);
+}
+
+function getCartItems() {
+    const parsePrice = (p) => parseFloat(String(p).replace(/[^0-9]/g, ''));
+    return cart.map(item => ({
+        name: item.name,
+        value: parsePrice(item.priceWa || item.priceCrt),
+        weight: item.weight || 850,
+        quantity: item.qty
+    }));
+}
+
+async function searchBiteshipArea(villageName, districtName, cityName, provinceName) {
+    try {
+        const res = await fetch('/api/search-area', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                name: villageName,
+                district: districtName,
+                city: cityName,
+                province: provinceName
+            })
+        });
+        const data = await res.json();
+        if (data.areas && data.areas.length > 0) {
+            destinationAreaId = data.areas[0].id;
+            return destinationAreaId;
+        }
+        return null;
+    } catch (err) {
+        console.error('Search area error:', err);
+        return null;
+    }
+}
+
+async function fetchRates(areaId) {
+    try {
+        const items = getCartItems();
+        if (!items.length) return [];
+
+        const res = await fetch('/api/rates', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ destination_area_id: areaId, items })
+        });
+        const data = await res.json();
+        return data.pricing || data.rates || [];
+    } catch (err) {
+        console.error('Fetch rates error:', err);
+        return [];
+    }
+}
+
+function renderShippingOptions(rates) {
+    const container = document.getElementById('shipping-options');
+    const list = document.getElementById('shipping-options-list');
+    if (!container || !list) return;
+
+    if (!rates.length) {
+        container.classList.add('hidden');
+        return;
+    }
+
+    container.classList.remove('hidden');
+    list.innerHTML = '';
+
+    rates.forEach((rate, idx) => {
+        const price = rate.price || rate.courier_price || 0;
+        const company = rate.company || rate.courier_company || '';
+        const service = rate.service || rate.courier_service_name || '';
+        const est = rate.delivery_time || rate.courier_estimated || '';
+        const logo = rate.logo || rate.courier_logo || '';
+
+        const label = document.createElement('label');
+        label.className = 'shipping-option flex items-center gap-3 bg-slate-50 dark:bg-slate-800 rounded-xl px-4 py-3 cursor-pointer has-[:checked]:ring-2 has-[:checked]:ring-brand-blue has-[:checked]:bg-brand-blue/5 transition-all';
+
+        const logoHtml = logo ? `<img src="${logo}" alt="${company}" class="w-8 h-8 object-contain flex-shrink-0">` : '';
+
+        label.innerHTML = `
+            <input type="radio" name="shipping-courier" value="${idx}"
+                class="accent-brand-blue w-4 h-4 flex-shrink-0">
+            ${logoHtml}
+            <div class="flex-1 min-w-0">
+                <p class="text-sm font-semibold text-slate-800 dark:text-slate-100">${company} ${service}</p>
+                <p class="text-xs text-slate-400">${est}</p>
+            </div>
+            <span class="font-bold text-sm text-slate-900 dark:text-white flex-shrink-0">${price === 0 ? 'Gratis' : `Rp${price.toLocaleString('id-ID')}`}</span>
+        `;
+
+        const radio = label.querySelector('input');
+        radio.addEventListener('change', () => {
+            selectedCourierPrice = price;
+            selectedCourierName = company;
+            selectedCourierService = service;
+            updateGrandTotal();
+        });
+
+        list.appendChild(label);
+    });
+
+    // Auto-select first
+    const firstRadio = list.querySelector('input');
+    if (firstRadio) {
+        firstRadio.checked = true;
+        firstRadio.dispatchEvent(new Event('change'));
+    }
+}
+
+async function initBiteship() {
+    const villageSelect = document.getElementById('cust-subdistrict');
+    if (!villageSelect) return;
+
+    villageSelect.addEventListener('change', async () => {
+        const getText = (id) => {
+            const el = document.getElementById('cust-' + id);
+            if (!el || el.selectedIndex <= 0) return '';
+            const text = el.options[el.selectedIndex].text;
+            if (text.includes('Pilih ') || text.includes('Memuat')) return '';
+            return text;
+        };
+
+        const village = getText('subdistrict');
+        const district = getText('district');
+        const city = getText('city');
+        const province = getText('province');
+
+        if (!village) return;
+
+        destinationAreaId = null;
+        selectedCourierPrice = 0;
+        selectedCourierName = '';
+        selectedCourierService = '';
+        document.getElementById('shipping-options')?.classList.add('hidden');
+
+        const areaId = await searchBiteshipArea(village, district, city, province);
+        if (areaId) {
+            const rates = await fetchRates(areaId);
+            renderShippingOptions(rates);
+        } else {
+            document.getElementById('shipping-options')?.classList.add('hidden');
+        }
+    });
 }
 
 function updateCartTotalUI() {

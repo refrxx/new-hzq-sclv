@@ -287,22 +287,42 @@
 
 
 
-                            <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
-                                <div>
-                                    <label
-                                        class="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-2">Metode
-                                        Pembayaran <span class="text-red-500">*</span></label>
-                                    <div class="relative">
-                                        <select id="payment-method" required
-                                            class="w-full bg-slate-50 dark:bg-slate-800 border-none rounded-xl px-4 py-3 text-slate-900 dark:text-white focus:ring-2 focus:ring-brand-blue outline-none transition-all appearance-none cursor-pointer pr-10">
-                                            <option value="" disabled selected>Pilih Metode Pembayaran</option>
-                                            <option value="transfer">Transfer Bank (Manual)</option>
-                                            <option value="qris">QRIS</option>
-                                            <option value="cod">Cash on Delivery (COD)</option>
-                                        </select>
-                                        <span
-                                            class="material-symbols-outlined absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-slate-400 text-sm">payments</span>
-                                    </div>
+                            <!-- Pilih Kurir -->
+                            <div id="shipping-options" class="hidden">
+                                <label class="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-3">Pilih Kurir <span class="text-red-500">*</span></label>
+                                <div id="shipping-options-list" class="space-y-2 mb-5">
+                                    <p class="text-sm text-slate-400">Memuat ongkos kirim...</p>
+                                </div>
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-3">Metode
+                                    Pembayaran <span class="text-red-500">*</span></label>
+                                <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+                                    <label class="payment-option flex items-center gap-3 bg-slate-50 dark:bg-slate-800 rounded-xl px-4 py-3 cursor-pointer has-[:checked]:ring-2 has-[:checked]:ring-brand-blue has-[:checked]:bg-brand-blue/5 transition-all">
+                                        <input type="radio" name="payment-method" value="transfer" checked
+                                            class="accent-brand-blue w-4 h-4 flex-shrink-0">
+                                        <div class="flex items-center gap-2 min-w-0">
+                                            <span class="material-symbols-outlined text-slate-400 text-[20px] flex-shrink-0">account_balance</span>
+                                            <span class="text-sm font-medium text-slate-700 dark:text-slate-300">Transfer Bank</span>
+                                        </div>
+                                    </label>
+                                    <label class="payment-option flex items-center gap-3 bg-slate-50 dark:bg-slate-800 rounded-xl px-4 py-3 cursor-pointer has-[:checked]:ring-2 has-[:checked]:ring-brand-blue has-[:checked]:bg-brand-blue/5 transition-all">
+                                        <input type="radio" name="payment-method" value="qris"
+                                            class="accent-brand-blue w-4 h-4 flex-shrink-0">
+                                        <div class="flex items-center gap-2 min-w-0">
+                                            <span class="material-symbols-outlined text-slate-400 text-[20px] flex-shrink-0">qr_code_scanner</span>
+                                            <span class="text-sm font-medium text-slate-700 dark:text-slate-300">QRIS</span>
+                                        </div>
+                                    </label>
+                                    <label class="payment-option flex items-center gap-3 bg-slate-50 dark:bg-slate-800 rounded-xl px-4 py-3 cursor-pointer has-[:checked]:ring-2 has-[:checked]:ring-brand-blue has-[:checked]:bg-brand-blue/5 transition-all">
+                                        <input type="radio" name="payment-method" value="cod"
+                                            class="accent-brand-blue w-4 h-4 flex-shrink-0">
+                                        <div class="flex items-center gap-2 min-w-0">
+                                            <span class="material-symbols-outlined text-slate-400 text-[20px] flex-shrink-0">payments</span>
+                                            <span class="text-sm font-medium text-slate-700 dark:text-slate-300">Bayar di Rumah</span>
+                                        </div>
+                                    </label>
                                 </div>
                             </div>
                         </form>
@@ -364,7 +384,7 @@
                                     <span class="font-semibold text-slate-800 dark:text-slate-100" id="ongkir-summary-price">-</span>
                                 </div>
                                 <div id="cod-fee-row" class="hidden flex items-center justify-between text-sm">
-                                    <span class="text-slate-500 dark:text-slate-400">Biaya Admin COD (4%)</span>
+                                    <span class="text-slate-500 dark:text-slate-400">Biaya Admin Bayar di Rumah (4%)</span>
                                     <span class="font-semibold text-slate-800 dark:text-slate-100" id="cod-fee-price">-</span>
                                 </div>
                                 <div class="h-px w-full bg-slate-100 dark:bg-slate-800 my-6"></div>
