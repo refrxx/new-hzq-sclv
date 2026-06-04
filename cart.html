@@ -232,57 +232,34 @@
                                     class="w-full bg-slate-50 dark:bg-slate-800 border-none rounded-xl px-4 py-3 text-slate-900 dark:text-white focus:ring-2 focus:ring-brand-blue outline-none transition-all resize-none"
                                     placeholder="Contoh: Jl. Merdeka No. 123, Perumahan Indah, Blok A5"></textarea>
                             </div>
-                            <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
-                                <div>
-                                    <label
-                                        class="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-2">Provinsi</label>
-                                    <div class="relative">
-                                        <select id="cust-province"
-                                            class="w-full bg-slate-50 dark:bg-slate-800 border-none rounded-xl px-4 py-3 text-slate-900 dark:text-white focus:ring-2 focus:ring-brand-blue outline-none transition-all appearance-none cursor-pointer pr-10">
-                                            <option value="" disabled selected>Pilih Provinsi</option>
-                                        </select>
-                                        <span
-                                            class="material-symbols-outlined absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-slate-400 text-sm">expand_more</span>
-                                    </div>
+                            <!-- Area Search (Biteship Autocomplete) -->
+                            <div class="relative" id="area-search-wrapper">
+                                <label class="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-2">
+                                    Kecamatan / Kelurahan <span class="text-red-500">*</span>
+                                </label>
+                                <input type="text" id="area-search-input"
+                                    placeholder="Ketik nama kecamatan atau kota..."
+                                    autocomplete="off"
+                                    class="w-full bg-slate-50 dark:bg-slate-800 border-none rounded-xl px-4 py-3 text-slate-900 dark:text-white focus:ring-2 focus:ring-brand-blue outline-none transition-all" />
+                                <div id="area-search-results"
+                                    class="hidden absolute z-50 w-full bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl shadow-xl mt-1 max-h-60 overflow-y-auto">
                                 </div>
-                                <div>
-                                    <label
-                                        class="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-2">Kota/Kabupaten</label>
-                                    <div class="relative">
-                                        <select id="cust-city" disabled
-                                            class="w-full bg-slate-50 dark:bg-slate-800 border-none rounded-xl px-4 py-3 text-slate-900 dark:text-white focus:ring-2 focus:ring-brand-blue outline-none transition-all appearance-none cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed pr-10">
-                                            <option value="" disabled selected>Pilih Kota/Kabupaten</option>
-                                        </select>
-                                        <span
-                                            class="material-symbols-outlined absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-slate-400 text-sm">expand_more</span>
-                                    </div>
-                                </div>
+                                <input type="hidden" id="cust-area-id" />
+                                <input type="hidden" id="cust-area-name" />
                             </div>
-                            <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
-                                <div>
-                                    <label
-                                        class="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-2">Kecamatan</label>
-                                    <div class="relative">
-                                        <select id="cust-district" disabled
-                                            class="w-full bg-slate-50 dark:bg-slate-800 border-none rounded-xl px-4 py-3 text-slate-900 dark:text-white focus:ring-2 focus:ring-brand-blue outline-none transition-all appearance-none cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed pr-10">
-                                            <option value="" disabled selected>Pilih Kecamatan</option>
-                                        </select>
-                                        <span
-                                            class="material-symbols-outlined absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-slate-400 text-sm">expand_more</span>
-                                    </div>
+
+                            <!-- Ongkir Section -->
+                            <div id="ongkir-section" class="hidden mt-4">
+                                <label class="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-2">
+                                    Pilih Layanan Pengiriman <span class="text-red-500">*</span>
+                                </label>
+                                <div id="ongkir-loading" class="hidden text-sm text-slate-500 dark:text-slate-400 py-2">
+                                    Menghitung ongkir...
                                 </div>
-                                <div>
-                                    <label
-                                        class="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-2">Kelurahan/Desa</label>
-                                    <div class="relative">
-                                        <select id="cust-subdistrict" disabled
-                                            class="w-full bg-slate-50 dark:bg-slate-800 border-none rounded-xl px-4 py-3 text-slate-900 dark:text-white focus:ring-2 focus:ring-brand-blue outline-none transition-all appearance-none cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed pr-10">
-                                            <option value="" disabled selected>Pilih Kelurahan/Desa</option>
-                                        </select>
-                                        <span
-                                            class="material-symbols-outlined absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-slate-400 text-sm">expand_more</span>
-                                    </div>
-                                </div>
+                                <div id="ongkir-list" class="flex flex-col gap-2"></div>
+                                <input type="hidden" id="selected-courier-name" />
+                                <input type="hidden" id="selected-courier-price" />
+                                <input type="hidden" id="selected-courier-service" />
                             </div>
 
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
@@ -315,27 +292,35 @@
                         <h2
                             class="text-xl font-bold text-slate-900 dark:text-white mb-6 border-b border-slate-100 dark:border-slate-800 pb-4">
                             Ringkasan Belanja</h2>
-                        <div class="space-y-5 mb-1 text-sm font-medium">
-                            <div class="flex justify-between items-center text-slate-500 dark:text-slate-400">
-                                <div class="flex items-center gap-3"> <span>Harga Normal</span>
+                            <div class="space-y-5 mb-1 text-sm font-medium">
+                                <div class="flex justify-between items-center text-slate-500 dark:text-slate-400">
+                                    <div class="flex items-center gap-3"> <span>Harga Normal</span>
+                                    </div>
+                                    <span class="cart-normal-total font-bold text-slate-900 dark:text-white">Rp0</span>
                                 </div>
-                                <span class="cart-normal-total font-bold text-slate-900 dark:text-white">Rp0</span>
-                            </div>
-                            <div class="flex justify-between items-center text-slate-500 dark:text-slate-400">
-                                <div class="flex items-center gap-3">
+                                <div class="flex justify-between items-center text-slate-500 dark:text-slate-400">
+                                    <div class="flex items-center gap-3">
+                                        <span
+                                            class="material-symbols-outlined text-red-400 text-xl font-icon">confirmation_number</span>
+                                        <span class="text-red-400 dark:text-red-400">Diskon</span>
+                                    </div>
+                                    <span class="cart-discount font-bold text-red-500">- Rp0</span>
+                                </div>
+                                <div id="ongkir-summary-row" class="hidden flex items-center justify-between text-sm">
+                                    <span class="text-slate-500 dark:text-slate-400" id="ongkir-summary-label">Ongkos Kirim</span>
+                                    <span class="font-semibold text-slate-800 dark:text-slate-100" id="ongkir-summary-price">-</span>
+                                </div>
+                                <div class="h-px w-full bg-slate-100 dark:bg-slate-800 my-6"></div>
+                                <div class="flex justify-between items-center">
+                                    <span class="font-bold text-lg text-slate-900 dark:text-white">Total Belanja</span>
                                     <span
-                                        class="material-symbols-outlined text-red-400 text-xl font-icon">confirmation_number</span>
-                                    <span class="text-red-400 dark:text-red-400">Diskon</span>
+                                        class="cart-total font-black text-2xl text-brand-blue dark:text-brand-gold">Rp0</span>
                                 </div>
-                                <span class="cart-discount font-bold text-red-500">- Rp0</span>
                             </div>
-                            <div class="h-px w-full bg-slate-100 dark:bg-slate-800 my-6"></div>
-                            <div class="flex justify-between items-center">
-                                <span class="font-bold text-lg text-slate-900 dark:text-white">Total Belanja</span>
-                                <span
-                                    class="cart-total font-black text-2xl text-brand-blue dark:text-brand-gold">Rp0</span>
+                            <div id="grand-total-row" class="hidden flex justify-between items-center text-sm mb-2">
+                                <span class="font-semibold text-slate-900 dark:text-white">Grand Total</span>
+                                <span id="grand-total" class="font-black text-lg text-green-600 dark:text-green-400"></span>
                             </div>
-                        </div>
                         <button
                             class="btn-checkout-wa w-full mt-4 bg-green-600 text-white py-4 rounded-xl font-bold shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all flex items-center justify-center gap-2">
                             <span class="material-symbols-outlined">shopping_bag_speed</span>
@@ -359,11 +344,19 @@
                                     <span class="font-bold text-slate-900 dark:text-white"><span
                                             class="cart-count-summary">0</span> pcs</span>
                                 </div>
+                                <div id="ongkir-summary-row-mobile" class="hidden flex items-center justify-between text-sm mb-2">
+                                    <span class="text-slate-500 dark:text-slate-400" id="ongkir-summary-label-mobile">Ongkos Kirim</span>
+                                    <span class="font-semibold text-slate-800 dark:text-slate-100" id="ongkir-summary-price-mobile">-</span>
+                                </div>
                                 <div class="h-px w-full bg-slate-200/60 dark:bg-slate-700/60 mb-3"></div>
                                 <div class="flex justify-between items-center">
                                     <span class="text-slate-900 dark:text-white font-bold text-lg">Total Belanja</span>
                                     <span
                                         class="cart-total font-black text-2xl text-brand-blue dark:text-brand-gold">Rp0</span>
+                                </div>
+                                <div id="grand-total-row-mobile" class="hidden flex justify-between items-center text-sm mt-2">
+                                    <span class="font-semibold text-slate-900 dark:text-white">Grand Total</span>
+                                    <span id="grand-total-mobile" class="font-black text-lg text-green-600 dark:text-green-400"></span>
                                 </div>
                             </div>
 

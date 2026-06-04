@@ -374,16 +374,26 @@
                                 ${productsHtml}
                             </div>
                             <!-- Total & Method side by side -->
-                            <div class="flex items-center justify-between mb-5">
-                                <div class="flex items-center gap-2">
-                                    <span class="material-symbols-outlined text-base text-slate-400 dark:text-slate-500">payments</span>
-                                    <span class="text-sm text-slate-500 dark:text-slate-400">${paymentLabel}</span>
+                                ${order.courierName ? `
+                                <div class="flex items-center justify-between text-sm mb-2 pb-2 border-b border-slate-100 dark:border-slate-800">
+                                    <span class="text-slate-500 dark:text-slate-400">Kurir</span>
+                                    <span class="font-semibold text-slate-700 dark:text-slate-300">${order.courierName} (${order.courierService || '-'})</span>
                                 </div>
-                                <div class="text-right">
-                                    <span class="text-[11px] text-slate-400 dark:text-slate-500 block -mb-0.5">Total</span>
-                                    <span class="text-base font-bold text-slate-900 dark:text-white">Rp ${Number(order.subtotal).toLocaleString('id-ID')}</span>
+                                <div class="flex items-center justify-between text-sm mb-2">
+                                    <span class="text-slate-500 dark:text-slate-400">Ongkos Kirim</span>
+                                    <span class="font-semibold text-slate-700 dark:text-slate-300">Rp${Number(order.ongkirPrice || 0).toLocaleString('id-ID')}</span>
                                 </div>
-                            </div>
+                                ` : ''}
+                                <div class="flex items-center justify-between mb-5">
+                                    <div class="flex items-center gap-2">
+                                        <span class="material-symbols-outlined text-base text-slate-400 dark:text-slate-500">payments</span>
+                                        <span class="text-sm text-slate-500 dark:text-slate-400">${paymentLabel}</span>
+                                    </div>
+                                    <div class="text-right">
+                                        <span class="text-[11px] text-slate-400 dark:text-slate-500 block -mb-0.5">Grand Total</span>
+                                        <span class="text-base font-bold text-slate-900 dark:text-white">Rp${Number(order.grandTotal || order.subtotal).toLocaleString('id-ID')}</span>
+                                    </div>
+                                </div>
                             <!-- Action Buttons -->
                             <div class="flex flex-col sm:flex-row gap-2.5">
                                 <button onclick="togglePaymentInfo(this)"
@@ -393,7 +403,7 @@
                                         Lihat Info Pembayaran
                                     </span>
                                 </button>
-                                <a href="https://wa.me/6285155060816?text=Halo%20Admin%2C%20saya%20ingin%20konfirmasi%20pesanan%20${encodeURIComponent(orderId)}%20atas%20nama%20${encodeURIComponent(order.name)}.%20Total%3A%20Rp${order.subtotal}."
+                                <a href="https://wa.me/6285155060816?text=Halo%20Admin%2C%20saya%20ingin%20konfirmasi%20pesanan%20${encodeURIComponent(orderId)}%20atas%20nama%20${encodeURIComponent(order.name)}.%20Total%3A%20Rp${order.grandTotal || order.subtotal}."
                                     target="_blank"
                                     class="w-full sm:flex-1 px-4 py-2.5 bg-green-500 hover:bg-green-600 text-white rounded-full font-bold text-sm transition-all duration-300 text-center block">
                                     <span class="flex items-center justify-center gap-1.5">

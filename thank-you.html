@@ -176,7 +176,7 @@
         const order = JSON.parse(orderJson);
         sessionStorage.removeItem('hq_order');
 
-        const { name, phone, address, paymentMethod, subtotal, cart } = order;
+        const { name, phone, address, areaName, courierName, courierService, ongkirPrice, paymentMethod, subtotal, grandTotal, cart } = order;
 
         const formatPrice = (amount) => `Rp${Number(amount).toLocaleString('id-ID')}`;
 
@@ -215,7 +215,7 @@
                         </div>
                     </div>
                     <p class="text-sm text-slate-500 dark:text-slate-400 mt-4 italic">Setelah transfer, konfirmasi ke WhatsApp kami agar pesanan segera diproses.</p>
-                    <a href="https://wa.me/6285155060816?text=Halo%20Admin%2C%20saya%20sudah%20transfer%20untuk%20pesanan%20atas%20nama%20${encodeURIComponent(name)}.%20Total%3A%20${encodeURIComponent(formatPrice(subtotal))}.%20Mohon%20dikonfirmasi%20ya."
+                    <a href="https://wa.me/6285155060816?text=Halo%20Admin%2C%20saya%20sudah%20transfer%20untuk%20pesanan%20atas%20nama%20${encodeURIComponent(name)}.%20Total%3A%20${encodeURIComponent(formatPrice(grandTotal || subtotal))}.%20Mohon%20dikonfirmasi%20ya."
                         target="_blank"
                         class="mt-4 w-full bg-green-600 text-white py-4 rounded-xl font-bold shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all flex items-center justify-center gap-2">
                         <span class="material-symbols-outlined">whatsapp</span> Konfirmasi via WhatsApp
@@ -232,7 +232,7 @@
                     </div>
                     <p class="text-sm text-slate-500 dark:text-slate-400 text-center">Scan QR di atas menggunakan aplikasi dompet digital atau m-banking apapun.</p>
                     <p class="text-sm text-slate-500 dark:text-slate-400 mt-2 text-center italic">Setelah bayar, konfirmasi ke WhatsApp kami agar pesanan segera diproses.</p>
-                    <a href="https://wa.me/6285155060816?text=Halo%20Admin%2C%20saya%20sudah%20bayar%20via%20QRIS%20untuk%20pesanan%20atas%20nama%20${encodeURIComponent(name)}.%20Total%3A%20${encodeURIComponent(formatPrice(subtotal))}.%20Mohon%20dikonfirmasi%20ya."
+                    <a href="https://wa.me/6285155060816?text=Halo%20Admin%2C%20saya%20sudah%20bayar%20via%20QRIS%20untuk%20pesanan%20atas%20nama%20${encodeURIComponent(name)}.%20Total%3A%20${encodeURIComponent(formatPrice(grandTotal || subtotal))}.%20Mohon%20dikonfirmasi%20ya."
                         target="_blank"
                         class="mt-4 w-full bg-green-600 text-white py-4 rounded-xl font-bold shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all flex items-center justify-center gap-2">
                         <span class="material-symbols-outlined">whatsapp</span> Konfirmasi via WhatsApp
@@ -276,7 +276,8 @@
             <div class="bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-32 p-6 md:p-8 shadow-sm animate-fade-in-up" style="animation-delay: 100ms">
                 <div class="text-center mb-6">
                     <p class="text-sm text-slate-500 dark:text-slate-400">Total yang harus dibayar</p>
-                    <p class="text-3xl md:text-4xl font-black text-brand-blue dark:text-brand-gold mt-1">${formatPrice(subtotal)}</p>
+                    <p class="text-3xl md:text-4xl font-black text-brand-blue dark:text-brand-gold mt-1">${formatPrice(grandTotal || subtotal)}</p>
+                    ${ongkirPrice > 0 ? `<p class="text-xs text-slate-400 mt-1">Termasuk ongkos kirim ${formatPrice(ongkirPrice)}</p>` : ''}
                 </div>
             </div>
 
@@ -295,8 +296,12 @@
                     </div>
                     <div class="flex">
                         <span class="text-slate-500 dark:text-slate-400 w-28 shrink-0">Alamat</span>
-                        <span class="font-semibold text-slate-900 dark:text-white">${address}</span>
+                        <span class="font-semibold text-slate-900 dark:text-white">${address}${areaName ? `, ${areaName}` : ''}</span>
                     </div>
+                    ${courierName ? `<div class="flex">
+                        <span class="text-slate-500 dark:text-slate-400 w-28 shrink-0">Kurir</span>
+                        <span class="font-semibold text-slate-900 dark:text-white">${courierName} (${courierService})</span>
+                    </div>` : ''}
                     <div class="flex">
                         <span class="text-slate-500 dark:text-slate-400 w-28 shrink-0">Pembayaran</span>
                         <span class="font-semibold text-slate-900 dark:text-white">${paymentLabels[paymentMethod] || paymentMethod}</span>
