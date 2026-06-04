@@ -1652,7 +1652,7 @@ function updateGrandTotal() {
 
     const rows = [
         { rowId: 'ongkir-summary-row', labelId: 'ongkir-summary-label', priceId: 'ongkir-summary-price', totalId: 'grand-total', codRowId: 'cod-fee-row', codPriceId: 'cod-fee-price' },
-        { rowId: 'ongkir-summary-row-mobile', labelId: 'ongkir-summary-label-mobile', priceId: 'ongkir-summary-price-mobile', totalId: 'grand-total-mobile', codRowId: 'cod-fee-row-mobile', codPriceId: 'cod-fee-price-mobile' },
+        { totalId: 'grand-total-mobile' },
     ];
 
     rows.forEach(({ rowId, labelId, priceId, totalId, codRowId, codPriceId }) => {

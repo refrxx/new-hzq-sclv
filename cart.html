@@ -172,7 +172,7 @@
         </div>
     </header>
 
-    <main class="pt-12 lg:pt-12 pb-20 min-h-screen">
+    <main class="pt-12 lg:pt-12 pb-24 min-h-screen">
         <section class="max-w-[1200px] mx-auto px-8 md:px-12">
             <h1 class="text-2xl font-display font-black text-slate-900 dark:text-white mb-10 animate-fade-in-up">
                 Keranjang Belanja</h1>
@@ -358,47 +358,24 @@
                         </div>
                     </div>
 
-                    <!-- Mobile Design (Sticky Bottom Card) -->
-                    <div
-                        class="xl:hidden fixed bottom-0 left-0 w-full bg-white dark:bg-[#080e16] border-t border-slate-100 dark:border-slate-800 p-4 z-50 shadow-[0_-10px_30px_rgba(0,0,0,0.08)] transition-all duration-300">
-                        <div class="max-w-[600px] mx-auto">
-                            <!-- Summary Info Card -->
-                            <div
-                                class="bg-slate-50 dark:bg-slate-800/50 rounded-2xl p-4 mb-4 border border-slate-100 dark:border-slate-800">
-                                <div class="flex justify-between items-center mb-3 text-sm">
-                                    <span class="text-slate-500 dark:text-slate-400 font-medium">Total Item</span>
-                                    <span class="font-bold text-slate-900 dark:text-white"><span
-                                            class="cart-count-summary">0</span> pcs</span>
-                                </div>
-                                <div id="ongkir-summary-row-mobile" class="hidden flex items-center justify-between text-sm mb-2">
-                                    <span class="text-slate-500 dark:text-slate-400" id="ongkir-summary-label-mobile">Ongkos Kirim</span>
-                                    <span class="font-semibold text-slate-800 dark:text-slate-100" id="ongkir-summary-price-mobile">-</span>
-                                </div>
-                                <div id="cod-fee-row-mobile" class="hidden flex items-center justify-between text-sm mb-2">
-                                    <span class="text-slate-500 dark:text-slate-400">Biaya Admin COD (4%)</span>
-                                    <span class="font-semibold text-slate-800 dark:text-slate-100" id="cod-fee-price-mobile">-</span>
-                                </div>
-                                <div class="h-px w-full bg-slate-200/60 dark:bg-slate-700/60 mb-3"></div>
-                                <div class="flex justify-between items-center">
-                                    <span class="text-slate-900 dark:text-white font-bold text-lg">Total Belanja</span>
-                                    <span
-                                        id="grand-total-mobile"
-                                        class="cart-total font-black text-2xl text-brand-blue dark:text-brand-gold">Rp0</span>
-                                </div>
+                    <!-- Mobile Design (Sticky Bottom Bar) -->
+                    <div class="xl:hidden fixed bottom-0 left-0 w-full bg-white dark:bg-[#080e16] border-t border-slate-100 dark:border-slate-800 px-4 py-3 z-50 shadow-[0_-10px_30px_rgba(0,0,0,0.08)] transition-all duration-300">
+                        <div class="max-w-[600px] mx-auto flex items-center gap-3">
+                            <a href="produk.html"
+                                class="flex items-center justify-center w-12 h-12 bg-slate-100 dark:bg-slate-800 rounded-2xl text-slate-600 dark:text-slate-400 flex-shrink-0">
+                                <span class="material-symbols-outlined">arrow_back</span>
+                            </a>
+                            <div class="flex-1 min-w-0">
+                                <p class="text-xs text-slate-400 dark:text-slate-500 font-medium leading-none mb-0.5">Total Pembayaran</p>
+                                <span
+                                    id="grand-total-mobile"
+                                    class="cart-total font-black text-xl text-brand-blue dark:text-brand-gold leading-none">Rp0</span>
                             </div>
-
-                            <!-- Action Buttons -->
-                            <div class="flex gap-3">
-                                <a href="produk.html"
-                                    class="flex items-center justify-center w-14 h-14 bg-slate-100 dark:bg-slate-800 rounded-2xl text-slate-600 dark:text-slate-400">
-                                    <span class="material-symbols-outlined">arrow_back</span>
-                                </a>
-                                <button
-                                    class="btn-checkout-wa flex-1 bg-green-600 hover:bg-green-700 text-white py-4 rounded-2xl font-bold shadow-lg flex items-center justify-center gap-3">
-                                    <span class="material-symbols-outlined">shopping_bag_speed</span>
-                                    <span>Proses Checkout</span>
-                                </button>
-                            </div>
+                            <button
+                                class="btn-checkout-wa flex-shrink-0 bg-green-600 hover:bg-green-700 text-white px-5 h-12 rounded-2xl font-bold shadow-lg flex items-center gap-2 transition-all">
+                                <span class="material-symbols-outlined text-[20px]">shopping_bag_speed</span>
+                                <span class="text-sm">Checkout</span>
+                            </button>
                         </div>
                     </div>
                 </div>
