@@ -1,6 +1,6 @@
-name = "hamzahquran"
+name = "new-hzq-sclv"
 pages_build_output_dir = "."
 compatibility_date = "2025-05-01"
 
 [vars]
-ORIGIN_POSTAL_CODE = "53147"
+ORIGIN_POSTAL_CODE = "15223"
