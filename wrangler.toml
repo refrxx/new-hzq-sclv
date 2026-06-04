@@ -4,8 +4,3 @@ compatibility_date = "2025-05-01"
 
 [vars]
 ORIGIN_POSTAL_CODE = "53147"
-
-[[d1_databases]]
-binding = "DB"
-database_name = "hamzahquran"
-database_id = ""

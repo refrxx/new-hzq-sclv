@@ -1660,6 +1660,7 @@ async function searchBiteshipArea(villageName, districtName, cityName, provinceN
                 province: provinceName
             })
         });
+        if (!res.ok) return null;
         const data = await res.json();
         if (data.areas && data.areas.length > 0) {
             destinationAreaId = data.areas[0].id;
@@ -1667,7 +1668,6 @@ async function searchBiteshipArea(villageName, districtName, cityName, provinceN
         }
         return null;
     } catch (err) {
-        console.error('Search area error:', err);
         return null;
     }
 }
@@ -1682,10 +1682,10 @@ async function fetchRates(areaId) {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ destination_area_id: areaId, items })
         });
+        if (!res.ok) return [];
         const data = await res.json();
         return data.pricing || data.rates || [];
     } catch (err) {
-        console.error('Fetch rates error:', err);
         return [];
     }
 }
