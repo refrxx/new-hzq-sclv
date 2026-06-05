@@ -1361,8 +1361,8 @@ function initCart() {
 
             const courierPrice = selectedCourierPrice || 0;
             const courierLabel = selectedCourierName ? `${selectedCourierName} ${selectedCourierService}` : '';
-            const subsidy = getSubsidy();
-            const ongkirAfterSubsidy = Math.max(0, courierPrice - subsidy);
+            const subsidy = Math.min(getSubsidy(), courierPrice);
+            const ongkirAfterSubsidy = courierPrice - subsidy;
 
             if (!name) return showFieldError('cust-name');
             if (!phone) return showFieldError('cust-phone');
@@ -1602,8 +1602,8 @@ function updateGrandTotal() {
     const subtotal = cart.reduce((sum, item) => sum + (parsePrice(item.priceWa || item.priceCrt) * item.qty), 0);
 
     const ongkirPrice = selectedCourierPrice || 0;
-    const subsidy = getSubsidy();
-    const ongkirAfterSubsidy = Math.max(0, ongkirPrice - subsidy);
+    const subsidy = Math.min(getSubsidy(), ongkirPrice);
+    const ongkirAfterSubsidy = ongkirPrice - subsidy;
     const codFee = isCOD() ? Math.round((subtotal + ongkirAfterSubsidy) * 0.04) : 0;
     const grandTotal = subtotal + ongkirAfterSubsidy + codFee;
 
