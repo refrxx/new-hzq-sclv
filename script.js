@@ -141,8 +141,6 @@ const GLOBAL_PRODUCTS = [
         specs: ["Kertas HVS Premium 70gr", "Full Color", "Tajwid Warna", "Dilengkapi Asmaul Husna", "Ukuran A5 (Sedang) 14,8 x 21 cm", "Mudah dibawa", "Kertas berkualitas", "Tampilan cerah", "Bantu hafalan surat pendek"]
     },
 ];
-
-let destinationAreaId = null;
 let selectedCourierPrice = 0;
 let selectedCourierName = '';
 let selectedCourierService = '';
@@ -1629,15 +1627,6 @@ function updateGrandTotal() {
 }
 
 // === BITESHIP ===
-function getCartWeight() {
-    return cart.reduce((sum, item) => sum + (item.weight || 850) * item.qty, 0);
-}
-
-function getCartValue() {
-    const parsePrice = (p) => parseFloat(String(p).replace(/[^0-9]/g, ''));
-    return cart.reduce((sum, item) => sum + (parsePrice(item.priceWa || item.priceCrt) * item.qty), 0);
-}
-
 function getCartItems() {
     const parsePrice = (p) => parseFloat(String(p).replace(/[^0-9]/g, ''));
     return cart.map(item => ({
@@ -1648,39 +1637,15 @@ function getCartItems() {
     }));
 }
 
-async function searchBiteshipArea(villageName, districtName, cityName, provinceName) {
-    try {
-        const res = await fetch('/api/search-area', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-                name: villageName,
-                district: districtName,
-                city: cityName,
-                province: provinceName
-            })
-        });
-        if (!res.ok) return null;
-        const data = await res.json();
-        if (data.areas && data.areas.length > 0) {
-            destinationAreaId = data.areas[0].id;
-            return destinationAreaId;
-        }
-        return null;
-    } catch (err) {
-        return null;
-    }
-}
-
-async function fetchRates(areaId) {
+async function fetchRates(postalCode) {
     try {
         const items = getCartItems();
-        if (!items.length) return [];
+        if (!items.length || !postalCode) return [];
 
         const res = await fetch('/api/rates', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ destination_area_id: areaId, items })
+            body: JSON.stringify({ destination_postal_code: postalCode, items })
         });
         if (!res.ok) return [];
         const data = await res.json();
@@ -1746,38 +1711,26 @@ function renderShippingOptions(rates) {
 }
 
 async function initBiteship() {
-    const villageSelect = document.getElementById('cust-subdistrict');
-    if (!villageSelect) return;
+    const postalInput = document.getElementById('cust-postal-code');
+    if (!postalInput) return;
 
-    villageSelect.addEventListener('change', async () => {
-        const getText = (id) => {
-            const el = document.getElementById('cust-' + id);
-            if (!el || el.selectedIndex <= 0) return '';
-            const text = el.options[el.selectedIndex].text;
-            if (text.includes('Pilih ') || text.includes('Memuat')) return '';
-            return text;
-        };
+    let debounceTimer;
 
-        const village = getText('subdistrict');
-        const district = getText('district');
-        const city = getText('city');
-        const province = getText('province');
+    postalInput.addEventListener('input', () => {
+        clearTimeout(debounceTimer);
 
-        if (!village) return;
-
-        destinationAreaId = null;
         selectedCourierPrice = 0;
         selectedCourierName = '';
         selectedCourierService = '';
         document.getElementById('shipping-options')?.classList.add('hidden');
 
-        const areaId = await searchBiteshipArea(village, district, city, province);
-        if (areaId) {
-            const rates = await fetchRates(areaId);
+        const code = postalInput.value.replace(/\D/g, '').slice(0, 5);
+        if (code.length < 5) return;
+
+        debounceTimer = setTimeout(async () => {
+            const rates = await fetchRates(code);
             renderShippingOptions(rates);
-        } else {
-            document.getElementById('shipping-options')?.classList.add('hidden');
-        }
+        }, 500);
     });
 }
 
