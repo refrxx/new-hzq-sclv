@@ -1495,6 +1495,11 @@ function initCart() {
                 });
             }
 
+            // === KOSONGKAN CART ===
+            cart = [];
+            localStorage.setItem('hq_cart', JSON.stringify(cart));
+            updateCartTotalUI();
+
             // === REDIRECT KE THANK YOU PAGE ===
             window.location.href = 'thank-you.html';
             } catch (err) {
