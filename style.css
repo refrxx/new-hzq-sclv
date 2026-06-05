@@ -3,6 +3,9 @@
     --sans-font: 'Inter', sans-serif;
 }
 
+/* Semua transisi lebih cepat */
+.duration-300 { transition-duration: 150ms !important; }
+
 .promo-bar {
     background-color: #1A5FB4;
     color: rgb(255, 255, 255);

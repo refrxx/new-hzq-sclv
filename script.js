@@ -1379,7 +1379,7 @@ function initCart() {
             const parsePrice = (p) => parseFloat(p.replace(/[^0-9]/g, ''));
 
             let subtotal = 0;
-            let message = `ADA ORDER BARU NIH!,\nOrder via hamzahquran.my.id\n\n`;
+            let message = `ADA ORDER BARU NIH!\nOrder Website hamzahquran.com\n\n`;
             message += `*Data Penerima:*\n`;
             message += `- Nama: ${name}\n`;
             message += `- No. WA: ${phone}\n`;
