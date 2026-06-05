@@ -1186,13 +1186,23 @@ function updateCartQty(idx, newQty) {
         cart[idx].qty = parseInt(newQty);
     }
     saveCart();
-    renderCart(); // Refresh cart UI if on cart page
+    renderCart();
 
-    // Auto-refresh shipping if already calculated
-    const pCode = document.getElementById('cust-postal-code')?.value;
-    if (pCode && pCode.length === 5) {
-        calculateShipping(pCode);
-    }
+    // Reset ongkir lama, disable pilihan kurir, munculin tombol update
+    selectedCourierPrice = 0;
+    selectedCourierName = '';
+    selectedCourierService = '';
+    updateGrandTotal();
+
+    document.querySelectorAll('.shipping-option').forEach(el => {
+        el.style.opacity = '0.4';
+        el.style.pointerEvents = 'none';
+        const radio = el.querySelector('input[type="radio"]');
+        if (radio) radio.disabled = true;
+    });
+
+    const btn = document.getElementById('btn-update-ongkir');
+    if (btn) btn.classList.remove('hidden');
 }
 
 function renderCart() {
@@ -1373,6 +1383,10 @@ function initCart() {
             if (!document.querySelector('input[name="payment-method"]:checked')) {
                 showFieldError('cust-name');
                 return showAlert('Pilih Pembayaran', 'Silakan pilih metode pembayaran.', 'info');
+            }
+
+            if (!selectedCourierName) {
+                return showAlert('Pilih Kurir', 'Silakan pilih kurir dan update ongkos kirim sebelum checkout.', 'info');
             }
 
             const formatPrice = (amount) => `Rp${amount.toLocaleString('id-ID')}`;
@@ -1766,6 +1780,21 @@ function renderShippingOptions(rates) {
 async function initBiteship() {
     const postalInput = document.getElementById('cust-postal-code');
     if (!postalInput) return;
+
+    document.getElementById('btn-update-ongkir')?.addEventListener('click', async function () {
+        const code = postalInput.value.replace(/\D/g, '').slice(0, 5);
+        if (code.length < 5) return;
+
+        this.textContent = 'Memperbarui...';
+        this.disabled = true;
+
+        const rates = await fetchRates(code);
+        renderShippingOptions(rates);
+
+        this.classList.add('hidden');
+        this.textContent = 'Update Ongkos Kirim';
+        this.disabled = false;
+    });
 
     let debounceTimer;
 

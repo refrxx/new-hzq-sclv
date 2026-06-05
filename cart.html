@@ -183,7 +183,7 @@
             <h1 class="text-2xl font-display font-black text-slate-900 dark:text-white mb-10 animate-fade-in-up">
                 Keranjang Belanja</h1>
 
-            <div class="grid grid-cols-1 xl:grid-cols-3 gap-8 xl:gap-12 pb-32 xl:pb-12" id="cart-container">
+            <div class="grid grid-cols-1 xl:grid-cols-3 gap-8 xl:gap-12 pb-4 xl:pb-12" id="cart-container">
                 <!-- Cart Content Filled by JS -->
                 <div class="xl:col-span-2 space-y-8 animate-fade-in-up" style="animation-delay: 100ms">
                     <!-- Items List -->
@@ -337,29 +337,33 @@
                                 <div id="shipping-options-list" class="space-y-2 mb-5">
                                     <p class="text-sm text-slate-400">Memuat ongkos kirim...</p>
                                 </div>
+                                <button id="btn-update-ongkir" type="button"
+                                    class="hidden w-full py-3 rounded-xl bg-brand-blue text-white font-bold text-sm hover:bg-brand-blue/90 transition disabled:opacity-50">
+                                    Update Ongkos Kirim
+                                </button>
                             </div>
                         </form>
                     </div>
 
                     <!-- Mobile Rincian Pembayaran -->
                     <div class="xl:hidden bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-32 p-6 md:p-8 shadow-sm">
-                        <h2 class="text-xl font-bold text-slate-900 dark:text-white mb-6 border-b border-slate-100 dark:border-slate-800 pb-4">Rincian Pembayaran</h2>
-                        <div class="space-y-4 text-sm font-medium">
+                        <h2 class="text-xl font-bold text-slate-900 dark:text-white mb-4 border-b border-slate-100 dark:border-slate-800 pb-3">Rincian Pembayaran</h2>
+                        <div class="space-y-3 text-sm font-medium">
                             <div class="flex justify-between items-center text-slate-500 dark:text-slate-400">
                                 <span>Harga Normal</span>
                                 <span class="cart-normal-total font-bold text-slate-900 dark:text-white">Rp0</span>
-                            </div>
-                            <div class="flex justify-between items-center text-slate-500 dark:text-slate-400">
-                                <span class="text-red-400 dark:text-red-400">Diskon</span>
-                                <span class="cart-discount font-bold text-red-500">- Rp0</span>
                             </div>
                             <div id="ongkir-summary-row-mobile" class="hidden flex justify-between items-center">
                                 <span class="text-slate-500 dark:text-slate-400" id="ongkir-summary-label-mobile">Ongkos Kirim</span>
                                 <span class="font-semibold text-slate-800 dark:text-slate-100" id="ongkir-summary-price-mobile">-</span>
                             </div>
                             <div id="subsidy-row-mobile" class="hidden flex justify-between items-center text-green-600 dark:text-green-400">
-                                <span>Subsidi Ongkir</span>
+                                <span>Diskon Ongkir</span>
                                 <span class="font-semibold" id="subsidy-price-mobile">-</span>
+                            </div>
+                            <div class="flex justify-between items-center text-slate-500 dark:text-slate-400">
+                                <span class="text-red-400 dark:text-red-400">Diskon Barang</span>
+                                <span class="cart-discount font-bold text-red-500">- Rp0</span>
                             </div>
                             <div id="cod-fee-row-mobile" class="hidden flex justify-between items-center">
                                 <span class="text-slate-500 dark:text-slate-400">Biaya Admin COD (4%)</span>
@@ -380,35 +384,30 @@
                     <div
                         class="hidden xl:block bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-32 p-8 shadow-sm sticky top-32 animate-fade-in-up">
                         <h2
-                            class="text-xl font-bold text-slate-900 dark:text-white mb-6 border-b border-slate-100 dark:border-slate-800 pb-4">
+                            class="text-xl font-bold text-slate-900 dark:text-white mb-4 border-b border-slate-100 dark:border-slate-800 pb-3">
                             Ringkasan Belanja</h2>
-                            <div class="space-y-5 mb-1 text-sm font-medium">
+                            <div class="space-y-3 text-sm font-medium">
                                 <div class="flex justify-between items-center text-slate-500 dark:text-slate-400">
-                                    <div class="flex items-center gap-3"> <span>Harga Normal</span>
-                                    </div>
+                                    <span>Harga Normal</span>
                                     <span class="cart-normal-total font-bold text-slate-900 dark:text-white">Rp0</span>
-                                </div>
-                                <div class="flex justify-between items-center text-slate-500 dark:text-slate-400">
-                                    <div class="flex items-center gap-3">
-                                        <span
-                                            class="material-symbols-outlined text-red-400 text-xl font-icon">confirmation_number</span>
-                                        <span class="text-red-400 dark:text-red-400">Diskon</span>
-                                    </div>
-                                    <span class="cart-discount font-bold text-red-500">- Rp0</span>
                                 </div>
                                 <div id="ongkir-summary-row" class="hidden flex items-center justify-between text-sm">
                                     <span class="text-slate-500 dark:text-slate-400" id="ongkir-summary-label">Ongkos Kirim</span>
                                     <span class="font-semibold text-slate-800 dark:text-slate-100" id="ongkir-summary-price">-</span>
                                 </div>
                                 <div id="subsidy-row" class="hidden flex items-center justify-between text-sm text-green-600 dark:text-green-400">
-                                    <span>Subsidi Ongkir</span>
+                                    <span>Diskon Ongkir</span>
                                     <span class="font-semibold" id="subsidy-price">-</span>
+                                </div>
+                                <div class="flex justify-between items-center text-slate-500 dark:text-slate-400">
+                                    <span class="text-red-400 dark:text-red-400">Diskon Barang</span>
+                                    <span class="cart-discount font-bold text-red-500">- Rp0</span>
                                 </div>
                                 <div id="cod-fee-row" class="hidden flex items-center justify-between text-sm">
                                     <span class="text-slate-500 dark:text-slate-400">Biaya Admin Bayar di Rumah (4%)</span>
                                     <span class="font-semibold text-slate-800 dark:text-slate-100" id="cod-fee-price">-</span>
                                 </div>
-                                <div class="h-px w-full bg-slate-100 dark:bg-slate-800 my-6"></div>
+                                <div class="h-px w-full bg-slate-100 dark:bg-slate-800 my-4"></div>
                                 <div class="flex justify-between items-center">
                                     <span class="font-bold text-lg text-slate-900 dark:text-white">Total Belanja</span>
                                     <span
