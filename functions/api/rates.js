@@ -25,7 +25,7 @@ export async function onRequest(context) {
         const body = {
             origin_postal_code: parseInt(env.ORIGIN_POSTAL_CODE) || 15223,
             destination_postal_code: parseInt(destination_postal_code),
-            couriers: 'jne,lion,anteraja',
+            couriers: 'jne,lion',
             items: items.map(i => ({
                 name: i.name,
                 description: 'Produk Hamzah Quran',

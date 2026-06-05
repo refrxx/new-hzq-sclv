@@ -1655,6 +1655,18 @@ async function fetchRates(postalCode) {
     }
 }
 
+const COURIER_LOGOS = {
+    'jne': 'img/jneico.svg',
+    'lion': 'img/lionico.svg',
+};
+
+function getCourierLogo(rate) {
+    const code = (rate.courier_code || rate.company || rate.courier_company || '').toLowerCase();
+    if (code.includes('jne')) return COURIER_LOGOS.jne;
+    if (code.includes('lion')) return COURIER_LOGOS.lion;
+    return '';
+}
+
 function renderShippingOptions(rates) {
     const container = document.getElementById('shipping-options');
     const list = document.getElementById('shipping-options-list');
@@ -1673,19 +1685,17 @@ function renderShippingOptions(rates) {
         const company = rate.company || rate.courier_company || '';
         const service = rate.service || rate.courier_service_name || '';
         const est = rate.delivery_time || rate.courier_estimated || '';
-        const logo = rate.logo || rate.courier_logo || '';
+        const logo = getCourierLogo(rate);
 
         const label = document.createElement('label');
         label.className = 'shipping-option flex items-center gap-3 bg-slate-50 dark:bg-slate-800 rounded-xl px-4 py-3 cursor-pointer has-[:checked]:ring-2 has-[:checked]:ring-brand-blue has-[:checked]:bg-brand-blue/5 transition-all';
 
-        const logoHtml = logo ? `<img src="${logo}" alt="${company}" class="w-8 h-8 object-contain flex-shrink-0">` : '';
-
         label.innerHTML = `
             <input type="radio" name="shipping-courier" value="${idx}"
                 class="accent-brand-blue w-4 h-4 flex-shrink-0">
-            ${logoHtml}
+            ${logo ? `<img src="${logo}" alt="${company}" class="w-10 h-10 object-contain flex-shrink-0">` : ''}
             <div class="flex-1 min-w-0">
-                <p class="text-sm font-semibold text-slate-800 dark:text-slate-100">${company} ${service}</p>
+                <p class="text-sm font-semibold text-slate-800 dark:text-slate-100">${service}</p>
                 <p class="text-xs text-slate-400">${est}</p>
             </div>
             <span class="font-bold text-sm text-slate-900 dark:text-white flex-shrink-0">${price === 0 ? 'Gratis' : `Rp${price.toLocaleString('id-ID')}`}</span>
