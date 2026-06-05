@@ -1361,6 +1361,8 @@ function initCart() {
 
             const courierPrice = selectedCourierPrice || 0;
             const courierLabel = selectedCourierName ? `${selectedCourierName} ${selectedCourierService}` : '';
+            const subsidy = getSubsidy();
+            const ongkirAfterSubsidy = Math.max(0, courierPrice - subsidy);
 
             if (!name) return showFieldError('cust-name');
             if (!phone) return showFieldError('cust-phone');
@@ -1404,12 +1406,18 @@ function initCart() {
             const paymentLabels = { transfer: 'Transfer Bank', qris: 'QRIS', cod: 'Bayar di Rumah' };
             const paymentMethodText = paymentLabels[paymentMethodValue] || 'Transfer Bank';
 
-            const codFee = paymentMethodValue === 'cod' ? Math.round((subtotal + courierPrice) * 0.04) : 0;
-            const grandTotal = subtotal + courierPrice + codFee;
+            const codFee = paymentMethodValue === 'cod' ? Math.round((subtotal + ongkirAfterSubsidy) * 0.04) : 0;
+            const grandTotal = subtotal + ongkirAfterSubsidy + codFee;
+
+            const totalQty = cart.reduce((sum, item) => sum + item.qty, 0);
 
             message += `==============\n`;
             message += `*SUBTOTAL: ${formatPrice(subtotal)}*\n`;
-            message += `*Ongkos Kirim:* ${courierLabel ? `${courierLabel} — ${courierPrice === 0 ? 'Gratis 🎉' : formatPrice(courierPrice)}` : courierPrice === 0 ? 'Gratis 🎉' : formatPrice(courierPrice)}\n`;
+            message += `*Ongkos Kirim:* ${courierLabel ? `${courierLabel} — ${formatPrice(courierPrice)}` : formatPrice(courierPrice)}\n`;
+            if (subsidy > 0) {
+                message += `*Subsidi Ongkir (${totalQty} pcs × Rp20.000):* -${formatPrice(subsidy)}\n`;
+            }
+            message += `*Total Ongkir:* ${ongkirAfterSubsidy === 0 ? 'Gratis 🎉' : formatPrice(ongkirAfterSubsidy)}\n`;
             if (codFee > 0) {
                 message += `*Biaya Admin Bayar di Rumah (4%):* ${formatPrice(codFee)}\n`;
             }
@@ -1438,8 +1446,10 @@ function initCart() {
                 address,
                 paymentMethod: paymentMethodValue,
                 subtotal,
-                ongkir: courierPrice,
+                ongkir: ongkirAfterSubsidy,
                 courier: courierLabel,
+                subsidy,
+                subsidyQty: totalQty,
                 codFee,
                 grandTotal,
                 cart: cart.map(item => ({
@@ -1580,6 +1590,11 @@ function isCOD() {
     return document.querySelector('input[name="payment-method"]:checked')?.value === 'cod';
 }
 
+function getSubsidy() {
+    const qty = cart.reduce((sum, item) => sum + item.qty, 0);
+    return qty * 20000;
+}
+
 function updateGrandTotal() {
     const parsePrice = (p) => parseFloat(String(p).replace(/[^0-9]/g, ''));
     const formatPrice = (n) => `Rp${n.toLocaleString('id-ID')}`;
@@ -1587,30 +1602,40 @@ function updateGrandTotal() {
     const subtotal = cart.reduce((sum, item) => sum + (parsePrice(item.priceWa || item.priceCrt) * item.qty), 0);
 
     const ongkirPrice = selectedCourierPrice || 0;
-    const codFee = isCOD() ? Math.round((subtotal + ongkirPrice) * 0.04) : 0;
-    const grandTotal = subtotal + ongkirPrice + codFee;
+    const subsidy = getSubsidy();
+    const ongkirAfterSubsidy = Math.max(0, ongkirPrice - subsidy);
+    const codFee = isCOD() ? Math.round((subtotal + ongkirAfterSubsidy) * 0.04) : 0;
+    const grandTotal = subtotal + ongkirAfterSubsidy + codFee;
 
     const rows = [
-        { rowId: 'ongkir-summary-row', labelId: 'ongkir-summary-label', priceId: 'ongkir-summary-price', totalId: 'grand-total', codRowId: 'cod-fee-row', codPriceId: 'cod-fee-price' },
-        { rowId: 'ongkir-summary-row-mobile', labelId: 'ongkir-summary-label-mobile', priceId: 'ongkir-summary-price-mobile', totalId: 'grand-total-mobile', codRowId: 'cod-fee-row-mobile', codPriceId: 'cod-fee-price-mobile' },
+        { rowId: 'ongkir-summary-row', labelId: 'ongkir-summary-label', priceId: 'ongkir-summary-price', totalId: 'grand-total', codRowId: 'cod-fee-row', codPriceId: 'cod-fee-price', subRowId: 'subsidy-row', subPriceId: 'subsidy-price' },
+        { rowId: 'ongkir-summary-row-mobile', labelId: 'ongkir-summary-label-mobile', priceId: 'ongkir-summary-price-mobile', totalId: 'grand-total-mobile', codRowId: 'cod-fee-row-mobile', codPriceId: 'cod-fee-price-mobile', subRowId: 'subsidy-row-mobile', subPriceId: 'subsidy-price-mobile' },
     ];
 
-    rows.forEach(({ rowId, labelId, priceId, totalId, codRowId, codPriceId }) => {
+    rows.forEach(({ rowId, labelId, priceId, totalId, codRowId, codPriceId, subRowId, subPriceId }) => {
         const row = document.getElementById(rowId);
         const label = document.getElementById(labelId);
         const priceEl = document.getElementById(priceId);
         const totalEl = document.getElementById(totalId);
         const codRow = document.getElementById(codRowId);
         const codPriceEl = document.getElementById(codPriceId);
-
-        const courierLabelText = selectedCourierName ? `${selectedCourierName} ${selectedCourierService}` : '';
+        const subRow = document.getElementById(subRowId);
+        const subPriceEl = document.getElementById(subPriceId);
 
         if (selectedCourierName && row) {
             row.classList.remove('hidden');
-            if (label) label.textContent = courierLabelText;
+            if (label) label.textContent = 'Ongkos Kirim';
             if (priceEl) priceEl.textContent = ongkirPrice === 0 ? 'Gratis 🎉' : formatPrice(ongkirPrice);
+
+            if (subsidy > 0 && subRow && subPriceEl) {
+                subRow.classList.remove('hidden');
+                subPriceEl.textContent = `-${formatPrice(subsidy)}`;
+            } else if (subRow) {
+                subRow.classList.add('hidden');
+            }
         } else if (row) {
             row.classList.add('hidden');
+            if (subRow) subRow.classList.add('hidden');
         }
 
         if (codFee > 0 && codRow) {
