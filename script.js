@@ -1336,6 +1336,8 @@ function initCart() {
     renderCart();
 
     // Checkout to WA binding
+    const loadingOverlay = document.getElementById('loading-overlay');
+
     const btnsCheckout = document.querySelectorAll('.btn-checkout-wa');
     btnsCheckout.forEach(btnCheckout => {
         btnCheckout.addEventListener('click', async () => {
@@ -1343,10 +1345,11 @@ function initCart() {
                 return showAlert("Keranjang Kosong", "Wah, keranjang belanja Anda masih kosong nih. Yuk cari Al-Quran favoritmu!", "info");
             }
 
-            const name = document.getElementById('cust-name').value.trim();
-            const phone = document.getElementById('cust-phone').value.trim();
-            const address = document.getElementById('cust-address').value.trim();
-            const getSelectText = (id) => {
+            try {
+                const name = document.getElementById('cust-name').value.trim();
+                const phone = document.getElementById('cust-phone').value.trim();
+                const address = document.getElementById('cust-address').value.trim();
+                const getSelectText = (id) => {
                 const el = document.getElementById('cust-' + id);
                 if (!el || el.selectedIndex <= 0) return '';
                 const text = el.options[el.selectedIndex].text;
@@ -1425,6 +1428,10 @@ function initCart() {
 
             message += `*Metode Pembayaran:* ${paymentMethodText}\n\n`;
 
+            // Show loading, mulai kirim notifikasi
+            loadingOverlay?.classList.remove('hidden');
+            loadingOverlay?.classList.add('flex');
+
             // === TELEGRAM NOTIFICATION ===
             try {
                 await fetch('/api/notify', {
@@ -1490,6 +1497,12 @@ function initCart() {
 
             // === REDIRECT KE THANK YOU PAGE ===
             window.location.href = 'thank-you.html';
+            } catch (err) {
+                console.error('Checkout error:', err);
+                loadingOverlay?.classList.add('hidden');
+                loadingOverlay?.classList.remove('flex');
+                showAlert('Oops!', 'Terjadi kesalahan. Silakan coba lagi.', 'error');
+            }
         });
     });
 
