@@ -41,7 +41,7 @@
         href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@700;800;900&display=swap"
         rel="stylesheet" />
     <link
-        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-25..0"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-25..0&display=block"
         rel="stylesheet" />
     <script>!function(){var e=localStorage.getItem('theme')==='dark';document.documentElement.classList.toggle('dark',e)}();</script>
 </head>
@@ -247,7 +247,7 @@
                                     class="w-full bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-2xl px-6 py-4 focus:outline-none focus:ring-2 focus:ring-brand-blue transition-all">
                                     <option value="">Pilih Skema</option>
                                     <option value="Reseller">Kirim Sendiri (Self Distribute)</option>
-                                    <option value="Marketer">Kirim Langsung dari Pusat (Direct to Buyer)</option>
+                                    <option value="Dropfilliate">Dropfilliate (Dropship Affiliate)</option>
                                 </select>
                             </div>
 
@@ -273,7 +273,7 @@
 
                                 const name = document.getElementById('reseller-name').value;
                                 const city = document.getElementById('reseller-city').value;
-                                const job = document.getElementById('reseller-job').value;
+                                const brand = document.getElementById('reseller-brand').value;
                                 const scheme = document.getElementById('reseller-scheme').value;
                                 const reason = document.getElementById('reseller-reason').value;
 
@@ -281,7 +281,7 @@
                                 const message = `Halo Admin Hamzah Quran, saya ingin mendaftar sebagai *${scheme}*.%0A%0A` +
                                     `*Nama:* ${name}%0A` +
                                     `*Kota Domisili:* ${city}%0A` +
-                                    `*Pekerjaan:* ${job}%0A` +
+                                    `*Brand:* ${brand}%0A` +
                                     `*Skema:* ${scheme}%0A` +
                                     `*Alasan bergabung:* ${reason}%0A%0A` +
                                     `Mohon informasi lebih lanjut. Terima kasih.`;
@@ -355,15 +355,15 @@
                         </ul>
                     </div>
 
-                    <!-- Skema: Kirim Langsung -->
+                    <!-- Skema: Dropfilliate -->
                     <div
                         class="bg-white dark:bg-slate-900 rounded-3xl p-8 border border-slate-100 dark:border-slate-800 shadow-sm hover:shadow-md transition-shadow">
                         <div class="flex items-center gap-4 mb-8">
                             <div
                                 class="w-12 h-12 bg-brand-gold/10 dark:bg-brand-gold/20 rounded-2xl flex items-center justify-center text-orange-600 dark:text-brand-gold">
-                                <span class="material-symbols-outlined">bolt</span>
+                                <span class="material-symbols-outlined">rocket_launch</span>
                             </div>
-                            <h4 class="text-2xl font-display font-black text-slate-900 dark:text-white">Kirim Langsung
+                            <h4 class="text-2xl font-display font-black text-slate-900 dark:text-white">Dropfilliate
                             </h4>
                         </div>
 
@@ -372,34 +372,30 @@
                                 <span class="text-[0.65rem] font-bold uppercase tracking-[0.1em] text-slate-400">Alur
                                     Pengiriman</span>
                                 <p class="text-slate-600 dark:text-slate-400 font-medium text-sm">Produk langsung
-                                    dikirim ke alamat Buyer</p>
+                                    dikirim dari pusat ke alamat pembeli atas nama brand Anda.</p>
                             </li>
                             <li class="flex flex-col gap-1 leading-relaxed">
                                 <span
                                     class="text-[0.65rem] font-bold uppercase tracking-[0.1em] text-slate-400">Kebebasan
                                     Packing</span>
-                                <p class="text-slate-600 dark:text-slate-400 font-medium text-sm">Standard Pusat
-                                    (Include Box & Bubble Wrap).</p>
+                                <p class="text-slate-600 dark:text-slate-400 font-medium text-sm">Standard pusat (Free Box & Tuding Ngaji 2 pcs).</p>
                             </li>
                             <li class="flex flex-col gap-1 leading-relaxed">
                                 <span
                                     class="text-[0.65rem] font-bold uppercase tracking-[0.1em] text-slate-400">Domisili
                                     Mitra</span>
-                                <p class="text-slate-600 dark:text-slate-400 font-medium text-sm">Cocok untuk Mitra
-                                    Luar Kota / Luar Jawa.</p>
+                                <p class="text-slate-600 dark:text-slate-400 font-medium text-sm">Cocok untuk seluruh
+                                    Indonesia, tanpa dibatasi lokasi.</p>
                             </li>
                             <li class="flex flex-col gap-1 leading-relaxed">
-                                <span class="text-[0.65rem] font-bold uppercase tracking-[0.1em] text-slate-400">Manfaat
-                                    Utama</span>
-                                <p class="text-slate-600 dark:text-slate-400 font-medium text-sm">Praktis, tidak perlu
-                                    stok dan tidak perlu packing.</p>
+                                <span class="text-[0.65rem] font-bold uppercase tracking-[0.1em] text-slate-400">Pembayaran</span>
+                                <p class="text-slate-600 dark:text-slate-400 font-medium text-sm">Customer bayar
+                                    langsung ke rekening Hamzah Quran dengan harga retail yang Anda tentukan.</p>
                             </li>
                             <li class="flex flex-col gap-1 leading-relaxed">
-                                <span class="text-[0.65rem] font-bold uppercase tracking-[0.1em] text-slate-400">Biaya
-                                    Layanan</span>
-                                <p class="text-slate-600 dark:text-slate-400 font-medium text-sm">Biaya produksi +
-                                    Jasa
-                                    Fulfillment (Packing & Drop).</p>
+                                <span class="text-[0.65rem] font-bold uppercase tracking-[0.1em] text-slate-400">Skema
+                                    Keuntungan</span>
+                                <p class="text-slate-600 dark:text-slate-400 font-medium text-sm">Komisi akan ditransfer ke rekening Dropfilliator setelah transaksi selesai.</p>
                             </li>
                         </ul>
                     </div>
@@ -507,7 +503,7 @@
                     </div>
                     <div class="pt-4 border-t border-white/20">
                         <p class="text-[10px] opacity-60 mb-2 uppercase font-bold tracking-widest">Powered by</p>
-                        <img src="img/lincah.png" alt="Lincah" class="h-5 w-auto invert brightness-0">
+                        <img src="img/logo-ka-white.svg" alt="KiriminAja" class="h-8 w-auto">
                     </div>
                 </div>
             </div>

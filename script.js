@@ -648,6 +648,25 @@ function initProductDetail() {
         // Render Related Products
         renderRelatedProducts(product.id, product.category);
 
+        // Touch swipe for mobile
+        const imgContainer = document.querySelector('#main-image')?.parentElement;
+        if (imgContainer && product.images?.length > 1) {
+            let startX = 0, startY = 0;
+            imgContainer.addEventListener('touchstart', (e) => {
+                const touch = e.touches[0];
+                startX = touch.clientX;
+                startY = touch.clientY;
+            }, { passive: true });
+            imgContainer.addEventListener('touchend', (e) => {
+                const touch = e.changedTouches[0];
+                const deltaX = touch.clientX - startX;
+                const deltaY = touch.clientY - startY;
+                if (Math.abs(deltaY) > Math.abs(deltaX)) return;
+                if (deltaX > 60) prevImage();
+                else if (deltaX < -60) nextImage();
+            }, { passive: true });
+        }
+
     } else if (window.location.pathname.includes('product-detail.html')) {
         window.location.href = 'produk.html';
     }
@@ -960,6 +979,31 @@ function initPersonalizationPage() {
         const backLink = document.getElementById('back-to-product');
         if (backLink) backLink.href = `product-detail.html?id=${product.id}`;
 
+        // Edit mode: pre-fill form with existing cart item data
+        const editMode = urlParams.get('edit');
+        let editIdx = -1;
+        if (editMode) {
+            editIdx = parseInt(sessionStorage.getItem('hq_edit_cart_idx') || '-1');
+            if (editIdx >= 0 && cart[editIdx]) {
+                const editItem = cart[editIdx];
+                const nameInput = document.getElementById('custom-name-input');
+                if (nameInput && editItem.customName) nameInput.value = editItem.customName;
+
+                const noteInput = document.getElementById('custom-note-input');
+                if (noteInput && editItem.customNote) noteInput.value = editItem.customNote;
+
+                const fontInput = document.getElementById('custom-font-input');
+                if (fontInput && editItem.customFont) fontInput.value = editItem.customFont;
+
+                if (editItem.coverName) {
+                    const cover = COVER_DESIGNS.find(c => c.name === editItem.coverName && c.category === editItem.coverCategory);
+                    if (cover) {
+                        setTimeout(() => selectModalCover(cover.id), 100);
+                    }
+                }
+            }
+        }
+
         // Setup Form
         const nameInput = document.getElementById('custom-name-input');
         if (nameInput) {
@@ -986,7 +1030,25 @@ function initPersonalizationPage() {
                 const customNote = document.getElementById('custom-note-input')?.value.trim() || '';
                 const customFont = document.getElementById('custom-font-input')?.value.trim() || '';
 
-                addToCart(product.id, customName, modalSelectedCoverId, customNote, customFont);
+                const cover = COVER_DESIGNS.find(c => c.id === modalSelectedCoverId);
+
+                // Edit mode: replace item at stored index instead of pushing new
+                if (editIdx >= 0 && cart[editIdx]) {
+                    cart[editIdx] = {
+                        ...cart[editIdx],
+                        customName,
+                        customNote,
+                        customFont,
+                        coverName: cover ? cover.name : '',
+                        coverCategory: cover ? cover.category : '',
+                        coverImg: cover ? cover.img : cart[editIdx].img,
+                    };
+                    saveCart();
+                    showToast('Item berhasil diperbarui!');
+                    sessionStorage.removeItem('hq_edit_cart_idx');
+                } else {
+                    addToCart(product.id, customName, modalSelectedCoverId, customNote, customFont);
+                }
                 window.location.href = 'cart.html';
             };
         }
@@ -1205,6 +1267,13 @@ function updateCartQty(idx, newQty) {
     if (btn) btn.classList.remove('hidden');
 }
 
+function editCartItem(idx) {
+    const item = cart[idx];
+    if (!item) return;
+    sessionStorage.setItem('hq_edit_cart_idx', idx);
+    window.location.href = `personalize.html?id=${item.id}&edit=1`;
+}
+
 function renderCart() {
     const cartContainer = document.getElementById('cart-container');
     const emptyCartView = document.getElementById('empty-cart');
@@ -1240,6 +1309,9 @@ function renderCart() {
 
         return `
             <div class="flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-6 bg-slate-50 dark:bg-slate-800/50 p-4 rounded-2xl relative group">
+                <button onclick="editCartItem(${idx})" class="absolute top-3 right-3 flex items-center gap-1 px-2.5 py-1 rounded-full bg-brand-blue/10 dark:bg-brand-gold/10 text-brand-blue dark:text-brand-gold hover:bg-brand-blue/20 dark:hover:bg-brand-gold/20 transition-colors text-xs font-semibold z-10" title="Ubah">
+                    <span class="material-symbols-outlined text-[0.9rem]">edit</span>ubah
+                </button>
                 <div class="w-20 h-20 sm:w-24 sm:h-24 bg-white dark:bg-slate-800 rounded-xl overflow-hidden shadow-sm shrink-0 border border-slate-100 dark:border-slate-700">
                     <img src="${item.coverImg || item.img}" class="w-full h-full object-cover">
                 </div>

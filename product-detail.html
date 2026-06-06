@@ -41,7 +41,7 @@
         href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@700;800;900&display=swap"
         rel="stylesheet" />
     <link
-        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-25..0"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-25..0&display=block"
         rel="stylesheet" />
 
     <!-- Facebook Pixel Code -->
@@ -173,11 +173,11 @@
 
                         <!-- Navigation Arrows -->
                         <button onclick="prevImage()"
-                            class="absolute left-4 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-white/50 dark:bg-black/50 backdrop-blur-sm flex items-center justify-center text-slate-900 dark:text-white opacity-0 group-hover/main:opacity-100 transition-all hover:bg-white/60 dark:hover:bg-black/60 z-20">
+                            class="hidden lg:flex absolute left-4 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-white/50 dark:bg-black/50 backdrop-blur-sm items-center justify-center text-slate-900 dark:text-white transition-all hover:bg-white/60 dark:hover:bg-black/60 z-20">
                             <span class="material-symbols-outlined">chevron_left</span>
                         </button>
                         <button onclick="nextImage()"
-                            class="absolute right-4 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-white/50 dark:bg-black/50 backdrop-blur-sm flex items-center justify-center text-slate-900 dark:text-white opacity-0 group-hover/main:opacity-100 transition-all hover:bg-white/60 dark:hover:bg-black/60 z-20">
+                            class="hidden lg:flex absolute right-4 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-white/50 dark:bg-black/50 backdrop-blur-sm items-center justify-center text-slate-900 dark:text-white transition-all hover:bg-white/60 dark:hover:bg-black/60 z-20">
                             <span class="material-symbols-outlined">chevron_right</span>
                         </button>
                     </div>
@@ -194,6 +194,7 @@
                         class="text-2xl lg:text-6xl font-display font-black text-slate-900 dark:text-white mb-6 leading-tight">
                         Product Name</h1>
                     <div class="flex items-baseline gap-3 mb-1">
+                        <span class="text-xs font-medium text-slate-400 dark:text-slate-500">Harga Shopee</span>
                         <div id="product-price"
                             class="text-xl lg:text-2xl font-black text-brand-blue dark:text-brand-gold">
                             Rp0
@@ -204,15 +205,30 @@
                         </div>
                     </div>
                     <div id="product-wa-price"
-                        class="text-xl lg:text-3xl font-bold text-emerald-600 dark:text-emerald-400 mb-8">
+                        class="text-xl lg:text-3xl font-bold text-emerald-600 dark:text-emerald-400">
                         Harga Diskon Khusus WA: Rp0
                     </div>
+
+                    <ul class="flex flex-col gap-2 my-6">
+                        <li class="flex items-center gap-2.5 text-sm font-semibold text-slate-700 dark:text-slate-300">
+                            <span class="material-symbols-outlined text-[1.2rem] text-brand-blue dark:text-brand-gold">local_shipping</span>
+                            Gratis Ongkir <span class="font-normal text-slate-500 dark:text-slate-400">Subsidi hingga Rp20.000</span>
+                        </li>
+                        <li class="flex items-center gap-2.5 text-sm font-semibold text-slate-700 dark:text-slate-300">
+                            <span class="material-symbols-outlined text-[1.2rem] text-brand-blue dark:text-brand-gold">verified</span>
+                            Garansi Ganti Baru <span class="font-normal text-slate-500 dark:text-slate-400">100% Gratis</span>
+                        </li>
+                        <li class="flex items-center gap-2.5 text-sm font-semibold text-slate-700 dark:text-slate-300">
+                            <span class="material-symbols-outlined text-[1.2rem] text-brand-blue dark:text-brand-gold">box</span>
+                            Bisa COD <span class="font-normal text-slate-500 dark:text-slate-400">ke Seluruh Indonesia</span>
+                        </li>
+                    </ul>
 
                     <!-- Desktop Action Buttons -->
                     <div class="hidden lg:flex flex-col gap-4 mb-8">
                         <button id="add-to-cart-btn"
                             class="w-full bg-brand-blue dark:bg-brand-gold text-white dark:text-black py-5 rounded-2xl font-bold hover:bg-brand-blue/90 dark:hover:bg-brand-gold/80 transition-all transition-duration-300 text-center flex items-center justify-center gap-3">
-                            <span class="material-symbols-outlined">add_shopping_cart</span>
+                                <span class="material-symbols-outlined">add_shopping_cart</span>
                             Masukkan Keranjang
                         </button>
                         <div class="grid grid-cols-2 gap-4">
@@ -229,83 +245,7 @@
                         </div>
                     </div>
 
-                    <!-- Trust Info -->
-                    <div class="mb-8 overflow-hidden relative">
-                        <!-- Desktop View: Static Row -->
-                        <div class="hidden lg:flex items-center gap-6 text-slate-500">
-                            <div class="flex items-center gap-2">
-                                <span
-                                    class="material-symbols-outlined text-[1.2rem] text-brand-blue dark:text-brand-gold">local_shipping</span>
-                                <span
-                                    class="text-[0.7rem] font-bold uppercase tracking-wider text-slate-900 dark:text-slate-100">Gratis
-                                    Ongkir</span>
-                            </div>
-                            <div class="flex items-center gap-2 border-l border-slate-200 dark:border-slate-800 pl-6">
-                                <span
-                                    class="material-symbols-outlined text-[1.2rem] text-brand-blue dark:text-brand-gold">verified</span>
-                                <span
-                                    class="text-[0.7rem] font-bold uppercase tracking-wider text-slate-900 dark:text-slate-100">Garansi
-                                    Ganti Baru</span>
-                            </div>
-                            <div class="flex items-center gap-2 border-l border-slate-200 dark:border-slate-800 pl-6">
-                                <span
-                                    class="material-symbols-outlined text-[1.2rem] text-brand-blue dark:text-brand-gold">box</span>
-                                <span
-                                    class="text-[0.7rem] font-bold uppercase tracking-wider text-slate-900 dark:text-slate-100">Bisa
-                                    COD</span>
-                            </div>
-                        </div>
 
-                        <!-- Mobile View: Marquee -->
-                        <div class="lg:hidden flex items-center bg-slate-50 dark:bg-slate-900/50 py-3 rounded-full">
-                            <div class="animate-marquee-fast flex items-center gap-8 px-4">
-                                <!-- Group 1 -->
-                                <div class="flex items-center gap-2 whitespace-nowrap">
-                                    <span
-                                        class="material-symbols-outlined text-[1rem] text-brand-blue dark:text-brand-gold">local_shipping</span>
-                                    <span
-                                        class="text-[0.8rem] font-bold uppercase tracking-wider dark:text-slate-300">Gratis
-                                        Ongkir</span>
-                                </div>
-                                <div class="flex items-center gap-2 whitespace-nowrap">
-                                    <span
-                                        class="material-symbols-outlined text-[1rem] text-brand-blue dark:text-brand-gold">verified</span>
-                                    <span
-                                        class="text-[0.8rem] font-bold uppercase tracking-wider dark:text-slate-300">Garansi
-                                        Ganti Baru</span>
-                                </div>
-                                <div class="flex items-center gap-2 whitespace-nowrap">
-                                    <span
-                                        class="material-symbols-outlined text-[1rem] text-brand-blue dark:text-brand-gold">box</span>
-                                    <span
-                                        class="text-[0.8rem] font-bold uppercase tracking-wider dark:text-slate-300">Bisa
-                                        COD</span>
-                                </div>
-                                <!-- Duplicate for seamless loop -->
-                                <div class="flex items-center gap-2 whitespace-nowrap">
-                                    <span
-                                        class="material-symbols-outlined text-[1rem] text-brand-blue dark:text-brand-gold">local_shipping</span>
-                                    <span
-                                        class="text-[0.8rem] font-bold uppercase tracking-wider dark:text-slate-300">Gratis
-                                        Ongkir</span>
-                                </div>
-                                <div class="flex items-center gap-2 whitespace-nowrap">
-                                    <span
-                                        class="material-symbols-outlined text-[1rem] text-brand-blue dark:text-brand-gold">verified</span>
-                                    <span
-                                        class="text-[0.8rem] font-bold uppercase tracking-wider dark:text-slate-300">Garansi
-                                        Ganti Baru</span>
-                                </div>
-                                <div class="flex items-center gap-2 whitespace-nowrap">
-                                    <span
-                                        class="material-symbols-outlined text-[1rem] text-brand-blue dark:text-brand-gold">box</span>
-                                    <span
-                                        class="text-[0.8rem] font-bold uppercase tracking-wider dark:text-slate-300">Bisa
-                                        COD</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
 
                     <div class="h-px w-full bg-[#f7f7f7] mb-8"></div>
 
