@@ -141,6 +141,13 @@ const GLOBAL_PRODUCTS = [
         specs: ["Kertas HVS Premium 70gr", "Full Color", "Tajwid Warna", "Dilengkapi Asmaul Husna", "Ukuran A5 (Sedang) 14,8 x 21 cm", "Mudah dibawa", "Kertas berkualitas", "Tampilan cerah", "Bantu hafalan surat pendek"]
     },
 ];
+
+// Facebook Pixel: Lead event on all WhatsApp link clicks
+document.addEventListener('click', function (e) {
+    var link = e.target.closest('a[href*="wa.me"]');
+    if (link && typeof fbq !== 'undefined') fbq('track', 'Lead');
+});
+
 let selectedCourierPrice = 0;
 let selectedCourierName = '';
 let selectedCourierService = '';
