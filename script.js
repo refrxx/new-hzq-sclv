@@ -7,7 +7,7 @@ const GLOBAL_PRODUCTS = [
         weight: 850,
         priceCrt: "Rp159.000",
         priceStr: "Rp143.000",
-        priceWa: "Rp118.000",
+        priceWa: "Rp139.000",
         img: "img/katalog/8qpp-a5.jpg",
         images: ["img/8qpp-a5/8qpp-a5.jpg", "img/8qpp-a5/8qpp-a5-1.jpg", "img/8qpp-a5/8qpp-a5-2.jpg", "img/8qpp-a5/8qpp-a5-3.jpg", "img/8qpp-a5/8qpp-a5-4.jpg", "img/usp.jpg", "img/usp-1.jpg", "img/usp-2.jpg"],
         wa: "Halo Admin, saya ingin pesan Al Quran Custom Nama Hafazan 8 Blok QPP A5",
@@ -21,7 +21,7 @@ const GLOBAL_PRODUCTS = [
         weight: 850,
         priceCrt: "Rp169.000",
         priceStr: "Rp149.000",
-        priceWa: "Rp121.000",
+        priceWa: "Rp142.000",
         img: "img/katalog/8matte-a5.jpg",
         images: ["img/8matte-a5/8matte-a5.jpg", "img/8matte-a5/8matte-a5-1.jpg", "img/8matte-a5/8matte-a5-2.jpg", "img/8matte-a5/8matte-a5-3.jpg", "img/usp.jpg", "img/usp-1.jpg", "img/usp-2.jpg"],
         wa: "Halo Admin, saya ingin pesan Al Quran Custom Nama Hafazan 8 Blok Matte A5",
@@ -35,7 +35,7 @@ const GLOBAL_PRODUCTS = [
         weight: 850,
         priceCrt: "Rp169.000",
         priceStr: "Rp149.000",
-        priceWa: "Rp121.000",
+        priceWa: "Rp142.000",
         img: "img/katalog/8tahfiz-a5.jpg",
         images: ["img/8tahfiz/8tahfiz-3.jpg", "img/8tahfiz/8tahfiz.jpg", "img/8tahfiz/8tahfiz-1.jpg", "img/8tahfiz/8tahfiz-2.jpg", "img/usp.jpg", "img/usp-1.jpg", "img/usp-2.jpg"],
         wa: "Halo Admin, saya ingin pesan Al Quran Custom Nama Hafazan 8 TAHFIZ A5",
@@ -49,7 +49,7 @@ const GLOBAL_PRODUCTS = [
         weight: 850,
         priceCrt: "Rp129.000",
         priceStr: "Rp120.000",
-        priceWa: "Rp108.000",
+        priceWa: "Rp115.000",
         img: "img/katalog/tilawah-a5.jpg",
         images: ["img/tilawah/tilawah-3.jpg", "img/tilawah/tilawah.jpg", "img/tilawah/tilawah-1.jpg", "img/tilawah/tilawah-2.jpg", "img/usp.jpg", "img/usp-1.jpg", "img/usp-2.jpg"],
         wa: "Halo Admin, saya ingin pesan Al Quran Custom Nama Tilawah A5",
@@ -63,7 +63,7 @@ const GLOBAL_PRODUCTS = [
         weight: 850,
         priceCrt: "Rp149.000",
         priceStr: "Rp139.000",
-        priceWa: "Rp113.000",
+        priceWa: "Rp129.000",
         img: "img/katalog/yazid.jpg",
         images: ["img/yazid/yazid-a5.jpg", "img/yazid/yazid-a5-1.jpg", "img/usp.jpg", "img/usp-1.jpg", "img/usp-2.jpg"],
         wa: "Halo Admin, saya ingin pesan Al Quran Custom Nama Hafalan 6 Blok Non Terjemah A5",
@@ -77,7 +77,7 @@ const GLOBAL_PRODUCTS = [
         weight: 1600,
         priceCrt: "Rp229.000",
         priceStr: "Rp199.000",
-        priceWa: "Rp171.000",
+        priceWa: "Rp189.000",
         img: "img/katalog/8qpp-a4.jpg",
         images: ["img/8qpp-a4/8qpp-a4.jpg", "img/8qpp-a4/8qpp-a4-1.jpg", "img/8qpp-a4/8qpp-a4-2.jpg", "img/8qpp-a4/8qpp-a4-3.jpg", "img/8qpp-a4/8qpp-a4-4.jpg", "img/8qpp-a4/8qpp-a4-5.jpg", "img/usp.jpg", "img/usp-1.jpg", "img/usp-2.jpg"],
         wa: "Halo Admin, saya ingin pesan Al Quran Custom Nama Hafazan 8 Blok QPP A4",
@@ -91,7 +91,7 @@ const GLOBAL_PRODUCTS = [
         weight: 1600,
         priceCrt: "Rp239.000",
         priceStr: "Rp219.000",
-        priceWa: "Rp183.000",
+        priceWa: "Rp195.000",
         img: "img/katalog/8matte-a4.jpg",
         images: ["img/8matte-a4/8matte-a4.jpg", "img/8matte-a4/8matte-a4-1.jpg", "img/8matte-a4/8matte-a4-2.jpg", "img/8matte-a4/8matte-a4-3.jpg", "img/8matte-a4/8matte-a4-4.jpg", "img/usp.jpg", "img/usp-1.jpg", "img/usp-2.jpg"],
         wa: "Halo Admin, saya ingin pesan Al Quran Custom Nama Hafazan 8 Blok Matte A4",
@@ -119,7 +119,7 @@ const GLOBAL_PRODUCTS = [
         weight: 350,
         priceCrt: "Rp99.000",
         priceStr: "Rp84.900",
-        priceWa: "Rp75.000",
+        priceWa: "Rp79.000",
         img: "img/katalog/iqro-qr-3.jpg",
         images: ["img/iqro-qr/iqro-qr-3.jpg", "img/iqro-qr/iqro-qr.jpg", "img/iqro-qr/iqro-qr-1.jpg", "img/iqro-qr/iqro-qr-2.jpg", "img/usp.jpg", "img/usp-1.jpg", "img/usp-2.jpg"],
         wa: "Halo Admin, saya ingin pesan IQRO Custom Nama Full Color QR Code HVS A5",
@@ -133,7 +133,7 @@ const GLOBAL_PRODUCTS = [
         weight: 350,
         priceCrt: "Rp79.000",
         priceStr: "Rp62.000",
-        priceWa: "Rp53.000",
+        priceWa: "Rp58.000",
         img: "img/katalog/juzamma.jpg",
         images: ["img/katalog/juzamma.jpg", "img/juzamma/juzamma-3.jpg", "img/juzamma/juzamma-2.jpg", "img/juzamma/juzamma-1.jpg", "img/juzamma/juzamma-4.jpg", "img/usp.jpg", "img/usp-1.jpg", "img/usp-2.jpg"],
         wa: "Halo Admin, saya ingin pesan Juz Amma Custom Nama Full Color A5",
@@ -141,6 +141,22 @@ const GLOBAL_PRODUCTS = [
         specs: ["Kertas HVS Premium 70gr", "Full Color", "Tajwid Warna", "Dilengkapi Asmaul Husna", "Ukuran A5 (Sedang) 14,8 x 21 cm", "Mudah dibawa", "Kertas berkualitas", "Tampilan cerah", "Bantu hafalan surat pendek"]
     },
 ];
+
+// --- Voucher Config ---
+const VOUCHER_TIERS = [
+  { min: 350000, amount: 30000 },
+  { min: 220000, amount: 20000 },
+  { min: 100000, amount: 10000 },
+  { min: 60000, amount: 6000 },
+  { min: 0, amount: 5000 },
+];
+function getVoucher(subtotal) {
+  for (const t of VOUCHER_TIERS) if (subtotal >= t.min) return t.amount;
+  return 0;
+}
+function getVoucherLabel(amount) {
+  return `Rp${amount.toLocaleString('id-ID')}`;
+}
 
 // Facebook Pixel: Lead event on all WhatsApp link clicks
 document.addEventListener('click', function (e) {
@@ -603,6 +619,17 @@ function initProductDetail() {
                 <span class="label-text !text-sm !opacity-100 !font-normal">Harga spesial Web</span>
             </div>
         `, 'innerHTML');
+
+        // Voucher banner
+        const priceNum = parseFloat(product.priceWa.replace(/[^\d]/g, ''));
+        const productVoucher = getVoucher(priceNum);
+        const voucherBanner = document.getElementById('voucher-banner');
+        const voucherText = document.getElementById('voucher-banner-text');
+        if (voucherBanner && voucherText) {
+            voucherBanner.classList.remove('hidden');
+            voucherText.textContent = `Checkout sekarang dan dapatkan voucher XTRA ${getVoucherLabel(productVoucher)}!`;
+        }
+
         setEl('main-image', product.img, 'src');
         setEl('wa-link', `https://wa.me/6285155060816?text=${encodeURIComponent(product.wa)}`, 'href');
         setEl('wa-link-mobile', `https://wa.me/6285155060816?text=${encodeURIComponent(product.wa)}`, 'href');
@@ -1502,13 +1529,17 @@ function initCart() {
             const paymentLabels = { transfer: 'Transfer Bank', qris: 'QRIS', cod: 'Bayar di Rumah' };
             const paymentMethodText = paymentLabels[paymentMethodValue] || 'Transfer Bank';
 
-            const codFee = paymentMethodValue === 'cod' ? Math.round((subtotal + ongkirAfterSubsidy) * 0.04) : 0;
-            const grandTotal = subtotal + ongkirAfterSubsidy + codFee;
+            const voucher = getVoucher(subtotal);
+            const codFee = paymentMethodValue === 'cod' ? Math.round((subtotal + ongkirAfterSubsidy - voucher) * 0.04) : 0;
+            const grandTotal = subtotal + ongkirAfterSubsidy + codFee - voucher;
 
             const totalQty = cart.reduce((sum, item) => sum + item.qty, 0);
 
             message += `==============\n`;
             message += `*SUBTOTAL: ${formatPrice(subtotal)}*\n`;
+            if (voucher > 0) {
+                message += `*Voucher Belanja:* -${formatPrice(voucher)}\n`;
+            }
             message += `*Ongkos Kirim:* ${courierLabel ? `${courierLabel} — ${formatPrice(courierPrice)}` : formatPrice(courierPrice)}\n`;
             if (subsidy > 0) {
                 message += `*Subsidi Ongkir (${totalQty} pcs × Rp20.000):* -${formatPrice(subsidy)}\n`;
@@ -1711,19 +1742,20 @@ function updateGrandTotal() {
     const formatPrice = (n) => `Rp${n.toLocaleString('id-ID')}`;
 
     const subtotal = cart.reduce((sum, item) => sum + (parsePrice(item.priceWa || item.priceCrt) * item.qty), 0);
+    const voucher = getVoucher(subtotal);
 
     const ongkirPrice = selectedCourierPrice || 0;
     const subsidy = Math.min(getSubsidy(), ongkirPrice);
     const ongkirAfterSubsidy = ongkirPrice - subsidy;
-    const codFee = isCOD() ? Math.round((subtotal + ongkirAfterSubsidy) * 0.04) : 0;
-    const grandTotal = subtotal + ongkirAfterSubsidy + codFee;
+    const codFee = isCOD() ? Math.round((subtotal + ongkirAfterSubsidy - voucher) * 0.04) : 0;
+    const grandTotal = subtotal + ongkirAfterSubsidy + codFee - voucher;
 
     const rows = [
-        { rowId: 'ongkir-summary-row', labelId: 'ongkir-summary-label', priceId: 'ongkir-summary-price', totalId: 'grand-total', codRowId: 'cod-fee-row', codPriceId: 'cod-fee-price', subRowId: 'subsidy-row', subPriceId: 'subsidy-price' },
-        { rowId: 'ongkir-summary-row-mobile', labelId: 'ongkir-summary-label-mobile', priceId: 'ongkir-summary-price-mobile', totalId: 'grand-total-mobile', codRowId: 'cod-fee-row-mobile', codPriceId: 'cod-fee-price-mobile', subRowId: 'subsidy-row-mobile', subPriceId: 'subsidy-price-mobile' },
+        { rowId: 'ongkir-summary-row', labelId: 'ongkir-summary-label', priceId: 'ongkir-summary-price', totalId: 'grand-total', codRowId: 'cod-fee-row', codPriceId: 'cod-fee-price', subRowId: 'subsidy-row', subPriceId: 'subsidy-price', vchRowId: 'voucher-row', vchPriceId: 'voucher-price' },
+        { rowId: 'ongkir-summary-row-mobile', labelId: 'ongkir-summary-label-mobile', priceId: 'ongkir-summary-price-mobile', totalId: 'grand-total-mobile', codRowId: 'cod-fee-row-mobile', codPriceId: 'cod-fee-price-mobile', subRowId: 'subsidy-row-mobile', subPriceId: 'subsidy-price-mobile', vchRowId: 'voucher-row-mobile', vchPriceId: 'voucher-price-mobile' },
     ];
 
-    rows.forEach(({ rowId, labelId, priceId, totalId, codRowId, codPriceId, subRowId, subPriceId }) => {
+    rows.forEach(({ rowId, labelId, priceId, totalId, codRowId, codPriceId, subRowId, subPriceId, vchRowId, vchPriceId }) => {
         const row = document.getElementById(rowId);
         const label = document.getElementById(labelId);
         const priceEl = document.getElementById(priceId);
@@ -1732,6 +1764,8 @@ function updateGrandTotal() {
         const codPriceEl = document.getElementById(codPriceId);
         const subRow = document.getElementById(subRowId);
         const subPriceEl = document.getElementById(subPriceId);
+        const vchRow = document.getElementById(vchRowId);
+        const vchPriceEl = document.getElementById(vchPriceId);
 
         if (selectedCourierName && row) {
             row.classList.remove('hidden');
@@ -1749,6 +1783,13 @@ function updateGrandTotal() {
             if (subRow) subRow.classList.add('hidden');
         }
 
+        if (voucher > 0 && vchRow) {
+            vchRow.classList.remove('hidden');
+            if (vchPriceEl) vchPriceEl.textContent = `-${formatPrice(voucher)}`;
+        } else if (vchRow) {
+            vchRow.classList.add('hidden');
+        }
+
         if (codFee > 0 && codRow) {
             codRow.classList.remove('hidden');
             if (codPriceEl) codPriceEl.textContent = formatPrice(codFee);
@@ -1758,6 +1799,22 @@ function updateGrandTotal() {
 
         if (totalEl) totalEl.textContent = formatPrice(grandTotal);
     });
+
+    // Voucher banner (desktop & mobile)
+    const vchBannerDesktop = document.getElementById('voucher-banner-desktop');
+    const vchBannerMobile = document.getElementById('voucher-banner-mobile');
+    const vchAmtDesktop = document.getElementById('voucher-banner-amount-desktop');
+    const vchAmtMobile = document.getElementById('voucher-banner-amount-mobile');
+    const vchLabel = getVoucherLabel(voucher);
+    if (voucher > 0) {
+        if (vchBannerDesktop) { vchBannerDesktop.classList.remove('hidden'); }
+        if (vchBannerMobile) { vchBannerMobile.classList.remove('hidden'); }
+        if (vchAmtDesktop) { vchAmtDesktop.textContent = vchLabel; }
+        if (vchAmtMobile) { vchAmtMobile.textContent = vchLabel; }
+    } else {
+        if (vchBannerDesktop) { vchBannerDesktop.classList.add('hidden'); }
+        if (vchBannerMobile) { vchBannerMobile.classList.add('hidden'); }
+    }
 
     document.querySelectorAll('.cart-total:not([id])').forEach(el => el.textContent = formatPrice(grandTotal));
 }

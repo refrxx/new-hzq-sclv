@@ -7,7 +7,7 @@
     <title>Katalog Cover - Hamzah Quran</title>
     <link rel="icon" type="image/svg+xml" href="img/hamzah-favico.svg">
 
-    <!-- Tailwind CSS CDN -->
+    
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -33,17 +33,17 @@
         }
     </script>
 
-    <!-- Custom CSS -->
+
     <link href="style.css" rel="stylesheet" />
 
-    <!-- Google Fonts -->
+    
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@700;800;900&display=swap"
         rel="stylesheet" />
     <link
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-25..0&display=block"
         rel="stylesheet" />
-    <!-- Facebook Pixel Code -->
+    
     <script>
         !function (f, b, e, v, n, t, s) {
             if (f.fbq) return; n = f.fbq = function () {
@@ -61,12 +61,12 @@
     </script>
     <noscript><img height="1" width="1" style="display:none"
             src="https://www.facebook.com/tr?id=1767415744634833&ev=PageView&noscript=1" /></noscript>
-    <!-- End Facebook Pixel Code -->
+    
     <script>!function(){var e=localStorage.getItem('theme')==='dark';document.documentElement.classList.toggle('dark',e)}();</script>
 </head>
 
 <body class="bg-white dark:bg-[#080e16] transition-colors duration-300">
-    <!-- Top Promo Bar -->
+    
     <div class="promo-bar font-sans flex items-center justify-center px-4 overflow-hidden h-[44px]">
         <div class="flex items-center justify-center gap-4 sm:gap-10">
             <span class="promo-item uppercase">🔥 Disc. up to 20% order via Website</span>
@@ -79,7 +79,7 @@
 
     <header class="header-sticky w-full z-50 scrolled">
         <nav class="max-w-[1200px] mx-auto px-8 md:px-12 py-4 flex items-center justify-between">
-            <!-- Logo -->
+            
             <a class="flex items-center relative" href="index.html">
                 <img src="img/hamzahcolor.png" alt="Hamzah Quran"
                     class="h-6 md:h-8 w-auto transition-opacity duration-300 opacity-100 dark:opacity-0">
@@ -87,7 +87,7 @@
                     class="h-6 md:h-8 w-auto absolute top-0 left-0 transition-opacity duration-300 opacity-0 dark:opacity-100 invert">
             </a>
 
-            <!-- Desktop Navigation -->
+            
             <ul class="hidden lg:flex items-center space-x-8">
                 <li><a class="nav-link-underline font-sans font-semibold text-slate-500 hover:text-brand-blue dark:text-slate-400 dark:hover:text-white transition-colors duration-300"
                         href="index.html">Home</a></li>
@@ -120,7 +120,7 @@
                     <span class="material-symbols-outlined hidden dark:inline">light_mode</span>
                 </button>
 
-                <!-- Mobile Menu Button -->
+                
                 <button id="mobile-menu-button"
                     class="lg:hidden p-2 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors duration-300 border-0 flex items-center justify-center">
                     <span class="material-symbols-outlined">menu</span>
@@ -128,7 +128,7 @@
             </div>
         </nav>
 
-        <!-- Mobile Menu (Hidden by default) -->
+        
         <div id="mobile-menu"
             class="hidden lg:hidden bg-white dark:bg-[#080e16] absolute top-full left-0 w-full border-b dark:border-slate-800 shadow-xl py-6 px-8 md:px-12 animate-fade-in-down transition-colors duration-300 z-[-1]">
             <ul class="flex flex-col space-y-4">
@@ -163,7 +163,7 @@
 
     <main class="pt-12 lg:pt-12">
 
-        <!-- Product Grid & Filters -->
+        
         <section id="products" class="max-w-[1200px] mx-auto px-8 md:px-12">
             <div class="flex flex-col items-center text-center mb-12 pb-10">
                 <h2 class="text-3xl md:text-4xl font-display font-black text-slate-900 dark:text-white mb-8">Pilihan
@@ -171,7 +171,7 @@
                 </h2>
 
                 <div class="flex flex-col items-center justify-center gap-8 w-full">
-                    <!-- Main Product Type Tabs -->
+                    
                     <div id="product-tab-container"
                         class="flex flex-wrap justify-center gap-4 border-b border-slate-100 dark:border-slate-800 pb-6 w-full max-w-2xl">
                         <button data-type="Al Quran"
@@ -185,7 +185,7 @@
                             Juz Amma</button>
                     </div>
 
-                    <!-- Sub-Category Filters (for Al Quran) -->
+                    
                     <div id="category-filter-container"
                         class="flex flex-wrap justify-center gap-3 transition-opacity duration-300">
                         <button
@@ -227,13 +227,13 @@
 
             <div id="cover-list"
                 class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-3 gap-y-3 mb-10 animate-fade-in-up">
-                <!-- Products will be rendered here by JS -->
+                
             </div>
 
         </section>
 
 
-        <!-- Dynamic CTA Grid Inspired by Experience Gradient -->
+        
         <section class="max-w-[1200px] mx-auto px-8 md:px-12 py-32">
             <div
                 class="relative rounded-40 py-24 px-8 text-center overflow-hidden bg-gradient-to-br from-brand-blue/80 to-brand-blue dark:from-brand-blue/80 dark:to-brand-blue border border-white dark:border-slate-800">
@@ -254,14 +254,14 @@
 
     </main>
 
-    <!-- Floating WhatsApp Button -->
+    
     <div class="fixed bottom-6 right-6 z-[60] group/wa">
-        <!-- Tooltip -->
+        
         <span
             class="absolute right-full mr-4 top-1/2 -translate-y-1/2 whitespace-nowrap bg-[#20bd5a] text-white text-xs font-bold px-4 py-2 rounded-xl opacity-0 translate-x-4 pointer-events-none transition-all duration-300 group-hover/wa:opacity-100 group-hover/wa:translate-x-0 shadow-xl">
             Hubungi kami di WhatsApp
         </span>
-        <!-- Button -->
+        
         <a href="https://wa.me/6285155060816" target="_blank" rel="noopener noreferrer"
             class="relative flex items-center justify-center w-14 h-14 bg-[#25D366] text-white rounded-full shadow-lg hover:-translate-y-1 hover:shadow-xl hover:bg-[#20bd5a] transition-all duration-300">
 
@@ -269,11 +269,11 @@
         </a>
     </div>
 
-    <!-- FOOTER -->
+    
     <footer class="w-full bg-[#0055AA] text-white pt-20 pb-10">
         <div class="max-w-[1200px] mx-auto px-8 md:px-12">
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8 mb-16">
-                <!-- Column 1: Brand Info -->
+                
                 <div class="flex flex-col items-start text-left space-y-6">
                     <img src="img/hamzahquran.png" alt="Hamzah Quran" class="h-8 w-auto invert brightness-0">
                     <h3 class="text-xl font-display font-black">Sahabat Setia Ibadahmu</h3>
@@ -284,7 +284,7 @@
                     </p>
                 </div>
 
-                <!-- Column 2: Kontak Kami -->
+                
                 <div class="space-y-6">
                     <h4 class="text-lg font-bold">Kontak Kami</h4>
                     <div class="space-y-4">
@@ -313,11 +313,11 @@
                     </div>
                 </div>
 
-                <!-- Column 3: Metode Pembayaran -->
+                
                 <div class="space-y-6">
                     <h4 class="text-lg font-bold">Metode Pembayaran</h4>
                     <div class="grid grid-cols-6 lg:grid-cols-4 gap-2">
-                        <!-- Simulated Payment Icons -->
+                        
                         <div
                             class="bg-white rounded h-7 flex items-center justify-center p-1 shadow-sm hover:scale-105 transition-transform">
                             <img src="img/bank/bca.svg" alt="BCA" class="h-3 w-auto">
@@ -353,7 +353,7 @@
                     </div>
                 </div>
 
-                <!-- Column 4: Metode Pengiriman -->
+                
                 <div class="space-y-6">
                     <h4 class="text-lg font-bold">Metode Pengiriman</h4>
                     <div class="flex flex-wrap gap-2 mb-4">
@@ -373,7 +373,7 @@
                 </div>
             </div>
 
-            <!-- Bottom Copyright Bar -->
+            
             <div class="pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4">
                 <p class="text-xs opacity-60">© 2026 Hamzah Quran. All rights reserved.</p>
                 <p class="text-xs text-white/60 flex items-center gap-4">Developed by <a href="https://maubuatweb.com"
@@ -383,13 +383,13 @@
         </div>
     </footer>
 
-    <!-- Lightbox Popup -->
+    
     <div id="lightbox">
         <span id="lightbox-close" class="material-symbols-outlined">close</span>
         <img id="lightbox-img" src="" alt="Cover Design" class="animate-zoom-in">
     </div>
 
-    <!-- Scripts -->
+    
     <script src="https://unpkg.com/lenis@1.1.20/dist/lenis.min.js"></script>
     <script src="script.js"></script>
     <script>
@@ -402,3 +402,4 @@
 </body>
 
 </html>
+
