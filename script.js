@@ -1525,9 +1525,9 @@ function initCart() {
             });
 
             const paymentRadio = document.querySelector('input[name="payment-method"]:checked');
-            const paymentMethodValue = paymentRadio?.value || 'transfer';
-            const paymentLabels = { transfer: 'Transfer Bank', qris: 'QRIS', cod: 'Bayar di Rumah' };
-            const paymentMethodText = paymentLabels[paymentMethodValue] || 'Transfer Bank';
+            const paymentMethodValue = paymentRadio?.value || 'bca';
+            const paymentLabels = { bca: 'BCA', bsi: 'BSI', qris: 'QRIS', cod: 'COD' };
+            const paymentMethodText = paymentLabels[paymentMethodValue] || 'BCA';
 
             const voucher = getVoucher(subtotal);
             const codFee = paymentMethodValue === 'cod' ? Math.round((subtotal + ongkirAfterSubsidy - voucher) * 0.04) : 0;

@@ -206,10 +206,8 @@
                     </div>
 
                     
-                    <div
-                        class="bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-32 p-6 md:p-8 shadow-sm">
                         <h2
-                            class="text-xl font-bold text-slate-900 dark:text-white mb-6 border-b border-slate-100 dark:border-slate-800 pb-4">
+                            class="text-xl font-bold text-slate-900 dark:text-white mb-6">
                             Informasi Pengiriman</h2>
                         <form id="shipping-form" class="space-y-5">
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
@@ -217,14 +215,14 @@
                                     <label class="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-2">Nama
                                         Penerima <span class="text-red-500">*</span></label>
                                     <input type="text" id="cust-name" required
-                                        class="w-full bg-slate-50 dark:bg-slate-800 border-none rounded-xl px-4 py-3 text-slate-900 dark:text-white focus:ring-2 focus:ring-brand-blue outline-none transition-all"
+                                        class="w-full bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-600 rounded-xl px-4 py-3 text-slate-900 dark:text-white focus:ring-2 focus:ring-brand-blue outline-none transition-all"
                                         placeholder="Contoh: Anang Hermansyah">
                                 </div>
                                 <div>
                                     <label class="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-2">No.
                                         WhatsApp <span class="text-red-500">*</span></label>
                                     <input type="text" id="cust-phone" required
-                                        class="w-full bg-slate-50 dark:bg-slate-800 border-none rounded-xl px-4 py-3 text-slate-900 dark:text-white focus:ring-2 focus:ring-brand-blue outline-none transition-all"
+                                        class="w-full bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-600 rounded-xl px-4 py-3 text-slate-900 dark:text-white focus:ring-2 focus:ring-brand-blue outline-none transition-all"
                                         placeholder="Contoh: 08123456789">
                                 </div>
                             </div>
@@ -232,7 +230,7 @@
                                 <label class="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-2">Alamat
                                     Lengkap <span class="text-red-500">*</span></label>
                                 <textarea id="cust-address" required rows="2"
-                                    class="w-full bg-slate-50 dark:bg-slate-800 border-none rounded-xl px-4 py-3 text-slate-900 dark:text-white focus:ring-2 focus:ring-brand-blue outline-none transition-all resize-none"
+                                    class="w-full bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-600 rounded-xl px-4 py-3 text-slate-900 dark:text-white focus:ring-2 focus:ring-brand-blue outline-none transition-all resize-none"
                                     placeholder="Contoh: Jl. Merdeka No. 123, Perumahan Indah, Blok A5"></textarea>
                             </div>
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
@@ -241,7 +239,7 @@
                                         class="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-2">Provinsi</label>
                                     <div class="relative">
                                         <select id="cust-province"
-                                            class="w-full bg-slate-50 dark:bg-slate-800 border-none rounded-xl px-4 py-3 text-slate-900 dark:text-white focus:ring-2 focus:ring-brand-blue outline-none transition-all appearance-none cursor-pointer pr-10">
+                                            class="w-full bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-600 rounded-xl px-4 py-3 text-slate-900 dark:text-white focus:ring-2 focus:ring-brand-blue outline-none transition-all appearance-none cursor-pointer pr-10">
                                             <option value="" disabled selected>Pilih Provinsi</option>
                                         </select>
                                         <span
@@ -253,7 +251,7 @@
                                         class="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-2">Kota/Kabupaten</label>
                                     <div class="relative">
                                         <select id="cust-city" disabled
-                                            class="w-full bg-slate-50 dark:bg-slate-800 border-none rounded-xl px-4 py-3 text-slate-900 dark:text-white focus:ring-2 focus:ring-brand-blue outline-none transition-all appearance-none cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed pr-10">
+                                            class="w-full bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-600 rounded-xl px-4 py-3 text-slate-900 dark:text-white focus:ring-2 focus:ring-brand-blue outline-none transition-all appearance-none cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed pr-10">
                                             <option value="" disabled selected>Pilih Kota/Kabupaten</option>
                                         </select>
                                         <span
@@ -267,7 +265,7 @@
                                         class="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-2">Kecamatan</label>
                                     <div class="relative">
                                         <select id="cust-district" disabled
-                                            class="w-full bg-slate-50 dark:bg-slate-800 border-none rounded-xl px-4 py-3 text-slate-900 dark:text-white focus:ring-2 focus:ring-brand-blue outline-none transition-all appearance-none cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed pr-10">
+                                            class="w-full bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-600 rounded-xl px-4 py-3 text-slate-900 dark:text-white focus:ring-2 focus:ring-brand-blue outline-none transition-all appearance-none cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed pr-10">
                                             <option value="" disabled selected>Pilih Kecamatan</option>
                                         </select>
                                         <span
@@ -279,7 +277,7 @@
                                         class="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-2">Kelurahan/Desa</label>
                                     <div class="relative">
                                         <select id="cust-subdistrict" disabled
-                                            class="w-full bg-slate-50 dark:bg-slate-800 border-none rounded-xl px-4 py-3 text-slate-900 dark:text-white focus:ring-2 focus:ring-brand-blue outline-none transition-all appearance-none cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed pr-10">
+                                            class="w-full bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-600 rounded-xl px-4 py-3 text-slate-900 dark:text-white focus:ring-2 focus:ring-brand-blue outline-none transition-all appearance-none cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed pr-10">
                                             <option value="" disabled selected>Pilih Kelurahan/Desa</option>
                                         </select>
                                         <span
@@ -290,7 +288,7 @@
                                     <label
                                         class="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-2">Kode Pos <span class="text-red-500">*</span></label>
                                     <input type="text" id="cust-postal-code" required
-                                        class="w-full bg-slate-50 dark:bg-slate-800 border-none rounded-xl px-4 py-3 text-slate-900 dark:text-white focus:ring-2 focus:ring-brand-blue outline-none transition-all"
+                                        class="w-full bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-600 rounded-xl px-4 py-3 text-slate-900 dark:text-white focus:ring-2 focus:ring-brand-blue outline-none transition-all"
                                         placeholder="Contoh: 15223" maxlength="5" inputmode="numeric">
                                 </div>
                             </div>
@@ -300,30 +298,30 @@
                             <div>
                                 <label class="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-3">Metode
                                     Pembayaran <span class="text-red-500">*</span></label>
-                                <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+                                <div id="payment-options" class="space-y-2">
                                     <label class="payment-option flex items-center gap-3 bg-slate-50 dark:bg-slate-800 rounded-xl px-4 py-3 cursor-pointer has-[:checked]:ring-2 has-[:checked]:ring-brand-blue has-[:checked]:bg-brand-blue/5 transition-all">
-                                        <input type="radio" name="payment-method" value="transfer" checked
+                                        <input type="radio" name="payment-method" value="bca" checked
                                             class="accent-brand-blue w-4 h-4 flex-shrink-0">
-                                        <div class="flex items-center gap-2 min-w-0">
-                                            <span class="material-symbols-outlined text-slate-400 text-[20px] flex-shrink-0">account_balance</span>
-                                            <span class="text-sm font-medium text-slate-700 dark:text-slate-300">Transfer Bank</span>
-                                        </div>
+                                        <img src="img/bank/bca.svg" alt="BCA" class="w-9 h-9 object-contain flex-shrink-0">
+                                        <span class="text-sm font-semibold text-slate-800 dark:text-slate-100">Transfer Bank BCA</span>
+                                    </label>
+                                    <label class="payment-option flex items-center gap-3 bg-slate-50 dark:bg-slate-800 rounded-xl px-4 py-3 cursor-pointer has-[:checked]:ring-2 has-[:checked]:ring-brand-blue has-[:checked]:bg-brand-blue/5 transition-all">
+                                        <input type="radio" name="payment-method" value="bsi"
+                                            class="accent-brand-blue w-4 h-4 flex-shrink-0">
+                                        <img src="img/bank/bsi.svg" alt="BSI" class="w-9 h-9 object-contain flex-shrink-0">
+                                        <span class="text-sm font-semibold text-slate-800 dark:text-slate-100">Transfer Bank BSI</span>
                                     </label>
                                     <label class="payment-option flex items-center gap-3 bg-slate-50 dark:bg-slate-800 rounded-xl px-4 py-3 cursor-pointer has-[:checked]:ring-2 has-[:checked]:ring-brand-blue has-[:checked]:bg-brand-blue/5 transition-all">
                                         <input type="radio" name="payment-method" value="qris"
                                             class="accent-brand-blue w-4 h-4 flex-shrink-0">
-                                        <div class="flex items-center gap-2 min-w-0">
-                                            <span class="material-symbols-outlined text-slate-400 text-[20px] flex-shrink-0">qr_code_scanner</span>
-                                            <span class="text-sm font-medium text-slate-700 dark:text-slate-300">QRIS</span>
-                                        </div>
+                                        <img src="img/bank/qris.svg" alt="QRIS" class="w-9 h-9 object-contain flex-shrink-0">
+                                        <span class="text-sm font-semibold text-slate-800 dark:text-slate-100">QRIS</span>
                                     </label>
                                     <label class="payment-option flex items-center gap-3 bg-slate-50 dark:bg-slate-800 rounded-xl px-4 py-3 cursor-pointer has-[:checked]:ring-2 has-[:checked]:ring-brand-blue has-[:checked]:bg-brand-blue/5 transition-all">
                                         <input type="radio" name="payment-method" value="cod"
                                             class="accent-brand-blue w-4 h-4 flex-shrink-0">
-                                        <div class="flex items-center gap-2 min-w-0">
-                                            <span class="material-symbols-outlined text-slate-400 text-[20px] flex-shrink-0">payments</span>
-                                            <span class="text-sm font-medium text-slate-700 dark:text-slate-300">Bayar di Rumah</span>
-                                        </div>
+                                        <span class="material-symbols-outlined text-brand-blue text-[28px]">payments</span>
+                                        <span class="text-sm font-semibold text-slate-800 dark:text-slate-100">COD (Bayar di Rumah)</span>
                                     </label>
                                 </div>
                             </div>
@@ -340,7 +338,6 @@
                                 </button>
                             </div>
                         </form>
-                    </div>
 
                     
                     <div id="voucher-banner-mobile" class="xl:hidden hidden p-4 rounded-2xl bg-gradient-to-r from-emerald-50 to-green-50 dark:from-emerald-900/20 dark:to-green-900/20 border border-emerald-200 dark:border-emerald-800">
