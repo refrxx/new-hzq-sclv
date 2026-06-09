@@ -208,7 +208,8 @@
         const container = document.getElementById('thankyou-content');
 
         const paymentLabels = {
-            transfer: 'Transfer Bank (Manual)',
+            bca: 'Transfer Bank BCA',
+            bsi: 'Transfer Bank BSI',
             qris: 'QRIS',
             cod: 'Bayar di Rumah'
         };
@@ -216,7 +217,7 @@
         let paymentSpecificHtml = '';
         let icon = '';
 
-        if (paymentMethod === 'transfer') {
+        if (paymentMethod === 'bca' || paymentMethod === 'bsi') {
             icon = '🏦';
             paymentSpecificHtml = `
                 <div class="bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-32 p-6 md:p-8 shadow-sm animate-fade-in-up" style="animation-delay: 200ms">
@@ -295,7 +296,7 @@
                     <span class="material-symbols-outlined text-green-600 dark:text-green-400 text-4xl">check_circle</span>
                 </div>
                 <h1 class="text-2xl md:text-3xl font-display font-black text-slate-900 dark:text-white">Pesanan Diterima! 🎉</h1>
-                <p class="text-lg text-slate-500 dark:text-slate-400 mt-2 font-medium">${icon} ${paymentMethod === 'transfer' ? 'Selesaikan pembayaran via Transfer Bank' : paymentMethod === 'qris' ? 'Selesaikan pembayaran via QRIS' : 'Pembayaran dilakukan saat barang tiba (COD)'}</p>
+                <p class="text-lg text-slate-500 dark:text-slate-400 mt-2 font-medium">${icon} ${paymentMethod === 'bca' || paymentMethod === 'bsi' ? `Selesaikan pembayaran via ${paymentLabels[paymentMethod]}` : paymentMethod === 'qris' ? 'Selesaikan pembayaran via QRIS' : 'Pembayaran dilakukan saat barang tiba (COD)'}</p>
             </div>
 
             <div class="bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-32 p-6 md:p-8 shadow-sm animate-fade-in-up" style="animation-delay: 100ms">

@@ -177,6 +177,15 @@ body {
     animation: zoomIn 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
 }
 
+.animate-slide-up {
+    animation: slideUp 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes slideUp {
+    from { transform: translateY(100%); opacity: 0; }
+    to   { transform: translateY(0); opacity: 1; }
+}
+
 /* WA Price Badge */
 .wa-price-badge {
     background-color: #def6e5;
@@ -587,6 +596,11 @@ html.lenis body {
 .reveal.visible {
     opacity: 1;
     transform: translateY(0);
+}
+
+/* Radio button accent color (for dynamic content) */
+input[type="radio"] {
+    accent-color: #1A5FB4;
 }
 
 /* Logo Mengantar Styling */

@@ -143,19 +143,40 @@ const GLOBAL_PRODUCTS = [
 ];
 
 // --- Voucher Config ---
-const VOUCHER_TIERS = [
-  { min: 350000, amount: 30000 },
-  { min: 220000, amount: 20000 },
-  { min: 100000, amount: 10000 },
-  { min: 60000, amount: 6000 },
-  { min: 0, amount: 5000 },
+const GRATIS_ONGKIR_TIERS = [
+  { min: 0, amount: 5000, label: 'Voucher Ongkir' },
+  { min: 60000, amount: 10000, label: 'Voucher Ongkir' },
+  { min: 100000, amount: 20000, label: 'Voucher Ongkir' },
+  { min: 300000, amount: 50000, label: 'Voucher Ongkir' },
+  { min: 500000, amount: 70000, label: 'Voucher Ongkir' },
 ];
-function getVoucher(subtotal) {
-  for (const t of VOUCHER_TIERS) if (subtotal >= t.min) return t.amount;
+const VOUCHER_TIERS = [
+  { min: 400000, amount: 40000, label: 'Voucher XTRA' },
+  { min: 250000, amount: 25000, label: 'Voucher XTRA' },
+  { min: 100000, amount: 10000, label: 'Voucher XTRA' },
+  { min: 0, amount: 5000, label: 'Voucher XTRA' },
+];
+
+const QURAN_VARIANTS = {
+  1: ['latin', 'tanpa-latin'],
+  2: ['tanpa-latin'],
+  6: ['latin', 'tanpa-latin'],
+  7: ['latin'],
+};
+function getBestVoucherAmount(subtotal) {
+  for (const t of [...VOUCHER_TIERS].sort((a, b) => b.min - a.min)) if (subtotal >= t.min) return t.amount;
   return 0;
 }
 function getVoucherLabel(amount) {
   return `Rp${amount.toLocaleString('id-ID')}`;
+}
+function getAutoGratisOngkir(subtotal) {
+  const e = GRATIS_ONGKIR_TIERS.filter(t => subtotal >= t.min).sort((a, b) => b.amount - a.amount);
+  return e[0] || null;
+}
+function getAutoVoucher(subtotal) {
+  const e = VOUCHER_TIERS.filter(t => subtotal >= t.min).sort((a, b) => b.amount - a.amount);
+  return e[0] || null;
 }
 
 // Facebook Pixel: Lead event on all WhatsApp link clicks
@@ -622,7 +643,7 @@ function initProductDetail() {
 
         // Voucher banner
         const priceNum = parseFloat(product.priceWa.replace(/[^\d]/g, ''));
-        const productVoucher = getVoucher(priceNum);
+        const productVoucher = getBestVoucherAmount(priceNum);
         const voucherBanner = document.getElementById('voucher-banner');
         const voucherText = document.getElementById('voucher-banner-text');
         if (voucherBanner && voucherText) {
@@ -641,7 +662,16 @@ function initProductDetail() {
             if (btn) {
                 btn.onclick = (e) => {
                     e.preventDefault();
-                    openCustomModal(product.id);
+                    if (product.category && product.category.startsWith('Al Quran')) {
+                        const variants = QURAN_VARIANTS[product.id];
+                        if (variants) {
+                            openQuranPickerModal(product.id, variants);
+                        } else {
+                            openCustomModal(product.id);
+                        }
+                    } else {
+                        openCustomModal(product.id);
+                    }
                 };
             }
         };
@@ -917,7 +947,7 @@ function updateCartBadge() {
     });
 }
 
-function addToCart(productId, customName, coverId, customNote = '', customFont = '') {
+function addToCart(productId, customName, coverId, customNote = '', customFont = '', quranType = '') {
     const product = GLOBAL_PRODUCTS.find(p => p.id === productId);
     if (!product) return;
 
@@ -927,7 +957,7 @@ function addToCart(productId, customName, coverId, customNote = '', customFont =
     cart.push({
         id: product.id,
         name: product.name,
-        category: product.category, // Added this line
+        category: product.category,
         priceCrt: product.priceCrt,
         priceWa: product.priceWa,
         img: product.img,
@@ -937,7 +967,8 @@ function addToCart(productId, customName, coverId, customNote = '', customFont =
         customFont: customFont || '',
         coverName: coverData ? coverData.name : '',
         coverCategory: coverData ? coverData.category : '',
-        coverImg: coverData ? coverData.img : ''
+        coverImg: coverData ? coverData.img : '',
+        quranType: quranType || ''
     });
     saveCart();
     showToast(`${product.name} berhasil ditambahkan ke keranjang!`);
@@ -982,8 +1013,10 @@ let modalProductId = null;
 let modalSelectedCoverId = null;
 let modalCoverFilter = 'Semua';
 
-function openCustomModal(productId) {
-    window.location.href = `personalize.html?id=${productId}`;
+function openCustomModal(productId, quranType) {
+    let url = `personalize.html?id=${productId}`;
+    if (quranType) url += `&quranType=${quranType}`;
+    window.location.href = url;
 }
 
 function initPersonalizationPage() {
@@ -992,6 +1025,7 @@ function initPersonalizationPage() {
 
     const urlParams = new URLSearchParams(window.location.search);
     const productId = parseInt(urlParams.get('id'));
+    const quranType = urlParams.get('quranType') || '';
     const product = GLOBAL_PRODUCTS.find(p => p.id === productId);
 
     if (product) {
@@ -1081,7 +1115,7 @@ function initPersonalizationPage() {
                     showToast('Item berhasil diperbarui!');
                     sessionStorage.removeItem('hq_edit_cart_idx');
                 } else {
-                    addToCart(product.id, customName, modalSelectedCoverId, customNote, customFont);
+                    addToCart(product.id, customName, modalSelectedCoverId, customNote, customFont, quranType);
                 }
                 window.location.href = 'cart.html';
             };
@@ -1236,7 +1270,10 @@ function confirmAddToCart() {
         return;
     }
 
-    addToCart(modalProductId, customName, modalSelectedCoverId);
+    const urlParams = new URLSearchParams(window.location.search);
+    const quranType = urlParams.get('quranType') || '';
+
+    addToCart(modalProductId, customName, modalSelectedCoverId, '', '', quranType);
     window.location.href = 'cart.html';
 }
 
@@ -1274,6 +1311,71 @@ function initCustomModal() {
     const confirmBtn = document.getElementById('confirm-add-to-cart');
     if (confirmBtn) confirmBtn.addEventListener('click', confirmAddToCart);
 }
+
+// === Quran Picker Modal ===
+let quranPickerProductId = null;
+let selectedQuranType = 'latin';
+
+function openQuranPickerModal(productId, variants) {
+    quranPickerProductId = productId;
+    const modal = document.getElementById('quran-picker-modal');
+    if (!modal) return;
+
+    const optLatin = document.getElementById('quran-opt-latin');
+    const optTanpa = document.getElementById('quran-opt-tanpa-latin');
+    const hasLatin = variants.includes('latin');
+    const hasTanpa = variants.includes('tanpa-latin');
+
+    // Show/hide options based on available variants
+    if (optLatin) optLatin.style.display = hasLatin ? '' : 'none';
+    if (optTanpa) optTanpa.style.display = hasTanpa ? '' : 'none';
+
+    // Auto-select first available variant
+    const defaultType = hasLatin ? 'latin' : 'tanpa-latin';
+    selectedQuranType = defaultType;
+    selectQuranType(defaultType);
+
+    modal.style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+}
+
+function closeQuranPickerModal() {
+    const modal = document.getElementById('quran-picker-modal');
+    if (modal) {
+        modal.style.display = 'none';
+        document.body.style.overflow = '';
+    }
+}
+
+function selectQuranType(type) {
+    selectedQuranType = type;
+    document.querySelectorAll('.quran-picker-card').forEach(el => {
+        el.classList.remove('selected');
+        el.classList.remove('border-brand-blue');
+        el.classList.add('border-transparent');
+    });
+    const target = type === 'latin'
+        ? document.getElementById('quran-opt-latin')
+        : document.getElementById('quran-opt-tanpa-latin');
+    if (target) {
+        target.classList.add('selected');
+        target.classList.remove('border-transparent');
+        target.classList.add('border-brand-blue');
+        const radio = target.querySelector('input[type="radio"]');
+        if (radio) radio.checked = true;
+    }
+}
+
+function confirmQuranPicker() {
+    closeQuranPickerModal();
+    if (quranPickerProductId) {
+        openCustomModal(quranPickerProductId, selectedQuranType);
+    }
+}
+
+document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') closeQuranPickerModal();
+});
 
 function updateCartQty(idx, newQty) {
     if (newQty < 1) {
@@ -1353,6 +1455,7 @@ function renderCart() {
                     <h3 class="font-bold text-lg text-slate-900 dark:text-white leading-tight">${item.name}</h3>
                     ${item.customName ? `<div class="flex items-center gap-1.5 mt-1"><span class="material-symbols-outlined text-[1rem] text-brand-blue dark:text-brand-gold">badge</span><span class="text-sm font-semibold text-slate-600 dark:text-slate-300">Nama: ${item.customName}</span></div>` : ''}
                     ${item.coverName ? `<div class="flex items-center gap-1.5 mt-0.5"><span class="material-symbols-outlined text-[1rem] text-brand-blue dark:text-brand-gold">palette</span><span class="text-sm font-semibold text-slate-600 dark:text-slate-300">Cover: ${item.coverName} (${item.coverCategory})</span></div>` : ''}
+                    ${item.quranType ? `<div class="flex items-center gap-1.5 mt-0.5"><span class="material-symbols-outlined text-[1rem] text-brand-blue dark:text-brand-gold">menu_book</span><span class="text-sm font-semibold text-slate-600 dark:text-slate-300">Varian: ${item.quranType === 'latin' ? 'Latin' : 'Tanpa Latin'}</span></div>` : ''}
                     ${item.customNote ? `<div class="flex items-center gap-1.5 mt-0.5"><span class="material-symbols-outlined text-[1rem] text-brand-blue dark:text-brand-gold">edit_note</span><span class="text-sm font-semibold text-slate-600 dark:text-slate-300">Ucapan: ${item.customNote}</span></div>` : ''}
                     ${item.customFont ? `<div class="flex items-center gap-1.5 mt-0.5"><span class="material-symbols-outlined text-[1rem] text-brand-blue dark:text-brand-gold">font_download</span><span class="text-sm font-semibold text-slate-600 dark:text-slate-300">Font: ${item.customFont}</span></div>` : ''}
                     <div class="text-brand-blue dark:text-brand-gold font-bold text-sm mt-1 mb-3">${formatPrice(priceNum)} <span class="text-xs text-slate-400 font-normal line-through ml-1">${item.priceCrt}</span></div>
@@ -1480,8 +1583,6 @@ function initCart() {
 
             const courierPrice = selectedCourierPrice || 0;
             const courierLabel = selectedCourierName ? `${selectedCourierName} ${selectedCourierService}` : '';
-            const subsidy = Math.min(getSubsidy(), courierPrice);
-            const ongkirAfterSubsidy = courierPrice - subsidy;
 
             if (!name) return showFieldError('cust-name');
             if (!phone) return showFieldError('cust-phone');
@@ -1519,6 +1620,7 @@ function initCart() {
                 message += `${i + 1}. ${c.name}\n`;
                 if (c.customName) message += `   - Nama: ${c.customName}\n`;
                 if (c.coverName) message += `   - Cover: ${c.coverName} (${c.coverCategory})\n`;
+                if (c.quranType) message += `   - Varian: ${c.quranType === 'latin' ? 'Latin' : 'Tanpa Latin'}\n`;
                 if (c.customNote) message += `   - Ucapan: ${c.customNote}\n`;
                 if (c.customFont) message += `   - Font: ${c.customFont}\n`;
                 message += `   ${c.qty} x ${formatPrice(priceNum)} = ${formatPrice(totalItem)}\n`;
@@ -1529,20 +1631,29 @@ function initCart() {
             const paymentLabels = { bca: 'BCA', bsi: 'BSI', qris: 'QRIS', cod: 'COD' };
             const paymentMethodText = paymentLabels[paymentMethodValue] || 'BCA';
 
-            const voucher = getVoucher(subtotal);
+            const shippingDiscount = getShippingDiscount(courierPrice, subtotal);
+            const ongkirAfterSubsidy = courierPrice - shippingDiscount;
+            const voucher = getVoucherDiscount(subtotal);
             const codFee = paymentMethodValue === 'cod' ? Math.round((subtotal + ongkirAfterSubsidy - voucher) * 0.04) : 0;
             const grandTotal = subtotal + ongkirAfterSubsidy + codFee - voucher;
 
+            const isGratisOngkir = getAutoGratisOngkir(subtotal) !== null;
+            const goLabel = getGratisOngkirLabel(subtotal);
+            const vchLabel = getAutoVoucherLabel(subtotal);
             const totalQty = cart.reduce((sum, item) => sum + item.qty, 0);
 
             message += `==============\n`;
             message += `*SUBTOTAL: ${formatPrice(subtotal)}*\n`;
             if (voucher > 0) {
-                message += `*Voucher Belanja:* -${formatPrice(voucher)}\n`;
+                message += `*${vchLabel || 'Voucher XTRA'}:* -${formatPrice(voucher)}\n`;
             }
             message += `*Ongkos Kirim:* ${courierLabel ? `${courierLabel} — ${formatPrice(courierPrice)}` : formatPrice(courierPrice)}\n`;
-            if (subsidy > 0) {
-                message += `*Subsidi Ongkir (${totalQty} pcs × Rp20.000):* -${formatPrice(subsidy)}\n`;
+            if (shippingDiscount > 0) {
+                if (isGratisOngkir) {
+                    message += `*${goLabel}:* -${formatPrice(shippingDiscount)}\n`;
+                } else {
+                    message += `*Subsidi Ongkir (${totalQty} pcs × Rp20.000):* -${formatPrice(shippingDiscount)}\n`;
+                }
             }
             message += `*Total Ongkir:* ${ongkirAfterSubsidy === 0 ? 'Gratis 🎉' : formatPrice(ongkirAfterSubsidy)}\n`;
             if (codFee > 0) {
@@ -1579,14 +1690,18 @@ function initCart() {
                 subtotal,
                 ongkir: ongkirAfterSubsidy,
                 courier: courierLabel,
-                subsidy,
-                subsidyQty: totalQty,
+                subsidy: shippingDiscount,
+                subsidyQty: isGratisOngkir ? 0 : totalQty,
+                voucher: voucher,
+                voucherLabel: vchLabel,
+                gratisOngkirLabel: goLabel,
                 codFee,
                 grandTotal,
                 cart: cart.map(item => ({
                     name: item.name,
                     qty: item.qty,
-                    price: parsePrice(item.priceWa || item.priceCrt)
+                    price: parsePrice(item.priceWa || item.priceCrt),
+                    quranType: item.quranType || ''
                 }))
             };
             // Tetap simpan ke sessionStorage untuk thank-you page
@@ -1737,18 +1852,45 @@ function getSubsidy() {
     return qty * 20000;
 }
 
+function getShippingDiscount(ongkirPrice, subtotal) {
+    const auto = getAutoGratisOngkir(subtotal);
+    if (auto) return Math.min(auto.amount, ongkirPrice);
+    return Math.min(getSubsidy(), ongkirPrice);
+}
+
+function getVoucherDiscount(subtotal) {
+    const auto = getAutoVoucher(subtotal);
+    return auto ? auto.amount : 0;
+}
+
+function getGratisOngkirLabel(subtotal) {
+    const auto = getAutoGratisOngkir(subtotal);
+    return auto ? auto.label : null;
+}
+
+function getAutoVoucherLabel(subtotal) {
+    const auto = getAutoVoucher(subtotal);
+    return auto ? auto.label : null;
+}
+
 function updateGrandTotal() {
     const parsePrice = (p) => parseFloat(String(p).replace(/[^0-9]/g, ''));
     const formatPrice = (n) => `Rp${n.toLocaleString('id-ID')}`;
 
     const subtotal = cart.reduce((sum, item) => sum + (parsePrice(item.priceWa || item.priceCrt) * item.qty), 0);
-    const voucher = getVoucher(subtotal);
 
+    // Calculate discounts
     const ongkirPrice = selectedCourierPrice || 0;
-    const subsidy = Math.min(getSubsidy(), ongkirPrice);
-    const ongkirAfterSubsidy = ongkirPrice - subsidy;
+    const shippingDiscount = getShippingDiscount(ongkirPrice, subtotal);
+    const ongkirAfterSubsidy = ongkirPrice - shippingDiscount;
+    const voucher = getVoucherDiscount(subtotal);
     const codFee = isCOD() ? Math.round((subtotal + ongkirAfterSubsidy - voucher) * 0.04) : 0;
     const grandTotal = subtotal + ongkirAfterSubsidy + codFee - voucher;
+
+    // Get labels for display
+    const isGratisOngkir = getAutoGratisOngkir(subtotal) !== null;
+    const goLabel = getGratisOngkirLabel(subtotal);
+    const vchLabel = getAutoVoucherLabel(subtotal);
 
     const rows = [
         { rowId: 'ongkir-summary-row', labelId: 'ongkir-summary-label', priceId: 'ongkir-summary-price', totalId: 'grand-total', codRowId: 'cod-fee-row', codPriceId: 'cod-fee-price', subRowId: 'subsidy-row', subPriceId: 'subsidy-price', vchRowId: 'voucher-row', vchPriceId: 'voucher-price' },
@@ -1772,9 +1914,18 @@ function updateGrandTotal() {
             if (label) label.textContent = 'Ongkos Kirim';
             if (priceEl) priceEl.textContent = ongkirPrice === 0 ? 'Gratis 🎉' : formatPrice(ongkirPrice);
 
-            if (subsidy > 0 && subRow && subPriceEl) {
+            if (shippingDiscount > 0 && subRow && subPriceEl) {
                 subRow.classList.remove('hidden');
-                subPriceEl.textContent = `-${formatPrice(subsidy)}`;
+                subPriceEl.textContent = `-${formatPrice(shippingDiscount)}`;
+                const subLabel = subRow.querySelector('span:first-child');
+                if (subLabel) {
+                    if (isGratisOngkir) {
+                        subLabel.textContent = goLabel;
+                    } else {
+                        const totalQty = cart.reduce((sum, item) => sum + item.qty, 0);
+                        subLabel.textContent = `Subsidi Ongkir (${totalQty} pcs × Rp20.000)`;
+                    }
+                }
             } else if (subRow) {
                 subRow.classList.add('hidden');
             }
@@ -1786,6 +1937,11 @@ function updateGrandTotal() {
         if (voucher > 0 && vchRow) {
             vchRow.classList.remove('hidden');
             if (vchPriceEl) vchPriceEl.textContent = `-${formatPrice(voucher)}`;
+            // Update XTRA label
+            const vchLabelEl = vchRow.querySelector('span:first-child');
+            if (vchLabelEl && vchLabel) {
+                vchLabelEl.textContent = vchLabel;
+            }
         } else if (vchRow) {
             vchRow.classList.add('hidden');
         }
@@ -1799,22 +1955,6 @@ function updateGrandTotal() {
 
         if (totalEl) totalEl.textContent = formatPrice(grandTotal);
     });
-
-    // Voucher banner (desktop & mobile)
-    const vchBannerDesktop = document.getElementById('voucher-banner-desktop');
-    const vchBannerMobile = document.getElementById('voucher-banner-mobile');
-    const vchAmtDesktop = document.getElementById('voucher-banner-amount-desktop');
-    const vchAmtMobile = document.getElementById('voucher-banner-amount-mobile');
-    const vchLabel = getVoucherLabel(voucher);
-    if (voucher > 0) {
-        if (vchBannerDesktop) { vchBannerDesktop.classList.remove('hidden'); }
-        if (vchBannerMobile) { vchBannerMobile.classList.remove('hidden'); }
-        if (vchAmtDesktop) { vchAmtDesktop.textContent = vchLabel; }
-        if (vchAmtMobile) { vchAmtMobile.textContent = vchLabel; }
-    } else {
-        if (vchBannerDesktop) { vchBannerDesktop.classList.add('hidden'); }
-        if (vchBannerMobile) { vchBannerMobile.classList.add('hidden'); }
-    }
 
     document.querySelectorAll('.cart-total:not([id])').forEach(el => el.textContent = formatPrice(grandTotal));
 }

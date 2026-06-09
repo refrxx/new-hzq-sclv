@@ -361,7 +361,8 @@
             actions.classList.remove('hidden');
             container.innerHTML = orders.map(order => {
                 const paymentMethodLabels = {
-                    'transfer': 'Transfer Bank',
+                    'bca': 'Transfer Bank BCA',
+                    'bsi': 'Transfer Bank BSI',
                     'qris': 'QRIS',
                     'cod': 'Bayar di Rumah'
                 };
@@ -433,6 +434,13 @@
                                         Lihat Info Pembayaran
                                     </span>
                                 </button>
+                                <button onclick="showPaymentModal('${orderId}', '${order.paymentMethod}')"
+                                    class="w-full sm:flex-1 px-4 py-2.5 border border-slate-300 dark:border-slate-600 text-slate-700 dark:text-slate-300 rounded-full font-bold text-sm hover:bg-slate-100 dark:hover:bg-slate-800 transition-all duration-300">
+                                    <span class="flex items-center justify-center gap-1.5">
+                                        <span class="material-symbols-outlined text-base">swap_horiz</span>
+                                        Ubah Pembayaran
+                                    </span>
+                                </button>
                                 <a href="https://wa.me/6285155060816?text=Halo%20Admin%2C%20saya%20ingin%20konfirmasi%20pesanan%20${encodeURIComponent(orderId)}%20atas%20nama%20${encodeURIComponent(order.name)}.%20Total%3A%20Rp${order.grandTotal || order.subtotal}."
                                     target="_blank"
                                     class="w-full sm:flex-1 px-4 py-2.5 bg-green-500 hover:bg-green-600 text-white rounded-full font-bold text-sm transition-all duration-300 text-center block">
@@ -453,7 +461,7 @@
         }
 
         function renderPaymentInfo(method) {
-            if (method === 'transfer') {
+            if (method === 'bca' || method === 'bsi') {
                 return `
                     <p class="text-xs font-semibold text-slate-600 dark:text-slate-300 mb-2 flex items-center gap-1.5">
                         <span class="material-symbols-outlined text-base">account_balance</span>
@@ -515,6 +523,133 @@
             }
             return '';
         }
+
+        const PAYMENT_OPTIONS = [
+            { value: 'bca', label: 'Transfer Bank BCA', icon: 'img/bank/bca.svg', imgClass: 'w-9 h-9 object-contain' },
+            { value: 'bsi', label: 'Transfer Bank BSI', icon: 'img/bank/bsi.svg', imgClass: 'w-9 h-9 object-contain' },
+            { value: 'qris', label: 'QRIS', icon: 'img/bank/qris.svg', imgClass: 'w-9 h-9 object-contain' },
+            { value: 'cod', label: 'COD (Bayar di Rumah)', icon: 'payments', imgClass: 'material-symbols-outlined text-brand-blue text-[28px]' },
+        ];
+
+        window.showPaymentModal = function (orderId, currentMethod) {
+            const existing = document.getElementById('payment-modal');
+            if (existing) existing.remove();
+
+            const overlay = document.createElement('div');
+            overlay.id = 'payment-modal';
+            overlay.className = 'fixed inset-0 z-[100] bg-black/80 flex items-center justify-center p-6 animate-fade-in-up';
+            overlay.onclick = function (e) { if (e.target === overlay) overlay.remove(); };
+
+            const formatPrice = (n) => `Rp${Number(n).toLocaleString('id-ID')}`;
+
+            const modal = document.createElement('div');
+            modal.className = 'bg-white dark:bg-slate-900 rounded-32 p-6 md:p-8 max-w-md w-full shadow-2xl max-h-[90vh] overflow-y-auto';
+
+            const orders = JSON.parse(localStorage.getItem('hq_orders') || '[]');
+            const order = orders.find(o => (o.orderId || '') === orderId);
+            if (!order) { alert('Pesanan tidak ditemukan.'); overlay.remove(); return; }
+
+            let selectedValue = currentMethod;
+
+            const renderModal = () => {
+                const codFee = selectedValue === 'cod' ? Math.round((order.subtotal + (order.ongkir || 0) - (order.voucher || 0)) * 0.04) : 0;
+                const grandTotal = (order.subtotal || 0) + (order.ongkir || 0) + codFee - (order.voucher || 0);
+
+                modal.innerHTML = `
+                    <div class="text-center mb-6">
+                        <span class="material-symbols-outlined text-4xl text-brand-blue dark:text-brand-gold mb-2 block">swap_horiz</span>
+                        <h3 class="text-xl font-bold text-slate-900 dark:text-white">Ubah Pembayaran</h3>
+                        <p class="text-sm text-slate-500 mt-1">Pilih metode pembayaran baru</p>
+                    </div>
+                    <div class="space-y-2 mb-6">
+                        ${PAYMENT_OPTIONS.map(opt => `
+                            <label class="flex items-center gap-3 bg-slate-50 dark:bg-slate-800 rounded-xl px-4 py-3 cursor-pointer has-[:checked]:ring-2 has-[:checked]:ring-brand-blue has-[:checked]:bg-brand-blue/5 transition-all ${opt.value === selectedValue ? 'ring-2 ring-brand-blue bg-brand-blue/5' : ''}">
+                                <input type="radio" name="ubah-payment" value="${opt.value}"
+                                    ${opt.value === selectedValue ? 'checked' : ''}
+                                    onchange="document.getElementById('payment-modal').dataset.selected='${opt.value}';"
+                                    class="accent-brand-blue w-4 h-4 flex-shrink-0">
+                                ${opt.value === 'cod'
+                                    ? `<span class="${opt.imgClass}">${opt.icon}</span>`
+                                    : `<img src="${opt.icon}" alt="${opt.label}" class="${opt.imgClass} flex-shrink-0">`
+                                }
+                                <span class="text-sm font-semibold text-slate-800 dark:text-slate-100">${opt.label}</span>
+                            </label>
+                        `).join('')}
+                    </div>
+                    <div class="bg-slate-50 dark:bg-slate-800/50 rounded-2xl p-4 mb-6 space-y-2 text-sm">
+                        <div class="flex justify-between text-slate-600 dark:text-slate-400">
+                            <span>Subtotal</span>
+                            <span>${formatPrice(order.subtotal || 0)}</span>
+                        </div>
+                        <div class="flex justify-between text-slate-600 dark:text-slate-400">
+                            <span>Ongkos Kirim</span>
+                            <span>${formatPrice(order.ongkir || 0)}</span>
+                        </div>
+                        ${order.voucher > 0 ? `<div class="flex justify-between text-emerald-600">
+                            <span>Voucher</span>
+                            <span>-${formatPrice(order.voucher)}</span>
+                        </div>` : ''}
+                        ${codFee > 0 ? `<div class="flex justify-between text-slate-600 dark:text-slate-400">
+                            <span>Biaya Admin COD (4%)</span>
+                            <span>${formatPrice(codFee)}</span>
+                        </div>` : ''}
+                        <div class="flex justify-between font-bold text-slate-900 dark:text-white pt-2 border-t border-slate-200 dark:border-slate-700">
+                            <span>Grand Total</span>
+                            <span class="text-brand-blue dark:text-brand-gold">${formatPrice(grandTotal)}</span>
+                        </div>
+                    </div>
+                    <div class="flex gap-3">
+                        <button onclick="document.getElementById('payment-modal').remove()"
+                            class="flex-1 px-4 py-3 border border-slate-300 dark:border-slate-600 text-slate-700 dark:text-slate-300 rounded-full font-bold text-sm hover:bg-slate-100 dark:hover:bg-slate-800 transition-all">
+                            Batal
+                        </button>
+                        <button onclick="confirmChangePayment('${orderId}')"
+                            class="flex-1 px-4 py-3 bg-brand-blue dark:bg-brand-gold text-white dark:text-black rounded-full font-bold text-sm hover:opacity-90 transition-all">
+                            Simpan
+                        </button>
+                    </div>
+                `;
+
+                // Listen for radio change
+                modal.querySelectorAll('input[name="ubah-payment"]').forEach(el => {
+                    el.addEventListener('change', () => {
+                        selectedValue = el.value;
+                        renderModal();
+                    });
+                });
+            };
+
+            renderModal();
+            overlay.appendChild(modal);
+            document.body.appendChild(overlay);
+        };
+
+        window.confirmChangePayment = function (orderId) {
+            const modalEl = document.getElementById('payment-modal');
+            if (!modalEl) return;
+            const selectedRadio = modalEl.querySelector('input[name="ubah-payment"]:checked');
+            if (!selectedRadio) return;
+            const newMethod = selectedRadio.value;
+
+            const orders = JSON.parse(localStorage.getItem('hq_orders') || '[]');
+            const idx = orders.findIndex(o => (o.orderId || '') === orderId);
+            if (idx === -1) { alert('Pesanan tidak ditemukan.'); return; }
+
+            const order = orders[idx];
+            const newCodFee = newMethod === 'cod' ? Math.round((order.subtotal + (order.ongkir || 0) - (order.voucher || 0)) * 0.04) : 0;
+            const newGrandTotal = (order.subtotal || 0) + (order.ongkir || 0) + newCodFee - (order.voucher || 0);
+
+            orders[idx] = {
+                ...order,
+                paymentMethod: newMethod,
+                codFee: newCodFee,
+                grandTotal: newGrandTotal
+            };
+
+            localStorage.setItem('hq_orders', JSON.stringify(orders));
+            modalEl.remove();
+            renderOrders();
+        };
 
         window.togglePaymentInfo = function (btn) {
             const card = btn.closest('.rounded-32');
