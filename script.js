@@ -1125,6 +1125,10 @@ function initPersonalizationPage() {
         if (removeBtn) {
             removeBtn.onclick = removeModalCoverSelection;
         }
+        const removeBtnMobile = document.getElementById('remove-cover-selection-mobile');
+        if (removeBtnMobile) {
+            removeBtnMobile.onclick = removeModalCoverSelection;
+        }
 
         renderModalCoverFilters();
         renderModalCoverGrid();
@@ -1232,13 +1236,22 @@ function selectModalCover(coverId) {
     modalSelectedCoverId = coverId;
     const cover = COVER_DESIGNS.find(c => c.id === coverId);
 
-    // Update preview
+    // Update desktop preview
     const preview = document.getElementById('selected-cover-preview');
     if (preview && cover) {
         preview.classList.remove('hidden');
         document.getElementById('selected-cover-img').src = cover.img;
         document.getElementById('selected-cover-name').textContent = cover.name;
         document.getElementById('selected-cover-category').textContent = cover.category;
+    }
+
+    // Update mobile preview
+    const mobilePreview = document.getElementById('selected-cover-preview-mobile');
+    if (mobilePreview && cover) {
+        mobilePreview.classList.remove('hidden');
+        document.getElementById('selected-cover-img-mobile').src = cover.img;
+        document.getElementById('selected-cover-name-mobile').textContent = cover.name;
+        document.getElementById('selected-cover-category-mobile').textContent = cover.category;
     }
 
     // Re-render grid to show selection
@@ -1248,7 +1261,10 @@ function selectModalCover(coverId) {
 
 function removeModalCoverSelection() {
     modalSelectedCoverId = null;
-    document.getElementById('selected-cover-preview').classList.add('hidden');
+    const desktop = document.getElementById('selected-cover-preview');
+    if (desktop) desktop.classList.add('hidden');
+    const mobile = document.getElementById('selected-cover-preview-mobile');
+    if (mobile) mobile.classList.add('hidden');
     renderModalCoverGrid();
     updateConfirmBtn();
 }
