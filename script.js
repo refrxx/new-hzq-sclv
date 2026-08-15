@@ -1782,20 +1782,20 @@ async function initRegionalAPI() {
 
     if (!provinceSelect) return;
 
-    const baseUrl = 'https://api-regional-indonesia.vercel.app/api';
+    const baseUrl = 'https://refrxx.github.io/api-wilayah-indonesia/api';
 
     async function fetchData(endpoint) {
         try {
             const res = await fetch(`${baseUrl}${endpoint}`);
             const json = await res.json();
-            return json.data || [];
+            return json || [];
         } catch (err) {
             console.error('API Regional Error:', err);
             return [];
         }
     }
 
-    const provinces = await fetchData('/provinces');
+    const provinces = await fetchData('/provinces.json');
     provinces.sort((a, b) => a.name.localeCompare(b.name, 'id')).forEach(p => {
         const opt = document.createElement('option');
         opt.value = p.id;
@@ -1806,7 +1806,7 @@ async function initRegionalAPI() {
     provinceSelect.addEventListener('change', async () => {
         citySelect.innerHTML = '<option value="" disabled selected>Memuat...</option>';
         citySelect.disabled = false;
-        const cities = await fetchData(`/cities/${provinceSelect.value}`);
+        const cities = await fetchData(`/regencies/${provinceSelect.value}.json`);
         citySelect.innerHTML = '<option value="" disabled selected>Pilih Kota/Kabupaten</option>';
         cities.forEach(c => {
             const opt = document.createElement('option');
@@ -1819,7 +1819,7 @@ async function initRegionalAPI() {
     citySelect.addEventListener('change', async () => {
         districtSelect.innerHTML = '<option value="" disabled selected>Memuat...</option>';
         districtSelect.disabled = false;
-        const districts = await fetchData(`/districts/${citySelect.value}`);
+        const districts = await fetchData(`/districts/${citySelect.value}.json`);
         districtSelect.innerHTML = '<option value="" disabled selected>Pilih Kecamatan</option>';
         districts.forEach(d => {
             const opt = document.createElement('option');
@@ -1832,7 +1832,7 @@ async function initRegionalAPI() {
     districtSelect.addEventListener('change', async () => {
         villageSelect.innerHTML = '<option value="" disabled selected>Memuat...</option>';
         villageSelect.disabled = false;
-        const villages = await fetchData(`/villages/${districtSelect.value}`);
+        const villages = await fetchData(`/villages/${districtSelect.value}.json`);
         villageSelect.innerHTML = '<option value="" disabled selected>Pilih Kelurahan/Desa</option>';
         villages.forEach(v => {
             const opt = document.createElement('option');
