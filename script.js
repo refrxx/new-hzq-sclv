@@ -26,7 +26,7 @@ const GLOBAL_PRODUCTS = [
         images: ["img/8matte-a5/8matte-a5.jpg", "img/8matte-a5/8matte-a5-1.jpg", "img/8matte-a5/8matte-a5-2.jpg", "img/8matte-a5/8matte-a5-3.jpg", "img/usp.jpg", "img/usp-1.jpg", "img/usp-2.jpg"],
         wa: "Halo Admin, saya ingin pesan Al Quran Custom Nama Hafalan 8 Blok Matte A5",
         shopee: "https://shopee.co.id/hamzahquran/17095398884",
-        specs: ["8 blok warna hafalan", "Ukuran A5 (Sedang) 14,8 x 21 cm", "Kertas Matte Premium (lebih tebal dan glossy)", "Hardcover bukan sticker", "Hanya tersedia versi tanpa latin", "Terjemah perayat", "Tajwid Warna", "Desain elegan", "QR Code Murottal"]
+        specs: ["8 blok warna hafalan", "Ukuran A5 (Sedang) 14,8 x 21 cm", "Kertas Matte Premium (lebih tebal dan glossy)", "Hardcover bukan sticker", "Tersedia versi dengan latin maupun tanpa latin", "Terjemah perayat", "Tajwid Warna", "Desain elegan", "QR Code Murottal"]
     },
     {
 id: 3,
@@ -183,7 +183,7 @@ const VOUCHER_TIERS = [
 
 const QURAN_VARIANTS = {
   1: ['latin', 'tanpa-latin'],
-  2: ['tanpa-latin'],
+  2: ['latin', 'tanpa-latin'],
   6: ['latin', 'tanpa-latin'],
   7: ['latin'],
 };
@@ -1870,6 +1870,21 @@ function initCart() {
     initRegionalAPI();
 }
 
+// Nama wilayah dari carikodepos.id campur kapital: "DKI JAKARTA", "BALI",
+// "Kabupaten Pidie", "KOTA ADM. JAKARTA PUSAT". Rapikan jadi title case,
+// acronym resmi (DKI, DIY) tetap kapital, singkatan lain dibiarkan.
+const WILAYAH_ACRONYM = new Set(['DKI', 'DIY']);
+
+function formatWilayahName(name) {
+    return String(name || '')
+        .toLowerCase()
+        .replace(/(^|[\s./-])([a-z]+)/g, (m, sep, word) => (
+            WILAYAH_ACRONYM.has(word.toUpperCase())
+                ? sep + word.toUpperCase()
+                : sep + word[0].toUpperCase() + word.slice(1)
+        ));
+}
+
 async function initRegionalAPI() {
     const provinceSelect = document.getElementById('cust-province');
     const citySelect = document.getElementById('cust-city');
@@ -1930,11 +1945,11 @@ async function initRegionalAPI() {
         select.appendChild(blank);
 
         [...items]
-            .sort((a, b) => String(a.name || '').localeCompare(String(b.name || ''), 'id'))
+            .sort((a, b) => formatWilayahName(a.name).localeCompare(formatWilayahName(b.name), 'id'))
             .forEach(item => {
                 const opt = document.createElement('option');
                 opt.value = item.id;
-                opt.textContent = item.name;
+                opt.textContent = formatWilayahName(item.name);
                 select.appendChild(opt);
             });
 
