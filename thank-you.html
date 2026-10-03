@@ -192,6 +192,8 @@
     </script>
     <script>
     (function() {
+        // Kembali dari Xenith (?order=HQ-...) ditangani blok script di bawah.
+        if (new URLSearchParams(location.search).get('order')) return;
         const orderJson = sessionStorage.getItem('hq_order');
         if (!orderJson) {
             window.location.replace('cart.html');
@@ -377,6 +379,74 @@
             document.body.removeChild(ta);
         });
     }
+    </script>
+    <script>
+    // Halaman setelah bayar online (Xenith): polling status order.
+    (function () {
+        const orderId = new URLSearchParams(location.search).get('order');
+        if (!orderId) return;
+        const container = document.getElementById('thankyou-content');
+        const esc = s => String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+        const fmt = n => `Rp${Number(n).toLocaleString('id-ID')}`;
+        const waLink = `https://wa.me/6285155060816?text=${encodeURIComponent('Halo Admin, saya ingin konfirmasi pesanan ' + orderId + '.')}`;
+
+        const VIEW = {
+            PENDING: { icon: 'hourglass_top', bg: 'bg-amber-100 dark:bg-amber-900/30', fg: 'text-amber-600 dark:text-amber-400', title: 'Menunggu Konfirmasi Pembayaran', text: 'Kami sedang mengecek pembayaranmu. Halaman ini akan update otomatis, jangan ditutup dulu.' },
+            PAID: { icon: 'check_circle', bg: 'bg-green-100 dark:bg-green-900/30', fg: 'text-green-600 dark:text-green-400', title: 'Pembayaran Berhasil! ✅', text: 'Terima kasih! Pesananmu segera kami proses dan kirim.' },
+            Abandoned: { icon: 'schedule', bg: 'bg-slate-100 dark:bg-slate-800', fg: 'text-slate-500', title: 'Pembayaran Melewati Batas Waktu (24 Jam)', text: 'Waktu pembayaran sudah habis (lebih dari 24 jam). Silakan buat pesanan baru.' },
+            EXPIRED: { icon: 'schedule', bg: 'bg-slate-100 dark:bg-slate-800', fg: 'text-slate-500', title: 'Link Pembayaran Kedaluwarsa', text: 'Waktu pembayaran sudah habis. Silakan buat pesanan baru.' },
+            AMOUNT_MISMATCH: { icon: 'info', bg: 'bg-amber-100 dark:bg-amber-900/30', fg: 'text-amber-600 dark:text-amber-400', title: 'Pembayaran Perlu Dicek', text: 'Nominal pembayaran belum sesuai dengan total pesanan. Admin kami akan menghubungimu.' },
+            CREATE_FAILED: { icon: 'error', bg: 'bg-red-100 dark:bg-red-900/30', fg: 'text-red-600 dark:text-red-400', title: 'Pesanan Belum Terbuat', text: 'Pembayaran tidak berhasil dibuat. Silakan coba checkout lagi.' }
+        };
+
+        function render(status, total, paymentUrl) {
+            const v = VIEW[status] || VIEW.PENDING;
+            container.innerHTML = `
+                <div class="bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-32 p-8 shadow-sm text-center animate-fade-in-up">
+                    <div class="w-20 h-20 ${v.bg} rounded-full flex items-center justify-center mx-auto mb-4">
+                        <span class="material-symbols-outlined ${v.fg} text-4xl">${v.icon}</span>
+                    </div>
+                    <h1 class="text-2xl md:text-3xl font-display font-black text-slate-900 dark:text-white">${v.title}</h1>
+                    <p class="text-slate-500 dark:text-slate-400 mt-2 font-medium">${v.text}</p>
+                    <p class="text-sm text-slate-400 mt-4">No. Pesanan: <span class="font-bold text-slate-700 dark:text-slate-200">${esc(orderId)}</span></p>
+                    ${total ? `<p class="text-2xl font-black text-brand-blue dark:text-brand-gold mt-2">${fmt(total)}</p>` : ''}
+                    <div class="mt-6 flex flex-col sm:flex-row gap-3 justify-center">
+                        ${status === 'PENDING' && /^https:\/\//.test(paymentUrl || '') ? `<a href="${esc(paymentUrl)}" class="px-6 py-3 bg-brand-blue text-white rounded-full font-bold">Lanjut Bayar</a>` : ''}
+                        ${(status === 'Abandoned' || status === 'EXPIRED') ? `<a href="cart.html" class="px-6 py-3 bg-brand-blue text-white rounded-full font-bold">Beli Lagi</a>` : ''}
+                        <a href="${waLink}" target="_blank" class="px-6 py-3 bg-green-500 hover:bg-green-600 text-white rounded-full font-bold">Hubungi Admin WA</a>
+                        <a href="shop.html" class="px-6 py-3 border border-slate-300 dark:border-slate-600 text-slate-700 dark:text-slate-200 rounded-full font-bold">Kembali Belanja</a>
+                    </div>
+                </div>`;
+        }
+
+        function markLocalPaid() {
+            try {
+                const list = JSON.parse(localStorage.getItem('hq_orders') || '[]');
+                const o = list.find(x => x.orderId === orderId);
+                if (o) { o.status = 'Dibayar'; localStorage.setItem('hq_orders', JSON.stringify(list)); }
+            } catch (e) { /* abaikan */ }
+        }
+
+        let tries = 0;
+        async function poll() {
+            tries++;
+            try {
+                const r = await fetch('/api/xenith-status?orderId=' + encodeURIComponent(orderId), { cache: 'no-store' });
+                if (r.ok) {
+                    const d = await r.json();
+                    render(d.status, d.total, d.paymentUrl);
+                    if (d.status === 'PAID') markLocalPaid();
+                    if (d.status !== 'PENDING') return; // status final, berhenti polling
+                } else if (r.status === 404 || r.status === 400) {
+                    render('CREATE_FAILED', 0, '');
+                    return;
+                }
+            } catch (e) { /* jaringan putus, coba lagi */ }
+            if (tries < 120) setTimeout(poll, 5000); // maks ~10 menit
+        }
+        render('PENDING', 0, '');
+        poll();
+    })();
     </script>
 </body>
 

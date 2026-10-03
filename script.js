@@ -1723,9 +1723,9 @@ function initCart() {
             });
 
             const paymentRadio = document.querySelector('input[name="payment-method"]:checked');
-            const paymentMethodValue = paymentRadio?.value || 'bca';
-            const paymentLabels = { bca: 'BCA', bsi: 'BSI', qris: 'QRIS', cod: 'COD' };
-            const paymentMethodText = paymentLabels[paymentMethodValue] || 'BCA';
+            const paymentMethodValue = paymentRadio?.value || 'xenith';
+            const paymentLabels = { xenith: 'Bayar Online (Xenith)', cod: 'COD' };
+            const paymentMethodText = paymentLabels[paymentMethodValue] || 'Bayar Online (Xenith)';
 
             const shippingDiscount = getShippingDiscount(courierPrice, subtotal);
             const ongkirAfterSubsidy = courierPrice - shippingDiscount;
