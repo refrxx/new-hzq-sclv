@@ -2,7 +2,7 @@
 const GLOBAL_PRODUCTS = [
     {
         id: 1,
-        name: "Hafazan 8 Blok QPP A5",
+        name: "Al Quran Custom Hafalan 8 Blok QPP A5",
         category: "Al Quran Sedang",
         weight: 850,
         priceCrt: "Rp159.000",
@@ -10,13 +10,13 @@ const GLOBAL_PRODUCTS = [
         priceWa: "Rp139.000",
         img: "img/katalog/8qpp-a5.jpg",
         images: ["img/8qpp-a5/8qpp-a5.jpg", "img/8qpp-a5/8qpp-a5-1.jpg", "img/8qpp-a5/8qpp-a5-2.jpg", "img/8qpp-a5/8qpp-a5-3.jpg", "img/8qpp-a5/8qpp-a5-4.jpg", "img/usp.jpg", "img/usp-1.jpg", "img/usp-2.jpg"],
-        wa: "Halo Admin, saya ingin pesan Al Quran Custom Nama Hafazan 8 Blok QPP A5",
+        wa: "Halo Admin, saya ingin pesan Al Quran Custom Nama Hafalan 8 Blok QPP A5",
         shopee: "https://shopee.co.id/hamzahquran/23569937190",
         specs: ["8 blok warna hafalan", "Ukuran A5 (Sedang) 14,8 x 21 cm", "Kertas Quran Premium (awet dan tahan lama)", "Hardcover bukan sticker", "Tersedia versi dengan latin maupun tanpa latin", "Terjemah perkata", "Terjemah perayat", "Tajwid Warna", "QR Code Murottal"]
     },
     {
         id: 2,
-        name: "Hafazan 8 Blok Matte A5",
+        name: "Al Quran Custom Hafalan 8 Blok Matte A5",
         category: "Al Quran Sedang",
         weight: 850,
         priceCrt: "Rp169.000",
@@ -24,27 +24,28 @@ const GLOBAL_PRODUCTS = [
         priceWa: "Rp142.000",
         img: "img/katalog/8matte-a5.jpg",
         images: ["img/8matte-a5/8matte-a5.jpg", "img/8matte-a5/8matte-a5-1.jpg", "img/8matte-a5/8matte-a5-2.jpg", "img/8matte-a5/8matte-a5-3.jpg", "img/usp.jpg", "img/usp-1.jpg", "img/usp-2.jpg"],
-        wa: "Halo Admin, saya ingin pesan Al Quran Custom Nama Hafazan 8 Blok Matte A5",
+        wa: "Halo Admin, saya ingin pesan Al Quran Custom Nama Hafalan 8 Blok Matte A5",
         shopee: "https://shopee.co.id/hamzahquran/17095398884",
         specs: ["8 blok warna hafalan", "Ukuran A5 (Sedang) 14,8 x 21 cm", "Kertas Matte Premium (lebih tebal dan glossy)", "Hardcover bukan sticker", "Hanya tersedia versi tanpa latin", "Terjemah perayat", "Tajwid Warna", "Desain elegan", "QR Code Murottal"]
     },
     {
-        id: 3,
-        name: "Hafazan 8 TAHFIZ A5",
+id: 3,
+        name: "Al Quran Custom Hafalan 8 TAHFIZ A5",
         category: "Al Quran Sedang",
+        soldOut: true,
         weight: 850,
         priceCrt: "Rp169.000",
         priceStr: "Rp149.000",
         priceWa: "Rp142.000",
         img: "img/katalog/8tahfiz-a5.jpg",
         images: ["img/8tahfiz/8tahfiz-3.jpg", "img/8tahfiz/8tahfiz.jpg", "img/8tahfiz/8tahfiz-1.jpg", "img/8tahfiz/8tahfiz-2.jpg", "img/usp.jpg", "img/usp-1.jpg", "img/usp-2.jpg"],
-        wa: "Halo Admin, saya ingin pesan Al Quran Custom Nama Hafazan 8 TAHFIZ A5",
+        wa: "Halo Admin, saya ingin pesan Al Quran Custom Nama Hafalan 8 TAHFIZ A5",
         shopee: "https://shopee.co.id/hamzahquran/26385974446",
         specs: ["8 blok warna hafalan", "Ukuran A5 (Sedang) 14,8 x 21 cm", "Kertas Matte Premium (lebih tebal dan glossy)", "Hardcover bukan sticker", "Hanya tersedia versi tanpa latin", "Terjemah perkata", "Terjemah perayat", "Fokus hafalan intensif", "QR Code Murottal"]
     },
     {
         id: 4,
-        name: "Tilawah A5",
+        name: "Al Quran Custom Tilawah A5",
         category: "Al Quran Sedang",
         weight: 850,
         priceCrt: "Rp129.000",
@@ -58,7 +59,7 @@ const GLOBAL_PRODUCTS = [
     },
     {
         id: 5,
-        name: "Non Terjemah 6 Blok A5",
+        name: "Al Quran Custom Non Terjemah 6 Blok A5",
         category: "Al Quran Sedang",
         weight: 850,
         priceCrt: "Rp149.000",
@@ -72,7 +73,7 @@ const GLOBAL_PRODUCTS = [
     },
     {
         id: 6,
-        name: "Hafazan 8 Blok QPP A4",
+        name: "Al Quran Custom Hafalan 8 Blok QPP A4",
         category: "Al Quran Besar",
         weight: 1600,
         priceCrt: "Rp229.000",
@@ -80,13 +81,13 @@ const GLOBAL_PRODUCTS = [
         priceWa: "Rp189.000",
         img: "img/katalog/8qpp-a4.jpg",
         images: ["img/8qpp-a4/8qpp-a4.jpg", "img/8qpp-a4/8qpp-a4-1.jpg", "img/8qpp-a4/8qpp-a4-2.jpg", "img/8qpp-a4/8qpp-a4-3.jpg", "img/8qpp-a4/8qpp-a4-4.jpg", "img/8qpp-a4/8qpp-a4-5.jpg", "img/usp.jpg", "img/usp-1.jpg", "img/usp-2.jpg"],
-        wa: "Halo Admin, saya ingin pesan Al Quran Custom Nama Hafazan 8 Blok QPP A4",
+        wa: "Halo Admin, saya ingin pesan Al Quran Custom Nama Hafalan 8 Blok QPP A4",
         shopee: "https://shopee.co.id/hamzahquran/20691896045",
         specs: ["8 blok warna hafalan", "Ukuran A4 (Besar) 21 x 29,7 cm", "Kertas Quran Premium (awet dan tahan lama)", "Hardcover bukan sticker", "Tersedia versi dengan latin maupun tanpa latin", "Terjemah perkata", "Terjemah perayat", "Tajwid Warna", "QR Code Murottal"]
     },
     {
         id: 7,
-        name: "Hafazan 8 Blok Matte A4",
+        name: "Al Quran Custom Hafalan 8 Blok Matte A4",
         category: "Al Quran Besar",
         weight: 1600,
         priceCrt: "Rp239.000",
@@ -94,13 +95,13 @@ const GLOBAL_PRODUCTS = [
         priceWa: "Rp195.000",
         img: "img/katalog/8matte-a4.jpg",
         images: ["img/8matte-a4/8matte-a4.jpg", "img/8matte-a4/8matte-a4-1.jpg", "img/8matte-a4/8matte-a4-2.jpg", "img/8matte-a4/8matte-a4-3.jpg", "img/8matte-a4/8matte-a4-4.jpg", "img/usp.jpg", "img/usp-1.jpg", "img/usp-2.jpg"],
-        wa: "Halo Admin, saya ingin pesan Al Quran Custom Nama Hafazan 8 Blok Matte A4",
+        wa: "Halo Admin, saya ingin pesan Al Quran Custom Nama Hafalan 8 Blok Matte A4",
         shopee: "https://shopee.co.id/hamzahquran/23954192019",
         specs: ["8 blok warna hafalan", "Ukuran A4 (Besar) 21 x 29,7 cm", "Kertas Matte Premium (lebih tebal dan glossy)", "Hardcover bukan sticker", "Hanya tersedia versi tanpa latin", "Terjemah perkata", "Terjemah perayat", "Tajwid Warna"]
     },
     {
         id: 8,
-        name: "IQRO Hitam Putih HVS A5",
+        name: "IQRO Custom Hitam Putih HVS A5",
         category: "IQRO",
         weight: 350,
         priceCrt: "Rp79.000",
@@ -114,7 +115,7 @@ const GLOBAL_PRODUCTS = [
     },
     {
         id: 9,
-        name: "IQRO Full Color HVS A5",
+        name: "IQRO Custom Full Color HVS A5",
         category: "IQRO",
         weight: 350,
         priceCrt: "Rp99.000",
@@ -141,6 +142,29 @@ const GLOBAL_PRODUCTS = [
         specs: ["Kertas HVS Premium 70gr", "Full Color", "Tajwid Warna", "Dilengkapi Asmaul Husna", "Ukuran A5 (Sedang) 14,8 x 21 cm", "Mudah dibawa", "Kertas berkualitas", "Tampilan cerah", "Bantu hafalan surat pendek"]
     },
 ];
+
+// --- Social Proof (manual) ---
+// TODO: ganti angka di bawah dengan data penjualan asli dari Shopee sebelum publish.
+// Nilai di bawah ini placeholder. Kosongkan / hapus entry bila produk tidak punya data.
+const PRODUCT_SOCIAL_PROOF = {
+    1: { rating: '4.9', sold: 5450},
+    2: { rating: '4.8', sold: 1421 },
+    3: { rating: '4.9', sold: 18 },
+    4: { rating: '4.7', sold: 22 },
+    5: { rating: '4.8', sold: 43 },
+    6: { rating: '5.0', sold: 257 },
+    7: { rating: '4.9', sold: 153 },
+    8: { rating: '4.8', sold: 567 },
+    9: { rating: '4.9', sold: 4405 },
+    10: { rating: '4.8', sold: 314 },
+};
+
+// --- Label singkat untuk pill kategori di card (data p.category tetap penuh) ---
+const CATEGORY_SHORT = {
+    'Al Quran Sedang': 'Sedang',
+    'Al Quran Besar': 'Besar',
+};
+const shortCategory = c => CATEGORY_SHORT[c] || c;
 
 // --- Voucher Config ---
 const GRATIS_ONGKIR_TIERS = [
@@ -398,84 +422,168 @@ function initLenis() {
     return null;
 }
 
+// Product Card Template (katalog, related, trending)
+function productCardTemplate(p, opts = {}) {
+    const toNum = s => parseInt(String(s).replace(/[^\d]/g, ''), 10) || 0;
+    const crt = toNum(p.priceCrt);
+    const wa = toNum(p.priceWa);
+    const discount = crt > 0 ? Math.round((crt - wa) / crt * 100) : 0;
+
+    const social = PRODUCT_SOCIAL_PROOF[p.id] || {};
+    const metaParts = [];
+    if (social.rating) {
+        metaParts.push(`<span class="inline-flex items-center gap-0.5"><span class="material-symbols-outlined text-[0.9rem] text-amber-400 leading-none" style="font-variation-settings: 'FILL' 1">star</span>${social.rating}</span>`);
+    }
+    if (social.sold) {
+        metaParts.push(`<span>Terjual ${social.sold}</span>`);
+    }
+    const metaRow = metaParts.length
+        ? `<div class="mt-1.5 flex items-center gap-1.5 text-[10px] sm:text-[11px] font-medium text-slate-500 dark:text-slate-400">${metaParts.join('<span class="text-slate-300 dark:text-slate-600">|</span>')}</div>`
+        : '';
+
+    const discountRow = discount > 0
+        ? `<div class="mt-1 flex items-center gap-2">
+                    <span class="text-[11px] sm:text-xs text-slate-400 line-through">${p.priceCrt}</span>
+                    <span class="bg-red-500 text-white text-[10px] sm:text-[11px] font-bold rounded-full px-2 py-0.5">-${discount}%</span>
+                </div>`
+        : '';
+
+    // Sold out: gambar jadi abu-abu + label overlay
+    const soldOutOverlay = p.soldOut
+        ? `<div class="absolute inset-0 flex items-center justify-center bg-slate-900/40">
+                    <span class="rounded-full bg-white/95 px-3 py-1.5 text-[11px] font-black uppercase tracking-widest text-slate-700 shadow-lg">Sold Out</span>
+                </div>`
+        : '';
+
+    return `<a href="product-detail.html?id=${p.id}"
+        class="group flex flex-col h-full rounded-2xl overflow-hidden bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 transition-shadow hover:shadow-xl ${opts.className || ''}"
+        style="${opts.style || ''}" aria-label="Lihat detail ${p.name}">
+        <div class="relative aspect-square overflow-hidden bg-slate-100 dark:bg-slate-800">
+            <img src="${p.img}" alt="${p.name}" loading="lazy"
+                class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105 ${p.soldOut ? 'grayscale opacity-60' : ''}">
+            ${soldOutOverlay}
+        </div>
+        <div class="p-4 flex flex-col flex-1">
+            <div class="flex flex-wrap items-center gap-1 mb-1.5 sm:gap-1.5 sm:mb-2">
+                <span class="rounded-full px-1.5 sm:px-2 py-0.5 text-[10px] sm:text-[11px] font-bold uppercase text-white bg-gradient-to-r from-brand-blue to-blue-800">COD</span>
+                <span class="rounded-full px-1.5 sm:px-2 py-0.5 text-[10px] sm:text-[11px] font-bold uppercase bg-brand-gold/20 text-amber-700 dark:text-brand-gold">${shortCategory(p.category)}</span>
+            </div>
+            <h3 class="font-display font-bold text-[13px] sm:text-sm text-slate-900 dark:text-white line-clamp-2 min-h-[2.5rem]">${p.name}</h3>
+            ${metaRow}
+            <div class="mt-auto pt-3 border-t border-slate-100 dark:border-slate-800">
+                <p class="text-[10px] sm:text-xs text-slate-500 dark:text-slate-400">Harga Spesial</p>
+                <p class="price-val text-base sm:text-lg md:text-xl font-black leading-tight text-brand-blue dark:text-brand-gold">${p.priceWa}</p>
+                ${discountRow}
+            </div>
+        </div>
+    </a>`;
+}
+
 // 4. Katalog Page Logic
 function initKatalog() {
     const productGrid = document.getElementById('product-list');
     if (!productGrid) return;
 
-    let currentFilter = 'Semua Produk';
+    let currentFilter = 'ALL';
     let currentSort = 'default';
 
-    const filterButtons = document.querySelectorAll('.filter-btn');
-    const sortTrigger = document.getElementById('sort-trigger');
-    const sortDropdown = document.getElementById('sort-dropdown');
-    const sortOptions = document.querySelectorAll('.sort-option');
-    const sortLabel = document.getElementById('current-sort-label');
+    const filterButtons = document.querySelectorAll('.category-card');
+    const sortButtons = document.querySelectorAll('.sort-btn');
+    const sortSelect = document.getElementById('sort-select');
+
+    const catScroll = document.getElementById('category-scroll');
+    const catPrev = document.getElementById('cat-prev');
+    const catNext = document.getElementById('cat-next');
+
+    const toNum = v => parseFloat(String(v).replace(/[^\d]/g, '')) || 0;
+    const soldOf = p => (PRODUCT_SOCIAL_PROOF[p.id] && PRODUCT_SOCIAL_PROOF[p.id].sold) || 0;
 
     function renderProducts() {
         let filtered = [...GLOBAL_PRODUCTS];
 
-        if (currentFilter !== 'Semua Produk') {
+        if (currentFilter !== 'ALL') {
             filtered = GLOBAL_PRODUCTS.filter(p => p.category === currentFilter);
         }
 
-        if (currentSort === 'name-asc') filtered.sort((a, b) => a.name.localeCompare(b.name));
-        else if (currentSort === 'name-desc') filtered.sort((a, b) => b.name.localeCompare(a.name));
-        else if (currentSort === 'price-low') filtered.sort((a, b) => parseFloat(a.priceStr.replace(/[^\d]/g, '')) - parseFloat(b.priceStr.replace(/[^\d]/g, '')));
-        else if (currentSort === 'price-high') filtered.sort((a, b) => parseFloat(b.priceStr.replace(/[^\d]/g, '')) - parseFloat(a.priceStr.replace(/[^\d]/g, '')));
+        if (currentSort === 'price-low') filtered.sort((a, b) => toNum(a.priceWa) - toNum(b.priceWa));
+        else if (currentSort === 'price-high') filtered.sort((a, b) => toNum(b.priceWa) - toNum(a.priceWa));
+        else if (currentSort === 'sold-desc') filtered.sort((a, b) => soldOf(b) - soldOf(a));
 
-        productGrid.innerHTML = filtered.map((p, idx) => `
-            <div class="group bg-white dark:bg-slate-900 rounded-2xl p-4 border border-slate-100 dark:border-slate-800 shadow-sm hover:shadow-xl transition-all">
-                <a href="product-detail.html?id=${p.id}" class="block">
-                    <div class="bg-[#f2f2f2] dark:bg-slate-800 aspect-square rounded-xl overflow-hidden mb-6 relative">
-                        <img src="${p.img}" alt="${p.name}" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
-                    </div>
-                    <h3 class="text-md font-display font-bold text-slate-900 dark:text-white mb-4 px-2 leading-tight">${p.name}</h3>
-                </a>
-                <div class="flex flex-col px-2 pb-2">
-                    <div class="flex items-center justify-between mb-1">
-                        <span class="text-[0.85rem] sm:text-[0.8rem] font-bold text-slate-400 tracking-tight line-through opacity-70">${p.priceCrt}</span>
-                        <div class="text-[1.2rem] sm:text-[1rem] text-brand-blue dark:text-brand-gold font-bold flex items-center gap-1">
-                            <span class="material-symbols-outlined">confirmation_number</span>
-                            <span class="price-val">${p.priceWa}</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="flex items-center justify-between mb-1">
-                    <a href="product-detail.html?id=${p.id}" class="bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-200 hover:bg-brand-blue hover:text-white dark:hover:bg-brand-gold dark:hover:text-black transition-all text-sm md:text-xs font-bold px-4 py-3 rounded-xl text-center w-full">Lihat Detail</a>
-                </div>
-            </div>
-        `).join('');
+        productGrid.innerHTML = filtered.map(p => productCardTemplate(p)).join('');
     }
 
     // Filter events
+    function selectCategory(btn) {
+        filterButtons.forEach(b => {
+            const isActive = (b === btn);
+            b.classList.toggle('selected', isActive);
+            b.setAttribute('aria-pressed', isActive ? 'true' : 'false');
+        });
+        currentFilter = btn.dataset.category || 'ALL';
+        renderProducts();
+    }
+
     filterButtons.forEach(btn => {
-        btn.addEventListener('click', () => {
-            filterButtons.forEach(b => {
-                b.classList.remove('bg-brand-blue', 'text-white', 'dark:bg-white', 'dark:text-black', 'shadow-lg');
-                b.classList.add('bg-slate-50', 'dark:bg-slate-900', 'text-slate-400', 'dark:text-slate-500');
+        btn.addEventListener('click', () => selectCategory(btn));
+    });
+
+    // Horizontal category carousel nav (mobile only)
+    function updateCatNav() {
+        if (!catScroll || !catPrev || !catNext) return;
+        const overflow = catScroll.scrollWidth > catScroll.clientWidth + 4;
+        catPrev.classList.toggle('hidden', !overflow);
+        catNext.classList.toggle('hidden', !overflow);
+        if (!overflow) return;
+        const maxScroll = catScroll.scrollWidth - catScroll.clientWidth;
+        catPrev.disabled = catScroll.scrollLeft <= 4;
+        catNext.disabled = catScroll.scrollLeft >= maxScroll - 4;
+    }
+
+    if (catScroll && catPrev && catNext) {
+        catPrev.addEventListener('click', () => {
+            catScroll.scrollBy({ left: -catScroll.clientWidth * 0.8, behavior: 'smooth' });
+        });
+        catNext.addEventListener('click', () => {
+            catScroll.scrollBy({ left: catScroll.clientWidth * 0.8, behavior: 'smooth' });
+        });
+
+        let navRaf = null;
+        catScroll.addEventListener('scroll', () => {
+            if (navRaf) return;
+            navRaf = requestAnimationFrame(() => {
+                navRaf = null;
+                updateCatNav();
             });
-            btn.classList.add('bg-brand-blue', 'text-white', 'dark:bg-white', 'dark:text-black', 'shadow-lg');
-            btn.classList.remove('bg-slate-50', 'dark:bg-slate-900', 'text-slate-400', 'dark:text-slate-500');
-            currentFilter = btn.textContent.trim().replace(/\s+/g, ' ');
-            renderProducts();
+        });
+        window.addEventListener('resize', updateCatNav);
+        updateCatNav();
+        // Re-check once fonts/images settle so clientWidth is final
+        window.addEventListener('load', updateCatNav);
+    }
+
+    // Sort events: tombol (desktop) & dropdown (mobile) berbagi satu state
+    function applySort(key) {
+        currentSort = key;
+        sortButtons.forEach(b => {
+            const isActive = b.getAttribute('data-sort') === key;
+            b.classList.toggle('active', isActive);
+            b.setAttribute('aria-pressed', isActive ? 'true' : 'false');
+        });
+        if (sortSelect) sortSelect.value = key;
+        renderProducts();
+    }
+
+    // Tombol: klik tombol aktif lagi = matikan sortir
+    sortButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const key = btn.getAttribute('data-sort');
+            applySort(currentSort === key ? 'default' : key);
         });
     });
 
-    // Sort events
-    if (sortTrigger) {
-        sortTrigger.addEventListener('click', (e) => {
-            e.stopPropagation();
-            if (sortDropdown) sortDropdown.classList.toggle('hidden');
-        });
-        document.addEventListener('click', () => sortDropdown && sortDropdown.classList.add('hidden'));
-        sortOptions.forEach(opt => {
-            opt.addEventListener('click', () => {
-                currentSort = opt.getAttribute('data-sort');
-                if (sortLabel) sortLabel.textContent = opt.textContent;
-                renderProducts();
-            });
-        });
+    // Dropdown mobile: pilih "Default" untuk matikan sortir
+    if (sortSelect) {
+        sortSelect.addEventListener('change', () => applySort(sortSelect.value));
     }
 
     renderProducts();
@@ -662,6 +770,7 @@ function initProductDetail() {
             if (btn) {
                 btn.onclick = (e) => {
                     e.preventDefault();
+                    if (product.soldOut) return;
                     if (product.category && product.category.startsWith('Al Quran')) {
                         const variants = QURAN_VARIANTS[product.id];
                         if (variants) {
@@ -678,6 +787,32 @@ function initProductDetail() {
 
         setupCartBtn('add-to-cart-btn');
         setupCartBtn('add-to-cart-btn-mobile');
+
+        // Sold out: matikan tombol keranjang + link Shopee, link Chat Admin tetap aktif
+        if (product.soldOut) {
+            ['add-to-cart-btn', 'add-to-cart-btn-mobile'].forEach(id => {
+                const btn = document.getElementById(id);
+                if (!btn) return;
+                btn.disabled = true;
+                btn.classList.add('btn-disabled-solid');
+                const icon = btn.querySelector('.material-symbols-outlined');
+                if (icon) icon.textContent = 'remove_shopping_cart';
+                Array.from(btn.childNodes).forEach(node => {
+                    if (node.nodeType === 3 && node.textContent.trim()) {
+                        node.textContent = ' Stok Habis ';
+                    }
+                });
+            });
+
+            ['shopee-link', 'shopee-link-mobile'].forEach(id => {
+                const el = document.getElementById(id);
+                if (!el) return;
+                el.removeAttribute('href');
+                el.setAttribute('aria-disabled', 'true');
+                el.setAttribute('tabindex', '-1');
+                el.classList.add('btn-disabled-outline');
+            });
+        }
 
         // Render Gallery Thumbnails
         const thumbGallery = document.getElementById('thumbnail-gallery');
@@ -732,7 +867,7 @@ function initProductDetail() {
         }
 
     } else if (window.location.pathname.includes('product-detail.html')) {
-        window.location.href = 'produk.html';
+        window.location.href = 'shop.html';
     }
 }
 
@@ -753,28 +888,7 @@ function renderRelatedProducts(currentId, category) {
     // Combine and take 4
     let finalRelated = [...shuffle(sameCategory), ...shuffle(otherCategories)].slice(0, 4);
 
-    relatedContainer.innerHTML = finalRelated.map(p => `
-        <div class="group bg-white dark:bg-slate-900 rounded-2xl p-4 border border-slate-100 dark:border-slate-800 shadow-sm hover:shadow-xl transition-all h-full flex flex-col">
-            <a href="product-detail.html?id=${p.id}" class="block">
-                <div class="bg-[#f2f2f2] dark:bg-slate-800 aspect-square rounded-xl overflow-hidden mb-4 relative">
-                    <img src="${p.img}" alt="${p.name}" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
-                </div>
-                <h3 class="text-md font-display font-bold text-slate-900 dark:text-white mb-1 px-2 leading-tight h-[2rem]">${p.name}</h3>
-            </a>
-            <div class="flex flex-col px-2 pb-2 mb-2">
-                <div class="flex items-center justify-between mb-1">
-                    <span class="text-[0.85rem] font-bold text-slate-400 tracking-tight line-through opacity-70">${p.priceCrt}</span>
-                    <div class="text-[1.2rem] sm:text-[1rem] text-brand-blue dark:text-brand-gold font-bold flex items-center gap-1">
-                        <span class="material-symbols-outlined">confirmation_number</span>
-                        <span class="price-val">${p.priceWa}</span>
-                    </div>
-                </div>
-            </div>
-            <div class="flex items-center justify-between mt-auto">
-                <a href="product-detail.html?id=${p.id}" class="bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-200 hover:bg-brand-blue hover:text-white dark:hover:bg-brand-gold dark:hover:text-black transition-all text-sm md:text-xs font-bold px-4 py-3 rounded-xl text-center w-full">Lihat Produk</a>
-            </div>
-        </div>
-    `).join('');
+relatedContainer.innerHTML = finalRelated.map(p => productCardTemplate(p)).join('');
 }
 
 // Gallery Changer
@@ -857,28 +971,10 @@ function initTrending() {
     const trendingIds = [1, 6, 9, 10];
     const trendingProducts = GLOBAL_PRODUCTS.filter(p => trendingIds.includes(p.id));
 
-    trendingGrid.innerHTML = trendingProducts.map((p, idx) => `
-        <div class="group bg-white dark:bg-slate-900 rounded-2xl p-4 border border-slate-100 dark:border-slate-800 shadow-sm hover:shadow-xl transition-all animate-fade-in-up" style="animation-delay: ${idx * 50}ms">
-            <a href="product-detail.html?id=${p.id}" class="block">
-                <div class="bg-[#f2f2f2] dark:bg-slate-800 aspect-square rounded-xl overflow-hidden mb-6 relative">
-                    <img src="${p.img}" alt="${p.name}" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
-                </div>
-                <h3 class="text-md font-display font-bold text-slate-900 dark:text-white mb-4 px-2 leading-tight">${p.name}</h3>
-            </a>
-                <div class="flex flex-col px-2 pb-2">
-                    <div class="flex items-center justify-between mb-1">
-                        <span class="text-[0.85rem] sm:text-[0.8rem] font-bold text-slate-400 tracking-tight line-through opacity-70">${p.priceCrt}</span>
-                        <div class="text-[1.2rem] sm:text-[1rem] text-brand-blue dark:text-brand-gold font-bold flex items-center gap-1">
-                            <span class="material-symbols-outlined">confirmation_number</span>
-                            <span class="price-val">${p.priceWa}</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="flex items-center justify-between mb-1">
-                    <a href="product-detail.html?id=${p.id}" class="bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-200 hover:bg-brand-blue hover:text-white dark:hover:bg-brand-gold dark:hover:text-black transition-all text-sm md:text-xs font-bold px-4 py-3 rounded-xl text-center w-full">Lihat Detail</a>
-                </div>
-        </div>
-    `).join('');
+trendingGrid.innerHTML = trendingProducts.map((p, idx) => productCardTemplate(p, {
+        className: 'animate-fade-in-up',
+        style: `animation-delay: ${idx * 50}ms`
+    })).join('');
 }
 
 const counters = document.querySelectorAll('.counter');
@@ -1131,7 +1227,7 @@ function initPersonalizationPage() {
         updateConfirmBtn();
 
     } else {
-        window.location.href = 'produk.html';
+        window.location.href = 'shop.html';
     }
 }
 
@@ -1782,64 +1878,135 @@ async function initRegionalAPI() {
 
     if (!provinceSelect) return;
 
-    const baseUrl = 'https://refrxx.github.io/api-wilayah-indonesia/api';
+    const postalInput = document.getElementById('cust-postal-code');
+    const POSTAL_PLACEHOLDER = 'Contoh: 15223';
 
-    async function fetchData(endpoint) {
+    // carikodepos.id tidak mengirim header CORS pada response GET, jadi browser
+    // memblokir request langsung. Semua panggilan lewat Worker proxy /api/wilayah.
+    // CATATAN: key di dalam json.data tidak sama dengan nama endpoint
+    // (endpoint "postal-codes" -> json.data.postalCodes).
+    const REGION_API = {
+        provinces: { endpoint: 'provinces', dataKey: 'provinces' },
+        cities: { endpoint: 'cities', dataKey: 'cities' },
+        districts: { endpoint: 'districts', dataKey: 'districts' },
+        villages: { endpoint: 'villages', dataKey: 'villages' },
+        postalCodes: { endpoint: 'postal-codes', dataKey: 'postalCodes' },
+    };
+
+    async function fetchList(key, params = {}) {
+        const cfg = REGION_API[key];
+        if (!cfg) return [];
+
         try {
-            const res = await fetch(`${baseUrl}${endpoint}`);
+            const qs = new URLSearchParams({ endpoint: cfg.endpoint, ...params });
+            const res = await fetch(`/api/wilayah?${qs}`);
+            if (!res.ok) throw new Error(`HTTP ${res.status}`);
             const json = await res.json();
-            return json || [];
+            return json?.data?.[cfg.dataKey] || [];
         } catch (err) {
-            console.error('API Regional Error:', err);
+            console.error(`API ${key} Error:`, err);
             return [];
         }
     }
 
-    const provinces = await fetchData('/provinces.json');
-    provinces.sort((a, b) => a.name.localeCompare(b.name, 'id')).forEach(p => {
-        const opt = document.createElement('option');
-        opt.value = p.id;
-        opt.textContent = p.name;
-        provinceSelect.appendChild(opt);
-    });
+    // API ini sesekali balas array kosong walau flag sukses -> coba 1x lagi
+    async function fetchListRetry(key, params = {}) {
+        let items = await fetchList(key, params);
+        if (items.length === 0) {
+            await new Promise(res => setTimeout(res, 400));
+            items = await fetchList(key, params);
+        }
+        return items;
+    }
+
+    function fillSelect(select, placeholder, items) {
+        select.innerHTML = '';
+
+        const blank = document.createElement('option');
+        blank.value = '';
+        blank.textContent = placeholder;
+        blank.disabled = true;
+        blank.selected = true;
+        select.appendChild(blank);
+
+        [...items]
+            .sort((a, b) => String(a.name || '').localeCompare(String(b.name || ''), 'id'))
+            .forEach(item => {
+                const opt = document.createElement('option');
+                opt.value = item.id;
+                opt.textContent = item.name;
+                select.appendChild(opt);
+            });
+
+        select.disabled = false;
+    }
+
+    function resetSelect(select, placeholder) {
+        if (!select) return;
+        select.innerHTML = `<option value="" disabled selected>${placeholder}</option>`;
+        select.disabled = true;
+    }
+
+    function setPostalCode(code) {
+        if (!postalInput) return;
+        postalInput.placeholder = POSTAL_PLACEHOLDER;
+        postalInput.value = code || '';
+        // Trigger initBiteship() -> ongkir ikut terhitung tanpa klik manual
+        if (code) postalInput.dispatchEvent(new Event('input'));
+    }
+
+    const provinces = await fetchListRetry('provinces', { limit: 50 });
+    if (provinces.length === 0) {
+        provinceSelect.innerHTML = '<option value="" disabled selected>Gagal memuat, isi manual</option>';
+        provinceSelect.disabled = true;
+    } else {
+        fillSelect(provinceSelect, 'Pilih Provinsi', provinces);
+    }
 
     provinceSelect.addEventListener('change', async () => {
-        citySelect.innerHTML = '<option value="" disabled selected>Memuat...</option>';
-        citySelect.disabled = false;
-        const cities = await fetchData(`/regencies/${provinceSelect.value}.json`);
-        citySelect.innerHTML = '<option value="" disabled selected>Pilih Kota/Kabupaten</option>';
-        cities.forEach(c => {
-            const opt = document.createElement('option');
-            opt.value = c.id;
-            opt.textContent = c.name;
-            citySelect.appendChild(opt);
-        });
+        const provinceId = provinceSelect.value;
+        resetSelect(citySelect, 'Memuat...');
+        resetSelect(districtSelect, 'Pilih Kecamatan');
+        resetSelect(villageSelect, 'Pilih Kelurahan/Desa');
+        setPostalCode('');
+
+        const cities = await fetchListRetry('cities', { provinceId, limit: 100 });
+        if (provinceSelect.value !== provinceId) return;
+        fillSelect(citySelect, 'Pilih Kota/Kabupaten', cities);
     });
 
     citySelect.addEventListener('change', async () => {
-        districtSelect.innerHTML = '<option value="" disabled selected>Memuat...</option>';
-        districtSelect.disabled = false;
-        const districts = await fetchData(`/districts/${citySelect.value}.json`);
-        districtSelect.innerHTML = '<option value="" disabled selected>Pilih Kecamatan</option>';
-        districts.forEach(d => {
-            const opt = document.createElement('option');
-            opt.value = d.id;
-            opt.textContent = d.name;
-            districtSelect.appendChild(opt);
-        });
+        const cityId = citySelect.value;
+        resetSelect(districtSelect, 'Memuat...');
+        resetSelect(villageSelect, 'Pilih Kelurahan/Desa');
+        setPostalCode('');
+
+        const districts = await fetchListRetry('districts', { cityId, limit: 100 });
+        if (citySelect.value !== cityId) return;
+        fillSelect(districtSelect, 'Pilih Kecamatan', districts);
     });
 
     districtSelect.addEventListener('change', async () => {
-        villageSelect.innerHTML = '<option value="" disabled selected>Memuat...</option>';
-        villageSelect.disabled = false;
-        const villages = await fetchData(`/villages/${districtSelect.value}.json`);
-        villageSelect.innerHTML = '<option value="" disabled selected>Pilih Kelurahan/Desa</option>';
-        villages.forEach(v => {
-            const opt = document.createElement('option');
-            opt.value = v.id;
-            opt.textContent = v.name;
-            villageSelect.appendChild(opt);
-        });
+        const districtId = districtSelect.value;
+        resetSelect(villageSelect, 'Memuat...');
+        setPostalCode('');
+
+        const villages = await fetchListRetry('villages', { districtId, limit: 100 });
+        if (districtSelect.value !== districtId) return;
+        fillSelect(villageSelect, 'Pilih Kelurahan/Desa', villages);
+    });
+
+    villageSelect.addEventListener('change', async () => {
+        const villageId = villageSelect.value;
+        setPostalCode('');
+        if (!villageId) return;
+
+        if (postalInput) postalInput.placeholder = 'Memuat...';
+
+        // Satu desa bisa punya >1 kode pos -> ambil yang pertama
+        const postalCodes = await fetchListRetry('postalCodes', { villageId, limit: 1 });
+        if (villageSelect.value !== villageId) return;
+        setPostalCode(postalCodes[0]?.code || '');
     });
 }
 

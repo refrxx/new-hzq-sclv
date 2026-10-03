@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <title>Produk Kami - Hamzah Quran</title>
+    <title>Shop - Hamzah Quran</title>
     <link rel="icon" type="image/svg+xml" href="img/hamzah-favico.svg">
 
     
@@ -93,7 +93,7 @@
                 <li><a class="nav-link-underline font-sans font-semibold text-slate-500 hover:text-brand-blue dark:text-slate-400 dark:hover:text-white transition-colors duration-300"
                         href="index.html">Home</a></li>
                 <li><a class="nav-link-underline font-sans font-semibold text-brand-blue hover:text-brand-blue dark:text-brand-gold dark:hover:text-white transition-colors duration-300"
-                        href="produk.html">Produk</a></li>
+                        href="shop.html">Shop</a></li>
                 <li><a class="nav-link-underline font-sans font-semibold text-slate-500 hover:text-brand-blue dark:text-slate-400 dark:hover:text-white transition-colors duration-300"
                         href="cover.html">Katalog Cover</a></li>
                 <li><a class="nav-link-underline font-sans font-semibold text-slate-500 hover:text-brand-blue dark:text-slate-400 dark:hover:text-white transition-colors duration-300"
@@ -136,7 +136,7 @@
                 <li><a class="font-sans font-semibold text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white block px-8 md:px-12 py-2 transition-colors duration-300"
                         href="index.html">Home</a></li>
                 <li><a class="font-sans font-semibold text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white block px-8 md:px-12 py-2 transition-colors duration-300"
-                        href="produk.html">Produk</a></li>
+                        href="shop.html">Shop</a></li>
                 <li><a class="font-sans font-semibold text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white block px-8 md:px-12 py-2 transition-colors duration-300"
                         href="cover.html">Katalog Cover</a></li>
                 <li><a class="font-sans font-semibold text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white block px-8 md:px-12 py-2 transition-colors duration-300"
@@ -162,68 +162,116 @@
         </div>
     </header>
 
-    <main class="pt-12 lg:pt-12">
+    <main class="pt-12 lg:pt-12 max-w-[1200px] mx-auto px-6 md:px-12">
 
-        
-        <section id="products" class="max-w-[1200px] mx-auto px-8 md:px-12">
-            <div class="flex flex-col mb-12 border-b border-slate-100 dark:border-slate-800 pb-10">
-                <h2 class="text-3xl md:text-4xl font-display font-black text-slate-900 dark:text-white mb-8">Produk Kami
+        <section class="hero-banner reveal rounded-3xl overflow-hidden mb-8 md:mb-10">
+            <img src="img/banner_desktop.jpg" alt="Produk Kami" class="w-full h-auto object-cover">
+        </section>
+
+        <section
+            class="reveal mb-8">
+            <div class="flex items-center justify-between gap-4 mb-5">
+                <h2
+                    class="flex items-center gap-2.5 text-lg md:text-xl font-display font-bold text-slate-900 dark:text-white">
+                    <span class="material-symbols-outlined text-brand-blue dark:text-brand-gold">grid_view</span>
+                    Kategori Produk
                 </h2>
 
-                <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
-                    
-                    <div id="filter-container" class="flex flex-wrap gap-3">
-                        <button
-                            class="filter-btn px-6 py-2.5 rounded-full bg-brand-blue dark:bg-white text-white dark:text-black font-medium text-sm hover:bg-brand-blue hover:text-white dark:hover:text-black dark:hover:bg-white transition-all">Semua
-                            Produk</button>
-                        <button
-                            class="filter-btn px-6 py-2.5 rounded-full bg-slate-50 dark:bg-slate-900 text-slate-400 dark:text-slate-500 font-medium text-sm hover:bg-brand-blue hover:text-white dark:hover:text-black dark:hover:bg-white transition-all">Al
-                            Quran Sedang</button>
-                        <button
-                            class="filter-btn px-6 py-2.5 rounded-full bg-slate-50 dark:bg-slate-900 text-slate-400 dark:text-slate-500 font-medium text-sm hover:bg-brand-blue hover:text-white dark:hover:text-black dark:hover:bg-white transition-all">Al
-                            Quran Besar</button>
-                        <button
-                            class="filter-btn px-6 py-2.5 rounded-full bg-slate-50 dark:bg-slate-900 text-slate-400 dark:text-slate-500 font-medium text-sm hover:bg-brand-blue hover:text-white dark:hover:text-black dark:hover:bg-white transition-all">IQRO</button>
-                        <button
-                            class="filter-btn px-6 py-2.5 rounded-full bg-slate-50 dark:bg-slate-900 text-slate-400 dark:text-slate-500 font-medium text-sm hover:bg-brand-blue hover:text-white dark:hover:text-black dark:hover:bg-white transition-all">Juz
-                            Amma</button>
-                    </div>
+                <div class="flex items-center gap-2">
+                    <button id="cat-prev" type="button" aria-label="Geser kategori ke kiri"
+                        class="hidden w-9 h-9 items-center justify-center rounded-full bg-slate-50 dark:bg-slate-800 border border-slate-100 dark:border-slate-800 text-slate-500 dark:text-slate-300 hover:text-brand-blue dark:hover:text-brand-gold transition-colors disabled:opacity-40 disabled:pointer-events-none">
+                        <span class="material-symbols-outlined text-[1.2rem]">chevron_left</span>
+                    </button>
+                    <button id="cat-next" type="button" aria-label="Geser kategori ke kanan"
+                        class="hidden w-9 h-9 items-center justify-center rounded-full bg-slate-50 dark:bg-slate-800 border border-slate-100 dark:border-slate-800 text-slate-500 dark:text-slate-300 hover:text-brand-blue dark:hover:text-brand-gold transition-colors disabled:opacity-40 disabled:pointer-events-none">
+                        <span class="material-symbols-outlined text-[1.2rem]">chevron_right</span>
+                    </button>
+                </div>
+            </div>
 
-                    
-                    <div class="relative">
-                        <button id="sort-trigger"
-                            class="flex items-center gap-2 text-slate-400 font-semibold text-sm cursor-pointer hover:text-slate-900 dark:hover:text-white transition-colors border-0 bg-transparent">
-                            Sortir Berdasarkan: <span id="current-sort-label"
-                                class="text-slate-900 dark:text-white">Default</span>
-                            <span class="material-symbols-outlined text-[1.2rem]">expand_more</span>
-                        </button>
-                        <div id="sort-dropdown"
-                            class="hidden absolute right-0 mt-3 w-48 bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-2xl shadow-2xl z-50 overflow-hidden transform origin-top-right transition-all">
-                            <ul class="py-2">
-                                <li><button
-                                        class="sort-option w-full text-left px-5 py-3 text-sm font-semibold text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 hover:text-brand-blue"
-                                        data-sort="default">Default</button></li>
-                                <li><button
-                                        class="sort-option w-full text-left px-5 py-3 text-sm font-semibold text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 hover:text-brand-blue"
-                                        data-sort="name-asc">Nama: A - Z</button></li>
-                                <li><button
-                                        class="sort-option w-full text-left px-5 py-3 text-sm font-semibold text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 hover:text-brand-blue"
-                                        data-sort="name-desc">Nama: Z - A</button></li>
-                                <li><button
-                                        class="sort-option w-full text-left px-5 py-3 text-sm font-semibold text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 hover:text-brand-blue"
-                                        data-sort="price-low">Harga Terendah</button></li>
-                                <li><button
-                                        class="sort-option w-full text-left px-5 py-3 text-sm font-semibold text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 hover:text-brand-blue"
-                                        data-sort="price-high">Harga Tertinggi</button></li>
-                            </ul>
-                        </div>
-                    </div>
+            <div class="rounded-2xl border border-slate-100 dark:border-slate-800 p-3 md:p-4">
+                <div id="category-scroll"
+                    class="scrollbar-hide flex gap-3 overflow-x-auto snap-x snap-mandatory pb-1 md:grid md:grid-cols-3 md:gap-4 md:overflow-visible md:pb-0">
+
+                    <button type="button" class="category-card selected snap-start"
+                        data-category="" aria-pressed="true">
+                        <span
+                            class="relative z-10 flex items-center h-full font-display font-semibold text-sm md:text-base">Semua
+                            Produk</span>
+                        <img class="cat-img" src="img/katalog/8qpp-a5.jpg" alt="" loading="lazy" aria-hidden="true">
+                    </button>
+
+                    <button type="button"
+                        class="category-card snap-start" data-category="Al Quran Sedang"
+                        aria-pressed="false">
+                        <span
+                            class="relative z-10 flex items-center h-full font-display font-semibold text-sm md:text-base">Al
+                            Quran Sedang</span>
+                        <img class="cat-img" src="img/katalog/8matte-a5.jpg" alt="" loading="lazy" aria-hidden="true">
+                    </button>
+
+                    <button type="button"
+                        class="category-card snap-start" data-category="Al Quran Besar"
+                        aria-pressed="false">
+                        <span
+                            class="relative z-10 flex items-center h-full font-display font-semibold text-sm md:text-base">Al
+                            Quran Besar</span>
+                        <img class="cat-img" src="img/katalog/8qpp-a4.jpg" alt="" loading="lazy" aria-hidden="true">
+                    </button>
+
+                    <button type="button"
+                        class="category-card snap-start" data-category="IQRO"
+                        aria-pressed="false">
+                        <span
+                            class="relative z-10 flex items-center h-full font-display font-semibold text-sm md:text-base">IQRO</span>
+                        <img class="cat-img" src="img/katalog/iqro-bw-3.jpg" alt="" loading="lazy" aria-hidden="true">
+                    </button>
+
+                    <button type="button"
+                        class="category-card snap-start" data-category="Juz Amma"
+                        aria-pressed="false">
+                        <span
+                            class="relative z-10 flex items-center h-full font-display font-semibold text-sm md:text-base">Juz
+                            Amma</span>
+                        <img class="cat-img" src="img/katalog/juzamma.jpg" alt="" loading="lazy" aria-hidden="true">
+                    </button>
+
+                </div>
+            </div>
+        </section>
+
+        <section id="products"
+            class="reveal">
+            <div class="flex flex-wrap items-center gap-2 mb-8">
+                <span class="text-sm font-semibold text-slate-500 dark:text-slate-400">Urutkan berdasarkan:</span>
+
+                <!-- Desktop: tombol sortir -->
+                <div class="hidden md:flex flex-wrap items-center gap-2">
+                    <button type="button" class="sort-btn rounded-full border px-4 py-2 text-sm font-semibold"
+                        data-sort="price-low" aria-pressed="false">Termurah</button>
+                    <button type="button" class="sort-btn rounded-full border px-4 py-2 text-sm font-semibold"
+                        data-sort="price-high" aria-pressed="false">Termahal</button>
+                    <button type="button" class="sort-btn rounded-full border px-4 py-2 text-sm font-semibold"
+                        data-sort="sold-desc" aria-pressed="false">Terlaris</button>
+                </div>
+
+                <!-- Mobile: dropdown -->
+                <div class="md:hidden relative">
+                    <select id="sort-select" aria-label="Urutkan berdasarkan"
+                        class="sort-select appearance-none rounded-full border py-2 text-sm font-semibold">
+                        <option value="default">Default</option>
+                        <option value="price-low">Termurah</option>
+                        <option value="price-high">Termahal</option>
+                        <option value="sold-desc">Terlaris</option>
+                    </select>
+                    <span
+                        class="material-symbols-outlined pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-[1.1rem] text-slate-400">expand_more</span>
                 </div>
             </div>
 
             <div id="product-list"
-                class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-x-6 gap-y-6 mb-20 animate-fade-in-up">
-                
+                class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-2 md:gap-x-6 gap-y-6 mb-10 animate-fade-in-up">
+
             </div>
 
         </section>
