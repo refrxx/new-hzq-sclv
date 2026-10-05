@@ -1759,6 +1759,105 @@ function initCart() {
 
             message += `*Metode Pembayaran:* ${paymentMethodText}\n\n`;
 
+            // === XENITH ONLINE PAYMENT ===
+            // Order dicatat di server (Sheets), customer diarahkan ke halaman bayar Xenith.
+            if (paymentMethodValue === 'xenith') {
+                loadingOverlay?.classList.remove('hidden');
+                loadingOverlay?.classList.add('flex');
+                try {
+                    const payRes = await fetch('/api/xenith-create', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            name, phone, address,
+                            region: regionParts.join(', '),
+                            courier: courierLabel,
+                            items: cart.map(c => ({
+                                name: c.name,
+                                qty: c.qty,
+                                price: parsePrice(c.priceWa || c.priceCrt),
+                                variant: c.quranType ? (c.quranType === 'latin' ? 'Latin' : 'Tanpa Latin') : '',
+                                note: [
+                                    c.customName && `Nama: ${c.customName}`,
+                                    c.coverName && `Cover: ${c.coverName}`,
+                                    c.customNote && `Ucapan: ${c.customNote}`,
+                                    c.customFont && `Font: ${c.customFont}`
+                                ].filter(Boolean).join(', ')
+                            })),
+                            subtotal,
+                            ongkir: ongkirAfterSubsidy,
+                            voucher,
+                            grandTotal
+                        })
+                    });
+                    const pay = await payRes.json();
+                    if (!payRes.ok || !pay.paymentLinkUrl) throw new Error(pay.error || 'Gagal membuat pembayaran');
+
+                    // Telegram: detail order lengkap + Order ID dari server
+                    try {
+                        await fetch('/api/notify', {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({
+                                text: message + `*Order ID:* ${pay.orderId}\n*Status:* Menunggu pembayaran online`,
+                                parse_mode: 'Markdown'
+                            })
+                        });
+                    } catch (err) { console.error('Telegram notify error:', err); }
+
+                    // Riwayat untuk pesanan-saya.html
+                    const xenithOrder = {
+                        name, phone, address,
+                        paymentMethod: 'xenith',
+                        subtotal,
+                        ongkir: ongkirAfterSubsidy,
+                        courier: courierLabel,
+                        subsidy: shippingDiscount,
+                        subsidyQty: isGratisOngkir ? 0 : totalQty,
+                        voucher,
+                        voucherLabel: vchLabel,
+                        gratisOngkirLabel: goLabel,
+                        codFee: 0,
+                        grandTotal,
+                        cart: cart.map(item => ({
+                            name: item.name,
+                            qty: item.qty,
+                            price: parsePrice(item.priceWa || item.priceCrt),
+                            quranType: item.quranType || ''
+                        })),
+                        orderId: pay.orderId,
+                        paymentUrl: pay.paymentLinkUrl,
+                        createdAt: new Date().toISOString(),
+                        status: 'Menunggu Pembayaran'
+                    };
+                    const prevOrders = JSON.parse(localStorage.getItem('hq_orders') || '[]');
+                    prevOrders.unshift(xenithOrder);
+                    localStorage.setItem('hq_orders', JSON.stringify(prevOrders.slice(0, 5)));
+
+                    if (typeof fbq !== 'undefined') {
+                        fbq('track', 'Purchase', {
+                            value: subtotal,
+                            currency: 'IDR',
+                            contents: cart.map(item => ({ id: item.id, quantity: item.qty })),
+                            content_type: 'product'
+                        });
+                    }
+
+                    cart = [];
+                    localStorage.setItem('hq_cart', JSON.stringify(cart));
+                    updateCartTotalUI();
+
+                    window.location.href = pay.paymentLinkUrl;
+                    return;
+                } catch (err) {
+                    console.error('Xenith checkout error:', err);
+                    loadingOverlay?.classList.add('hidden');
+                    loadingOverlay?.classList.remove('flex');
+                    showAlert('Pembayaran Gagal', 'Pembayaran online belum bisa dibuat. Keranjang kamu aman, coba lagi atau pilih metode pembayaran lain.', 'error');
+                    return;
+                }
+            }
+
             // Show loading, mulai kirim notifikasi
             loadingOverlay?.classList.remove('hidden');
             loadingOverlay?.classList.add('flex');
@@ -2199,7 +2298,7 @@ function renderShippingOptions(rates) {
         const price = rate.price || rate.courier_price || 0;
         const company = rate.company || rate.courier_company || '';
         const service = rate.service || rate.courier_service_name || '';
-        const est = rate.delivery_time || rate.courier_estimated || '';
+        const est = rate.duration || rate.delivery_time || rate.courier_estimated || '';
         const logo = getCourierLogo(rate);
 
         const label = document.createElement('label');

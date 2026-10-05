@@ -1,0 +1,11 @@
+{
+  "name": "hamzahquran",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "wrangler pages dev . --env-file .env"
+  },
+  "devDependencies": {
+    "wrangler": "^4.145.0"
+  }
+}

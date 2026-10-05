@@ -1,0 +1,4 @@
+.env
+script.js.bak
+node_modules/
+.wrangler/

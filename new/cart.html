@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Keranjang Belanja - Hamzah Quran</title>
+    <link rel="icon" type="image/svg+xml" href="img/hamzah-favico.svg">
+
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            blue: '#1A5FB4',
+                            gold: '#ffc107',
+                        }
+                    },
+                    fontFamily: {
+                        display: ['Plus Jakarta Sans', 'sans-serif'],
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    borderRadius: {
+                        '32': '32px',
+                        '40': '40px',
+                    },
+                    keyframes: {
+                        shake: {
+                            '0%, 100%': { transform: 'translateX(0)' },
+                            '25%': { transform: 'translateX(-5px)' },
+                            '50%': { transform: 'translateX(5px)' },
+                            '75%': { transform: 'translateX(-5px)' },
+                        },
+                        'fade-in-up': {
+                            '0%': { opacity: '0', transform: 'translateY(10px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        }
+                    },
+                    animation: {
+                        shake: 'shake 0.4s ease-in-out',
+                        'fade-in-up': 'fade-in-up 0.4s ease-out forwards',
+                    }
+                }
+            }
+        }
+    </script>
+
+
+    <link href="style.css" rel="stylesheet" />
+
+    
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@700;800;900&display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-25..0&display=block"
+        rel="stylesheet" />
+
+    
+    <script>
+        !function (f, b, e, v, n, t, s) {
+            if (f.fbq) return; n = f.fbq = function () {
+                n.callMethod ?
+                    n.callMethod.apply(n, arguments) : n.queue.push(arguments)
+            };
+            if (!f._fbq) f._fbq = n; n.push = n; n.loaded = !0; n.version = '2.0';
+            n.queue = []; t = b.createElement(e); t.async = !0;
+            t.src = v; s = b.getElementsByTagName(e)[0];
+            s.parentNode.insertBefore(t, s)
+        }(window, document, 'script',
+            'https://connect.facebook.net/en_US/fbevents.js');
+        fbq('init', '1767415744634833');
+        fbq('track', 'PageView');
+    </script>
+    <noscript><img height="1" width="1" style="display:none"
+            src="https://www.facebook.com/tr?id=1767415744634833&ev=PageView&noscript=1" /></noscript>
+    
+    <script>!function(){var e=localStorage.getItem('theme')==='dark';document.documentElement.classList.toggle('dark',e)}();</script>
+</head>
+
+<body class="bg-[#fcfdfd] dark:bg-[#080e16] transition-colors duration-300">
+    
+    <div class="promo-bar font-sans flex items-center justify-center px-4 overflow-hidden h-[44px]">
+        <div class="flex items-center justify-center gap-4 sm:gap-10">
+            <span class="promo-item uppercase">🔥 Disc. up to 20% order via Website</span>
+            <span class="promo-separator hidden sm:inline">•</span>
+            <span class="promo-item uppercase hidden sm:inline">🚚 Free Ongkir (area Pulau Jawa)</span>
+            <span class="promo-separator hidden sm:inline">•</span>
+            <span class="promo-item uppercase hidden sm:inline">📦 Bisa COD ke seluruh Indonesia</span>
+        </div>
+    </div>
+
+    <header class="header-sticky w-full z-50 scrolled">
+        <nav class="max-w-[1200px] mx-auto px-8 md:px-12 py-4 flex items-center justify-between">
+            
+            <a class="flex items-center relative" href="index.html">
+                <img src="img/hamzahcolor.png" alt="Hamzah Quran"
+                    class="h-6 md:h-8 w-auto transition-opacity duration-300 opacity-100 dark:opacity-0">
+                <img src="img/hamzahquran.png" alt="Hamzah Quran"
+                    class="h-6 md:h-8 w-auto absolute top-0 left-0 transition-opacity duration-300 opacity-0 dark:opacity-100 invert">
+            </a>
+
+            
+            <ul class="hidden lg:flex items-center space-x-8">
+                <li><a class="nav-link-underline font-sans font-semibold text-slate-500 hover:text-brand-blue dark:text-slate-400 dark:hover:text-white transition-colors duration-300"
+                        href="index.html">Home</a></li>
+                <li><a class="nav-link-underline font-sans font-semibold text-slate-500 hover:text-brand-blue dark:text-slate-400 dark:hover:text-white transition-colors duration-300"
+                        href="shop.html">Shop</a></li>
+                <li><a class="nav-link-underline font-sans font-semibold text-slate-500 hover:text-brand-blue dark:text-slate-400 dark:hover:text-white transition-colors duration-300"
+                        href="cover.html">Katalog Cover</a></li>
+                <li><a class="nav-link-underline font-sans font-semibold text-slate-500 hover:text-brand-blue dark:text-slate-400 dark:hover:text-white transition-colors duration-300"
+                        href="reseller.html">Reseller</a></li>
+                <li><a class="nav-link-underline font-sans font-semibold text-slate-500 hover:text-brand-blue dark:text-slate-400 dark:hover:text-white transition-colors duration-300"
+                        href="bulk-order.html">B2B</a></li>
+            </ul>
+
+            <div class="flex items-center gap-4">
+                <a href="pesanan-saya.html"
+                    class="p-2.5 bg-slate-100 dark:bg-slate-800 rounded-full text-slate-600 dark:text-slate-400 hover:text-brand-blue dark:hover:text-brand-gold transition-colors duration-300 flex items-center justify-center w-10 h-10 relative"
+                    title="Pesanan Saya">
+                    <span class="material-symbols-outlined">receipt_long</span>
+                </a>
+                <a href="cart.html"
+                    class="p-2.5 bg-slate-100 dark:bg-slate-800 rounded-full text-slate-600 dark:text-slate-400 hover:text-brand-blue dark:hover:text-brand-gold transition-colors duration-300 border-0 flex items-center justify-center w-10 h-10 relative">
+                    <span class="material-symbols-outlined">shopping_cart</span>
+                    <span id="nav-cart-badge"
+                        class="absolute -top-1 -right-1 bg-red-500 text-white text-[0.6rem] font-bold w-4 h-4 rounded-full flex items-center justify-center hidden">0</span>
+                </a>
+                <button id="theme-toggle"
+                    class="hidden lg:flex p-2.5 bg-slate-100 dark:bg-slate-800 rounded-full text-slate-600 dark:text-slate-400 hover:text-brand-blue dark:hover:text-brand-gold transition-colors duration-300 items-center justify-center w-10 h-10 border-0"
+                    title="Toggle Dark Mode">
+                    <span class="material-symbols-outlined dark:hidden">dark_mode</span>
+                    <span class="material-symbols-outlined hidden dark:inline">light_mode</span>
+                </button>
+
+                
+                <button id="mobile-menu-button"
+                    class="lg:hidden p-2 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors duration-300 border-0 flex items-center justify-center">
+                    <span class="material-symbols-outlined">menu</span>
+                </button>
+            </div>
+        </nav>
+
+        
+        <div id="mobile-menu"
+            class="hidden lg:hidden bg-white dark:bg-[#080e16] absolute top-full left-0 w-full border-b dark:border-slate-800 shadow-xl py-6 px-8 md:px-12 animate-fade-in-down transition-colors duration-300 z-[-1]">
+            <ul class="flex flex-col space-y-4">
+                <li><a class="font-sans font-semibold text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white block px-8 md:px-12 py-2 transition-colors duration-300"
+                        href="index.html">Home</a></li>
+                <li><a class="font-sans font-semibold text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white block px-8 md:px-12 py-2 transition-colors duration-300"
+                        href="shop.html">Shop</a></li>
+                <li><a class="font-sans font-semibold text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white block px-8 md:px-12 py-2 transition-colors duration-300"
+                        href="cover.html">Katalog Cover</a></li>
+                <li><a class="font-sans font-semibold text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white block px-8 md:px-12 py-2 transition-colors duration-300"
+                        href="reseller.html">Reseller</a></li>
+                <li><a class="font-sans font-semibold text-slate-500 dark:text-slate-400 hover:text-slate-500 dark:hover:text-white block px-8 md:px-12 py-2 transition-colors duration-300"
+                        href="bulk-order.html">B2B</a></li>
+                <li class="border-t border-slate-100 dark:border-slate-800 pt-4">
+                    <div class="flex items-center justify-between px-8 md:px-12 py-2">
+                        <span class="font-sans font-semibold text-slate-500 dark:text-slate-400">Aktifkan Dark Mode</span>
+                        <button id="theme-toggle-mobile"
+                            class="relative inline-flex items-center w-12 h-6 rounded-full transition-colors duration-300 focus:outline-none border-0"
+                            style="background: var(--toggle-bg, #cbd5e1);"
+                            aria-label="Toggle dark mode">
+                            <span id="theme-toggle-mobile-knob"
+                                class="inline-block w-5 h-5 bg-white rounded-full shadow transform transition-transform duration-300 translate-x-0.5"></span>
+                        </button>
+                    </div>
+                </li>
+                <li class="pt-4"><a href="cart.html"
+                        class="block bg-brand-blue dark:bg-white text-white dark:text-black rounded-full px-6 py-3 font-bold shadow-md text-center transition-all duration-300">Lihat
+                        Keranjang</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <main class="pt-12 lg:pt-12 pb-24 min-h-screen">
+        <section class="max-w-[1200px] mx-auto px-8 md:px-12">
+            <h1 class="text-2xl font-display font-black text-slate-900 dark:text-white mb-10 animate-fade-in-up">
+                Keranjang Belanja</h1>
+
+            <div class="grid grid-cols-1 xl:grid-cols-3 gap-8 xl:gap-12 pb-4 xl:pb-12" id="cart-container">
+                
+                <div class="xl:col-span-2 space-y-8 animate-fade-in-up" style="animation-delay: 100ms">
+                    
+                    <h2
+                        class="text-xl font-bold text-slate-900 dark:text-white mb-6">
+                        Daftar Produk</h2>
+                    <div id="cart-items" class="space-y-6">
+                        
+                        <div class="text-center py-10 text-slate-500">Memuat keranjang...</div>
+                    </div>
+
+                    
+                    <div class="mb-8">
+                        <a href="shop.html"
+                            class="flex items-center justify-center gap-2 text-brand-blue dark:text-brand-gold font-bold hover:opacity-80 transition-all group">
+                            <span
+                                class="material-symbols-outlined transition-transform group-hover:scale-110">add_circle</span>
+                            <span>Tambah Produk ke Keranjang</span>
+                        </a>
+                    </div>
+
+                    <div class="h-px bg-slate-200 dark:bg-slate-700 mb-8"></div>
+
+                    
+                        <h2
+                            class="text-xl font-bold text-slate-900 dark:text-white mb-6">
+                            Informasi Pengiriman</h2>
+                        <form id="shipping-form" class="space-y-5">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                                <div>
+                                    <label class="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-2">Nama
+                                        Penerima <span class="text-red-500">*</span></label>
+                                    <input type="text" id="cust-name" required
+                                        class="w-full bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-600 rounded-xl px-4 py-3 text-slate-900 dark:text-white focus:ring-2 focus:ring-brand-blue outline-none transition-all"
+                                        placeholder="Contoh: Anang Hermansyah">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-2">No.
+                                        WhatsApp <span class="text-red-500">*</span></label>
+                                    <input type="text" id="cust-phone" required
+                                        class="w-full bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-600 rounded-xl px-4 py-3 text-slate-900 dark:text-white focus:ring-2 focus:ring-brand-blue outline-none transition-all"
+                                        placeholder="Contoh: 08123456789">
+                                </div>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-2">Alamat
+                                    Lengkap <span class="text-red-500">*</span></label>
+                                <textarea id="cust-address" required rows="2"
+                                    class="w-full bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-600 rounded-xl px-4 py-3 text-slate-900 dark:text-white focus:ring-2 focus:ring-brand-blue outline-none transition-all resize-none"
+                                    placeholder="Contoh: Jl. Merdeka No. 123, Perumahan Indah, Blok A5"></textarea>
+                            </div>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                                <div>
+                                    <label
+                                        class="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-2">Provinsi</label>
+                                    <div class="relative">
+                                        <select id="cust-province"
+                                            class="w-full bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-600 rounded-xl px-4 py-3 text-slate-900 dark:text-white focus:ring-2 focus:ring-brand-blue outline-none transition-all appearance-none cursor-pointer pr-10">
+                                            <option value="" disabled selected>Pilih Provinsi</option>
+                                        </select>
+                                        <span
+                                            class="material-symbols-outlined absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-slate-400 text-sm">expand_more</span>
+                                    </div>
+                                </div>
+                                <div>
+                                    <label
+                                        class="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-2">Kota/Kabupaten</label>
+                                    <div class="relative">
+                                        <select id="cust-city" disabled
+                                            class="w-full bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-600 rounded-xl px-4 py-3 text-slate-900 dark:text-white focus:ring-2 focus:ring-brand-blue outline-none transition-all appearance-none cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed pr-10">
+                                            <option value="" disabled selected>Pilih Kota/Kabupaten</option>
+                                        </select>
+                                        <span
+                                            class="material-symbols-outlined absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-slate-400 text-sm">expand_more</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                                <div>
+                                    <label
+                                        class="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-2">Kecamatan</label>
+                                    <div class="relative">
+                                        <select id="cust-district" disabled
+                                            class="w-full bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-600 rounded-xl px-4 py-3 text-slate-900 dark:text-white focus:ring-2 focus:ring-brand-blue outline-none transition-all appearance-none cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed pr-10">
+                                            <option value="" disabled selected>Pilih Kecamatan</option>
+                                        </select>
+                                        <span
+                                            class="material-symbols-outlined absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-slate-400 text-sm">expand_more</span>
+                                    </div>
+                                </div>
+                                <div>
+                                    <label
+                                        class="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-2">Kelurahan/Desa</label>
+                                    <div class="relative">
+                                        <select id="cust-subdistrict" disabled
+                                            class="w-full bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-600 rounded-xl px-4 py-3 text-slate-900 dark:text-white focus:ring-2 focus:ring-brand-blue outline-none transition-all appearance-none cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed pr-10">
+                                            <option value="" disabled selected>Pilih Kelurahan/Desa</option>
+                                        </select>
+                                        <span
+                                            class="material-symbols-outlined absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-slate-400 text-sm">expand_more</span>
+                                    </div>
+                                </div>
+                                <div>
+                                    <label
+                                        class="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-2">Kode Pos <span class="text-red-500">*</span></label>
+                                    <input type="text" id="cust-postal-code" required
+                                        class="w-full bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-600 rounded-xl px-4 py-3 text-slate-900 dark:text-white focus:ring-2 focus:ring-brand-blue outline-none transition-all"
+                                        placeholder="Contoh: 15223" maxlength="5" inputmode="numeric">
+                                </div>
+                            </div>
+
+
+
+                            <div>
+                                <label class="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-3">Metode
+                                    Pembayaran <span class="text-red-500">*</span></label>
+                                <div id="payment-options" class="space-y-2">
+                                    <label class="payment-option flex items-center gap-3 bg-slate-50 dark:bg-slate-800 rounded-xl px-4 py-3 cursor-pointer has-[:checked]:ring-2 has-[:checked]:ring-brand-blue has-[:checked]:bg-brand-blue/5 transition-all">
+                                        <input type="radio" name="payment-method" value="bca" checked
+                                            class="accent-brand-blue w-4 h-4 flex-shrink-0">
+                                        <img src="img/bank/bca.svg" alt="BCA" class="w-9 h-9 object-contain flex-shrink-0">
+                                        <span class="text-sm font-semibold text-slate-800 dark:text-slate-100">Transfer Bank BCA</span>
+                                    </label>
+                                    <label class="payment-option flex items-center gap-3 bg-slate-50 dark:bg-slate-800 rounded-xl px-4 py-3 cursor-pointer has-[:checked]:ring-2 has-[:checked]:ring-brand-blue has-[:checked]:bg-brand-blue/5 transition-all">
+                                        <input type="radio" name="payment-method" value="bsi"
+                                            class="accent-brand-blue w-4 h-4 flex-shrink-0">
+                                        <img src="img/bank/bsi.svg" alt="BSI" class="w-9 h-9 object-contain flex-shrink-0">
+                                        <span class="text-sm font-semibold text-slate-800 dark:text-slate-100">Transfer Bank BSI</span>
+                                    </label>
+                                    <label class="payment-option flex items-center gap-3 bg-slate-50 dark:bg-slate-800 rounded-xl px-4 py-3 cursor-pointer has-[:checked]:ring-2 has-[:checked]:ring-brand-blue has-[:checked]:bg-brand-blue/5 transition-all">
+                                        <input type="radio" name="payment-method" value="qris"
+                                            class="accent-brand-blue w-4 h-4 flex-shrink-0">
+                                        <img src="img/bank/qris.svg" alt="QRIS" class="w-9 h-9 object-contain flex-shrink-0">
+                                        <span class="text-sm font-semibold text-slate-800 dark:text-slate-100">QRIS</span>
+                                    </label>
+                                    <label class="payment-option flex items-center gap-3 bg-slate-50 dark:bg-slate-800 rounded-xl px-4 py-3 cursor-pointer has-[:checked]:ring-2 has-[:checked]:ring-brand-blue has-[:checked]:bg-brand-blue/5 transition-all">
+                                        <input type="radio" name="payment-method" value="xenith"
+                                            class="accent-brand-blue w-4 h-4 flex-shrink-0">
+                                        <span class="material-symbols-outlined text-brand-blue text-[28px]">credit_card</span>
+                                        <span class="flex flex-col">
+                                            <span class="text-sm font-semibold text-slate-800 dark:text-slate-100">Bayar Online</span>
+                                            <span class="text-xs text-slate-500 dark:text-slate-400">Virtual Account, QRIS, E-Wallet (otomatis terkonfirmasi)</span>
+                                        </span>
+                                    </label>
+                                    <label class="payment-option flex items-center gap-3 bg-slate-50 dark:bg-slate-800 rounded-xl px-4 py-3 cursor-pointer has-[:checked]:ring-2 has-[:checked]:ring-brand-blue has-[:checked]:bg-brand-blue/5 transition-all">
+                                        <input type="radio" name="payment-method" value="cod"
+                                            class="accent-brand-blue w-4 h-4 flex-shrink-0">
+                                        <span class="material-symbols-outlined text-brand-blue text-[28px]">payments</span>
+                                        <span class="text-sm font-semibold text-slate-800 dark:text-slate-100">COD (Bayar di Rumah)</span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            
+                            <div id="shipping-options" class="hidden">
+                                <label class="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-3">Pilih Kurir <span class="text-red-500">*</span></label>
+                                <div id="shipping-options-list" class="space-y-2 mb-5">
+                                    <p class="text-sm text-slate-400">Memuat ongkos kirim...</p>
+                                </div>
+                                <button id="btn-update-ongkir" type="button"
+                                    class="hidden w-full py-3 rounded-xl bg-brand-blue text-white font-bold text-sm hover:bg-brand-blue/90 transition disabled:opacity-50">
+                                    Update Ongkos Kirim
+                                </button>
+                            </div>
+                        </form>
+
+
+
+                    
+                    <div class="xl:hidden bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-32 p-6 md:p-8 shadow-sm">
+                        <h2 class="text-xl font-bold text-slate-900 dark:text-white mb-4 border-b border-slate-100 dark:border-slate-800 pb-3">Rincian Pembayaran</h2>
+                        <div class="space-y-3 text-sm font-medium">
+                            <div class="flex justify-between items-center text-slate-500 dark:text-slate-400">
+                                <span>Harga Normal</span>
+                                <span class="cart-normal-total font-bold text-slate-900 dark:text-white">Rp0</span>
+                            </div>
+                            <div id="ongkir-summary-row-mobile" class="hidden flex justify-between items-center">
+                                <span class="text-slate-500 dark:text-slate-400" id="ongkir-summary-label-mobile">Ongkos Kirim</span>
+                                <span class="font-semibold text-slate-800 dark:text-slate-100" id="ongkir-summary-price-mobile">-</span>
+                            </div>
+                            <div id="subsidy-row-mobile" class="hidden flex justify-between items-center text-green-600 dark:text-green-400">
+                                <span>Diskon Ongkir</span>
+                                <span class="font-semibold" id="subsidy-price-mobile">-</span>
+                            </div>
+                            <div class="flex justify-between items-center text-slate-500 dark:text-slate-400">
+                                <span class="text-red-400 dark:text-red-400">Diskon Barang</span>
+                                <span class="cart-discount font-bold text-red-500">-Rp0</span>
+                            </div>
+                            <div id="cod-fee-row-mobile" class="hidden flex justify-between items-center">
+                                <span class="text-slate-500 dark:text-slate-400">Biaya Admin COD (4%)</span>
+                                <span class="font-semibold text-slate-800 dark:text-slate-100" id="cod-fee-price-mobile">-</span>
+                            </div>
+                            <div id="voucher-row-mobile" class="hidden flex justify-between items-center text-emerald-600 dark:text-emerald-400">
+                                <span>Voucher XTRA</span>
+                                <span class="font-semibold" id="voucher-price-mobile">-Rp0</span>
+                            </div>
+                            <div class="h-px w-full bg-slate-100 dark:bg-slate-800"></div>
+                            <div class="flex justify-between items-center">
+                                <span class="font-bold text-slate-900 dark:text-white">Total Belanja</span>
+                                <span class="cart-total font-black text-xl text-brand-blue dark:text-brand-gold">Rp0</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                
+                <div class="xl:col-span-1">
+                    
+                    <div
+                        class="hidden xl:block bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-32 p-8 shadow-sm sticky top-32 animate-fade-in-up">
+                        <h2
+                            class="text-xl font-bold text-slate-900 dark:text-white mb-4 border-b border-slate-100 dark:border-slate-800 pb-3">
+                            Rincian Pembayaran</h2>
+                            <div class="space-y-3 text-sm font-medium">
+                                <div class="flex justify-between items-center text-slate-500 dark:text-slate-400">
+                                    <span>Harga Normal</span>
+                                    <span class="cart-normal-total font-bold text-slate-900 dark:text-white">Rp0</span>
+                                </div>
+                                <div id="ongkir-summary-row" class="hidden flex items-center justify-between text-sm">
+                                    <span class="text-slate-500 dark:text-slate-400" id="ongkir-summary-label">Ongkos Kirim</span>
+                                    <span class="font-semibold text-slate-800 dark:text-slate-100" id="ongkir-summary-price">-</span>
+                                </div>
+                                <div id="subsidy-row" class="hidden flex items-center justify-between text-sm text-green-600 dark:text-green-400">
+                                    <span>Diskon Ongkir</span>
+                                    <span class="font-semibold" id="subsidy-price">-</span>
+                                </div>
+                                <div class="flex justify-between items-center text-slate-500 dark:text-slate-400">
+                                    <span class="text-red-400 dark:text-red-400">Diskon Barang</span>
+                                    <span class="cart-discount font-bold text-red-500">-Rp0</span>
+                                </div>
+                                <div id="cod-fee-row" class="hidden flex items-center justify-between text-sm">
+                                    <span class="text-slate-500 dark:text-slate-400">Biaya Admin Bayar di Rumah (4%)</span>
+                                    <span class="font-semibold text-slate-800 dark:text-slate-100" id="cod-fee-price">-</span>
+                                </div>
+                                <div id="voucher-row" class="hidden flex items-center justify-between text-sm text-emerald-600 dark:text-emerald-400">
+                                    <span>Voucher XTRA</span>
+                                    <span class="font-semibold" id="voucher-price">-Rp0</span>
+                                </div>
+                                <div class="h-px w-full bg-slate-100 dark:bg-slate-800 my-4"></div>
+                                <div class="flex justify-between items-center">
+                                    <span class="font-bold text-lg text-slate-900 dark:text-white">Total Belanja</span>
+                                    <span
+                                        id="grand-total"
+                                        class="cart-total font-black text-2xl text-brand-blue dark:text-brand-gold">Rp0</span>
+                                </div>
+                            </div>
+                        <button
+                            class="btn-checkout-wa w-full mt-4 bg-green-600 text-white py-4 rounded-xl font-bold shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all flex items-center justify-center gap-2">
+                            <span class="material-symbols-outlined">shopping_bag_speed</span>
+                            Proses Checkout
+                        </button>
+                        <div class="mt-4 text-center">
+                            <span class="text-[10px] text-slate-400 uppercase tracking-widest font-bold">Aman •
+                                Terpercaya • Cepat</span>
+                        </div>
+                    </div>
+
+                    
+                    <div class="xl:hidden fixed bottom-0 left-0 w-full bg-white dark:bg-[#080e16] border-t border-slate-100 dark:border-slate-800 px-4 py-3 z-50 shadow-[0_-10px_30px_rgba(0,0,0,0.08)] transition-all duration-300">
+                        <div class="max-w-[600px] mx-auto flex items-center gap-3">
+                            <a href="shop.html"
+                                class="flex items-center justify-center w-12 h-12 bg-slate-100 dark:bg-slate-800 rounded-2xl text-slate-600 dark:text-slate-400 flex-shrink-0">
+                                <span class="material-symbols-outlined">arrow_back</span>
+                            </a>
+                            <div class="flex-1 min-w-0">
+                                <p class="text-xs text-slate-400 dark:text-slate-500 font-medium leading-none mb-0.5">Total Pembayaran</p>
+                                <span
+                                    id="grand-total-mobile"
+                                    class="cart-total font-black text-xl text-brand-blue dark:text-brand-gold leading-none">Rp0</span>
+                            </div>
+                            <button
+                                class="btn-checkout-wa flex-shrink-0 bg-green-600 hover:bg-green-700 text-white px-5 h-12 rounded-2xl font-bold shadow-lg flex items-center gap-2 transition-all">
+                                <span class="material-symbols-outlined text-[20px]">shopping_bag_speed</span>
+                                <span class="text-sm">Checkout</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            
+            <div id="empty-cart"
+                class="hidden flex flex-col items-center justify-center py-20 text-center animate-fade-in-up">
+                <div
+                    class="w-24 h-24 bg-slate-100 dark:bg-slate-800 rounded-full flex items-center justify-center text-slate-300 dark:text-slate-600 mb-6">
+                    <span class="material-symbols-outlined text-5xl">shopping_cart</span>
+                </div>
+                <h3 class="text-2xl font-bold text-slate-900 dark:text-white mb-2">Keranjang Anda Masih Kosong</h3>
+                <p class="text-slate-500 dark:text-slate-400 mb-8">Yuk, temukan Al-Quran custom impian Anda sekarang!
+                </p>
+                <a href="shop.html"
+                    class="bg-brand-blue dark:bg-brand-gold text-white dark:text-black font-bold py-4 px-10 rounded-full hover:shadow-lg transition-all hover:scale-105">Belanja
+                    Sekarang</a>
+            </div>
+
+        </section>
+    </main>
+
+    
+    <div id="loading-overlay" class="fixed inset-0 z-[100] bg-white/80 dark:bg-[#080e16]/80 backdrop-blur-sm hidden flex-col items-center justify-center">
+        <div class="w-12 h-12 border-4 border-brand-blue border-t-transparent rounded-full animate-spin mb-4"></div>
+        <p class="text-sm font-bold text-slate-700 dark:text-slate-300">Memproses pesanan...</p>
+    </div>
+
+    
+    <script src="https://unpkg.com/lenis@1.1.20/dist/lenis.min.js"></script>
+    <script src="script.js"></script>
+    <script>
+    document.addEventListener('DOMContentLoaded',function(){
+        var t=document.getElementById('theme-toggle');if(t){t.addEventListener('click',function(){var e=!document.documentElement.classList.contains('dark');document.documentElement.classList.toggle('dark',e);localStorage.setItem('theme',e?'dark':'light')})}
+        var h=document.querySelector('.header-sticky');if(h){!function s(){window.scrollY>10?h.classList.add('scrolled'):h.classList.remove('scrolled');window.addEventListener('scroll',s)}()}
+        var b=document.getElementById('mobile-menu-button'),m=document.getElementById('mobile-menu');if(b&&m){b.addEventListener('click',function(){m.classList.toggle('hidden')});m.querySelectorAll('a').forEach(function(l){l.addEventListener('click',function(){m.classList.add('hidden')})})}
+    });
+    </script>
+</body>
+
+</html>
+

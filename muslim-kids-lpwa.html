@@ -1,0 +1,773 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Al-Quran Custom Nama Muslim Kids - Hadiah Islami untuk Anak | Hamzah Quran</title>
+<meta property="og:title" content="Al-Quran Custom Nama Muslim Kids - Hadiah Islami untuk Anak | Hamzah Quran">
+<meta name="description" content="Al-Quran Custom Nama Anak dari Hamzah Quran. Dilengkapi 8 blok warna, tajwid warna, dan terjemah perkata untuk bantu anak belajar &amp; menghafal Quran lebih mudah.">
+<meta property="og:description" content="Al-Quran Custom Nama Anak dari Hamzah Quran. Dilengkapi 8 blok warna, tajwid warna, dan terjemah perkata untuk bantu anak belajar &amp; menghafal Quran lebih mudah.">
+<link rel="icon" href="https://cdn.scalev.com/uploads/1780839736/4goz7ncJsP9g_zsUYvIiJg/1780839736779-hamzah-only-color.png">
+<style>
+  .font-semibold { font-weight: 600; }
+  .italic { font-style: italic; }
+  .text-red-500 { color: #ef4444; }
+  .text-xs { font-size: 0.75rem; line-height: 1rem; }
+</style>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&amp;amp;amp;family=Plus+Jakarta+Sans:wght@700;800;900&amp;amp;amp;display=swap" rel="stylesheet">
+<style>
+    /* =====================
+       VARS & BASE
+    ===================== */
+    :root {
+      --display-font: 'Plus Jakarta Sans', sans-serif;
+      --sans-font: 'Inter', sans-serif;
+      --brand-blue: #0047B2;
+      --brand-blue-light: #1A5FB4;
+      --brand-red: #E60000;
+      --brand-gold: #ECA913;
+      --brand-green: #05B41C;
+      --text-dark: #0f172a;
+      --text-slate: #475569;
+      --text-light: #64748b;
+    }
+
+    body {
+      font-family: var(--sans-font);
+      background-color: #F8FBFF;
+      color: #334155;
+    }
+
+    .font-display { font-family: var(--display-font); }
+    .text-red-brand { color: #E60000; }
+    .text-blue-brand { color: #0047B2; }
+
+    /* =====================
+       ANIMATIONS
+    ===================== */
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes zoomIn {
+      from { opacity: 0; transform: scale(0.7); }
+      to   { opacity: 1; transform: scale(1); }
+    }
+
+    .animate-fade-in-up { animation: fadeInUp 0.8s ease-out forwards; }
+    .animate-zoom-in    { animation: zoomIn 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards; }
+
+    /* =====================
+       FEATURE CARD
+    ===================== */
+    .feature-card {
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      padding: 1.5rem;
+      border-radius: 1.5rem;
+    }
+    .feature-card:hover {
+      background-color: #fff;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.05);
+      transform: translateY(-8px);
+    }
+
+    /* =====================
+       CTA BUTTON
+    ===================== */
+    .btn-cta {
+      display: block;
+      background-color: #ECA913;
+      color: #fff;
+      font-family: var(--display-font);
+      font-weight: 900;
+      font-size: 1rem;
+      text-align: center;
+      padding: 1.2rem 2rem;
+      border-radius: 12px;
+      box-shadow: 0 20px 40px rgba(236,169,19,0.35);
+      text-decoration: none;
+      transition: all 0.25s ease;
+    }
+    .btn-cta:hover {
+      transform: scale(1.02);
+      box-shadow: 0 24px 48px rgba(236,169,19,0.45);
+    }
+    
+    .btn-submit {
+      display: block;
+      background-color: #05B41C;
+      color: #fff;
+      font-family: var(--display-font);
+      font-weight: 900;
+      font-size: 1rem;
+      text-align: center;
+      padding: 1.2rem 2rem;
+      border-radius: 12px;
+      box-shadow: 0 20px 40px rgba(5,180,28,0.3);
+      text-decoration: none;
+      transition: all 0.25s ease;
+      cursor: pointer;
+      border: none;
+      width: 100%;
+    }
+    .btn-submit:hover {
+      transform: scale(1.02);
+      box-shadow: 0 24px 48px rgba(5,180,28,0.3);
+    }
+
+    /* =====================
+       DIVIDER
+    ===================== */
+    .divider-blue {
+      border: none;
+      border-top: 3px solid #09AFED;
+      margin: 2rem 0;
+    }
+
+    /* =====================
+       TESTI CARD
+    ===================== */
+    .testi-card {
+      background: #fff;
+      border: 1.5px solid #dbeafe;
+      border-radius: 2rem;
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      box-shadow: 0 2px 12px rgba(26,95,180,0.04);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .testi-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 28px rgba(26,95,180,0.1);
+    }
+
+    /* =====================
+       BADGE AVATAR
+    ===================== */
+    .avatar-badge {
+      width: 2.5rem;
+      height: 2.5rem;
+      border-radius: 9999px;
+      background-color: #EFF6FF;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: #1A5FB4;
+      flex-shrink: 0;
+    }
+
+    /* =====================
+       PRICE BLOCK
+    ===================== */
+    .price-strike {
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: #E60000;
+      text-decoration: line-through;
+      opacity: 0.8;
+    }
+    .price-special {
+      font-family: var(--display-font);
+      font-size: 2.4rem;
+      font-weight: 900;
+      color: #0047B2;
+    }
+
+    /* =====================
+       FEATURE ROW
+    ===================== */
+    .feature-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      padding: 0.75rem 0;
+      border-bottom: 1px dashed #e2e8f0;
+    }
+    .feature-row:last-child { border-bottom: none; }
+    .feature-icon {
+      font-size: 1.5rem;
+      flex-shrink: 0;
+      line-height: 1.4;
+    }
+    .feature-text {
+      font-size: 1rem;
+      font-weight: 600;
+      color: #1e293b;
+      line-height: 1.5;
+    }
+
+        /* =====================
+       SECTION WRAP BASE
+    ===================== */
+    .section-wrap {
+      max-width: 640px;
+      margin: 0 auto;
+      padding-left: 1.5rem;
+      padding-right: 1.5rem;
+    }
+
+    @media (min-width: 640px) {
+      .testi-grid { grid-template-columns: repeat(3, 1fr) !important; }
+    }
+
+    /* =====================
+       720px BREAKPOINT
+    ===================== */
+    @media (min-width: 720px) {
+      .section-wrap {
+        max-width: 800px;
+        padding-left: 3rem;
+        padding-right: 3rem;
+      }
+      main { padding-bottom: 6rem; }
+      .testi-grid { grid-template-columns: repeat(3, 1fr) !important; }
+    }
+</style>
+<style>
+  .slideshow {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    border-radius: 1rem;
+  }
+  .slideshow .slide {
+    display: none;
+    width: 100%;
+    border-radius: 1rem;
+    aspect-ratio: 0.85/1;
+    object-fit: cover;
+  }
+  .slideshow .slide.active { display: block; }
+  .slideshow-dots {
+    text-align: center;
+    margin-top: 0.75rem;
+    display: flex;
+    justify-content: center;
+    gap: 0.4rem;
+  }
+  .slideshow-dots .dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 9999px;
+    background: #cbd5e1;
+    cursor: pointer;
+    transition: background 0.3s ease, width 0.3s ease;
+    display: inline-block;
+  }
+  .slideshow-dots .dot.active {
+    background: #1A5FB4;
+    width: 20px;
+  }
+
+    /* =====================
+       COVER THUMBNAIL STRIP
+    ===================== */
+    .cover-thumb {
+      flex-shrink: 0;
+      width: 64px;
+      cursor: pointer;
+      border-radius: 10px;
+      overflow: hidden;
+      border: 2px solid transparent;
+      transition: border-color 0.2s ease, transform 0.2s ease;
+      display: flex;
+    }
+    .cover-thumb img {
+      width: 64px;
+      height: 80px;
+      object-fit: cover;
+      display: block;
+    }
+    .cover-thumb.active-thumb {
+      border-color: var(--brand-blue-light);
+    }
+    .cover-thumb:hover {
+      transform: scale(1.05);
+    }
+</style>
+  <style>
+#cover-thumb-strip::-webkit-scrollbar{display:none}
+  </style>
+
+<script>
+    !function (f, b, e, v, n, t, s) {
+        if (f.fbq) return; n = f.fbq = function () {
+            n.callMethod ?
+                n.callMethod.apply(n, arguments) : n.queue.push(arguments)
+        };
+        if (!f._fbq) f._fbq = n; n.push = n; n.loaded = !0; n.version = '2.0';
+        n.queue = []; t = b.createElement(e); t.async = !0;
+        t.src = v; s = b.getElementsByTagName(e)[0];
+        s.parentNode.insertBefore(t, s)
+    }(window, document, 'script',
+        'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '1767415744634833');
+    fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+        src="https://www.facebook.com/tr?id=1767415744634833&ev=PageView&noscript=1" /></noscript>
+
+</head>
+<body>
+
+
+
+  <main style="background:#F8FBFF; padding-bottom: 5rem; max-width:600px; margin:0 auto;">
+
+    
+    <div style="max-width:640px;margin:0 auto;padding:1.5rem;text-align:center;">
+      <img src="https://hamzahquran.my.id/img/hamzahcolor.png" alt="Hamzah Quran" style="height:40px;width:auto;display:inline-block;" onerror="this.style.display='none'">
+    </div>
+
+    
+    <section class="section-wrap animate-fade-in-up" style="text-align:center;padding-top:1.5rem;padding-bottom:2rem;">
+      <h1 class="font-display" style="font-size:clamp(1.8rem,5vw,2.8rem);font-weight:900;color:#0f172a;line-height:1.25;margin-bottom:1rem;">
+        Bingung Cari <span class="text-red-brand">Hadiah Bermakna</span><br>untuk Anak? 🎁
+      </h1>
+      <p class="font-display" style="font-size:clamp(1.1rem,3vw,1.4rem);font-weight:700;color:#475569;line-height:1.5;">
+        Ini jawabannya —
+        <span class="text-red-brand">Al-Quran yang bikin anak bangga punya namanya sendiri!</span> ✨
+      </p>
+    </section>
+
+    
+    <section class="section-wrap" style="padding-bottom:2.5rem;">
+      <img src="https://cdn.scalev.com/uploads/1780304022/vj8FJcyQ9OGX0pk5rqABCA/1780304021501-review.webp" alt="Al-Quran Custom Kidz Hamzah Quran" style="max-width:500px;border-radius:1.5rem;box-shadow:0 20px 48px rgba(0,0,0,0.12);aspect-ratio:1/1;object-fit:cover;" loading="eager">
+    </section>
+
+    
+    <section class="section-wrap" style="padding-bottom:2.5rem;">
+      <div style="background:#fff;border-radius:2rem;border:1.5px solid #dbeafe;padding:2rem;box-shadow:0 2px 16px rgba(26,95,180,0.05);">
+        <h2 class="font-display" style="font-size:1.2rem;font-weight:800;color:#0f172a;margin-bottom:1.25rem;">
+          Pasti pernah mikirin ini kan...
+        </h2>
+        <div style="display:flex;flex-direction:column;gap:1rem;">
+          <div style="display:flex;gap:0.75rem;text-align:left;">
+            <span style="flex-shrink:0;font-size:1.1rem;">👉</span>
+            <span style="font-size:0.95rem;color:#475569;line-height:1.6;">
+              <strong style="color:#0f172a;">Hadiah yang beneran kepake,</strong> bukan cuma pajangan doang
+            </span>
+          </div>
+          <div style="display:flex;gap:0.75rem;text-align:left;">
+            <span style="flex-shrink:0;font-size:1.1rem;">👉</span>
+            <span style="font-size:0.95rem;color:#475569;line-height:1.6;">
+              <strong style="color:#0f172a;">Anak seneng nerima hadiahnya,</strong> bukan senyum basa-basi
+            </span>
+          </div>
+          <div style="display:flex;gap:0.75rem;text-align:left;">
+            <span style="flex-shrink:0;font-size:1.1rem;">👉</span>
+            <span style="font-size:0.95rem;color:#475569;line-height:1.6;">
+              <strong style="color:#0f172a;">Ada nilai ibadahnya,</strong> bukan sekadar barang
+            </span>
+          </div>
+          <div style="display:flex;gap:0.75rem;text-align:left;">
+            <span style="flex-shrink:0;font-size:1.1rem;">👉</span>
+            <span style="font-size:0.95rem;color:#475569;line-height:1.6;">
+              <strong style="color:#0f172a;">Bisa diinget terus,</strong> karena ada nama anaknya langsung di sana
+            </span>
+          </div>
+          <div style="display:flex;gap:0.75rem;text-align:left;">
+            <span style="flex-shrink:0;font-size:1.1rem;">👉</span>
+            <span style="font-size:0.95rem;color:#475569;line-height:1.6;">
+              <strong style="color:#0f172a;">Bantu anak lebih semangat ngaji,</strong> bukan malah males-malesan
+            </span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    
+    <div class="section-wrap">
+      <hr class="divider-blue">
+    </div>
+
+    
+    <section class="section-wrap animate-fade-in-up" style="padding:1.75rem 1.5rem;text-align:center;">
+      <p class="font-display" style="font-size:clamp(1.1rem,3vw,1.35rem);font-weight:800;color:#0f172a;line-height:1.5;">
+        Nah, hadiah yang kayak gitu emang ada.<br>Dan anak-anak usia SD langsung suka! 😍
+      </p>
+    </section>
+
+    
+    <section class="section-wrap" style="text-align:center;padding-bottom:1.5rem;">
+      <div style="background:#EFF6FF;border-radius:9999px;display:inline-block;padding:0.4rem 1.25rem;margin-bottom:0.75rem;">
+        <span style="font-size:0.8rem;font-weight:700;color:#1A5FB4;letter-spacing:0.08em;text-transform:uppercase;">dari Hamzah Quran</span>
+      </div>
+      <h2 class="font-display" style="font-size:clamp(1.8rem,5vw,2.5rem);font-weight:900;color:#0047B2;line-height:1.2;">
+      Al-Quran Custom<br> Muslim Kids
+      </h2>
+    </section>
+
+    
+    <section class="section-wrap" style="padding-bottom:2.5rem;">
+      <img src="https://cdn.scalev.com/uploads/1780305377/aGNRAUtlgd5_Uaos1LVcQw/1780305375791-ChatGPT-Image-1-Jun-2026,-16.16.03.webp" alt="Cover Al-Quran Custom Kidz" style="width:100%;border-radius:1.5rem;box-shadow:0 20px 48px rgba(0,0,0,0.12);aspect-ratio:4/5;object-fit:cover;" loading="lazy">
+    </section>
+
+    
+    <section class="section-wrap" style="padding-bottom:2.5rem;">
+      <div style="background:#fff;border-radius:2.5rem;border:1.5px solid #dbeafe;overflow:hidden;box-shadow:0 4px 24px rgba(26,95,180,0.06);">
+        <div style="background:#FFFBEB;padding:1.25rem 1.5rem;text-align:center;border-bottom:1.5px solid #FDE68A;">
+          <h2 class="font-display" style="font-size:1.25rem;font-weight:900;color:#0f172a;">
+            Kenapa ini jadi hadiah yang beda dari yang lain? 🤔
+          </h2>
+        </div>
+        <div style="padding:1.5rem;display:flex;flex-direction:column;gap:0;">
+          <div class="feature-row">
+            <span class="feature-icon">🌟</span>
+            <span class="feature-text">Ada nama anak langsung di cover &amp; punggung Qurannya — personal banget! 🎁</span>
+          </div>
+          <div style="padding:1rem 0;">
+            <img src="https://cdn.scalev.com/uploads/1780306583/Vi-wfKWaBUnjpl3Lhk5KIg/1780306581846-ChatGPT-Image-1-Jun-2026,-16.27.51-copy.webp" alt="Custom Nama di Cover Quran" style="width:100%;border-radius:1rem;aspect-ratio:1/1;object-fit:cover;" loading="lazy">
+          </div>
+          <div class="feature-row">
+            <span class="feature-icon">🌟</span>
+            <span class="feature-text">8 Blok Warna bantu anak hafal surat lebih cepat &amp; lebih fun 🎨</span>
+          </div>
+          <div class="feature-row">
+            <span class="feature-icon">🌟</span>
+            <span class="feature-text">Tajwid warna — belajar ngaji yang bener, tapi visual &amp; gampang dipahami 🌈</span>
+          </div>
+          <div class="feature-row">
+            <span class="feature-icon">🌟</span>
+            <span class="feature-text">Tanda Tanafus — anak bisa atur nafas saat ngaji, bacaan jadi lebih lancar 😍</span>
+          </div>
+          <div class="feature-row">
+            <span class="feature-icon">🌟</span>
+            <span class="feature-text">Terjemah perkata — anak ngerti isi surat yang dia baca, bukan hafal buta 🤩</span>
+          </div>
+          <div style="padding:1rem 0 0;">
+            <img src="https://cdn.scalev.com/uploads/1780308977/lOsys2QA4REyWOzy6nDSuw/1780308976587-fitur-alquran.webp" alt="Fitur Isi Quran Custom Kidz" style="width:100%;border-radius:1rem;object-fit:cover;" loading="lazy">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    
+    <section class="section-wrap animate-fade-in-up" style="text-align:center;padding:1.5rem;">
+      <p class="font-display" style="font-size:clamp(1.1rem,3vw,1.35rem);font-weight:800;color:#0f172a;line-height:1.5;">
+        Anak-anak yang dapet hadiah ini langsung excited mau ngaji.<br>
+        <span style="color:#1A5FB4;">Orang tuanya yang terharu.</span> 🥹
+      </p>
+    </section>
+    
+    
+    <section class="section-wrap" style="padding-bottom:2.5rem;">
+      <img src="https://cdn.scalev.com/uploads/1780310424/dvgavW1SLsei9ZJ5TJPE2Q/1780310423021-ChatGPT-Image-1-Jun-2026,-17.39.51.webp" alt="Showcase Produk Quran Custom Kidz" style="width:100%;border-radius:1.5rem;box-shadow:0 20px 48px rgba(0,0,0,0.12);object-fit:cover;" loading="lazy">
+    </section>
+
+    
+    <div class="section-wrap">
+      <hr class="divider-blue">
+    </div>
+    
+        
+    <section style="max-width:500px;margin:0 auto;padding:3rem 1.5rem 2rem;border-top:1.5px solid #dbeafe;">
+      <div style="display:flex;align-items:center;gap:1rem;margin-bottom:2rem;">
+        <h2 class="font-display" style="font-size:1.2rem;font-weight:900;color:#0f172a;white-space:nowrap;">
+          Kata mereka yang udah order:
+        </h2>
+        <div style="flex:1;height:1.5px;background:#dbeafe;"></div>
+      </div>
+
+    
+<div style="display: flex; flex-direction: column; gap: 1.5rem; margin: 0 auto">
+
+  
+  <div class="testi-card" style="display: flex; flex-direction: column; gap: 0.75rem; background: #ffffff; border: 1px solid #e2e8f0; padding: 1.25rem; border-radius: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.05);">
+    
+    <div style="font-size:1rem; letter-spacing:2px;">⭐⭐⭐⭐⭐</div>
+    
+    
+    <div style="display:flex; align-items:center; gap:0.75rem;">
+      <div class="avatar-badge" style="width: 40px; height: 40px; background: #eff6ff; color: #1e40af; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.85rem;">
+        AM
+      </div>
+      <div>
+        <p style="font-size:0.9rem; font-weight:700; color:#0f172a; margin:0;">Anisa Mulyani</p>
+        <p style="font-size:0.75rem; color:#94a3b8; margin:0;">Ibu Rumah Tangga</p>
+      </div>
+    </div>
+
+    
+    <div style="width: 100%; border-radius: 8px; overflow: hidden; margin-top: 0.25rem;">
+      <img src="https://cdn.scalev.com/uploads/1780803486/EFAeXKyKdfPPb2r9LcTCnA/1780803485636-id-11134103-8224u-mk4t6d34r30i58.webp" alt="Bukti Review Anisa Mulyani" style="width: 100%; height: auto; display: block; border-radius: 8px;">
+    </div>
+    
+    
+    <p style="font-size:0.9rem; color:#475569; line-height:1.65; margin:0;">
+      "MasyaAllah tabarakallah, paketnya cepet banget sampai. Packingnya aman pakai bubble wrap tebal. Al-Quran custom namanya bagus, cetakan jelas, dan anak saya suka banget langsung mau ngaji!"
+    </p>
+  </div>
+
+
+  
+  <div class="testi-card" style="display: flex; flex-direction: column; gap: 0.75rem; background: #ffffff; border: 1px solid #e2e8f0; padding: 1.25rem; border-radius: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.05);">
+    
+    <div style="font-size:1rem; letter-spacing:2px;">⭐⭐⭐⭐⭐</div>
+    
+    
+    <div style="display:flex; align-items:center; gap:0.75rem;">
+      <div class="avatar-badge" style="width: 40px; height: 40px; background: #f0fdf4; color: #166534; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.85rem;">
+        SE
+      </div>
+      <div>
+        <p style="font-size:0.9rem; font-weight:700; color:#0f172a; margin:0;">Shintiya Erni</p>
+        <p style="font-size:0.75rem; color:#94a3b8; margin:0;">Guru SD</p>
+      </div>
+    </div>
+
+    
+    <div style="width: 100%; border-radius: 8px; overflow: hidden; margin-top: 0.25rem;">
+      <img src="https://cdn.scalev.com/uploads/1780803497/ary3FAMlKbUp86WU1f4_Nw/1780803496530-id-11134103-822wq-mmo63jj2yn7odc.webp" alt="Bukti Review Shintiya Erni" style="width: 100%; height: auto; display: block; border-radius: 8px;">
+    </div>
+    
+    
+    <p style="font-size:0.9rem; color:#475569; line-height:1.65; margin:0;">
+      "Saya rekomendasiin ini ke murid-murid, soalnya 8 blok warnanya beneran bantu hafalan. Orang tua siswa pada pesen juga haha 😄"
+    </p>
+  </div>
+
+
+  
+  <div class="testi-card" style="display: flex; flex-direction: column; gap: 0.75rem; background: #ffffff; border: 1px solid #e2e8f0; padding: 1.25rem; border-radius: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.05);">
+    
+    <div style="font-size:1rem; letter-spacing:2px;">⭐⭐⭐⭐⭐</div>
+    
+    
+    <div style="display:flex; align-items:center; gap:0.75rem;">
+      <div class="avatar-badge" style="width: 40px; height: 40px; background: #fdf2f8; color: #9d174d; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.85rem;">
+        RH
+      </div>
+      <div>
+        <p style="font-size:0.9rem; font-weight:700; color:#0f172a; margin:0;">Rini Handayani</p>
+        <p style="font-size:0.75rem; color:#94a3b8; margin:0;">Orang Tua Wali</p>
+      </div>
+    </div>
+
+    
+    <div style="width: 100%; border-radius: 8px; overflow: hidden; margin-top: 0.25rem;">
+      <img src="https://cdn.scalev.com/uploads/1780803478/cxK6Ycl9WL5Ek46q-PRfOw/1780803477713-id-11134103-7ras8-m5o7l88k0togf0.webp" alt="Bukti Review Rini Handayani" style="width: 100%; height: auto; display: block; border-radius: 8px;">
+    </div>
+    
+    
+    <p style="font-size:0.9rem; color:#475569; line-height:1.65; margin:0;">
+      "Sengaja beli buat kado ulang tahun ponakan. Pas datang beneran premium banget tampilannya, kertasnya adem di mata. Custom namanya juga bener gak ada typo. Recommended seller!"
+    </p>
+  </div>
+
+</div>
+    </section>
+
+    
+    <section class="section-wrap animate-fade-in-up" style="text-align:center;padding:1.75rem 1.5rem;">
+      <p class="font-display" style="font-size:clamp(1.1rem,3vw,1.35rem);font-weight:800;color:#0f172a;line-height:1.5;">
+        Spesial buat kamu yang mau kasih hadiah paling berkesan —<br>
+        <span style="color:#ECA913;">hari ini ada harga khusus lho 🎉</span>
+      </p>
+    </section>
+
+    
+<section id="harga" class="section-wrap" style="text-align:center;padding-bottom:2rem;">
+      <div style="background:#fff;border-radius:2rem;border:1.5px solid #dbeafe;padding:2rem;box-shadow:0 4px 24px rgba(26,95,180,0.06); max-width:420px; margin:0 auto;">
+        <p style="font-size:0.95rem;font-weight:600;color:#94a3b8;margin-bottom:0.5rem;">Harga Normal:</p>
+        <p class="price-strike">Rp 229.000</p>
+        <p class="price-strike" style="margin-bottom:1.25rem;">Rp 179.000</p>
+        <div style="height:1.5px;background:#e2e8f0;margin:1.25rem 0;"></div>
+        <p style="font-size:0.95rem;font-weight:700;color:#475569;margin-bottom:0.5rem;">Harga Spesial Sekarang:</p>
+        <p class="price-special" id="live-promo-header-price">Rp 139.000</p>
+        
+        <div style="display:inline-block; background-color:#f0fdf4; border:1px solid #bbf7d0; color:#166534; font-size:0.85rem; font-weight:800; padding:0.4rem 1.25rem; border-radius:9999px; margin-top:0.75rem; letter-spacing: 0.05em; text-transform: uppercase; box-shadow: 0 4px 12px rgba(22,101,52,0.06);">
+          🚚 Gratis Ongkir
+        </div>
+
+        <p style="font-size:0.85rem;font-weight:600;color:#64748b;margin-top:0.75rem;">( Khusus pembelian hari ini aja ya! )</p>
+        <a href="https://wa.me/6285155060816?text=Halo%20admin%2C%20saya%20ingin%20pesan%20Al%20Quran%20Custom%20Nama%20seri%20Muslim%20Kids.%20Bagaimana%20cara%20ordernya%3F" class="btn-cta" style="font-size:1.15rem;margin-top:1.25rem;" onclick="trackLead()">
+          → Pesan Sekarang
+        </a>
+      </div>
+    </section>
+
+    
+    <section class="section-wrap" style="padding-bottom:1.5rem; padding-top:1.5rem;">
+      <div>
+        <img src="https://cdn.scalev.com/uploads/1780310768/0Y7oaIq11ZXLEBAYZncAUg/1780310766754-ChatGPT-Image-1-Jun-2026,-17.45.49.webp" alt="Bonus Produk" style="width:100%;border-radius:1rem;object-fit:cover;" loading="lazy">
+      </div>
+    </section>
+
+    
+    <section class="section-wrap" style="padding-bottom:2.5rem;">
+      <div style="background:#fff;border-radius:2rem;border:1.5px solid #dbeafe;padding:1.5rem;box-shadow:0 4px 24px rgba(26,95,180,0.06);">
+        <h3 class="font-display" style="font-size:1.1rem;font-weight:900;color:#0f172a;text-align:center;margin-bottom:1.25rem;">
+          Pilihan Desain Cover 🎨
+        </h3>
+
+        
+        <div style="position:relative;width:100%;border-radius:1rem;overflow:hidden;margin-bottom:1rem;">
+          <img id="cover-main-img" src="https://cdn.scalev.com/uploads/1780369565/JqDDE-7haM7ESTiPX-xWeg/1780369565041-Muslim-Kids-Series-12_comp.webp" alt="Night Sky" style="width:100%;aspect-ratio:3/4;object-fit:cover;display:block;border-radius:1rem;">
+        </div>
+
+        
+        <div style="display:flex;gap:0.5rem;overflow-x:auto;padding-bottom:0.25rem;scrollbar-width:none;">
+          
+          <div id="cover-thumb-strip" style="display:flex;gap:0.5rem;">
+
+            <div class="cover-thumb active-thumb" data-name="Night Sky" data-src="https://cdn.scalev.com/uploads/1780369565/JqDDE-7haM7ESTiPX-xWeg/1780369565041-Muslim-Kids-Series-12_comp.webp">
+              <img src="https://cdn.scalev.com/uploads/1780369565/JqDDE-7haM7ESTiPX-xWeg/1780369565041-Muslim-Kids-Series-12_comp.webp" alt="Night Sky">
+            </div>
+
+            <div class="cover-thumb" data-name="Football Boy" data-src="https://cdn.scalev.com/uploads/1780369570/F-KTvuQRJZNCQUlbWn69GA/1780369570680-Muslim-Kids-Series-5_comp.webp">
+              <img src="https://cdn.scalev.com/uploads/1780369570/F-KTvuQRJZNCQUlbWn69GA/1780369570680-Muslim-Kids-Series-5_comp.webp" alt="Football Boy">
+            </div>
+
+            <div class="cover-thumb" data-name="Smart Girl" data-src="https://cdn.scalev.com/uploads/1780369579/rvf-w0cwXNIQ8J9RSebLWQ/1780369579038-Muslim-Kids-Series-4_comp.webp">
+              <img src="https://cdn.scalev.com/uploads/1780369579/rvf-w0cwXNIQ8J9RSebLWQ/1780369579038-Muslim-Kids-Series-4_comp.webp" alt="Smart Girl">
+            </div>
+
+            <div class="cover-thumb" data-name="Rocket Boy" data-src="https://cdn.scalev.com/uploads/1780369595/1GN5IKO3w1cgnI5iNJIAoA/1780369595515-Muslim-Kids-Series-8_comp.webp">
+              <img src="https://cdn.scalev.com/uploads/1780369595/1GN5IKO3w1cgnI5iNJIAoA/1780369595515-Muslim-Kids-Series-8_comp.webp" alt="Rocket Boy">
+            </div>
+
+            <div class="cover-thumb" data-name="Basket Boy" data-src="https://cdn.scalev.com/uploads/1780369600/AlB7clwz_8n9bkBRx-9zMA/1780369600304-Muslim-Kids-Series-9_comp.webp">
+              <img src="https://cdn.scalev.com/uploads/1780369600/AlB7clwz_8n9bkBRx-9zMA/1780369600304-Muslim-Kids-Series-9_comp.webp" alt="Basket Boy">
+            </div>
+
+            <div class="cover-thumb" data-name="Galaxy" data-src="https://cdn.scalev.com/uploads/1780369607/OXZAvvyJ60wTQCaCWTv_9A/1780369606772-Muslim-Kids-Series-7_comp.webp">
+              <img src="https://cdn.scalev.com/uploads/1780369607/OXZAvvyJ60wTQCaCWTv_9A/1780369606772-Muslim-Kids-Series-7_comp.webp" alt="Galaxy">
+            </div>
+
+            <div class="cover-thumb" data-name="Pinky Girl" data-src="https://cdn.scalev.com/uploads/1780369613/UHrf5gqXSLqf0DBP-VX4iw/1780369613012-Muslim-Kids-Series-10_comp.webp">
+              <img src="https://cdn.scalev.com/uploads/1780369613/UHrf5gqXSLqf0DBP-VX4iw/1780369613012-Muslim-Kids-Series-10_comp.webp" alt="Pinky Girl">
+            </div>
+
+            <div class="cover-thumb" data-name="Sky Blue" data-src="https://cdn.scalev.com/uploads/1780369619/f7H37kLHbLaeHGihDJrz1Q/1780369618742-Muslim-Kids-Series-6_comp.webp">
+              <img src="https://cdn.scalev.com/uploads/1780369619/f7H37kLHbLaeHGihDJrz1Q/1780369618742-Muslim-Kids-Series-6_comp.webp" alt="Sky Blue">
+            </div>
+
+            <div class="cover-thumb" data-name="Latte Brown" data-src="https://cdn.scalev.com/uploads/1780369625/zp2IKoskl04D4IJjGnd43w/1780369625601-Muslim-Kids-Series-11_comp.webp">
+              <img src="https://cdn.scalev.com/uploads/1780369625/zp2IKoskl04D4IJjGnd43w/1780369625601-Muslim-Kids-Series-11_comp.webp" alt="Latte Brown">
+            </div>
+
+            <div class="cover-thumb" data-name="Dino Brown" data-src="https://cdn.scalev.com/uploads/1780369633/CpynV-LqD9EtD-bCWbPU6Q/1780369632837-Muslim-Kids-Series-3_comp.webp">
+              <img src="https://cdn.scalev.com/uploads/1780369633/CpynV-LqD9EtD-bCWbPU6Q/1780369632837-Muslim-Kids-Series-3_comp.webp" alt="Dino Brown">
+            </div>
+
+            <div class="cover-thumb" data-name="Star Black" data-src="https://cdn.scalev.com/uploads/1780369651/xsSaVMyoQsmcApWnofpzdg/1780369650776-Muslim-Kids-Series_comp.webp">
+              <img src="https://cdn.scalev.com/uploads/1780369651/xsSaVMyoQsmcApWnofpzdg/1780369650776-Muslim-Kids-Series_comp.webp" alt="Star Black">
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+
+
+        
+    <section id="CTA" class="section-wrap animate-fade-in-up" style="text-align:center;padding:1.75rem 1.5rem 1.25rem;">
+      <h2 class="font-display" style="font-size:clamp(1.4rem,4vw,1.8rem);font-weight:900;color:#0f172a;line-height:1.3;margin-bottom:0.5rem;">
+        Siap kasih hadiah yang bikin anak bangga? 🎁
+      </h2>
+      <p style="font-size:0.95rem;font-weight:600;color:#64748b;">Order sekarang, proses cepat!</p>
+    </section>
+
+    
+    <div class="section-wrap">
+      <hr class="divider-blue">
+    </div>
+
+    
+    <section class="section-wrap" style="padding-bottom:2rem;">
+      <div style="background:#fff;border-radius:2rem;border:1.5px solid #dbeafe;padding:1.25rem;">
+        <div class="slideshow">
+          <img src="https://cdn.scalev.com/uploads/1780363820/-mTRwRqo1N8frzp7GkZ-IQ/1780363820569-serang.webp" class="slide active" alt="Screenshot Testimoni Pembeli" loading="lazy">
+          <img src="https://cdn.scalev.com/uploads/1780363815/ZMu0tam4xfAMckc59xyRgA/1780363814585-reiza.webp" class="slide" alt="Screenshot Testimoni Pembeli 2" loading="lazy">
+          <div class="slideshow-dots">
+            <span class="dot active" onclick="goToSlide(0)"></span>
+            <span class="dot" onclick="goToSlide(1)"></span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    
+    <section class="section-wrap" style="padding-bottom:5rem;">
+      <p style="text-align:center;font-weight:700;color:#64748b;margin-bottom:1rem;">Jangan sampe kehabisan bonusnya ya! 😄</p>
+      <a href="https://wa.me/6285155060816?text=Halo%20admin%2C%20saya%20ingin%20pesan%20Al%20Quran%20Custom%20Nama%20seri%20Muslim%20Kids.%20Bagaimana%20cara%20ordernya%3F" class="btn-cta" onclick="trackLead()">→ Pesan Sekarang</a>
+    </section>
+
+  </main>
+
+
+
+  
+  
+
+
+
+
+
+<script>
+
+
+    //  10. Automated Live Testimony Media Slideshow Controller Interface
+    document.addEventListener('DOMContentLoaded', function () {
+      var testiSection = document.querySelector('[style*="grid-template-columns:1fr"]');
+      if (testiSection) testiSection.classList.add('testi-grid');
+
+      var slides = document.querySelectorAll('.slideshow .slide');
+      var dots = document.querySelectorAll('.slideshow-dots .dot');
+      var currentSlide = 0;
+
+      function showSlide(index) {
+        slides.forEach(function(s) { s.classList.remove('active'); });
+        dots.forEach(function(d) { d.classList.remove('active'); });
+        currentSlide = (index + slides.length) % slides.length;
+        if(slides[currentSlide]) slides[currentSlide].classList.add('active');
+        if(dots[currentSlide]) dots[currentSlide].classList.add('active');
+      }
+
+      window.goToSlide = function(index) { showSlide(index); };
+
+      setInterval(function() {
+        showSlide(currentSlide + 1);
+      }, 3000);
+    });
+  
+
+    // Cover Thumbnail Picker
+    document.addEventListener('DOMContentLoaded', function () {
+      var mainImg   = document.getElementById('cover-main-img');
+      var mainLabel = document.getElementById('cover-main-label');
+      var thumbs    = document.querySelectorAll('.cover-thumb');
+
+      thumbs.forEach(function (thumb) {
+        thumb.addEventListener('click', function () {
+          thumbs.forEach(function (t) { t.classList.remove('active-thumb'); });
+          thumb.classList.add('active-thumb');
+          mainImg.src        = thumb.dataset.src;
+          mainImg.alt        = thumb.dataset.name;
+          mainLabel.innerText = thumb.dataset.name;
+          // scroll thumb ke tengah
+          thumb.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+        });
+      });
+    });
+
+
+
+    // Track Lead event
+    function trackLead() {
+      if (typeof fbq !== 'undefined') fbq('track', 'Lead');
+    }
+
+
+</script>
+</body>
+</html>
+
+

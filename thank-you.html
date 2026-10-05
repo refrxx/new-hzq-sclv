@@ -210,17 +210,17 @@
         const container = document.getElementById('thankyou-content');
 
         const paymentLabels = {
-            bca: 'Transfer Bank BCA',
-            bsi: 'Transfer Bank BSI',
-            qris: 'QRIS',
+            xenith: 'Bayar Online (Xenith)',
             cod: 'Bayar di Rumah'
         };
 
         let paymentSpecificHtml = '';
         let icon = '';
+        let paymentHint = '';
 
         if (paymentMethod === 'bca' || paymentMethod === 'bsi') {
             icon = '🏦';
+            paymentHint = `Selesaikan pembayaran via ${paymentLabels[paymentMethod]}`;
             paymentSpecificHtml = `
                 <div class="bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-32 p-6 md:p-8 shadow-sm animate-fade-in-up" style="animation-delay: 200ms">
                     <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-4">Data Rekening</h3>
@@ -252,6 +252,7 @@
             `;
         } else if (paymentMethod === 'qris') {
             icon = '📱';
+            paymentHint = 'Selesaikan pembayaran via QRIS';
             paymentSpecificHtml = `
                 <div class="bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-32 p-6 md:p-8 shadow-sm animate-fade-in-up" style="animation-delay: 200ms">
                     <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-4 text-center">Scan QRIS untuk Bayar</h3>
@@ -267,8 +268,26 @@
                     </a>
                 </div>
             `;
+        } else if (paymentMethod === 'xenith') {
+            icon = '💳';
+            paymentHint = 'Lanjutkan pembayaran online di halaman Xenith';
+            paymentSpecificHtml = `
+                <div class="bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-32 p-6 md:p-8 shadow-sm animate-fade-in-up" style="animation-delay: 200ms">
+                    <div class="flex items-start gap-3">
+                        <span class="material-symbols-outlined text-brand-blue dark:text-brand-gold text-3xl">credit_card</span>
+                        <div>
+                            <p class="text-sm text-slate-500 dark:text-slate-400">Pesanan ini memakai Bayar Online. Halaman pembayaran Xenith tidak terbuka, jadi klik tombol di bawah untuk melanjutkan.</p>
+                            <a href="pesanan-saya.html"
+                                class="mt-4 inline-flex items-center gap-2 bg-brand-blue dark:bg-brand-gold text-white dark:text-black font-bold py-3 px-6 rounded-xl text-sm hover:opacity-90 transition-all">
+                                <span class="material-symbols-outlined">receipt_long</span> Lihat Status Pembayaran
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            `;
         } else {
             icon = '🚚';
+            paymentHint = 'Pembayaran dilakukan saat barang tiba (COD)';
             paymentSpecificHtml = `
                 <div class="bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-32 p-6 md:p-8 shadow-sm animate-fade-in-up" style="animation-delay: 200ms">
                     <div class="flex items-start gap-3">
@@ -298,7 +317,7 @@
                     <span class="material-symbols-outlined text-green-600 dark:text-green-400 text-4xl">check_circle</span>
                 </div>
                 <h1 class="text-2xl md:text-3xl font-display font-black text-slate-900 dark:text-white">Pesanan Diterima! 🎉</h1>
-                <p class="text-lg text-slate-500 dark:text-slate-400 mt-2 font-medium">${icon} ${paymentMethod === 'bca' || paymentMethod === 'bsi' ? `Selesaikan pembayaran via ${paymentLabels[paymentMethod]}` : paymentMethod === 'qris' ? 'Selesaikan pembayaran via QRIS' : 'Pembayaran dilakukan saat barang tiba (COD)'}</p>
+                <p class="text-lg text-slate-500 dark:text-slate-400 mt-2 font-medium">${icon} ${paymentHint}</p>
             </div>
 
             <div class="bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-32 p-6 md:p-8 shadow-sm animate-fade-in-up" style="animation-delay: 100ms">
@@ -388,7 +407,6 @@
         const container = document.getElementById('thankyou-content');
         const esc = s => String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
         const fmt = n => `Rp${Number(n).toLocaleString('id-ID')}`;
-        const waLink = `https://wa.me/6285155060816?text=${encodeURIComponent('Halo Admin, saya ingin konfirmasi pesanan ' + orderId + '.')}`;
 
         const VIEW = {
             PENDING: { icon: 'hourglass_top', bg: 'bg-amber-100 dark:bg-amber-900/30', fg: 'text-amber-600 dark:text-amber-400', title: 'Menunggu Konfirmasi Pembayaran', text: 'Kami sedang mengecek pembayaranmu. Halaman ini akan update otomatis, jangan ditutup dulu.' },
@@ -413,7 +431,7 @@
                     <div class="mt-6 flex flex-col sm:flex-row gap-3 justify-center">
                         ${status === 'PENDING' && /^https:\/\//.test(paymentUrl || '') ? `<a href="${esc(paymentUrl)}" class="px-6 py-3 bg-brand-blue text-white rounded-full font-bold">Lanjut Bayar</a>` : ''}
                         ${(status === 'Abandoned' || status === 'EXPIRED') ? `<a href="cart.html" class="px-6 py-3 bg-brand-blue text-white rounded-full font-bold">Beli Lagi</a>` : ''}
-                        <a href="${waLink}" target="_blank" class="px-6 py-3 bg-green-500 hover:bg-green-600 text-white rounded-full font-bold">Hubungi Admin WA</a>
+                        <a href="pesanan-saya.html" class="px-6 py-3 bg-green-500 hover:bg-green-600 text-white rounded-full font-bold">Lihat Transaksi</a>
                         <a href="shop.html" class="px-6 py-3 border border-slate-300 dark:border-slate-600 text-slate-700 dark:text-slate-200 rounded-full font-bold">Kembali Belanja</a>
                     </div>
                 </div>`;
@@ -423,7 +441,7 @@
             try {
                 const list = JSON.parse(localStorage.getItem('hq_orders') || '[]');
                 const o = list.find(x => x.orderId === orderId);
-                if (o) { o.status = 'Dibayar'; localStorage.setItem('hq_orders', JSON.stringify(list)); }
+                if (o) { o.status = 'PAID'; localStorage.setItem('hq_orders', JSON.stringify(list)); }
             } catch (e) { /* abaikan */ }
         }
 
