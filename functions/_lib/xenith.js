@@ -46,7 +46,17 @@ export async function xenithRequest(env, method, path, body) {
     };
     if (method === 'POST') headers['X-Idempotency-Key'] = crypto.randomUUID();
 
-    const res = await fetch(xenithBaseUrl(env) + path, {
+    // Opsional: lewat relay IPv4 (Xenith belum mendukung IPv6, sedangkan Cloudflare Workers
+    // keluar lewat IPv6). Signature tidak berubah: relay meneruskan request apa adanya.
+    let url = xenithBaseUrl(env) + path;
+    if (env.XENITH_RELAY_URL) {
+        if (!env.XENITH_RELAY_KEY) throw new Error('XENITH_RELAY_KEY belum diset');
+        const relay = env.XENITH_RELAY_URL;
+        url = `${relay}${relay.includes('?') ? '&' : '?'}path=${encodeURIComponent(path)}`;
+        headers['X-Relay-Key'] = env.XENITH_RELAY_KEY;
+    }
+
+    const res = await fetch(url, {
         method,
         headers,
         body: bodyStr || undefined // body yang dikirim HARUS string yang sama dengan yang di-sign
