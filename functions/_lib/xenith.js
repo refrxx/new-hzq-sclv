@@ -54,6 +54,9 @@ export async function xenithRequest(env, method, path, body) {
         const relay = env.XENITH_RELAY_URL;
         url = `${relay}${relay.includes('?') ? '&' : '?'}path=${encodeURIComponent(path)}`;
         headers['X-Relay-Key'] = env.XENITH_RELAY_KEY;
+        // Beberapa hosting (LiteSpeed/ModSecurity) menolak request tanpa User-Agent dengan 403 HTML.
+        // Workers tidak mengirim User-Agent secara bawaan. Relay tidak meneruskan header ini ke Xenith.
+        headers['User-Agent'] = 'hamzahquran-xenith/1.0';
     }
 
     const res = await fetch(url, {
