@@ -1,5 +1,5 @@
-import { xenithRequest } from '../_lib/xenith.js';
-import { sheets } from '../_lib/orders.js';
+import { xenithRequest } from '../lib/xenith.js';
+import { sheets } from '../lib/orders.js';
 
 const json = (obj, status = 200) => new Response(JSON.stringify(obj), {
     status,
@@ -8,7 +8,11 @@ const json = (obj, status = 200) => new Response(JSON.stringify(obj), {
 
 const toInt = v => Math.round(Number(v)) || 0;
 
-export async function onRequestPost({ request, env }) {
+const env = process.env;
+
+export default async function handler(request) {
+    if (request.method !== 'POST') return json({ error: 'Method not allowed' }, 405);
+
     let b;
     try { b = await request.json(); } catch (e) { return json({ error: 'Body tidak valid' }, 400); }
 

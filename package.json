@@ -2,8 +2,9 @@
   "name": "hamzahquran",
   "version": "1.0.0",
   "private": true,
+  "type": "module",
   "scripts": {
-    "dev": "wrangler pages dev . --env-file .env"
+    "dev": "vercel dev"
   },
   "devDependencies": {
     "wrangler": "^4.145.0"

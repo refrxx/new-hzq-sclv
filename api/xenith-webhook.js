@@ -1,9 +1,13 @@
-import { verifyWebhook } from '../_lib/xenith.js';
-import { sheets, applyPaid, notifyTelegram } from '../_lib/orders.js';
+import { verifyWebhook } from '../lib/xenith.js';
+import { sheets, applyPaid, notifyTelegram } from '../lib/orders.js';
 
 const ok = () => new Response('ok', { status: 200 });
 
-export async function onRequestPost({ request, env }) {
+const env = process.env;
+
+export default async function handler(request) {
+    if (request.method !== 'POST') return new Response('Method not allowed', { status: 405 });
+
     // Body HARUS dibaca raw (jangan request.json()) supaya signature cocok.
     const raw = await request.text();
 

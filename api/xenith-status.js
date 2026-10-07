@@ -1,5 +1,5 @@
-import { xenithRequest } from '../_lib/xenith.js';
-import { sheets, applyPaid } from '../_lib/orders.js';
+import { xenithRequest } from '../lib/xenith.js';
+import { sheets, applyPaid } from '../lib/orders.js';
 
 const json = (obj, status = 200) => new Response(JSON.stringify(obj), {
     status,
@@ -9,7 +9,11 @@ const json = (obj, status = 200) => new Response(JSON.stringify(obj), {
 // Dipakai thank-you.html untuk polling status.
 // Kalau masih PENDING, tanya langsung ke Xenith (rekonsiliasi), jadi tetap
 // benar walau webhook telat atau gagal.
-export async function onRequestGet({ request, env }) {
+const env = process.env;
+
+export default async function handler(request) {
+    if (request.method !== 'GET') return json({ error: 'Method not allowed' }, 405);
+
     const orderId = new URL(request.url).searchParams.get('orderId');
     if (!orderId || !/^HQ-\d{10,}$/.test(orderId)) return json({ error: 'orderId tidak valid' }, 400);
 

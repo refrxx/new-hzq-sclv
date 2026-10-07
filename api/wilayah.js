@@ -24,9 +24,7 @@ const ALLOWED_PARAMS = {
     period: 'string',
 };
 
-export async function onRequest(context) {
-    const { request } = context;
-
+export default async function handler(request) {
     if (request.method === 'OPTIONS') {
         return new Response(null, { status: 204, headers: corsHeaders });
     }
@@ -62,7 +60,6 @@ export async function onRequest(context) {
     try {
         const res = await fetch(target, {
             headers: { 'Accept': 'application/json' },
-            cf: { cacheTtl: 600, cacheEverything: true },
         });
 
         const body = await res.text();

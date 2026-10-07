@@ -4,9 +4,9 @@ const corsHeaders = {
     'Access-Control-Allow-Headers': 'Content-Type',
 };
 
-export async function onRequest(context) {
-    const { request, env } = context;
+const env = process.env;
 
+export default async function handler(request) {
     if (request.method === 'OPTIONS') {
         return new Response(null, { status: 204, headers: corsHeaders });
     }
