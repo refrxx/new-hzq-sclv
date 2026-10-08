@@ -6,7 +6,7 @@ const corsHeaders = {
 
 const env = process.env;
 
-export default async function handler(request) {
+async function handler(request) {
     if (request.method === 'OPTIONS') {
         return new Response(null, { status: 204, headers: corsHeaders });
     }
@@ -58,3 +58,5 @@ export default async function handler(request) {
 
     return new Response('Method not allowed', { status: 405, headers: corsHeaders });
 }
+
+export { handler as GET, handler as POST, handler as OPTIONS };

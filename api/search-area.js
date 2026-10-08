@@ -6,7 +6,7 @@ const corsHeaders = {
 
 const env = process.env;
 
-export default async function handler(request) {
+async function handler(request) {
     if (request.method === 'OPTIONS') {
         return new Response(null, { status: 204, headers: corsHeaders });
     }
@@ -36,3 +36,5 @@ export default async function handler(request) {
         return new Response(JSON.stringify({ error: err.message }), { status: 500, headers: { 'Content-Type': 'application/json', ...corsHeaders } });
     }
 }
+
+export { handler as GET, handler as OPTIONS };

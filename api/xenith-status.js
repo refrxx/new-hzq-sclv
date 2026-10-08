@@ -11,7 +11,7 @@ const json = (obj, status = 200) => new Response(JSON.stringify(obj), {
 // benar walau webhook telat atau gagal.
 const env = process.env;
 
-export default async function handler(request) {
+async function handler(request) {
     if (request.method !== 'GET') return json({ error: 'Method not allowed' }, 405);
 
     const orderId = new URL(request.url).searchParams.get('orderId');
@@ -83,3 +83,5 @@ export default async function handler(request) {
         paymentUrl: paymentUrlOut
     });
 }
+
+export { handler as GET };

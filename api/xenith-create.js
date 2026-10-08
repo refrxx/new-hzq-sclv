@@ -10,7 +10,7 @@ const toInt = v => Math.round(Number(v)) || 0;
 
 const env = process.env;
 
-export default async function handler(request) {
+async function handler(request) {
     if (request.method !== 'POST') return json({ error: 'Method not allowed' }, 405);
 
     let b;
@@ -103,3 +103,5 @@ export default async function handler(request) {
         expiredTime: xr.data.expiredTime || null
     });
 }
+
+export { handler as POST };
