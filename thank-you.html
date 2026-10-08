@@ -203,16 +203,32 @@
         const order = JSON.parse(orderJson);
         sessionStorage.removeItem('hq_order');
 
-        const { name, phone, address, paymentMethod, subtotal, ongkir, courier, codFee, grandTotal, cart } = order;
+        const { name, phone, address, paymentMethod, paymentChoice, subtotal, ongkir, courier, codFee, grandTotal, cart } = order;
 
         const formatPrice = (amount) => `Rp${Number(amount).toLocaleString('id-ID')}`;
 
         const container = document.getElementById('thankyou-content');
 
         const paymentLabels = {
-            xenith: 'Bayar Online (Xenith)',
+            xenith: 'QRIS & Transfer Bank',
             cod: 'Bayar di Rumah'
         };
+        const paymentChoiceLabels = {
+            qris: 'QRIS',
+            va_danamon: 'Virtual Account Danamon',
+            va_maybank: 'Virtual Account Maybank',
+            va_bni: 'Virtual Account BNI',
+            va_bri: 'Virtual Account BRI',
+            va_sampoerna: 'Virtual Account Sahabat Sampoerna',
+            va_cimb: 'Virtual Account CIMB Niaga',
+            va_mandiri: 'Virtual Account Mandiri',
+            va_permata: 'Virtual Account Permata',
+            va_bca: 'Virtual Account BCA',
+            va_bsi: 'Virtual Account BSI',
+            va_jago: 'Virtual Account Jago'
+        };
+        const paymentLabel = (paymentChoice && paymentChoiceLabels[paymentChoice])
+            || paymentLabels[paymentMethod] || paymentMethod;
 
         let paymentSpecificHtml = '';
         let icon = '';
@@ -270,13 +286,15 @@
             `;
         } else if (paymentMethod === 'xenith') {
             icon = '💳';
-            paymentHint = 'Lanjutkan pembayaran online di halaman Xenith';
+            paymentHint = paymentChoice
+                ? `Lanjutkan pembayaran ${paymentLabel} di halaman Xenith`
+                : 'Lanjutkan pembayaran online di halaman Xenith';
             paymentSpecificHtml = `
                 <div class="bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-32 p-6 md:p-8 shadow-sm animate-fade-in-up" style="animation-delay: 200ms">
                     <div class="flex items-start gap-3">
                         <span class="material-symbols-outlined text-brand-blue dark:text-brand-gold text-3xl">credit_card</span>
                         <div>
-                            <p class="text-sm text-slate-500 dark:text-slate-400">Pesanan ini memakai Bayar Online. Halaman pembayaran Xenith tidak terbuka, jadi klik tombol di bawah untuk melanjutkan.</p>
+                            <p class="text-sm text-slate-500 dark:text-slate-400">Pesanan ini memakai ${paymentLabel}. Halaman pembayaran Xenith tidak terbuka, jadi klik tombol di bawah untuk melanjutkan.</p>
                             <a href="pesanan-saya.html"
                                 class="mt-4 inline-flex items-center gap-2 bg-brand-blue dark:bg-brand-gold text-white dark:text-black font-bold py-3 px-6 rounded-xl text-sm hover:opacity-90 transition-all">
                                 <span class="material-symbols-outlined">receipt_long</span> Lihat Status Pembayaran
@@ -360,7 +378,7 @@
                     </div>` : ''}
                     <div class="flex">
                         <span class="text-slate-500 dark:text-slate-400 w-28 shrink-0">Pembayaran</span>
-                        <span class="font-semibold text-slate-900 dark:text-white">${paymentLabels[paymentMethod] || paymentMethod}</span>
+                        <span class="font-semibold text-slate-900 dark:text-white">${paymentLabel}</span>
                     </div>
                 </div>
                 <div class="h-px bg-slate-100 dark:bg-slate-700 my-4"></div>
