@@ -2270,8 +2270,8 @@ async function fetchRates(postalCode) {
 }
 
 const COURIER_LOGOS = {
-    'jne': 'img/jneico.svg',
-    'lion': 'img/lionico.svg',
+    'jne': 'img/jne.png',
+    'lion': 'img/lion.png',
 };
 
 function getCourierLogo(rate) {
