@@ -1724,8 +1724,8 @@ function initCart() {
 
             const paymentRadio = document.querySelector('input[name="payment-method"]:checked');
             const paymentMethodValue = paymentRadio?.value || 'xenith';
-            const paymentLabels = { xenith: 'Bayar Online (Xenith)', cod: 'COD' };
-            const paymentMethodText = paymentLabels[paymentMethodValue] || 'Bayar Online (Xenith)';
+            const paymentLabels = { xenith: 'QRIS & Bank Transfer', cod: 'COD' };
+            const paymentMethodText = paymentLabels[paymentMethodValue] || 'Online Payment';
 
             const shippingDiscount = getShippingDiscount(courierPrice, subtotal);
             const ongkirAfterSubsidy = courierPrice - shippingDiscount;

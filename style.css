@@ -843,3 +843,31 @@ input[type="radio"] {
     border-color: #334155 !important;
     color: #64748b !important;
 }
+
+/* ===== Mobile scale-down: UI ~85% ===== */
+@media (max-width: 767px) {
+    html {
+        font-size: 85%;
+    }
+
+    .promo-bar {
+        font-size: 12px;
+    }
+
+    .category-card {
+        height: 44px;
+    }
+
+    .testimonial-card {
+        width: 272px;
+        height: 357px;
+    }
+
+    #lightbox-close {
+        font-size: 34px;
+    }
+
+    .grid-bg {
+        background-size: 34px 34px;
+    }
+}
