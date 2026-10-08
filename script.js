@@ -2307,7 +2307,7 @@ function renderShippingOptions(rates) {
         label.innerHTML = `
             <input type="radio" name="shipping-courier" value="${idx}"
                 class="accent-brand-blue w-4 h-4 flex-shrink-0">
-            ${logo ? `<img src="${logo}" alt="${company}" class="w-auto h-10 object-contain flex-shrink-0">` : ''}
+            ${logo ? `<img src="${logo}" alt="${company}" class="w-13 h-auto object-contain flex-shrink-0">` : ''}
             <div class="flex-1 min-w-0">
                 <p class="text-sm font-semibold text-slate-800 dark:text-slate-100">${service}</p>
                 <p class="text-xs text-slate-400">${est}</p>
