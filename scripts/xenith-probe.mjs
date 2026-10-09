@@ -37,6 +37,8 @@ async function post(path, body) {
 }
 
 const stamp = Date.now();
+const wib = new Date(stamp + 7 * 3600 * 1000);
+const sampleOrderId = `HQ-${wib.getUTCFullYear()}${String(wib.getUTCMonth() + 1).padStart(2, '0')}${String(wib.getUTCDate()).padStart(2, '0')}${Math.random().toString(36).slice(2, 8).toUpperCase()}`;
 const ref = n => `PROBE-${stamp}-${n}`;
 const base = n => ({
     amount: 10000, currency: 'IDR',
@@ -48,14 +50,14 @@ const base = n => ({
 const variants = [
     ['A. Minimal (cuma field wajib)', base('A')],
     ['B. A + paymentLinkCallbackUrl', { ...base('B'), paymentLinkCallbackUrl: `${SITE}/api/xenith-webhook` }],
-    ['C. A + redirectUrl ke thank-you (pakai query ?order=)', { ...base('C'), redirectUrl: `${SITE}/thank-you.html?order=HQ-${stamp}` }],
+    ['C. A + redirectUrl ke thank-you (pakai query ?order=)', { ...base('C'), redirectUrl: `${SITE}/thank-you.html?order=${sampleOrderId}` }],
     ['D. A + customerPhoneNumber', { ...base('D'), customerPhoneNumber: '081234567890' }],
     ['E. Persis seperti checkout (semua field)', {
         amount: 60000, currency: 'IDR',
-        redirectUrl: `${SITE}/thank-you.html?order=HQ-${stamp}`,
+        redirectUrl: `${SITE}/thank-you.html?order=${sampleOrderId}`,
         paymentLinkCallbackUrl: `${SITE}/api/xenith-webhook`,
         customerReference: '081234567890', customerName: 'Tes Sandbox',
-        customerPhoneNumber: '081234567890', referenceCode: `HQ-${stamp}`
+        customerPhoneNumber: '081234567890', referenceCode: sampleOrderId
     }]
 ];
 

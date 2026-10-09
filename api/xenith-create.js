@@ -1,5 +1,6 @@
 import { xenithRequest } from '../lib/xenith.js';
 import { sheets } from '../lib/orders.js';
+import { generateOrderId } from '../lib/order-id.js';
 
 const json = (obj, status = 200) => new Response(JSON.stringify(obj), {
     status,
@@ -39,7 +40,7 @@ async function handler(request) {
 
     // Normalisasi nomor: +62/62 -> 0
     const phone = phoneRaw.replace(/^\+?62/, '0');
-    const orderId = 'HQ-' + Date.now();
+    const orderId = generateOrderId();
     const origin = (env.SITE_URL || new URL(request.url).origin).replace(/\/$/, '');
     const totalQty = items.reduce((s, i) => s + toInt(i.qty), 0);
     const produk = items.map(i =>

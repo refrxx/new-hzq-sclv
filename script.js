@@ -107,6 +107,7 @@ id: 3,
         priceCrt: "Rp79.000",
         priceStr: "Rp69.000",
         priceWa: "Rp64.000",
+        bindings: { softcover: "Rp54.000", hardcover: "Rp64.000" },
         img: "img/katalog/iqro-bw-3.jpg",
         images: ["img/iqro-bw/iqro-bw-3.jpg", "img/iqro-bw/iqro-bw.jpg", "img/iqro-bw/iqro-bw-1.jpg", "img/iqro-bw/iqro-bw-2.jpg", "img/usp.jpg", "img/usp-1.jpg", "img/usp-2.jpg"],
         wa: "Halo Admin, saya ingin pesan IQRO Custom Nama Hitam Putih HVS A5",
@@ -121,6 +122,7 @@ id: 3,
         priceCrt: "Rp99.000",
         priceStr: "Rp84.900",
         priceWa: "Rp79.000",
+        bindings: { softcover: "Rp69.000", hardcover: "Rp79.000" },
         img: "img/katalog/iqro-qr-3.jpg",
         images: ["img/iqro-qr/iqro-qr-3.jpg", "img/iqro-qr/iqro-qr.jpg", "img/iqro-qr/iqro-qr-1.jpg", "img/iqro-qr/iqro-qr-2.jpg", "img/usp.jpg", "img/usp-1.jpg", "img/usp-2.jpg"],
         wa: "Halo Admin, saya ingin pesan IQRO Custom Nama Full Color QR Code HVS A5",
@@ -135,6 +137,7 @@ id: 3,
         priceCrt: "Rp79.000",
         priceStr: "Rp62.000",
         priceWa: "Rp58.000",
+        bindings: { softcover: "Rp48.000", hardcover: "Rp58.000" },
         img: "img/katalog/juzamma.jpg",
         images: ["img/katalog/juzamma.jpg", "img/juzamma/juzamma-3.jpg", "img/juzamma/juzamma-2.jpg", "img/juzamma/juzamma-1.jpg", "img/juzamma/juzamma-4.jpg", "img/usp.jpg", "img/usp-1.jpg", "img/usp-2.jpg"],
         wa: "Halo Admin, saya ingin pesan Juz Amma Custom Nama Full Color A5",
@@ -187,6 +190,23 @@ const QURAN_VARIANTS = {
   6: ['latin', 'tanpa-latin'],
   7: ['latin'],
 };
+
+// --- Binding (softcover/hardcover) ---
+// Produk dengan pilihan jilid: hanya priceWa yang beda per binding, sisanya sama.
+const bindingLabel = b => (b === 'softcover' ? 'Softcover' : b === 'hardcover' ? 'Hardcover' : b);
+const bindingKeys = p => (p && p.bindings ? Object.keys(p.bindings) : []);
+function bindingPriceNum(v) { return parseInt(String(v).replace(/[^\d]/g, ''), 10) || 0; }
+function productCheapestPrice(p) {
+  if (p && p.bindings) {
+    const nums = Object.values(p.bindings).map(bindingPriceNum);
+    return 'Rp' + Math.min(...nums).toLocaleString('id-ID');
+  }
+  return p.priceWa;
+}
+function productPriceRange(p) {
+  if (!p || !p.bindings) return null;
+  return Object.values(p.bindings).join(' - ');
+}
 function getBestVoucherAmount(subtotal) {
   for (const t of [...VOUCHER_TIERS].sort((a, b) => b.min - a.min)) if (subtotal >= t.min) return t.amount;
   return 0;
@@ -201,6 +221,20 @@ function getAutoGratisOngkir(subtotal) {
 function getAutoVoucher(subtotal) {
   const e = VOUCHER_TIERS.filter(t => subtotal >= t.min).sort((a, b) => b.amount - a.amount);
   return e[0] || null;
+}
+
+// Nomor pesanan: HQ-YYYYMMDD + 6 karakter alfanumerik acak (tanggal WIB).
+function generateOrderId() {
+  const ALPHABET = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+  const d = new Date(Date.now() + 7 * 60 * 60 * 1000);
+  const yyyy = d.getUTCFullYear();
+  const mm = String(d.getUTCMonth() + 1).padStart(2, '0');
+  const dd = String(d.getUTCDate()).padStart(2, '0');
+  const bytes = new Uint8Array(6);
+  crypto.getRandomValues(bytes);
+  let rand = '';
+  for (let i = 0; i < bytes.length; i++) rand += ALPHABET[bytes[i] % ALPHABET.length];
+  return `HQ-${yyyy}${mm}${dd}${rand}`;
 }
 
 // Facebook Pixel: Lead event on all WhatsApp link clicks
@@ -426,7 +460,8 @@ function initLenis() {
 function productCardTemplate(p, opts = {}) {
     const toNum = s => parseInt(String(s).replace(/[^\d]/g, ''), 10) || 0;
     const crt = toNum(p.priceCrt);
-    const wa = toNum(p.priceWa);
+    const priceWaStr = productCheapestPrice(p);
+    const wa = toNum(priceWaStr);
     const discount = crt > 0 ? Math.round((crt - wa) / crt * 100) : 0;
 
     const social = PRODUCT_SOCIAL_PROOF[p.id] || {};
@@ -472,7 +507,7 @@ function productCardTemplate(p, opts = {}) {
             ${metaRow}
             <div class="mt-auto pt-3 border-t border-slate-100 dark:border-slate-800">
                 <p class="text-[10px] sm:text-xs text-slate-500 dark:text-slate-400">Harga Spesial</p>
-                <p class="price-val text-base sm:text-lg md:text-xl font-black leading-tight text-brand-blue dark:text-brand-gold">${p.priceWa}</p>
+                <p class="price-val text-base sm:text-lg md:text-xl font-black leading-tight text-brand-blue dark:text-brand-gold">${priceWaStr}</p>
                 ${discountRow}
             </div>
         </div>
@@ -505,8 +540,9 @@ function initKatalog() {
             filtered = GLOBAL_PRODUCTS.filter(p => p.category === currentFilter);
         }
 
-        if (currentSort === 'price-low') filtered.sort((a, b) => toNum(a.priceWa) - toNum(b.priceWa));
-        else if (currentSort === 'price-high') filtered.sort((a, b) => toNum(b.priceWa) - toNum(a.priceWa));
+        const effPrice = p => bindingPriceNum(productCheapestPrice(p));
+        if (currentSort === 'price-low') filtered.sort((a, b) => effPrice(a) - effPrice(b));
+        else if (currentSort === 'price-high') filtered.sort((a, b) => effPrice(b) - effPrice(a));
         else if (currentSort === 'sold-desc') filtered.sort((a, b) => soldOf(b) - soldOf(a));
 
         productGrid.innerHTML = filtered.map(p => productCardTemplate(p)).join('');
@@ -741,16 +777,17 @@ function initProductDetail() {
         setEl('product-category', product.category);
         setEl('harga-coret', product.priceCrt);
         setEl('product-price', product.priceStr);
+        const waPriceRange = productPriceRange(product);
         setEl('product-wa-price', `
             <div class="wa-price-badge py-3 px-5 mb-2">
                 <span class="material-symbols-outlined !text-2xl">confirmation_number</span>
-                <span class="price-val !text-2xl sm:!text-3xl">${product.priceWa}</span>
+                <span class="price-val ${waPriceRange ? '!text-xl sm:!text-2xl' : '!text-2xl sm:!text-3xl'}">${waPriceRange || product.priceWa}</span>
                 <span class="label-text !text-sm !opacity-100 !font-normal">Harga spesial Web</span>
             </div>
         `, 'innerHTML');
 
         // Voucher banner
-        const priceNum = parseFloat(product.priceWa.replace(/[^\d]/g, ''));
+        const priceNum = bindingPriceNum(productCheapestPrice(product));
         const productVoucher = getBestVoucherAmount(priceNum);
         const voucherBanner = document.getElementById('voucher-banner');
         const voucherText = document.getElementById('voucher-banner-text');
@@ -771,7 +808,9 @@ function initProductDetail() {
                 btn.onclick = (e) => {
                     e.preventDefault();
                     if (product.soldOut) return;
-                    if (product.category && product.category.startsWith('Al Quran')) {
+                    if (product.bindings) {
+                        openBindingPickerModal(product.id);
+                    } else if (product.category && product.category.startsWith('Al Quran')) {
                         const variants = QURAN_VARIANTS[product.id];
                         if (variants) {
                             openQuranPickerModal(product.id, variants);
@@ -1043,11 +1082,13 @@ function updateCartBadge() {
     });
 }
 
-function addToCart(productId, customName, coverId, customNote = '', customFont = '', quranType = '') {
+function addToCart(productId, customName, coverId, customNote = '', customFont = '', quranType = '', binding = '') {
     const product = GLOBAL_PRODUCTS.find(p => p.id === productId);
     if (!product) return;
 
     const coverData = coverId ? COVER_DESIGNS.find(c => c.id === coverId) : null;
+    const chosenBinding = binding && product.bindings && product.bindings[binding] ? binding : '';
+    const priceWa = chosenBinding ? product.bindings[chosenBinding] : product.priceWa;
 
     // Each customization is unique, so always push new item
     cart.push({
@@ -1055,7 +1096,7 @@ function addToCart(productId, customName, coverId, customNote = '', customFont =
         name: product.name,
         category: product.category,
         priceCrt: product.priceCrt,
-        priceWa: product.priceWa,
+        priceWa: priceWa,
         img: product.img,
         qty: 1,
         customName: customName || '',
@@ -1064,7 +1105,8 @@ function addToCart(productId, customName, coverId, customNote = '', customFont =
         coverName: coverData ? coverData.name : '',
         coverCategory: coverData ? coverData.category : '',
         coverImg: coverData ? coverData.img : '',
-        quranType: quranType || ''
+        quranType: quranType || '',
+        binding: chosenBinding
     });
     saveCart();
     showToast(`${product.name} berhasil ditambahkan ke keranjang!`);
@@ -1076,7 +1118,7 @@ function addToCart(productId, customName, coverId, customNote = '', customFont =
             content_category: product.category,
             content_ids: [product.id],
             content_type: 'product',
-            value: parseFloat(product.priceWa.replace(/[^\d]/g, '')),
+            value: parseInt(String(priceWa).replace(/[^\d]/g, ''), 10) || 0,
             currency: 'IDR'
         });
     }
@@ -1109,9 +1151,10 @@ let modalProductId = null;
 let modalSelectedCoverId = null;
 let modalCoverFilter = 'Semua';
 
-function openCustomModal(productId, quranType) {
+function openCustomModal(productId, quranType, binding) {
     let url = `personalize.html?id=${productId}`;
     if (quranType) url += `&quranType=${quranType}`;
+    if (binding) url += `&binding=${binding}`;
     window.location.href = url;
 }
 
@@ -1122,6 +1165,7 @@ function initPersonalizationPage() {
     const urlParams = new URLSearchParams(window.location.search);
     const productId = parseInt(urlParams.get('id'));
     const quranType = urlParams.get('quranType') || '';
+    let binding = urlParams.get('binding') || '';
     const product = GLOBAL_PRODUCTS.find(p => p.id === productId);
 
     if (product) {
@@ -1138,7 +1182,7 @@ function initPersonalizationPage() {
         setEl('personalize-product-img', product.img, 'src');
         setEl('personalize-product-name', product.name);
         setEl('personalize-product-category', product.category);
-        setEl('personalize-product-price', product.priceWa || product.priceStr);
+        setEl('personalize-product-price', (binding && product.bindings && product.bindings[binding]) ? product.bindings[binding] : (product.priceWa || product.priceStr));
 
         const backLink = document.getElementById('back-to-product');
         if (backLink) backLink.href = `product-detail.html?id=${product.id}`;
@@ -1150,6 +1194,10 @@ function initPersonalizationPage() {
             editIdx = parseInt(sessionStorage.getItem('hq_edit_cart_idx') || '-1');
             if (editIdx >= 0 && cart[editIdx]) {
                 const editItem = cart[editIdx];
+                if (editItem.binding) {
+                    binding = editItem.binding;
+                    setEl('personalize-product-price', (product.bindings && product.bindings[binding]) ? product.bindings[binding] : (product.priceWa || product.priceStr));
+                }
                 const nameInput = document.getElementById('custom-name-input');
                 if (nameInput && editItem.customName) nameInput.value = editItem.customName;
 
@@ -1211,7 +1259,7 @@ function initPersonalizationPage() {
                     showToast('Item berhasil diperbarui!');
                     sessionStorage.removeItem('hq_edit_cart_idx');
                 } else {
-                    addToCart(product.id, customName, modalSelectedCoverId, customNote, customFont, quranType);
+                    addToCart(product.id, customName, modalSelectedCoverId, customNote, customFont, quranType, binding);
                 }
                 window.location.href = 'cart.html';
             };
@@ -1469,8 +1517,66 @@ function confirmQuranPicker() {
     }
 }
 
+// === Binding Picker Modal (softcover / hardcover) ===
+let bindingPickerProductId = null;
+let selectedBinding = 'softcover';
+
+function openBindingPickerModal(productId) {
+    bindingPickerProductId = productId;
+    const modal = document.getElementById('binding-picker-modal');
+    if (!modal) return;
+
+    const product = GLOBAL_PRODUCTS.find(p => p.id === productId);
+    const keys = bindingKeys(product);
+
+    // Isi harga tiap opsi sesuai produk
+    keys.forEach(k => {
+        const priceEl = document.getElementById('binding-price-' + k);
+        if (priceEl) priceEl.textContent = product.bindings[k];
+    });
+
+    const defaultBinding = keys[0] || 'softcover';
+    selectedBinding = defaultBinding;
+    selectBinding(defaultBinding);
+
+    modal.style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+}
+
+function closeBindingPickerModal() {
+    const modal = document.getElementById('binding-picker-modal');
+    if (modal) {
+        modal.style.display = 'none';
+        document.body.style.overflow = '';
+    }
+}
+
+function selectBinding(binding) {
+    selectedBinding = binding;
+    document.querySelectorAll('.binding-picker-btn').forEach(el => {
+        el.classList.remove('border-brand-blue', 'dark:border-brand-gold', 'bg-brand-blue/5', 'dark:bg-brand-gold/10');
+        el.classList.add('border-transparent');
+        const ic = el.querySelector('.binding-check');
+        if (ic) ic.classList.add('hidden');
+    });
+    const target = document.getElementById('binding-opt-' + binding);
+    if (target) {
+        target.classList.remove('border-transparent');
+        target.classList.add('border-brand-blue', 'dark:border-brand-gold', 'bg-brand-blue/5', 'dark:bg-brand-gold/10');
+        const ic = target.querySelector('.binding-check');
+        if (ic) ic.classList.remove('hidden');
+    }
+}
+
+function confirmBindingPicker() {
+    closeBindingPickerModal();
+    if (bindingPickerProductId) {
+        openCustomModal(bindingPickerProductId, '', selectedBinding);
+    }
+}
+
 document.addEventListener('keydown', function (e) {
-    if (e.key === 'Escape') closeQuranPickerModal();
+    if (e.key === 'Escape') { closeQuranPickerModal(); closeBindingPickerModal(); }
 });
 
 function updateCartQty(idx, newQty) {
@@ -1540,7 +1646,7 @@ function renderCart() {
         subtotal += priceNum * item.qty;
 
         return `
-            <div class="flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-6 bg-slate-50 dark:bg-slate-800/50 p-4 rounded-2xl relative group">
+            <div class="flex flex-col sm:flex-row items-start gap-4 sm:gap-6 bg-slate-50 dark:bg-slate-800/50 p-4 rounded-2xl relative group">
                 <button onclick="editCartItem(${idx})" class="absolute top-3 right-3 flex items-center gap-1 px-2.5 py-1 rounded-full bg-brand-blue/10 dark:bg-brand-gold/10 text-brand-blue dark:text-brand-gold hover:bg-brand-blue/20 dark:hover:bg-brand-gold/20 transition-colors text-xs font-semibold z-10" title="Ubah">
                     <span class="material-symbols-outlined text-[0.9rem]">edit</span>ubah
                 </button>
@@ -1552,6 +1658,7 @@ function renderCart() {
                     ${item.customName ? `<div class="flex items-center gap-1.5 mt-1"><span class="material-symbols-outlined text-[1rem] text-brand-blue dark:text-brand-gold">badge</span><span class="text-sm font-semibold text-slate-600 dark:text-slate-300">Nama: ${item.customName}</span></div>` : ''}
                     ${item.coverName ? `<div class="flex items-center gap-1.5 mt-0.5"><span class="material-symbols-outlined text-[1rem] text-brand-blue dark:text-brand-gold">palette</span><span class="text-sm font-semibold text-slate-600 dark:text-slate-300">Cover: ${item.coverName} (${item.coverCategory})</span></div>` : ''}
                     ${item.quranType ? `<div class="flex items-center gap-1.5 mt-0.5"><span class="material-symbols-outlined text-[1rem] text-brand-blue dark:text-brand-gold">menu_book</span><span class="text-sm font-semibold text-slate-600 dark:text-slate-300">Varian: ${item.quranType === 'latin' ? 'Latin' : 'Tanpa Latin'}</span></div>` : ''}
+                    ${item.binding ? `<div class="flex items-center gap-1.5 mt-0.5"><span class="material-symbols-outlined text-[1rem] text-brand-blue dark:text-brand-gold">layers</span><span class="text-sm font-semibold text-slate-600 dark:text-slate-300">Jilid: ${bindingLabel(item.binding)}</span></div>` : ''}
                     ${item.customNote ? `<div class="flex items-center gap-1.5 mt-0.5"><span class="material-symbols-outlined text-[1rem] text-brand-blue dark:text-brand-gold">edit_note</span><span class="text-sm font-semibold text-slate-600 dark:text-slate-300">Ucapan: ${item.customNote}</span></div>` : ''}
                     ${item.customFont ? `<div class="flex items-center gap-1.5 mt-0.5"><span class="material-symbols-outlined text-[1rem] text-brand-blue dark:text-brand-gold">font_download</span><span class="text-sm font-semibold text-slate-600 dark:text-slate-300">Font: ${item.customFont}</span></div>` : ''}
                     <div class="text-brand-blue dark:text-brand-gold font-bold text-sm mt-1 mb-3">${formatPrice(priceNum)} <span class="text-xs text-slate-400 font-normal line-through ml-1">${item.priceCrt}</span></div>
@@ -1717,6 +1824,7 @@ function initCart() {
                 if (c.customName) message += `   - Nama: ${c.customName}\n`;
                 if (c.coverName) message += `   - Cover: ${c.coverName} (${c.coverCategory})\n`;
                 if (c.quranType) message += `   - Varian: ${c.quranType === 'latin' ? 'Latin' : 'Tanpa Latin'}\n`;
+                if (c.binding) message += `   - Jilid: ${bindingLabel(c.binding)}\n`;
                 if (c.customNote) message += `   - Ucapan: ${c.customNote}\n`;
                 if (c.customFont) message += `   - Font: ${c.customFont}\n`;
                 message += `   ${c.qty} x ${formatPrice(priceNum)} = ${formatPrice(totalItem)}\n`;
@@ -1780,6 +1888,7 @@ function initCart() {
                                 note: [
                                     c.customName && `Nama: ${c.customName}`,
                                     c.coverName && `Cover: ${c.coverName}`,
+                                    c.binding && `Jilid: ${bindingLabel(c.binding)}`,
                                     c.customNote && `Ucapan: ${c.customNote}`,
                                     c.customFont && `Font: ${c.customFont}`
                                 ].filter(Boolean).join(', ')
@@ -1827,7 +1936,8 @@ function initCart() {
                             img: item.img || '',
                             coverImg: item.coverImg || '',
                             customName: item.customName || '',
-                            customNote: item.customNote || ''
+                            customNote: item.customNote || '',
+                            binding: item.binding || ''
                         })),
                         orderId: pay.orderId,
                         paymentUrl: pay.paymentLinkUrl,
@@ -1904,14 +2014,15 @@ function initCart() {
                     img: item.img || '',
                     coverImg: item.coverImg || '',
                     customName: item.customName || '',
-                    customNote: item.customNote || ''
+                    customNote: item.customNote || '',
+                    binding: item.binding || ''
                 }))
             };
             // Tetap simpan ke sessionStorage untuk thank-you page
             sessionStorage.setItem('hq_order', JSON.stringify(orderData));
 
             // Simpan ke localStorage untuk pesanan-saya.html (max 5 pesanan)
-            const orderId = 'HQ-' + Date.now();
+            const orderId = generateOrderId();
             const orderWithMeta = {
                 ...orderData,
                 orderId,

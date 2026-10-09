@@ -15,7 +15,7 @@ async function handler(request) {
     if (request.method !== 'GET') return json({ error: 'Method not allowed' }, 405);
 
     const orderId = new URL(request.url).searchParams.get('orderId');
-    if (!orderId || !/^HQ-\d{10,}$/.test(orderId)) return json({ error: 'orderId tidak valid' }, 400);
+    if (!orderId || !/^HQ-(\d{8}[A-Z0-9]{6}|\d{10,})$/.test(orderId)) return json({ error: 'orderId tidak valid' }, 400);
 
     let order;
     try {

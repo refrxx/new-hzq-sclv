@@ -363,7 +363,7 @@
         // Hanya order Xenith yang ada di sheet. Order COD sengaja tidak disentuh.
         async function syncStatuses() {
             const orders = readOrders();
-            const targets = orders.filter(o => o.paymentMethod === 'xenith' && /^HQ-\d{10,}$/.test(o.orderId || ''));
+            const targets = orders.filter(o => o.paymentMethod === 'xenith' && /^HQ-(\d{8}[A-Z0-9]{6}|\d{10,})$/.test(o.orderId || ''));
             if (!targets.length) return false;
 
             const results = await Promise.allSettled(targets.map(o =>
@@ -467,6 +467,7 @@
                     const imgUrl = item.coverImg || item.img || '';
                     const details = [
                         item.quranType ? `Varian: ${item.quranType === 'latin' ? 'Latin' : 'Tanpa Latin'}` : '',
+                        item.binding ? `Jilid: ${item.binding === 'softcover' ? 'Softcover' : 'Hardcover'}` : '',
                         item.customName ? `Nama: ${esc(item.customName)}` : '',
                         item.customNote ? `Ucapan: ${esc(item.customNote)}` : ''
                     ].filter(Boolean);
@@ -487,7 +488,7 @@
                     </div>`;
                 }).join('');
 
-                const orderId = order.orderId || 'HQ-' + Date.now();
+                const orderId = order.orderId || generateOrderId();
 
                 return `
                     <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-32 shadow-sm overflow-hidden animate-fade-in-up">
