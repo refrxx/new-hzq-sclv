@@ -1832,7 +1832,7 @@ function initCart() {
 
             const paymentRadio = document.querySelector('input[name="payment-method"]:checked');
             const paymentMethodValue = paymentRadio?.value || 'xenith';
-            const paymentLabels = { xenith: 'QRIS & Bank Transfer', cod: 'COD' };
+            const paymentLabels = { xenith: 'Online Payment', cod: 'COD' };
             const paymentMethodText = paymentLabels[paymentMethodValue] || 'Online Payment';
 
             const shippingDiscount = getShippingDiscount(courierPrice, subtotal);
