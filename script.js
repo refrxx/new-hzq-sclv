@@ -1826,7 +1826,8 @@ function initCart() {
                             quranType: item.quranType || '',
                             img: item.img || '',
                             coverImg: item.coverImg || '',
-                            customName: item.customName || ''
+                            customName: item.customName || '',
+                            customNote: item.customNote || ''
                         })),
                         orderId: pay.orderId,
                         paymentUrl: pay.paymentLinkUrl,
@@ -1902,7 +1903,8 @@ function initCart() {
                     quranType: item.quranType || '',
                     img: item.img || '',
                     coverImg: item.coverImg || '',
-                    customName: item.customName || ''
+                    customName: item.customName || '',
+                    customNote: item.customNote || ''
                 }))
             };
             // Tetap simpan ke sessionStorage untuk thank-you page
