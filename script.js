@@ -1750,7 +1750,7 @@ function showAlert(title, text, type = 'warning') {
     modal.onclick = (e) => { if (e.target === modal) close(); };
 }
 
-function initCart() {
+async function initCart() {
     updateCartBadge();
     const cartContainer = document.getElementById('cart-container');
     if (!cartContainer) return; // Only run on cart.html
@@ -1961,6 +1961,7 @@ function initCart() {
                     localStorage.setItem('hq_cart', JSON.stringify(cart));
                     updateCartTotalUI();
 
+                    saveCurrentAddress();
                     window.location.href = pay.paymentLinkUrl;
                     return;
                 } catch (err) {
@@ -2053,6 +2054,8 @@ function initCart() {
             localStorage.setItem('hq_cart', JSON.stringify(cart));
             updateCartTotalUI();
 
+            saveCurrentAddress();
+
             // === REDIRECT KE THANK YOU PAGE ===
             window.location.href = 'thank-you.html';
             } catch (err) {
@@ -2085,7 +2088,8 @@ function initCart() {
     });
 
     initBiteship();
-    initRegionalAPI();
+    const regionalApi = await initRegionalAPI();
+    initSavedAddresses(regionalApi);
 }
 
 // Nama wilayah dari carikodepos.id campur kapital: "DKI JAKARTA", "BALI",
@@ -2241,6 +2245,177 @@ async function initRegionalAPI() {
         if (villageSelect.value !== villageId) return;
         setPostalCode(postalCodes[0]?.code || '');
     });
+
+    function findOption(select, value, text) {
+        if (!select) return null;
+        const opts = [...select.options];
+        if (value) {
+            const byVal = opts.find(o => o.value === value);
+            if (byVal) return byVal;
+        }
+        if (text) {
+            const byTxt = opts.find(o => o.text.trim().toLowerCase() === text.trim().toLowerCase());
+            if (byTxt) return byTxt;
+        }
+        return null;
+    }
+
+    async function waitOptions(select, timeout = 8000) {
+        const start = Date.now();
+        while (Date.now() - start < timeout) {
+            if (select && !select.disabled) return true;
+            await new Promise(r => setTimeout(r, 100));
+        }
+        return false;
+    }
+
+    async function waitPostal(timeout = 8000) {
+        const start = Date.now();
+        while (Date.now() - start < timeout) {
+            if (!postalInput || postalInput.placeholder !== 'Memuat...') return true;
+            await new Promise(r => setTimeout(r, 100));
+        }
+        return false;
+    }
+
+    // Pulihkan form wilayah dari alamat tersimpan. Cocokkan by id, fallback by nama.
+    async function restore(entry) {
+        const applyPostal = () => { if (entry.postalCode) setPostalCode(entry.postalCode); };
+
+        const p = findOption(provinceSelect, entry.provinceId, entry.provinceText);
+        if (!p) { applyPostal(); return false; }
+        provinceSelect.value = p.value;
+        provinceSelect.dispatchEvent(new Event('change'));
+
+        if (!entry.cityId && !entry.cityText) { applyPostal(); return true; }
+        await waitOptions(citySelect);
+        const c = findOption(citySelect, entry.cityId, entry.cityText);
+        if (!c) { applyPostal(); return false; }
+        citySelect.value = c.value;
+        citySelect.dispatchEvent(new Event('change'));
+
+        if (!entry.districtId && !entry.districtText) { applyPostal(); return true; }
+        await waitOptions(districtSelect);
+        const d = findOption(districtSelect, entry.districtId, entry.districtText);
+        if (!d) { applyPostal(); return false; }
+        districtSelect.value = d.value;
+        districtSelect.dispatchEvent(new Event('change'));
+
+        if (!entry.villageId && !entry.villageText) { applyPostal(); return true; }
+        await waitOptions(villageSelect);
+        const v = findOption(villageSelect, entry.villageId, entry.villageText);
+        if (!v) { applyPostal(); return false; }
+        villageSelect.value = v.value;
+        villageSelect.dispatchEvent(new Event('change'));
+        await waitPostal();
+        applyPostal();
+        return true;
+    }
+
+    return { restore };
+}
+
+// === ALAMAT TERSIMPAN (localStorage, per device) ===
+const SAVED_ADDR_KEY = 'hq_saved_addresses';
+const SAVED_ADDR_MAX = 5;
+
+function getSavedAddresses() {
+    try { return JSON.parse(localStorage.getItem(SAVED_ADDR_KEY) || '[]'); } catch (e) { return []; }
+}
+function setSavedAddresses(list) {
+    try { localStorage.setItem(SAVED_ADDR_KEY, JSON.stringify(list.slice(0, SAVED_ADDR_MAX))); } catch (e) {}
+}
+function getSelectInfo(id) {
+    const el = document.getElementById('cust-' + id);
+    if (!el || el.selectedIndex <= 0) return { id: '', text: '' };
+    const text = el.options[el.selectedIndex].text.trim();
+    if (!text || text.startsWith('Pilih ') || text.includes('Memuat')) return { id: '', text: '' };
+    return { id: el.value, text };
+}
+function captureCurrentAddress() {
+    const val = id => (document.getElementById(id)?.value || '').trim();
+    const province = getSelectInfo('province');
+    const city = getSelectInfo('city');
+    const district = getSelectInfo('district');
+    const subdistrict = getSelectInfo('subdistrict');
+    return {
+        name: val('cust-name'),
+        phone: val('cust-phone'),
+        address: val('cust-address'),
+        provinceId: province.id, provinceText: province.text,
+        cityId: city.id, cityText: city.text,
+        districtId: district.id, districtText: district.text,
+        villageId: subdistrict.id, villageText: subdistrict.text,
+        postalCode: val('cust-postal-code')
+    };
+}
+// Dipanggil saat checkout sukses (kalau checkbox dicentang).
+function saveCurrentAddress() {
+    const check = document.getElementById('save-address-check');
+    if (!check || !check.checked) return;
+    const snap = captureCurrentAddress();
+    if (!snap.name || !snap.phone || !snap.address) return;
+    const list = getSavedAddresses();
+    const idx = list.findIndex(a => a.address === snap.address && a.phone === snap.phone);
+    const id = idx >= 0 ? list[idx].id : (Date.now().toString(36) + Math.random().toString(36).slice(2, 6));
+    const entry = { ...snap, id, updatedAt: Date.now() };
+    if (idx >= 0) list.splice(idx, 1);
+    list.unshift(entry);
+    setSavedAddresses(list);
+}
+async function applySavedAddress(entry, regionalApi) {
+    const set = (id, v) => { const el = document.getElementById(id); if (el) el.value = v || ''; };
+    set('cust-name', entry.name);
+    set('cust-phone', entry.phone);
+    set('cust-address', entry.address);
+
+    if (regionalApi && typeof regionalApi.restore === 'function') {
+        await regionalApi.restore(entry);
+    } else {
+        const postal = document.getElementById('cust-postal-code');
+        if (postal) {
+            postal.value = entry.postalCode || '';
+            if (entry.postalCode) postal.dispatchEvent(new Event('input'));
+        }
+    }
+
+    updateCheckoutButtonState();
+    updateGrandTotal();
+    document.getElementById('shipping-form')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+function initSavedAddresses(regionalApi) {
+    const block = document.getElementById('saved-address-block');
+    const select = document.getElementById('saved-address-select');
+    const delBtn = document.getElementById('saved-address-delete');
+    if (!block || !select) return;
+
+    const render = () => {
+        const list = getSavedAddresses();
+        if (!list.length) { block.classList.add('hidden'); return; }
+        block.classList.remove('hidden');
+        select.innerHTML = '<option value="" disabled selected>Pilih alamat tersimpan</option>';
+        list.forEach(a => {
+            const region = [a.districtText, a.cityText || a.provinceText].filter(Boolean).join(', ');
+            const opt = document.createElement('option');
+            opt.value = a.id;
+            opt.textContent = `${a.name}${region ? ' — ' + region : ''} (${a.phone})`;
+            select.appendChild(opt);
+        });
+    };
+
+    select.addEventListener('change', async () => {
+        const entry = getSavedAddresses().find(a => a.id === select.value);
+        if (entry) await applySavedAddress(entry, regionalApi);
+    });
+
+    delBtn?.addEventListener('click', () => {
+        const id = select.value;
+        if (!id) return;
+        setSavedAddresses(getSavedAddresses().filter(a => a.id !== id));
+        render();
+    });
+
+    render();
 }
 
 function isCOD() {
