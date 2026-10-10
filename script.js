@@ -1977,6 +1977,11 @@ async function initCart() {
             loadingOverlay?.classList.remove('hidden');
             loadingOverlay?.classList.add('flex');
 
+            // Order ID dibuat lebih awal supaya ikut terkirim ke Telegram dan
+            // dipakai mencocokkan baris di Google Sheets (tempat admin isi resi).
+            const orderId = generateOrderId();
+            message += `*Order ID:* ${orderId}\n`;
+
             // === TELEGRAM NOTIFICATION ===
             try {
                 await fetch('/api/notify', {
@@ -2023,7 +2028,6 @@ async function initCart() {
             sessionStorage.setItem('hq_order', JSON.stringify(orderData));
 
             // Simpan ke localStorage untuk pesanan-saya.html (max 5 pesanan)
-            const orderId = generateOrderId();
             const orderWithMeta = {
                 ...orderData,
                 orderId,
@@ -2035,6 +2039,39 @@ async function initCart() {
             existingOrders.unshift(orderWithMeta);
             const trimmed = existingOrders.slice(0, 5);
             localStorage.setItem('hq_orders', JSON.stringify(trimmed));
+
+            // Rekam order ke Google Sheets supaya admin bisa mengisi nomor resi.
+            try {
+                await fetch('/api/record-order', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        orderId, name, phone, address,
+                        region: regionParts.join(', '),
+                        courier: courierLabel,
+                        items: cart.map(c => ({
+                            name: c.name,
+                            qty: c.qty,
+                            price: parsePrice(c.priceWa || c.priceCrt),
+                            variant: c.quranType ? (c.quranType === 'latin' ? 'Latin' : 'Tanpa Latin') : '',
+                            note: [
+                                c.customName && `Nama: ${c.customName}`,
+                                c.coverName && `Cover: ${c.coverName}`,
+                                c.binding && `Jilid: ${bindingLabel(c.binding)}`,
+                                c.customNote && `Ucapan: ${c.customNote}`,
+                                c.customFont && `Font: ${c.customFont}`
+                            ].filter(Boolean).join(', ')
+                        })),
+                        subtotal,
+                        ongkir: ongkirAfterSubsidy,
+                        voucher,
+                        codFee,
+                        grandTotal
+                    })
+                });
+            } catch (e) {
+                console.error('record-order error:', e);
+            }
 
             // === FACEBOOK PIXEL ===
             if (typeof fbq !== 'undefined') {

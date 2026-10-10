@@ -97,6 +97,8 @@
                 <li><a class="nav-link-underline font-sans font-semibold text-slate-500 hover:text-brand-blue dark:text-slate-400 dark:hover:text-white transition-colors duration-300"
                         href="cover.html">Katalog Cover</a></li>
                 <li><a class="nav-link-underline font-sans font-semibold text-slate-500 hover:text-brand-blue dark:text-slate-400 dark:hover:text-white transition-colors duration-300"
+                        href="cara-order.html">Cara Order</a></li>
+                <li><a class="nav-link-underline font-sans font-semibold text-slate-500 hover:text-brand-blue dark:text-slate-400 dark:hover:text-white transition-colors duration-300"
                         href="reseller.html">Reseller</a></li>
                 <li><a class="nav-link-underline font-sans font-semibold text-slate-500 hover:text-brand-blue dark:text-slate-400 dark:hover:text-white transition-colors duration-300"
                         href="bulk-order.html">B2B</a></li>
@@ -139,6 +141,8 @@
                         href="shop.html">Shop</a></li>
                 <li><a class="font-sans font-semibold text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white block px-8 md:px-12 py-2 transition-colors duration-300"
                         href="cover.html">Katalog Cover</a></li>
+                <li><a class="font-sans font-semibold text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white block px-8 md:px-12 py-2 transition-colors duration-300"
+                        href="cara-order.html">Cara Order</a></li>
                 <li><a class="font-sans font-semibold text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white block px-8 md:px-12 py-2 transition-colors duration-300"
                         href="reseller.html">Reseller</a></li>
                 <li><a class="font-sans font-semibold text-slate-500 dark:text-slate-400 hover:text-slate-500 dark:hover:text-white block px-8 md:px-12 py-2 transition-colors duration-300"
@@ -371,6 +375,69 @@
             catch (e) { return []; }
         }
 
+        const esc = v => String(v == null ? '' : v).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+
+        // Nomor resi diambil dari Google Sheets (diisi manual oleh admin).
+        // Link lacak pakai agregator yang mendukung nomor resi semua kurir.
+        const trackingUrl = resi => 'https://cekresi.com/?noresi=' + encodeURIComponent(resi);
+
+        // Isi slot resi pada kartu order: tombol lacak kalau resi sudah ada.
+        function renderResiSlot(order) {
+            const el = container.querySelector('[data-resi-for="' + order.orderId + '"]');
+            if (!el) return;
+            const resi = String(order.resi || '').trim();
+            if (!resi) {
+                el.innerHTML = `<p class="text-[11px] text-slate-400 dark:text-slate-500 flex items-center gap-1.5 mb-3">
+                    <span class="material-symbols-outlined text-base">local_shipping</span>
+                    Nomor resi belum tersedia
+                </p>`;
+                return;
+            }
+            el.innerHTML = `
+                <div class="flex flex-wrap items-center gap-3 p-3 mb-3 bg-slate-50 dark:bg-slate-800/60 rounded-2xl border border-slate-200 dark:border-slate-700">
+                    <div class="min-w-0 flex-1">
+                        <p class="text-[10px] uppercase font-bold tracking-wider text-slate-400 dark:text-slate-500">Nomor Resi</p>
+                        <p class="font-mono font-bold text-sm text-slate-900 dark:text-white tracking-wider break-all">${esc(resi)}</p>
+                    </div>
+                    <button data-resi="${esc(resi)}" onclick="copyText(this.dataset.resi)"
+                        class="px-3 py-1.5 text-[11px] bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-200 rounded-full font-bold hover:bg-slate-300 dark:hover:bg-slate-600 transition-colors">
+                        Salin
+                    </button>
+                    <a href="${trackingUrl(resi)}" target="_blank" rel="noopener noreferrer"
+                        class="px-4 py-2 text-[12px] bg-brand-blue dark:bg-brand-gold text-white dark:text-black rounded-full font-bold hover:opacity-90 transition-opacity flex items-center gap-1.5">
+                        <span class="material-symbols-outlined text-base">local_shipping</span>
+                        Lacak Pengiriman
+                    </a>
+                </div>`;
+        }
+
+        // Ambil nomor resi tiap order dari server, simpan ke cache localStorage,
+        // lalu render ulang semua slot resi.
+        async function syncResi() {
+            const targets = readOrders().filter(o => o.orderId);
+            if (!targets.length) return;
+
+            const results = await Promise.allSettled(targets.map(o =>
+                fetch('/api/get-resi?orderId=' + encodeURIComponent(o.orderId), { cache: 'no-store' })
+                    .then(r => (r.ok ? r.json() : null))
+            ));
+
+            let changed = false;
+            const next = readOrders();
+            results.forEach((res, i) => {
+                if (res.status !== 'fulfilled' || !res.value) return;
+                const target = next.find(x => x.orderId === targets[i].orderId);
+                if (!target) return;
+                const resi = String(res.value.resi || '');
+                if (target.resi !== resi) { target.resi = resi; changed = true; }
+            });
+
+            if (changed) {
+                try { localStorage.setItem('hq_orders', JSON.stringify(next)); } catch (e) {}
+            }
+            next.forEach(renderResiSlot);
+        }
+
         // Hanya order Xenith yang ada di sheet. Order COD sengaja tidak disentuh.
         async function syncStatuses() {
             const orders = readOrders();
@@ -424,6 +491,7 @@
 
         function startSync() {
             syncOnce();
+            syncResi();
         }
 
         function renderOrders() {
@@ -544,7 +612,9 @@
                                         <span class="text-base font-bold text-slate-900 dark:text-white">Rp${Number(order.grandTotal || order.subtotal).toLocaleString('id-ID')}</span>
                                     </div>
                                 </div>
-                            
+
+                                <div data-resi-for="${orderId}"></div>
+
                             <div class="flex flex-col sm:flex-row gap-2.5">
                                 <button onclick="togglePaymentInfo(this)"
                                     class="w-full sm:flex-1 px-4 py-2.5 border border-brand-blue dark:border-brand-gold text-brand-blue dark:text-brand-gold rounded-full font-bold text-sm hover:bg-brand-blue hover:text-white dark:hover:bg-brand-gold dark:hover:text-black transition-all duration-300">
@@ -570,6 +640,8 @@
                     </div>
                 `;
             }).join('');
+
+            orders.forEach(renderResiSlot);
         }
 
         function renderPaymentInfo(method, order) {
