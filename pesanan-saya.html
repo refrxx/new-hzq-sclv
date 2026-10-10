@@ -487,11 +487,6 @@
                             <p class="text-[10px] uppercase font-bold tracking-wider text-slate-400 dark:text-slate-500">Nomor Resi</p>
                             <p class="text-sm font-bold text-slate-900 dark:text-white break-all">${esc(resi)}</p>
                         </div>
-                        <button data-resi="${esc(resi)}" onclick="copyText(this.dataset.resi)"
-                            class="px-4 py-2 text-[11px] bg-brand-blue hover:bg-brand-blue/80 text-white rounded-full font-bold transition-colors shrink-0 flex items-center gap-1">
-                            <span class="material-symbols-outlined text-sm">content_copy</span>
-                            Salin
-                        </button>
                         <button onclick="loadTracking('${esc(order.orderId)}')"
                             class="px-4 py-2 text-[12px] bg-brand-blue dark:bg-brand-gold text-white dark:text-black rounded-full font-bold hover:opacity-90 transition-opacity flex items-center gap-1.5">
                             <span class="material-symbols-outlined text-base">local_shipping</span>
