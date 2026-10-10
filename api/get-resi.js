@@ -31,10 +31,15 @@ async function handler(request) {
         if (order.note) courier = JSON.parse(order.note).courier || '';
     } catch (e) {}
 
+    // note.courier berformat "<kode> <service>" (mis. "jne Reguler"), jadi kode
+    // kurir Biteship = token pertama. Dipakai untuk Public Tracking.
+    const kurir = String(courier).trim().split(/\s+/)[0].toLowerCase();
+
     return json({
         orderId,
         resi: order.resi || '',
         courier,
+        kurir,
         status: order.status || ''
     });
 }

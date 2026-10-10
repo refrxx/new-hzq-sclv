@@ -378,8 +378,95 @@
         const esc = v => String(v == null ? '' : v).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 
         // Nomor resi diambil dari Google Sheets (diisi manual oleh admin).
-        // Link lacak pakai agregator yang mendukung nomor resi semua kurir.
+        // Link fallback ke agregator yang mendukung nomor resi semua kurir.
         const trackingUrl = resi => 'https://cekresi.com/?noresi=' + encodeURIComponent(resi);
+
+        // Timeline Biteship di-cache per-resi supaya hemat biaya (Rp10/hit).
+        const TRACK_TTL = 30 * 60 * 1000;
+        const TRACK_STATUS_CLASSES = {
+            delivered: 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200',
+            droppingOff: 'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200',
+            picked: 'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200',
+            pickingUp: 'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200',
+            allocated: 'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200',
+            confirmed: 'bg-slate-100 text-slate-600 dark:bg-slate-800 dark:text-slate-300',
+            onHold: 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200',
+            returnInTransit: 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200',
+            returned: 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200',
+            rejected: 'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200',
+            cancelled: 'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200',
+            courierNotFound: 'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200',
+            disposed: 'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200'
+        };
+        const trackStatusClass = s => TRACK_STATUS_CLASSES[s] || 'bg-slate-100 text-slate-600 dark:bg-slate-800 dark:text-slate-300';
+        const fmtTrackDate = s => {
+            const d = new Date(s);
+            return isNaN(d) ? '' : d.toLocaleString('id-ID', { day: 'numeric', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' });
+        };
+
+        function renderTracking(el, resi, data) {
+            if (!data || !data.tracked) {
+                el.innerHTML = `<p class="text-[11px] text-slate-400 dark:text-slate-500 flex items-center gap-1.5">
+                    <span class="material-symbols-outlined text-base">info</span>
+                    Riwayat otomatis belum tersedia. Pakai "Buka di cekresi.com" di bawah.
+                </p>`;
+                return;
+            }
+            const history = (data.history || []).slice().reverse(); // terbaru dulu
+            const items = history.map((h, i) => `
+                <li class="flex gap-3">
+                    <span class="mt-1 w-2.5 h-2.5 rounded-full shrink-0 ${i === 0 ? 'bg-brand-blue dark:bg-brand-gold' : 'bg-slate-300 dark:bg-slate-600'}"></span>
+                    <span class="min-w-0 flex-1">
+                        <span class="block text-xs text-slate-600 dark:text-slate-300">${esc(h.note)}</span>
+                        <span class="block text-[10px] text-slate-400 dark:text-slate-500 mt-0.5">${esc(fmtTrackDate(h.updated_at))}</span>
+                    </span>
+                </li>`).join('');
+            el.innerHTML = `
+                <div class="flex items-center gap-2 mb-2">
+                    <span class="inline-block px-3 py-1 text-[11px] font-bold rounded-full ${trackStatusClass(data.status)}">${esc(data.statusLabel || data.status)}</span>
+                    <span class="text-[11px] text-slate-400 dark:text-slate-500">${esc(data.waybill || resi)}</span>
+                </div>
+                ${items ? `<ul class="space-y-2.5 pl-1">${items}</ul>` : '<p class="text-[11px] text-slate-400 dark:text-slate-500">Belum ada riwayat perjalanan.</p>'}
+            `;
+        }
+
+        // Dipanggil saat tombol "Lacak Pengiriman" diklik.
+        window.loadTracking = async function (orderId) {
+            const el = container.querySelector('[data-track-for="' + orderId + '"]');
+            if (!el) return;
+            const order = readOrders().find(o => o.orderId === orderId);
+            const resi = order ? String(order.resi || '') : '';
+
+            el.innerHTML = `<p class="text-[11px] text-slate-400 dark:text-slate-500 flex items-center gap-1.5">
+                <span class="material-symbols-outlined text-base animate-spin">progress_activity</span>
+                Memuat status pengiriman...
+            </p>`;
+
+            const key = 'hq_track_' + resi;
+            if (resi) {
+                try {
+                    const cached = JSON.parse(localStorage.getItem(key) || 'null');
+                    if (cached && cached.ts && (Date.now() - cached.ts) < TRACK_TTL) {
+                        renderTracking(el, resi, cached.data);
+                        return;
+                    }
+                } catch (e) {}
+            }
+
+            try {
+                const res = await fetch('/api/track-resi?orderId=' + encodeURIComponent(orderId), { cache: 'no-store' });
+                const data = await res.json();
+                renderTracking(el, resi, data);
+                if (resi && data && data.tracked) {
+                    try { localStorage.setItem(key, JSON.stringify({ data, ts: Date.now() })); } catch (e) {}
+                }
+            } catch (e) {
+                el.innerHTML = `<p class="text-[11px] text-red-500 flex items-center gap-1.5">
+                    <span class="material-symbols-outlined text-base">error</span>
+                    Gagal memuat status. Coba lagi.
+                </p>`;
+            }
+        };
 
         // Isi slot resi pada kartu order: tombol lacak kalau resi sudah ada.
         function renderResiSlot(order) {
@@ -394,19 +481,27 @@
                 return;
             }
             el.innerHTML = `
-                <div class="flex flex-wrap items-center gap-3 p-3 mb-3 bg-slate-50 dark:bg-slate-800/60 rounded-2xl border border-slate-200 dark:border-slate-700">
-                    <div class="min-w-0 flex-1">
-                        <p class="text-[10px] uppercase font-bold tracking-wider text-slate-400 dark:text-slate-500">Nomor Resi</p>
-                        <p class="font-mono font-bold text-sm text-slate-900 dark:text-white tracking-wider break-all">${esc(resi)}</p>
+                <div class="p-3 mb-3 bg-slate-50 dark:bg-slate-800/60 rounded-2xl border border-slate-200 dark:border-slate-700">
+                    <div class="flex flex-wrap items-center gap-3">
+                        <div class="min-w-0 flex-1">
+                            <p class="text-[10px] uppercase font-bold tracking-wider text-slate-400 dark:text-slate-500">Nomor Resi</p>
+                            <p class="font-mono font-bold text-sm text-slate-900 dark:text-white tracking-wider break-all">${esc(resi)}</p>
+                        </div>
+                        <button data-resi="${esc(resi)}" onclick="copyText(this.dataset.resi)"
+                            class="px-3 py-1.5 text-[11px] bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-200 rounded-full font-bold hover:bg-slate-300 dark:hover:bg-slate-600 transition-colors">
+                            Salin
+                        </button>
+                        <button onclick="loadTracking('${esc(order.orderId)}')"
+                            class="px-4 py-2 text-[12px] bg-brand-blue dark:bg-brand-gold text-white dark:text-black rounded-full font-bold hover:opacity-90 transition-opacity flex items-center gap-1.5">
+                            <span class="material-symbols-outlined text-base">local_shipping</span>
+                            Lacak Pengiriman
+                        </button>
                     </div>
-                    <button data-resi="${esc(resi)}" onclick="copyText(this.dataset.resi)"
-                        class="px-3 py-1.5 text-[11px] bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-200 rounded-full font-bold hover:bg-slate-300 dark:hover:bg-slate-600 transition-colors">
-                        Salin
-                    </button>
+                    <div data-track-for="${esc(order.orderId)}" class="mt-3"></div>
                     <a href="${trackingUrl(resi)}" target="_blank" rel="noopener noreferrer"
-                        class="px-4 py-2 text-[12px] bg-brand-blue dark:bg-brand-gold text-white dark:text-black rounded-full font-bold hover:opacity-90 transition-opacity flex items-center gap-1.5">
-                        <span class="material-symbols-outlined text-base">local_shipping</span>
-                        Lacak Pengiriman
+                        class="inline-flex items-center gap-1 mt-2 text-[11px] text-slate-400 hover:text-brand-blue dark:hover:text-brand-gold transition-colors">
+                        <span class="material-symbols-outlined text-sm">open_in_new</span>
+                        Buka di cekresi.com
                     </a>
                 </div>`;
         }
