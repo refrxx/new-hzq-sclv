@@ -485,10 +485,11 @@
                     <div class="flex flex-wrap items-center gap-3">
                         <div class="min-w-0 flex-1">
                             <p class="text-[10px] uppercase font-bold tracking-wider text-slate-400 dark:text-slate-500">Nomor Resi</p>
-                            <p class="font-mono font-bold text-sm text-slate-900 dark:text-white tracking-wider break-all">${esc(resi)}</p>
+                            <p class="text-sm font-bold text-slate-900 dark:text-white break-all">${esc(resi)}</p>
                         </div>
                         <button data-resi="${esc(resi)}" onclick="copyText(this.dataset.resi)"
-                            class="px-3 py-1.5 text-[11px] bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-200 rounded-full font-bold hover:bg-slate-300 dark:hover:bg-slate-600 transition-colors">
+                            class="px-4 py-2 text-[11px] bg-brand-blue hover:bg-brand-blue/80 text-white rounded-full font-bold transition-colors shrink-0 flex items-center gap-1">
+                            <span class="material-symbols-outlined text-sm">content_copy</span>
                             Salin
                         </button>
                         <button onclick="loadTracking('${esc(order.orderId)}')"
