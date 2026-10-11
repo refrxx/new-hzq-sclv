@@ -500,7 +500,9 @@ function productCardTemplate(p, opts = {}) {
         </div>
         <div class="p-4 flex flex-col flex-1">
             <div class="flex flex-wrap items-center gap-1 mb-1.5 sm:gap-1.5 sm:mb-2">
-                <span class="rounded-full px-1.5 sm:px-2 py-0.5 text-[10px] sm:text-[11px] font-bold uppercase text-white bg-gradient-to-r from-brand-blue to-blue-800">COD</span>
+                <span class="inline-flex items-center gap-0.5 rounded-full px-1.5 sm:px-2 py-0.5 text-[10px] sm:text-[11px] font-bold uppercase text-white bg-emerald-500">
+                    <span class="material-symbols-outlined text-[0.85rem] leading-none">local_shipping</span>Gratis Ongkir
+                </span>
                 <span class="rounded-full px-1.5 sm:px-2 py-0.5 text-[10px] sm:text-[11px] font-bold uppercase bg-brand-gold/20 text-amber-700 dark:text-brand-gold">${shortCategory(p.category)}</span>
             </div>
             <h3 class="font-display font-bold text-[13px] sm:text-sm text-slate-900 dark:text-white line-clamp-2 min-h-[2.5rem]">${p.name}</h3>
