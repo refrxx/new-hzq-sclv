@@ -636,7 +636,7 @@
                     // Order lama di localStorage belum punya field gambar/nama: tampil seperti sebelumnya.
                     const imgUrl = item.coverImg || item.img || '';
                     const details = [
-                        item.quranType ? `Varian: ${item.quranType === 'latin' ? 'Latin' : 'Tanpa Latin'}` : '',
+                        item.quranType ? `Varian: ${variantLabel(item.quranType)}` : '',
                         item.binding ? `Jilid: ${item.binding === 'softcover' ? 'Softcover' : 'Hardcover'}` : '',
                         item.customName ? `Nama: ${esc(item.customName)}` : '',
                         item.customNote ? `Ucapan: ${esc(item.customNote)}` : ''

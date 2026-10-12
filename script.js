@@ -52,7 +52,7 @@ id: 3,
         priceStr: "Rp120.000",
         priceWa: "Rp115.000",
         img: "img/katalog/tilawah-a5.jpg",
-        images: ["img/tilawah/tilawah-3.jpg", "img/tilawah/tilawah.jpg", "img/tilawah/tilawah-1.jpg", "img/tilawah/tilawah-2.jpg", "img/usp.jpg", "img/usp-1.jpg", "img/usp-2.jpg"],
+        images: ["img/tilawah-a5/tilawah-3.jpg", "img/tilawah-a5/tilawah.jpg", "img/tilawah-a5/tilawah-1.jpg", "img/tilawah-a5/tilawah-2.jpg", "img/usp.jpg", "img/usp-1.jpg", "img/usp-2.jpg"],
         wa: "Halo Admin, saya ingin pesan Al Quran Custom Nama Tilawah A5",
         shopee: "https://shopee.co.id/hamzahquran/26513988170",
         specs: ["Kertas Quran Premium (awet dan tahan lama)", "Tajwid Warna", "Rasm Utsmani 15 baris", "Ukuran A5 (Sedang) 14,8 x 21 cm", "Tanpa terjemah", "Hardcover kokoh", "Cocok untuk tilawah harian", "Desain elegan", "Proses cetak cepat"]
@@ -66,7 +66,7 @@ id: 3,
         priceStr: "Rp139.000",
         priceWa: "Rp129.000",
         img: "img/katalog/yazid.jpg",
-        images: ["img/yazid/yazid-a5.jpg", "img/yazid/yazid-a5-1.jpg", "img/usp.jpg", "img/usp-1.jpg", "img/usp-2.jpg"],
+        images: ["img/hafalan-6blok/yazid-a5.jpg", "img/hafalan-6blok/yazid-a5-1.jpg", "img/hafalan-6blok/yazid-a5-2.jpg", "img/hafalan-6blok/yazid-a5-3.jpg", "img/usp.jpg", "img/usp-1.jpg", "img/usp-2.jpg"],
         wa: "Halo Admin, saya ingin pesan Al Quran Custom Nama Hafalan 6 Blok Non Terjemah A5",
         shopee: "https://shopee.co.id/hamzahquran/26474664037",
         specs: ["Kertas Quran Premium (awet dan tahan lama)", "6 Blok Warna Hafalan", "Tajwid Warna", "Panduan Muroja'ah", "Ukuran A5 (Sedang) 14,8 x 21 cm", "Hardcover kokoh", "Tanpa terjemah", "Desain colorful", "Proses cetak cepat"]
@@ -109,7 +109,7 @@ id: 3,
         priceWa: "Rp64.000",
         bindings: { softcover: "Rp54.000", hardcover: "Rp64.000" },
         img: "img/katalog/iqro-bw-3.jpg",
-        images: ["img/iqro-bw/iqro-bw-3.jpg", "img/iqro-bw/iqro-bw.jpg", "img/iqro-bw/iqro-bw-1.jpg", "img/iqro-bw/iqro-bw-2.jpg", "img/usp.jpg", "img/usp-1.jpg", "img/usp-2.jpg"],
+        images: ["img/iqro-bw/iqro-bw.jpg", "img/iqro-bw/iqro-bw-1.jpg", "img/iqro-bw/iqro-bw-2.jpg", "img/iqro-bw/iqro-bw-3.jpg", "img/usp.jpg", "img/usp-1.jpg", "img/usp-2.jpg"],
         wa: "Halo Admin, saya ingin pesan IQRO Custom Nama Hitam Putih HVS A5",
         shopee: "https://shopee.co.id/hamzahquran/22346411504",
         specs: ["Hardcover Premium", "Kertas HVS Premium 70gr", "Isi IQRO original", "Penerbit AMM Yogyakarta", "Ukuran A5 (Sedang) 14,8 x 21 cm", "Lengkap Jilid 1-6", "Kertas putih, tulisan jelas"]
@@ -144,6 +144,80 @@ id: 3,
         shopee: "https://shopee.co.id/hamzahquran/43817837285",
         specs: ["Kertas HVS Premium 70gr", "Full Color", "Tajwid Warna", "Dilengkapi Asmaul Husna", "Ukuran A5 (Sedang) 14,8 x 21 cm", "Mudah dibawa", "Kertas berkualitas", "Tampilan cerah", "Bantu hafalan surat pendek"]
     },
+    {
+        id: 11,
+        name: "Al Quran Custom Tilawah A4",
+        category: "Al Quran Besar",
+        weight: 1600,
+        priceCrt: "Rp169.000",
+        priceStr: "Rp160.000",
+        priceWa: "Rp155.000",
+        img: "img/katalog/tilawah-a4.jpg",
+        images: ["img/tilawah-a4/tilawah-a4.jpg", "img/tilawah-a4/tilawah-a4-1.jpg", "img/tilawah-a4/tilawah-a4-2.jpg", "img/tilawah-a4/tilawah-a4-3.jpg", "img/tilawah-a4/tilawah-a4-4.jpg", "img/usp.jpg", "img/usp-1.jpg", "img/usp-2.jpg"],
+        wa: "Halo Admin, saya ingin pesan Al Quran Custom Nama Tilawah A4",
+        shopee: "https://shopee.co.id/hamzahquran",
+        specs: ["Kertas Quran Premium (awet dan tahan lama)", "Tajwid Warna", "Rasm Utsmani 15 baris", "Ukuran A4 (Besar) 21 x 29,7 cm", "Tanpa terjemah", "Hardcover kokoh", "Cocok untuk tilawah harian", "Desain elegan", "Proses cetak cepat"]
+    },
+    {
+        id: 12,
+        name: "Al Quran Custom Tilawah 4 Kode Warna A5",
+        category: "Al Quran Sedang",
+        weight: 850,
+        priceCrt: "Rp103.000",
+        priceStr: "Rp94.000",
+        priceWa: "Rp89.000",
+        xtraVoucher: 5000,
+        img: "img/katalog/tilawah-4kode-a5.jpg",
+        images: ["img/tilawah-4kode-a5/tilawah-4kode-a5.jpg", "img/tilawah-4kode-a5/tilawah-4kode-a5-1.jpg", "img/tilawah-4kode-a5/tilawah-4kode-a5-2.jpg", "img/tilawah-4kode-a5/tilawah-4kode-a5-3.jpg", "img/usp.jpg", "img/usp-1.jpg", "img/usp-2.jpg"],
+        wa: "Halo Admin, saya ingin pesan Al Quran Custom Nama Tilawah 4 Kode Warna A5",
+        shopee: "",
+        specs: ["Kertas HVS 70gsm", "Isi berwarna", "4 kode warna tajwid", "Rasm Utsmani 15 baris", "Ukuran A5 (Sedang) 14,8 x 21 cm", "Tanpa terjemah", "Hardcover kokoh", "Cocok untuk tilawah harian", "Desain elegan", "Proses cetak cepat"]
+    },
+    {
+        id: 13,
+        name: "Al Quran Custom Tilawah 4 Kode Warna A4",
+        category: "Al Quran Besar",
+        weight: 1600,
+        priceCrt: "Rp136.000",
+        priceStr: "Rp127.000",
+        priceWa: "Rp122.000",
+        xtraVoucher: 7000,
+        img: "img/katalog/tilawah-4kode-a4.jpg",
+        images: ["img/tilawah-4kode-a4/tilawah-4kode-a4.jpg", "img/tilawah-4kode-a4/tilawah-4kode-a4-1.jpg", "img/tilawah-4kode-a4/tilawah-4kode-a4-2.jpg", "img/tilawah-4kode-a4/tilawah-4kode-a4-3.jpg", "img/tilawah-4kode-a4/tilawah-4kode-a4-4.jpg", "img/usp.jpg", "img/usp-1.jpg", "img/usp-2.jpg"],
+        wa: "Halo Admin, saya ingin pesan Al Quran Custom Nama Tilawah 4 Kode Warna A4",
+        shopee: "",
+        specs: ["Kertas HVS 70gsm", "Isi berwarna", "4 kode warna tajwid", "Rasm Utsmani 15 baris", "Ukuran A4 (Besar) 21 x 29,7 cm", "Tanpa terjemah", "Hardcover kokoh", "Cocok untuk tilawah harian", "Desain elegan", "Proses cetak cepat"]
+    },
+    {
+        id: 14,
+        name: "Al Quran Custom Perkata Latin 4 Kode Warna A5",
+        category: "Al Quran Sedang",
+        weight: 850,
+        priceCrt: "Rp100.000",
+        priceStr: "Rp91.000",
+        priceWa: "Rp86.000",
+        xtraVoucher: 5000,
+        img: "img/katalog/perkata-4kode-a5.jpg",
+        images: ["img/perkata-4kode-a5/perkata-4kode-a5.jpg", "img/perkata-4kode-a5/perkata-4kode-a5-1.jpg", "img/perkata-4kode-a5/perkata-4kode-a5-2.jpg", "img/perkata-4kode-a5/perkata-4kode-a5-3.jpg", "img/usp.jpg", "img/usp-1.jpg", "img/usp-2.jpg"],
+        wa: "Halo Admin, saya ingin pesan Al Quran Custom Nama Perkata Latin 4 Kode Warna A5",
+        shopee: "",
+        specs: ["Kertas HVS 70gsm", "Isi 2 warna", "Terjemah perkata", "Latin perkata", "4 kode warna tajwid", "Ukuran A5 (Sedang) 14,8 x 21 cm", "Hardcover kokoh", "Cocok untuk belajar arti per kata", "Proses cetak cepat"]
+    },
+    {
+        id: 15,
+        name: "Al Quran Custom Perkata Latin 4 Kode Warna A4",
+        category: "Al Quran Besar",
+        weight: 1600,
+        priceCrt: "Rp133.000",
+        priceStr: "Rp124.000",
+        priceWa: "Rp119.000",
+        xtraVoucher: 7000,
+        img: "img/katalog/perkata-4kode-a4.jpg",
+        images: ["img/perkata-4kode-a4/perkata-4kode-a4.jpg", "img/perkata-4kode-a4/perkata-4kode-a4-1.jpg", "img/perkata-4kode-a4/perkata-4kode-a4-2.jpg", "img/perkata-4kode-a4/perkata-4kode-a4-3.jpg", "img/perkata-4kode-a4/perkata-4kode-a4-4.jpg", "img/usp.jpg", "img/usp-1.jpg", "img/usp-2.jpg"],
+        wa: "Halo Admin, saya ingin pesan Al Quran Custom Nama Perkata Latin 4 Kode Warna A4",
+        shopee: "",
+        specs: ["Kertas HVS 70gsm", "Isi 2 warna", "Terjemah perkata", "Latin perkata", "4 kode warna tajwid", "Ukuran A4 (Besar) 21 x 29,7 cm", "Hardcover kokoh", "Cocok untuk belajar arti per kata", "Proses cetak cepat"]
+    },
 ];
 
 // --- Social Proof (manual) ---
@@ -177,19 +251,49 @@ const GRATIS_ONGKIR_TIERS = [
   { min: 300000, amount: 50000, label: 'Voucher Ongkir' },
   { min: 500000, amount: 70000, label: 'Voucher Ongkir' },
 ];
-const VOUCHER_TIERS = [
-  { min: 400000, amount: 40000, label: 'Voucher XTRA' },
-  { min: 250000, amount: 25000, label: 'Voucher XTRA' },
-  { min: 100000, amount: 10000, label: 'Voucher XTRA' },
-  { min: 0, amount: 5000, label: 'Voucher XTRA' },
-];
+// Voucher XTRA dihitung per produk per qty (bukan tier sub-total).
+// Default: Al Quran A4/A5 = Rp10.000, IQRO & Juz Amma = Rp5.000.
+// Produk dengan field xtraVoucher memakai nilai tsb (4 kode: A4 = Rp7.000, A5 = Rp5.000).
+const DEFAULT_XTRA_VOUCHER = 10000;
+const XTRA_VOUCHER_BY_CATEGORY = {
+  IQRO: 5000,
+  'Juz Amma': 5000,
+};
+function productXtraVoucher(p) {
+  if (p && p.xtraVoucher != null) return p.xtraVoucher;
+  if (p && XTRA_VOUCHER_BY_CATEGORY[p.category] != null) return XTRA_VOUCHER_BY_CATEGORY[p.category];
+  return DEFAULT_XTRA_VOUCHER;
+}
+function itemXtraVoucher(item) {
+  const p = GLOBAL_PRODUCTS.find(x => x.id === item.id);
+  return productXtraVoucher(p);
+}
 
 const QURAN_VARIANTS = {
   1: ['latin', 'tanpa-latin'],
   2: ['latin', 'tanpa-latin'],
   6: ['latin', 'tanpa-latin'],
   7: ['latin'],
+  4: ['tajwid-terjemah', 'non-terjemah'],
+  11: ['tajwid-terjemah', 'non-terjemah'],
 };
+
+// --- Konfigurasi opsi varian Quran (modal pilih varian di product detail) ---
+// add = selisih harga (Rp) terhadap harga dasar produk.
+const VARIANT_OPTIONS = {
+  latin: { label: 'Latin', img: 'img/preview-latin.jpg', add: 0 },
+  'tanpa-latin': { label: 'Tanpa Latin', img: 'img/preview-tanpa-latin.jpg', add: 0 },
+  'tajwid-terjemah': { label: 'Tajwid Terjemah', img: 'img/preview-tajwid-terjemah.jpg', add: 5000 },
+  'non-terjemah': { label: 'Non Terjemah', img: 'img/preview-non-terjemah.jpg', add: 0 },
+};
+const variantLabel = k => (VARIANT_OPTIONS[k] && VARIANT_OPTIONS[k].label) || 'Varian';
+function variantPriceStr(product, field, quranType) {
+  const base = product && product[field] ? String(product[field]) : '';
+  const add = (VARIANT_OPTIONS[quranType] || {}).add || 0;
+  if (!add) return base;
+  const num = parseInt(base.replace(/[^\d]/g, ''), 10) || 0;
+  return 'Rp' + (num + add).toLocaleString('id-ID');
+}
 
 // --- Binding (softcover/hardcover) ---
 // Produk dengan pilihan jilid: hanya priceWa yang beda per binding, sisanya sama.
@@ -207,19 +311,11 @@ function productPriceRange(p) {
   if (!p || !p.bindings) return null;
   return Object.values(p.bindings).join(' - ');
 }
-function getBestVoucherAmount(subtotal) {
-  for (const t of [...VOUCHER_TIERS].sort((a, b) => b.min - a.min)) if (subtotal >= t.min) return t.amount;
-  return 0;
-}
 function getVoucherLabel(amount) {
   return `Rp${amount.toLocaleString('id-ID')}`;
 }
 function getAutoGratisOngkir(subtotal) {
   const e = GRATIS_ONGKIR_TIERS.filter(t => subtotal >= t.min).sort((a, b) => b.amount - a.amount);
-  return e[0] || null;
-}
-function getAutoVoucher(subtotal) {
-  const e = VOUCHER_TIERS.filter(t => subtotal >= t.min).sort((a, b) => b.amount - a.amount);
   return e[0] || null;
 }
 
@@ -500,10 +596,10 @@ function productCardTemplate(p, opts = {}) {
         </div>
         <div class="p-4 flex flex-col flex-1">
             <div class="flex flex-wrap items-center gap-1 mb-1.5 sm:gap-1.5 sm:mb-2">
-                <span class="inline-flex items-center gap-0.5 rounded-full px-1.5 sm:px-2 py-0.5 text-[10px] sm:text-[11px] font-bold uppercase text-white bg-emerald-500">
+                <span class="inline-flex items-center gap-0.5 rounded-full px-1.5 sm:px-2 py-0.5 text-[10px] sm:text-[11px] font-bold uppercase text-white bg-[#2453ec]">
                     <span class="material-symbols-outlined text-[0.85rem] leading-none">local_shipping</span>Gratis Ongkir
                 </span>
-                <span class="rounded-full px-1.5 sm:px-2 py-0.5 text-[10px] sm:text-[11px] font-bold uppercase bg-brand-gold/20 text-amber-700 dark:text-brand-gold">${shortCategory(p.category)}</span>
+                <span class="rounded-full px-1.5 sm:px-2 py-0.5 text-[10px] sm:text-[11px] font-bold uppercase bg-brand-gold text-[#593218]">${shortCategory(p.category)}</span>
             </div>
             <h3 class="font-display font-bold text-[13px] sm:text-sm text-slate-900 dark:text-white line-clamp-2 min-h-[2.5rem]">${p.name}</h3>
             ${metaRow}
@@ -695,12 +791,12 @@ function initCoverKatalog() {
             // Reset sub-category filter when switching product type
             currentFilter = 'Semua Desain';
             filterButtons.forEach(b => {
-                b.classList.remove('bg-brand-blue', 'text-white', 'dark:bg-white', 'dark:text-black', 'shadow-lg');
+                b.classList.remove('bg-brand-blue', 'text-white', 'dark:bg-brand-gold', 'dark:text-black', 'shadow-lg');
                 b.classList.add('bg-slate-50', 'dark:bg-slate-900', 'text-slate-400', 'dark:text-slate-500');
             });
             const firstSubBtn = document.querySelector('.filter-btn');
             if (firstSubBtn) {
-                firstSubBtn.classList.add('bg-brand-blue', 'text-white', 'dark:bg-white', 'dark:text-black', 'shadow-lg');
+                firstSubBtn.classList.add('bg-brand-blue', 'text-white', 'dark:bg-brand-gold', 'dark:text-black', 'shadow-lg');
                 firstSubBtn.classList.remove('bg-slate-50', 'dark:bg-slate-900', 'text-slate-400', 'dark:text-slate-500');
             }
 
@@ -739,10 +835,10 @@ function initCoverKatalog() {
     filterButtons.forEach(btn => {
         btn.addEventListener('click', () => {
             filterButtons.forEach(b => {
-                b.classList.remove('bg-brand-blue', 'text-white', 'dark:bg-white', 'dark:text-black', 'shadow-lg');
+                b.classList.remove('bg-brand-blue', 'text-white', 'dark:bg-brand-gold', 'dark:text-black', 'shadow-lg');
                 b.classList.add('bg-slate-50', 'dark:bg-slate-900', 'text-slate-400', 'dark:text-slate-500');
             });
-            btn.classList.add('bg-brand-blue', 'text-white', 'dark:bg-white', 'dark:text-black', 'shadow-lg');
+            btn.classList.add('bg-brand-blue', 'text-white', 'dark:bg-brand-gold', 'dark:text-black', 'shadow-lg');
             btn.classList.remove('bg-slate-50', 'dark:bg-slate-900', 'text-slate-400', 'dark:text-slate-500');
             currentFilter = btn.textContent.trim().replace(/\s+/g, ' ');
             renderCovers();
@@ -789,8 +885,7 @@ function initProductDetail() {
         `, 'innerHTML');
 
         // Voucher banner
-        const priceNum = bindingPriceNum(productCheapestPrice(product));
-        const productVoucher = getBestVoucherAmount(priceNum);
+        const productVoucher = productXtraVoucher(product);
         const voucherBanner = document.getElementById('voucher-banner');
         const voucherText = document.getElementById('voucher-banner-text');
         if (voucherBanner && voucherText) {
@@ -1090,14 +1185,14 @@ function addToCart(productId, customName, coverId, customNote = '', customFont =
 
     const coverData = coverId ? COVER_DESIGNS.find(c => c.id === coverId) : null;
     const chosenBinding = binding && product.bindings && product.bindings[binding] ? binding : '';
-    const priceWa = chosenBinding ? product.bindings[chosenBinding] : product.priceWa;
+    const priceWa = chosenBinding ? product.bindings[chosenBinding] : variantPriceStr(product, 'priceWa', quranType);
 
     // Each customization is unique, so always push new item
     cart.push({
         id: product.id,
         name: product.name,
         category: product.category,
-        priceCrt: product.priceCrt,
+        priceCrt: variantPriceStr(product, 'priceCrt', quranType),
         priceWa: priceWa,
         img: product.img,
         qty: 1,
@@ -1184,7 +1279,7 @@ function initPersonalizationPage() {
         setEl('personalize-product-img', product.img, 'src');
         setEl('personalize-product-name', product.name);
         setEl('personalize-product-category', product.category);
-        setEl('personalize-product-price', (binding && product.bindings && product.bindings[binding]) ? product.bindings[binding] : (product.priceWa || product.priceStr));
+        setEl('personalize-product-price', (binding && product.bindings && product.bindings[binding]) ? product.bindings[binding] : variantPriceStr(product, 'priceWa', quranType));
 
         const backLink = document.getElementById('back-to-product');
         if (backLink) backLink.href = `product-detail.html?id=${product.id}`;
@@ -1465,21 +1560,37 @@ let selectedQuranType = 'latin';
 function openQuranPickerModal(productId, variants) {
     quranPickerProductId = productId;
     const modal = document.getElementById('quran-picker-modal');
-    if (!modal) return;
+    const container = document.getElementById('quran-options');
+    if (!modal || !container) return;
 
-    const optLatin = document.getElementById('quran-opt-latin');
-    const optTanpa = document.getElementById('quran-opt-tanpa-latin');
-    const hasLatin = variants.includes('latin');
-    const hasTanpa = variants.includes('tanpa-latin');
+    const product = GLOBAL_PRODUCTS.find(p => p.id === productId);
+    const hasPriceDiff = variants.some(k => VARIANT_OPTIONS[k] && VARIANT_OPTIONS[k].add > 0);
 
-    // Show/hide options based on available variants
-    if (optLatin) optLatin.style.display = hasLatin ? '' : 'none';
-    if (optTanpa) optTanpa.style.display = hasTanpa ? '' : 'none';
+    container.innerHTML = variants.map(key => {
+        const opt = VARIANT_OPTIONS[key] || { label: key, img: '', add: 0 };
+        const priceTag = product && hasPriceDiff
+            ? `<span class="absolute bottom-2 right-2 rounded-full bg-black/70 text-white px-3 py-1 text-xs font-bold backdrop-blur-sm">${variantPriceStr(product, 'priceWa', key)}</span>`
+            : '';
+        return `
+            <label id="quran-opt-${key}" class="quran-picker-card modal-cover-card cursor-pointer rounded-[1.25rem] overflow-hidden border-2 border-transparent relative"
+                   onclick="selectQuranType('${key}')">
+                <input type="radio" name="quran-type" value="${key}" class="sr-only">
+                <div class="aspect-[16/7] relative bg-slate-100 dark:bg-slate-800 overflow-hidden">
+                  <img src="${opt.img}" alt="${opt.label}" class="w-full h-full object-cover">
+                  <div class="absolute inset-0 bg-gradient-to-r from-black/70 via-black/30 to-transparent flex items-center px-5">
+                    <span class="text-white font-display font-black text-2xl">${opt.label}</span>
+                  </div>
+                  ${priceTag}
+                </div>
+                <div class="cover-check bg-brand-blue text-white">
+                  <span class="material-symbols-outlined text-[0.9rem]">check</span>
+                </div>
+            </label>`;
+    }).join('');
 
     // Auto-select first available variant
-    const defaultType = hasLatin ? 'latin' : 'tanpa-latin';
-    selectedQuranType = defaultType;
-    selectQuranType(defaultType);
+    selectedQuranType = variants[0];
+    selectQuranType(variants[0]);
 
     modal.style.display = 'flex';
     document.body.style.overflow = 'hidden';
@@ -1500,16 +1611,35 @@ function selectQuranType(type) {
         el.classList.remove('border-brand-blue');
         el.classList.add('border-transparent');
     });
-    const target = type === 'latin'
-        ? document.getElementById('quran-opt-latin')
-        : document.getElementById('quran-opt-tanpa-latin');
+    const target = document.getElementById('quran-opt-' + type);
     if (target) {
         target.classList.add('selected');
         target.classList.remove('border-transparent');
         target.classList.add('border-brand-blue');
         const radio = target.querySelector('input[type="radio"]');
         if (radio) radio.checked = true;
+        updateQuranPriceDisplay();
     }
+}
+
+function updateQuranPriceDisplay() {
+    const product = quranPickerProductId ? GLOBAL_PRODUCTS.find(p => p.id === quranPickerProductId) : null;
+    if (!product) return;
+    const variants = QURAN_VARIANTS[product.id] || [];
+    const hasPriceDiff = variants.some(k => VARIANT_OPTIONS[k] && VARIANT_OPTIONS[k].add > 0);
+    if (!hasPriceDiff) return;
+
+    const crtEl = document.getElementById('harga-coret');
+    const priceEl = document.getElementById('product-price');
+    const waEl = document.getElementById('product-wa-price');
+    if (crtEl) crtEl.textContent = variantPriceStr(product, 'priceCrt', selectedQuranType);
+    if (priceEl) priceEl.textContent = variantPriceStr(product, 'priceStr', selectedQuranType);
+    if (waEl) waEl.innerHTML = `
+        <div class="wa-price-badge py-3 px-5 mb-2">
+            <span class="material-symbols-outlined !text-2xl">confirmation_number</span>
+            <span class="price-val !text-2xl sm:!text-3xl">${variantPriceStr(product, 'priceWa', selectedQuranType)}</span>
+            <span class="label-text !text-sm !opacity-100 !font-normal">Harga spesial Web</span>
+        </div>`;
 }
 
 function confirmQuranPicker() {
@@ -1659,7 +1789,7 @@ function renderCart() {
                     <h3 class="font-bold text-lg text-slate-900 dark:text-white leading-tight">${item.name}</h3>
                     ${item.customName ? `<div class="flex items-center gap-1.5 mt-1"><span class="material-symbols-outlined text-[1rem] text-brand-blue dark:text-brand-gold">badge</span><span class="text-sm font-semibold text-slate-600 dark:text-slate-300">Nama: ${item.customName}</span></div>` : ''}
                     ${item.coverName ? `<div class="flex items-center gap-1.5 mt-0.5"><span class="material-symbols-outlined text-[1rem] text-brand-blue dark:text-brand-gold">palette</span><span class="text-sm font-semibold text-slate-600 dark:text-slate-300">Cover: ${item.coverName} (${item.coverCategory})</span></div>` : ''}
-                    ${item.quranType ? `<div class="flex items-center gap-1.5 mt-0.5"><span class="material-symbols-outlined text-[1rem] text-brand-blue dark:text-brand-gold">menu_book</span><span class="text-sm font-semibold text-slate-600 dark:text-slate-300">Varian: ${item.quranType === 'latin' ? 'Latin' : 'Tanpa Latin'}</span></div>` : ''}
+                    ${item.quranType ? `<div class="flex items-center gap-1.5 mt-0.5"><span class="material-symbols-outlined text-[1rem] text-brand-blue dark:text-brand-gold">menu_book</span><span class="text-sm font-semibold text-slate-600 dark:text-slate-300">Varian: ${item.quranType ? variantLabel(item.quranType) : ''}</span></div>` : ''}
                     ${item.binding ? `<div class="flex items-center gap-1.5 mt-0.5"><span class="material-symbols-outlined text-[1rem] text-brand-blue dark:text-brand-gold">layers</span><span class="text-sm font-semibold text-slate-600 dark:text-slate-300">Jilid: ${bindingLabel(item.binding)}</span></div>` : ''}
                     ${item.customNote ? `<div class="flex items-center gap-1.5 mt-0.5"><span class="material-symbols-outlined text-[1rem] text-brand-blue dark:text-brand-gold">edit_note</span><span class="text-sm font-semibold text-slate-600 dark:text-slate-300">Ucapan: ${item.customNote}</span></div>` : ''}
                     ${item.customFont ? `<div class="flex items-center gap-1.5 mt-0.5"><span class="material-symbols-outlined text-[1rem] text-brand-blue dark:text-brand-gold">font_download</span><span class="text-sm font-semibold text-slate-600 dark:text-slate-300">Font: ${item.customFont}</span></div>` : ''}
@@ -1825,7 +1955,7 @@ async function initCart() {
                 message += `${i + 1}. ${c.name}\n`;
                 if (c.customName) message += `   - Nama: ${c.customName}\n`;
                 if (c.coverName) message += `   - Cover: ${c.coverName} (${c.coverCategory})\n`;
-                if (c.quranType) message += `   - Varian: ${c.quranType === 'latin' ? 'Latin' : 'Tanpa Latin'}\n`;
+                if (c.quranType) message += `   - Varian: ${variantLabel(c.quranType)}\n`;
                 if (c.binding) message += `   - Jilid: ${bindingLabel(c.binding)}\n`;
                 if (c.customNote) message += `   - Ucapan: ${c.customNote}\n`;
                 if (c.customFont) message += `   - Font: ${c.customFont}\n`;
@@ -1886,7 +2016,7 @@ async function initCart() {
                                 name: c.name,
                                 qty: c.qty,
                                 price: parsePrice(c.priceWa || c.priceCrt),
-                                variant: c.quranType ? (c.quranType === 'latin' ? 'Latin' : 'Tanpa Latin') : '',
+                                variant: c.quranType ? variantLabel(c.quranType) : '',
                                 note: [
                                     c.customName && `Nama: ${c.customName}`,
                                     c.coverName && `Cover: ${c.coverName}`,
@@ -2055,7 +2185,7 @@ async function initCart() {
                             name: c.name,
                             qty: c.qty,
                             price: parsePrice(c.priceWa || c.priceCrt),
-                            variant: c.quranType ? (c.quranType === 'latin' ? 'Latin' : 'Tanpa Latin') : '',
+                            variant: c.quranType ? variantLabel(c.quranType) : '',
                             note: [
                                 c.customName && `Nama: ${c.customName}`,
                                 c.coverName && `Cover: ${c.coverName}`,
@@ -2472,9 +2602,9 @@ function getShippingDiscount(ongkirPrice, subtotal) {
     return Math.min(getSubsidy(), ongkirPrice);
 }
 
-function getVoucherDiscount(subtotal) {
-    const auto = getAutoVoucher(subtotal);
-    return auto ? auto.amount : 0;
+function getVoucherDiscount() {
+    // Voucher XTRA per produk per qty (bukan tier sub-total).
+    return cart.reduce((sum, item) => sum + (item.qty || 1) * itemXtraVoucher(item), 0);
 }
 
 function getGratisOngkirLabel(subtotal) {
@@ -2482,9 +2612,8 @@ function getGratisOngkirLabel(subtotal) {
     return auto ? auto.label : null;
 }
 
-function getAutoVoucherLabel(subtotal) {
-    const auto = getAutoVoucher(subtotal);
-    return auto ? auto.label : null;
+function getAutoVoucherLabel() {
+    return 'Voucher XTRA';
 }
 
 function updateGrandTotal() {
