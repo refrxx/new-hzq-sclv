@@ -32,8 +32,14 @@
                         sans: ['Inter', 'sans-serif'],
                     },
                     borderRadius: {
-                        '32': '32px',
-                        '40': '40px',
+                        'DEFAULT': '2px',
+                        'md': '2px',
+                        'lg': '4px',
+                        'xl': '5px',
+                        '2xl': '6px',
+                        '3xl': '8px',
+                        '32': '10px',
+                        '40': '12px',
                     }
                 }
             }
@@ -112,15 +118,15 @@
 
             <div class="flex items-center gap-4">
                 <a href="pesanan-saya.html"
-                    class="p-2.5 bg-slate-100 dark:bg-slate-800 rounded-full text-slate-600 dark:text-slate-400 hover:text-brand-blue dark:hover:text-brand-gold transition-colors duration-300 flex items-center justify-center w-10 h-10 relative"
+                    class="hidden lg:flex p-2.5 bg-slate-100 dark:bg-slate-800 rounded-full text-slate-600 dark:text-slate-400 hover:text-brand-blue dark:hover:text-brand-gold transition-colors duration-300 items-center justify-center w-10 h-10 relative"
                     title="Pesanan Saya">
                     <span class="material-symbols-outlined">receipt_long</span>
                 </a>
                 <a href="cart.html"
-                    class="p-2.5 bg-slate-100 dark:bg-slate-800 rounded-full text-slate-600 dark:text-slate-400 hover:text-brand-blue dark:hover:text-brand-gold transition-colors duration-300 border-0 flex items-center justify-center w-10 h-10 relative">
+                    class="hidden lg:flex p-2.5 bg-slate-100 dark:bg-slate-800 rounded-full text-slate-600 dark:text-slate-400 hover:text-brand-blue dark:hover:text-brand-gold transition-colors duration-300 border-0 items-center justify-center w-10 h-10 relative">
                     <span class="material-symbols-outlined">shopping_cart</span>
                     <span id="nav-cart-badge"
-                        class="absolute -top-1 -right-1 bg-red-500 text-white text-[0.6rem] font-bold w-4 h-4 rounded-full flex items-center justify-center hidden">0</span>
+                        class="nav-cart-badge absolute -top-1 -right-1 bg-red-500 text-white text-[0.6rem] font-bold w-4 h-4 rounded-full flex items-center justify-center hidden">0</span>
                 </a>
                 <button id="theme-toggle"
                     class="hidden lg:flex p-2.5 bg-slate-100 dark:bg-slate-800 rounded-full text-slate-600 dark:text-slate-400 hover:text-brand-blue dark:hover:text-brand-gold transition-colors duration-300 items-center justify-center w-10 h-10 border-0"
@@ -171,6 +177,67 @@
             </ul>
         </div>
     </header>
+
+    <!-- Bottom Navigation (mobile) -->
+    <nav class="bottom-nav fixed inset-x-0 bottom-0 z-[110] bg-white/95 dark:bg-[#080e16]/95 backdrop-blur-md border-t border-slate-100 dark:border-slate-800">
+        <a href="index.html" class="bottom-nav-item">
+            <span class="material-symbols-outlined">home</span>
+            <span>Home</span>
+        </a>
+        <a href="shop.html" class="bottom-nav-item">
+            <span class="material-symbols-outlined">storefront</span>
+            <span>Shop</span>
+        </a>
+        <a href="cart.html" class="bottom-nav-item">
+            <span class="relative">
+                <span class="material-symbols-outlined">shopping_cart</span>
+                <span class="nav-cart-badge absolute -top-1 -right-3 bg-red-500 text-white text-[0.6rem] font-bold w-4 h-4 rounded-full flex items-center justify-center hidden">0</span>
+            </span>
+            <span>Keranjang</span>
+        </a>
+        <a href="pesanan-saya.html" class="bottom-nav-item">
+            <span class="material-symbols-outlined">receipt_long</span>
+            <span>Pesanan</span>
+        </a>
+        <button type="button" data-bottom-menu-toggle class="bottom-nav-item">
+            <span class="material-symbols-outlined">menu</span>
+            <span>Menu</span>
+        </button>
+    </nav>
+
+    <!-- Bottom Sheet (slide-up menu) -->
+    <div id="bottom-sheet" class="bottom-sheet" aria-hidden="true">
+        <div class="bottom-sheet-backdrop" data-bottom-sheet-close></div>
+        <div class="bottom-sheet-panel" role="dialog" aria-label="Menu lainnya">
+            <div class="bottom-sheet-handle"></div>
+            <a href="cover.html" class="bottom-sheet-link">
+                <span class="material-symbols-outlined">palette</span>
+                <span>Katalog Cover</span>
+            </a>
+            <a href="cara-order.html" class="bottom-sheet-link">
+                <span class="material-symbols-outlined">shopping_cart_checkout</span>
+                <span>Cara Order</span>
+            </a>
+            <a href="reseller.html" class="bottom-sheet-link">
+                <span class="material-symbols-outlined">storefront</span>
+                <span>Reseller</span>
+            </a>
+            <a href="bulk-order.html" class="bottom-sheet-link">
+                <span class="material-symbols-outlined">inventory_2</span>
+                <span>B2B / Grosir</span>
+            </a>
+            <div class="bottom-sheet-row">
+                <span>Aktifkan Dark Mode</span>
+                <button id="theme-toggle-sheet"
+                    class="relative inline-flex items-center w-12 h-6 rounded-full transition-colors duration-300 focus:outline-none border-0"
+                    style="background: var(--toggle-bg, #cbd5e1);"
+                    aria-label="Toggle dark mode">
+                    <span id="theme-toggle-sheet-knob"
+                        class="inline-block w-5 h-5 bg-white rounded-full shadow transform transition-transform duration-300 translate-x-0.5"></span>
+                </button>
+            </div>
+        </div>
+    </div>
 
     <main class="pt-12 pb-12 lg:pt-16 lg:pb-20">
         <section class="max-w-[1200px] mx-auto px-8 md:px-12 text-center">

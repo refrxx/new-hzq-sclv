@@ -1172,7 +1172,7 @@ function saveCart() {
 }
 
 function updateCartBadge() {
-    const badges = document.querySelectorAll('#nav-cart-badge');
+    const badges = document.querySelectorAll('.nav-cart-badge');
     const totalQty = cart.reduce((sum, item) => sum + item.qty, 0);
     badges.forEach(badge => {
         if (totalQty > 0) {
@@ -1457,14 +1457,22 @@ function renderModalCoverGrid() {
     grid.innerHTML = covers.map(c => {
         const isSelected = c.id === modalSelectedCoverId;
         const selectedBorder = isSelected ? 'ring-3 ring-brand-blue dark:ring-brand-gold' : 'border border-slate-200 dark:border-slate-700';
+        const showPreview = !!document.getElementById('cover-preview');
+        const previewBtn = showPreview
+            ? `<button type="button" class="cover-preview-btn" title="Lihat gambar penuh"
+                   onclick="event.stopPropagation(); openCoverPreview('${c.img}')">
+                   <span class="material-symbols-outlined">zoom_in</span>
+               </button>`
+            : '';
         return `
             <div class="modal-cover-card rounded-xl overflow-hidden ${selectedBorder} ${isSelected ? 'selected' : ''}"
                  onclick="selectModalCover(${c.id})">
                 <div class="cover-check bg-brand-blue dark:bg-brand-gold text-white dark:text-black">
                     <span class="material-symbols-outlined text-[0.9rem]">check</span>
                 </div>
-                <div class="aspect-[3/4] bg-slate-100 dark:bg-slate-800">
+                <div class="aspect-[3/4] relative bg-slate-100 dark:bg-slate-800">
                     <img src="${c.img}" alt="${c.name}" class="w-full h-full object-cover">
+                    ${previewBtn}
                 </div>
                 <div class="p-2 bg-white dark:bg-slate-900">
                     <p class="text-[0.85rem] font-medium text-slate-900 dark:text-white text-center">${c.name}</p>
@@ -2989,6 +2997,96 @@ function initThemeMobile() {
     updateMobileToggle();
 }
 
+// Bottom navigation slide-up sheet (separate from the top hamburger dropdown)
+function initBottomSheet() {
+    const sheet = document.getElementById('bottom-sheet');
+    if (!sheet) return;
+    const toggles = document.querySelectorAll('[data-bottom-menu-toggle]');
+
+    const openSheet = () => {
+        sheet.classList.add('open');
+        sheet.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+        toggles.forEach((b) => b.classList.add('active'));
+    };
+    const closeSheet = () => {
+        sheet.classList.remove('open');
+        sheet.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+        toggles.forEach((b) => b.classList.remove('active'));
+    };
+
+    toggles.forEach((btn) => {
+        btn.addEventListener('click', () => {
+            sheet.classList.contains('open') ? closeSheet() : openSheet();
+        });
+    });
+
+    sheet.querySelectorAll('[data-bottom-sheet-close]').forEach((el) => {
+        el.addEventListener('click', closeSheet);
+    });
+
+    sheet.querySelectorAll('a').forEach((a) => {
+        a.addEventListener('click', closeSheet);
+    });
+
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && sheet.classList.contains('open')) closeSheet();
+    });
+}
+
+// Dark mode switch inside the bottom sheet
+function initSheetThemeToggle() {
+    const toggle = document.getElementById('theme-toggle-sheet');
+    const knob = document.getElementById('theme-toggle-sheet-knob');
+    if (!toggle) return;
+
+    const update = () => {
+        const isDark = document.documentElement.classList.contains('dark');
+        toggle.style.setProperty('--toggle-bg', isDark ? '#1A5FB4' : '#cbd5e1');
+        toggle.style.background = isDark ? '#1A5FB4' : '#cbd5e1';
+        if (knob) knob.style.transform = isDark ? 'translateX(1.5rem)' : 'translateX(0.125rem)';
+    };
+
+    toggle.addEventListener('click', () => {
+        const isDark = document.documentElement.classList.contains('dark');
+        document.documentElement.classList.toggle('dark', !isDark);
+        localStorage.setItem('theme', !isDark ? 'dark' : 'light');
+        update();
+    });
+
+    update();
+}
+
+// Cover image preview overlay (personalize page)
+function openCoverPreview(src) {
+    if (!src) return;
+    const preview = document.getElementById('cover-preview');
+    const img = document.getElementById('cover-preview-img');
+    if (!preview || !img) return;
+    img.src = src;
+    preview.classList.add('active');
+    document.body.style.overflow = 'hidden';
+}
+
+function closeCoverPreview() {
+    const preview = document.getElementById('cover-preview');
+    if (!preview) return;
+    preview.classList.remove('active');
+    document.body.style.overflow = '';
+}
+
+function initCoverPreview() {
+    const preview = document.getElementById('cover-preview');
+    if (!preview) return;
+    preview.addEventListener('click', (e) => {
+        if (e.target.tagName !== 'IMG') closeCoverPreview();
+    });
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && preview.classList.contains('active')) closeCoverPreview();
+    });
+}
+
 // --- START ALL ---
 document.addEventListener('DOMContentLoaded', () => {
     initLenis();
@@ -3003,4 +3101,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initPersonalizationPage();
     initBulkOrder();
     initThemeMobile();
+    initBottomSheet();
+    initSheetThemeToggle();
+    initCoverPreview();
 });
