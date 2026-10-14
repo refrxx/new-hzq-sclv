@@ -1562,7 +1562,8 @@ function renderModalCoverGrid() {
         const showPreview = !!document.getElementById('cover-preview');
         const previewBtn = showPreview
             ? `<button type="button" class="cover-preview-btn" title="Lihat gambar penuh"
-                   onclick="event.stopPropagation(); openCoverPreview('${c.img}')">
+                   data-cover-src="${c.img}"
+                   onclick="event.stopPropagation(); openCoverPreview(this.dataset.coverSrc)">
                    <span class="material-symbols-outlined">zoom_in</span>
                </button>`
             : '';
@@ -2173,8 +2174,11 @@ async function initCart() {
             const shippingDiscount = getShippingDiscount(courierPrice, subtotal);
             const ongkirAfterSubsidy = courierPrice - shippingDiscount;
             const voucher = getVoucherDiscount(subtotal);
-            const codFee = paymentMethodValue === 'cod' ? Math.round((subtotal + ongkirAfterSubsidy - voucher) * 0.04) : 0;
-            const grandTotal = subtotal + ongkirAfterSubsidy + codFee - voucher;
+            const feeBase = subtotal + ongkirAfterSubsidy - voucher;
+            const isCodPay = paymentMethodValue === 'cod';
+            const codFee = isCodPay ? calcCodFee(feeBase) : 0;
+            const serviceFee = isCodPay ? 0 : ONLINE_SERVICE_FEE;
+            const grandTotal = subtotal + ongkirAfterSubsidy + codFee + serviceFee - voucher;
 
             const isGratisOngkir = getAutoGratisOngkir(subtotal) !== null;
             const goLabel = getGratisOngkirLabel(subtotal);
@@ -2196,7 +2200,10 @@ async function initCart() {
             }
             message += `*Total Ongkir:* ${ongkirAfterSubsidy === 0 ? 'Gratis 🎉' : formatPrice(ongkirAfterSubsidy)}\n`;
             if (codFee > 0) {
-                message += `*Biaya Admin Bayar di Rumah (4%):* ${formatPrice(codFee)}\n`;
+                message += `*Biaya Admin Bayar di Rumah (3% + PPN 11%):* ${formatPrice(codFee)}\n`;
+            }
+            if (serviceFee > 0) {
+                message += `*Biaya Layanan:* ${formatPrice(serviceFee)}\n`;
             }
             message += `*TOTAL PEMBAYARAN:* ${formatPrice(grandTotal)}\n\n`;
 
@@ -2231,6 +2238,7 @@ async function initCart() {
                             subtotal,
                             ongkir: ongkirAfterSubsidy,
                             voucher,
+                            serviceFee,
                             grandTotal
                         })
                     });
@@ -2262,6 +2270,7 @@ async function initCart() {
                         voucherLabel: vchLabel,
                         gratisOngkirLabel: goLabel,
                         codFee: 0,
+                        serviceFee,
                         grandTotal,
                         cart: cart.map(item => ({
                             name: item.name,
@@ -2346,6 +2355,7 @@ async function initCart() {
                 voucherLabel: vchLabel,
                 gratisOngkirLabel: goLabel,
                 codFee,
+                serviceFee,
                 grandTotal,
                 cart: cart.map(item => ({
                     name: item.name,
@@ -2790,6 +2800,14 @@ function initSavedAddresses(regionalApi) {
     render();
 }
 
+// Biaya metode pembayaran:
+// - COD: 3% dari (subtotal + ongkir setelah subsidi - voucher) + PPN 11% atas biaya tsb.
+// - QRIS & Transfer Bank: biaya layanan tetap Rp1.000 per order.
+const COD_RATE = 0.03;
+const PPN_RATE = 0.11;
+const ONLINE_SERVICE_FEE = 1000;
+const calcCodFee = (base) => Math.round(Math.max(0, base) * COD_RATE * (1 + PPN_RATE));
+
 function isCOD() {
     return document.querySelector('input[name="payment-method"]:checked')?.value === 'cod';
 }
@@ -2830,8 +2848,10 @@ function updateGrandTotal() {
     const shippingDiscount = getShippingDiscount(ongkirPrice, subtotal);
     const ongkirAfterSubsidy = ongkirPrice - shippingDiscount;
     const voucher = getVoucherDiscount(subtotal);
-    const codFee = isCOD() ? Math.round((subtotal + ongkirAfterSubsidy - voucher) * 0.04) : 0;
-    const grandTotal = subtotal + ongkirAfterSubsidy + codFee - voucher;
+    const feeBase = subtotal + ongkirAfterSubsidy - voucher;
+    const codFee = isCOD() ? calcCodFee(feeBase) : 0;
+    const serviceFee = isCOD() ? 0 : ONLINE_SERVICE_FEE;
+    const grandTotal = subtotal + ongkirAfterSubsidy + codFee + serviceFee - voucher;
 
     // Get labels for display
     const isGratisOngkir = getAutoGratisOngkir(subtotal) !== null;
@@ -2839,11 +2859,11 @@ function updateGrandTotal() {
     const vchLabel = getAutoVoucherLabel(subtotal);
 
     const rows = [
-        { rowId: 'ongkir-summary-row', labelId: 'ongkir-summary-label', priceId: 'ongkir-summary-price', totalId: 'grand-total', codRowId: 'cod-fee-row', codPriceId: 'cod-fee-price', subRowId: 'subsidy-row', subPriceId: 'subsidy-price', vchRowId: 'voucher-row', vchPriceId: 'voucher-price' },
-        { rowId: 'ongkir-summary-row-mobile', labelId: 'ongkir-summary-label-mobile', priceId: 'ongkir-summary-price-mobile', totalId: 'grand-total-mobile', codRowId: 'cod-fee-row-mobile', codPriceId: 'cod-fee-price-mobile', subRowId: 'subsidy-row-mobile', subPriceId: 'subsidy-price-mobile', vchRowId: 'voucher-row-mobile', vchPriceId: 'voucher-price-mobile' },
+        { rowId: 'ongkir-summary-row', labelId: 'ongkir-summary-label', priceId: 'ongkir-summary-price', totalId: 'grand-total', codRowId: 'cod-fee-row', codPriceId: 'cod-fee-price', subRowId: 'subsidy-row', subPriceId: 'subsidy-price', vchRowId: 'voucher-row', vchPriceId: 'voucher-price', serviceFeeRowId: 'service-fee-row', serviceFeePriceId: 'service-fee-price' },
+        { rowId: 'ongkir-summary-row-mobile', labelId: 'ongkir-summary-label-mobile', priceId: 'ongkir-summary-price-mobile', totalId: 'grand-total-mobile', codRowId: 'cod-fee-row-mobile', codPriceId: 'cod-fee-price-mobile', subRowId: 'subsidy-row-mobile', subPriceId: 'subsidy-price-mobile', vchRowId: 'voucher-row-mobile', vchPriceId: 'voucher-price-mobile', serviceFeeRowId: 'service-fee-row-mobile', serviceFeePriceId: 'service-fee-price-mobile' },
     ];
 
-    rows.forEach(({ rowId, labelId, priceId, totalId, codRowId, codPriceId, subRowId, subPriceId, vchRowId, vchPriceId }) => {
+    rows.forEach(({ rowId, labelId, priceId, totalId, codRowId, codPriceId, subRowId, subPriceId, vchRowId, vchPriceId, serviceFeeRowId, serviceFeePriceId }) => {
         const row = document.getElementById(rowId);
         const label = document.getElementById(labelId);
         const priceEl = document.getElementById(priceId);
@@ -2854,6 +2874,8 @@ function updateGrandTotal() {
         const subPriceEl = document.getElementById(subPriceId);
         const vchRow = document.getElementById(vchRowId);
         const vchPriceEl = document.getElementById(vchPriceId);
+        const serviceFeeRow = document.getElementById(serviceFeeRowId);
+        const serviceFeePriceEl = document.getElementById(serviceFeePriceId);
 
         if (selectedCourierName && row) {
             row.classList.remove('hidden');
@@ -2897,6 +2919,13 @@ function updateGrandTotal() {
             if (codPriceEl) codPriceEl.textContent = formatPrice(codFee);
         } else if (codRow) {
             codRow.classList.add('hidden');
+        }
+
+        if (serviceFee > 0 && serviceFeeRow) {
+            serviceFeeRow.classList.remove('hidden');
+            if (serviceFeePriceEl) serviceFeePriceEl.textContent = formatPrice(serviceFee);
+        } else if (serviceFeeRow) {
+            serviceFeeRow.classList.add('hidden');
         }
 
         if (totalEl) totalEl.textContent = formatPrice(grandTotal);

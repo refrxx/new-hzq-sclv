@@ -274,7 +274,7 @@
         const order = JSON.parse(orderJson);
         sessionStorage.removeItem('hq_order');
 
-        const { name, phone, address, paymentMethod, subtotal, ongkir, courier, codFee, grandTotal, cart } = order;
+        const { name, phone, address, paymentMethod, subtotal, ongkir, courier, codFee, serviceFee, grandTotal, cart } = order;
 
         const formatPrice = (amount) => `Rp${Number(amount).toLocaleString('id-ID')}`;
 
@@ -396,7 +396,8 @@
                     <p class="text-sm text-slate-500 dark:text-slate-400">Total yang harus dibayar</p>
                     <p class="text-3xl md:text-4xl font-black text-brand-blue dark:text-brand-gold mt-1">${formatPrice(grandTotal || subtotal)}</p>
                     ${ongkir > 0 ? `<p class="text-xs text-slate-400 mt-1">Termasuk ongkos kirim ${formatPrice(ongkir)}${courier ? ` (${courier})` : ''}</p>` : ''}
-                    ${codFee > 0 ? `<p class="text-xs text-slate-400 mt-1">Biaya admin Bayar di Rumah 4%: ${formatPrice(codFee)}</p>` : ''}
+                    ${codFee > 0 ? `<p class="text-xs text-slate-400 mt-1">Biaya admin Bayar di Rumah (3% + PPN 11%): ${formatPrice(codFee)}</p>` : ''}
+                    ${serviceFee > 0 ? `<p class="text-xs text-slate-400 mt-1">Biaya layanan: ${formatPrice(serviceFee)}</p>` : ''}
                 </div>
             </div>
 
@@ -426,8 +427,12 @@
                         <span class="font-semibold text-slate-900 dark:text-white">${formatPrice(ongkir)}</span>
                     </div>` : ''}
                     ${codFee > 0 ? `<div class="flex">
-                        <span class="text-slate-500 dark:text-slate-400 w-28 shrink-0">COD Fee</span>
+                        <span class="text-slate-500 dark:text-slate-400 w-28 shrink-0">Biaya Admin COD</span>
                         <span class="font-semibold text-slate-900 dark:text-white">${formatPrice(codFee)}</span>
+                    </div>` : ''}
+                    ${serviceFee > 0 ? `<div class="flex">
+                        <span class="text-slate-500 dark:text-slate-400 w-28 shrink-0">Biaya Layanan</span>
+                        <span class="font-semibold text-slate-900 dark:text-white">${formatPrice(serviceFee)}</span>
                     </div>` : ''}
                     <div class="flex">
                         <span class="text-slate-500 dark:text-slate-400 w-28 shrink-0">Pembayaran</span>

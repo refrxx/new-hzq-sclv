@@ -756,8 +756,14 @@
                                 </div>
                                 ${order.codFee > 0 ? `
                                 <div class="flex items-center justify-between text-sm mb-2">
-                                    <span class="text-slate-500 dark:text-slate-400">Biaya Admin Bayar di Rumah (4%)</span>
+                                    <span class="text-slate-500 dark:text-slate-400">Biaya Admin Bayar di Rumah (3% + PPN 11%)</span>
                                     <span class="font-semibold text-slate-700 dark:text-slate-300">Rp${Number(order.codFee).toLocaleString('id-ID')}</span>
+                                </div>
+                                ` : ''}
+                                ${order.serviceFee > 0 ? `
+                                <div class="flex items-center justify-between text-sm mb-2">
+                                    <span class="text-slate-500 dark:text-slate-400">Biaya Layanan</span>
+                                    <span class="font-semibold text-slate-700 dark:text-slate-300">Rp${Number(order.serviceFee).toLocaleString('id-ID')}</span>
                                 </div>
                                 ` : ''}
                                 <div class="flex items-center justify-between mb-5">
