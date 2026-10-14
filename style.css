@@ -1230,7 +1230,26 @@ input[type="radio"] {
 }
 
 .dark .pd-price-block {
-    background: linear-gradient(180deg, #0b1420 0%, #0f1b2b 100%);
+    background: linear-gradient(180deg, #0b14201e 0%, #0f1b2b 100%);
+}
+
+.pd-discount-pill {
+    margin-left: auto;
+    display: inline-flex;
+    align-items: center;
+    padding: 3px 9px;
+    border-radius: 9999px;
+    background: #ff0707;
+    color: rgb(255, 229, 229);
+    font-size: 0.85rem;
+    font-weight: 800;
+    line-height: 1.2;
+    white-space: nowrap;
+}
+
+.dark .pd-discount-pill {
+    background: rgba(239, 68, 68, 0.16);
+    color: #fca5a5;
 }
 
 .pd-big-price {
@@ -1241,7 +1260,7 @@ input[type="radio"] {
 }
 
 .pd-big-price .pd-currency {
-    font-size: 1.35rem;
+    font-size: 1.1rem;
     font-weight: 700;
     color: #1A5FB4;
 }
@@ -1252,7 +1271,7 @@ input[type="radio"] {
 
 .pd-big-price .pd-amount {
     font-family: var(--display-font);
-    font-size: 2.5rem;
+    font-size: 2.05rem;
     font-weight: 800;
     letter-spacing: -0.01em;
     color: #0f172a;
@@ -1263,7 +1282,7 @@ input[type="radio"] {
 }
 
 .pd-big-price .pd-amount-sm {
-    font-size: 1.5rem;
+    font-size: 1.3rem;
 }
 
 .pd-rp-icon {
@@ -1348,18 +1367,23 @@ input[type="radio"] {
     color: #ffc107;
 }
 
-.pd-tab-btn.active::after {
-    content: "";
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: -1px;
-    height: 2px;
-    background: #1A5FB4;
-    border-radius: 9999px;
+.pd-tabs {
+    position: relative;
 }
 
-.dark .pd-tab-btn.active::after {
+.pd-tab-indicator {
+    position: absolute;
+    left: 0;
+    bottom: -1px;
+    height: 2px;
+    width: 0;
+    border-radius: 9999px;
+    background: #1A5FB4;
+    pointer-events: none;
+    transition: width 320ms cubic-bezier(0.4, 0, 0.2, 1), transform 320ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.dark .pd-tab-indicator {
     background: #ffc107;
 }
 

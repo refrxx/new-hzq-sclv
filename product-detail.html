@@ -261,16 +261,8 @@
                 
                 <div class="flex flex-col animate-fade-in-up px-8 md:px-0" style="animation-delay: 100ms">
 
-                    <!-- Discount banner -->
-                    <div id="pd-discount-banner" class="hidden -mx-8 md:mx-0 bg-brand-blue">
-                        <div class="flex items-center justify-center gap-2 py-2.5 px-4 text-center text-sm font-semibold text-white">
-                            <span class="material-symbols-outlined text-[1.15rem]">sell</span>
-                            <span id="pd-discount-text">Diskon 0%, Hemat Rp0</span>
-                        </div>
-                    </div>
-
                     <!-- Price block -->
-                    <div class="pd-price-block -mx-8 md:mx-0 px-8 md:px-6 py-5">
+                    <div class="pd-price-block -mx-8 md:mx-0 px-8 md:px-6 py-4 lg:mt-4">
                         <div class="flex flex-col">
                             <span id="harga-coret"
                                 class="text-xs font-medium text-slate-400 dark:text-slate-500 line-through">Rp0</span>
@@ -283,6 +275,7 @@
                                 </div>
                                 <span
                                     class="material-symbols-outlined text-slate-400 dark:text-slate-500 text-[1.1rem] select-none">info</span>
+                                <span id="pd-discount-pill" class="pd-discount-pill hidden" title="Hemat Rp0">-0%</span>
                             </div>
                             <span id="product-price" class="hidden">Rp0</span>
                             <div id="voucher-banner" class="hidden mt-1.5">
@@ -296,7 +289,7 @@
                     </div>
 
                     <!-- Title -->
-                    <div class="flex items-start justify-between gap-3 mt-5">
+                    <div class="flex items-start justify-between gap-3 mt-5 lg:mt-0 lg:order-first">
                         <h1 id="product-name"
                             class="text-xl lg:text-2xl font-display font-semibold text-slate-900 dark:text-white leading-snug">
                             Product Name</h1>
@@ -307,7 +300,7 @@
                     </div>
 
                     <!-- Rating -->
-                    <div id="pd-rating-row" class="hidden mt-2">
+                    <div id="pd-rating-row" class="hidden mt-2 lg:order-[-1]">
                         <div class="flex items-center gap-1.5 text-sm">
                             <span class="material-symbols-outlined text-brand-gold"
                                 style="font-size:1rem; font-variation-settings: 'FILL' 1">star</span>
@@ -342,9 +335,11 @@
                     </div>
 
                     <!-- Tabs -->
-                    <div class="mt-6 flex gap-6 border-b border-slate-100 dark:border-slate-800">
+                    <div id="pd-tabs"
+                        class="pd-tabs mt-6 flex gap-6 border-b border-slate-100 dark:border-slate-800">
                         <button type="button" class="pd-tab-btn active" data-tab="ringkasan">Ringkasan</button>
                         <button type="button" class="pd-tab-btn" data-tab="spesifikasi">Spesifikasi Produk</button>
+                        <span id="pd-tab-indicator" class="pd-tab-indicator"></span>
                     </div>
 
                     <div id="pd-panel-spesifikasi" class="hidden py-5">

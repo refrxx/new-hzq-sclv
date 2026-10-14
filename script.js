@@ -918,23 +918,23 @@ function initProductDetail() {
             if (product.bindings) return Math.min(...Object.values(product.bindings).map(v => toNum(v) - productVoucher));
             return Math.max(0, toNum(product.priceWa) - productVoucher);
         };
-        const setDiscountBanner = (quranType) => {
-            const banner = document.getElementById('pd-discount-banner');
-            const text = document.getElementById('pd-discount-text');
-            if (!banner || !text) return;
+        const setDiscountPill = (quranType) => {
+            const pill = document.getElementById('pd-discount-pill');
+            if (!pill) return;
             const crt = toNum(product.priceCrt);
             const diff = crt - shownPriceNum(quranType);
             if (diff > 0 && crt > 0) {
                 const pct = Math.round((diff / crt) * 100);
-                text.textContent = `Diskon ${pct}%, Hemat Rp${diff.toLocaleString('id-ID')}`;
-                banner.classList.remove('hidden');
+                pill.textContent = `-${pct}%`;
+                pill.title = `Hemat Rp${diff.toLocaleString('id-ID')}`;
+                pill.classList.remove('hidden');
             } else {
-                banner.classList.add('hidden');
+                pill.classList.add('hidden');
             }
         };
 
         setBigPrice(discountedWaStr());
-        setDiscountBanner();
+        setDiscountPill();
 
         // Social proof (rating + jumlah terjual)
         const social = PRODUCT_SOCIAL_PROOF[product.id] || {};
@@ -1069,8 +1069,10 @@ function initProductDetail() {
                     const panel = tabPanels[key];
                     if (panel) panel.classList.toggle('hidden', key !== name);
                 });
+                updateTabIndicator();
             });
         });
+        updateTabIndicator();
 
         // Wishlist heart (UI only — belum terhubung ke fitur wishlist)
         const wishlistBtn = document.getElementById('pd-wishlist-btn');
@@ -1738,6 +1740,17 @@ function selectQuranType(type) {
     }
 }
 
+function updateTabIndicator() {
+    const indicator = document.getElementById('pd-tab-indicator');
+    const active = document.querySelector('.pd-tab-btn.active');
+    if (!indicator || !active) return;
+    indicator.style.width = active.offsetWidth + 'px';
+    indicator.style.transform = `translateX(${active.offsetLeft}px)`;
+}
+
+window.addEventListener('resize', updateTabIndicator);
+if (document.fonts && document.fonts.ready) document.fonts.ready.then(updateTabIndicator);
+
 function updateQuranPriceDisplay() {
     const product = quranPickerProductId ? GLOBAL_PRODUCTS.find(p => p.id === quranPickerProductId) : null;
     if (!product) return;
@@ -1761,17 +1774,17 @@ function updateQuranPriceDisplay() {
             : `<span class="pd-amount pd-amount-sm">${displayPrice}</span>`;
     }
 
-    const banner = document.getElementById('pd-discount-banner');
-    const text = document.getElementById('pd-discount-text');
-    if (banner && text) {
+    const pill = document.getElementById('pd-discount-pill');
+    if (pill) {
         const crt = toNum(product.priceCrt);
         const diff = crt - toNum(displayPrice);
         if (diff > 0 && crt > 0) {
             const pct = Math.round((diff / crt) * 100);
-            text.textContent = `Diskon ${pct}%, Hemat Rp${diff.toLocaleString('id-ID')}`;
-            banner.classList.remove('hidden');
+            pill.textContent = `-${pct}%`;
+            pill.title = `Hemat Rp${diff.toLocaleString('id-ID')}`;
+            pill.classList.remove('hidden');
         } else {
-            banner.classList.add('hidden');
+            pill.classList.add('hidden');
         }
     }
 }
