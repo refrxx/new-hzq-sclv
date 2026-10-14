@@ -12,7 +12,8 @@ const GLOBAL_PRODUCTS = [
         images: ["img/8qpp-a5/8qpp-a5.jpg", "img/8qpp-a5/8qpp-a5-1.jpg", "img/8qpp-a5/8qpp-a5-2.jpg", "img/8qpp-a5/8qpp-a5-3.jpg", "img/8qpp-a5/8qpp-a5-4.jpg", "img/usp.jpg", "img/usp-1.jpg", "img/usp-2.jpg"],
         wa: "Halo Admin, saya ingin pesan Al Quran Custom Nama Hafalan 8 Blok QPP A5",
         shopee: "https://shopee.co.id/hamzahquran/23569937190",
-        specs: ["8 blok warna hafalan", "Ukuran A5 (Sedang) 14,8 x 21 cm", "Kertas Quran Premium (awet dan tahan lama)", "Hardcover bukan sticker", "Tersedia versi dengan latin maupun tanpa latin", "Terjemah perkata", "Terjemah perayat", "Tajwid Warna", "QR Code Murottal"]
+        specs: ["8 blok warna hafalan", "Ukuran A5 (Sedang) 14,8 x 21 cm", "Kertas Quran Premium (awet dan tahan lama)", "Hardcover bukan sticker", "Tersedia versi dengan latin maupun tanpa latin", "Terjemah perkata", "Terjemah perayat", "Tajwid Warna", "QR Code Murottal"],
+        desc: "Al Quran hafalan dengan 8 blok warna untuk memudahkan membagi target hafalan, ukuran A5 (14,8 x 21 cm) yang ringkas. Kertas Quran premium dengan hardcover, tersedia versi latin maupun tanpa latin. Dilengkapi terjemah perkata, terjemah perayat, tajwid warna, dan QR Code murottal."
     },
     {
         id: 2,
@@ -26,7 +27,8 @@ const GLOBAL_PRODUCTS = [
         images: ["img/8matte-a5/8matte-a5.jpg", "img/8matte-a5/8matte-a5-1.jpg", "img/8matte-a5/8matte-a5-2.jpg", "img/8matte-a5/8matte-a5-3.jpg", "img/usp.jpg", "img/usp-1.jpg", "img/usp-2.jpg"],
         wa: "Halo Admin, saya ingin pesan Al Quran Custom Nama Hafalan 8 Blok Matte A5",
         shopee: "https://shopee.co.id/hamzahquran/17095398884",
-        specs: ["8 blok warna hafalan", "Ukuran A5 (Sedang) 14,8 x 21 cm", "Kertas Matte Premium (lebih tebal dan glossy)", "Hardcover bukan sticker", "Tersedia versi dengan latin maupun tanpa latin", "Terjemah perayat", "Tajwid Warna", "Desain elegan", "QR Code Murottal"]
+        specs: ["8 blok warna hafalan", "Ukuran A5 (Sedang) 14,8 x 21 cm", "Kertas Matte Premium (lebih tebal dan glossy)", "Hardcover bukan sticker", "Tersedia versi dengan latin maupun tanpa latin", "Terjemah perayat", "Tajwid Warna", "Desain elegan", "QR Code Murottal"],
+        desc: "Al Quran hafalan 8 blok warna ukuran A5 (14,8 x 21 cm) dengan kertas Matte Premium yang lebih tebal. Hadir dalam versi latin maupun tanpa latin, lengkap dengan terjemah perayat, tajwid warna, dan tampilan yang elegan."
     },
     {
 id: 3,
@@ -41,7 +43,8 @@ id: 3,
         images: ["img/8tahfiz/8tahfiz-3.jpg", "img/8tahfiz/8tahfiz.jpg", "img/8tahfiz/8tahfiz-1.jpg", "img/8tahfiz/8tahfiz-2.jpg", "img/usp.jpg", "img/usp-1.jpg", "img/usp-2.jpg"],
         wa: "Halo Admin, saya ingin pesan Al Quran Custom Nama Hafalan 8 TAHFIZ A5",
         shopee: "https://shopee.co.id/hamzahquran/26385974446",
-        specs: ["8 blok warna hafalan", "Ukuran A5 (Sedang) 14,8 x 21 cm", "Kertas Matte Premium (lebih tebal dan glossy)", "Hardcover bukan sticker", "Hanya tersedia versi tanpa latin", "Terjemah perkata", "Terjemah perayat", "Fokus hafalan intensif", "QR Code Murottal"]
+        specs: ["8 blok warna hafalan", "Ukuran A5 (Sedang) 14,8 x 21 cm", "Kertas Matte Premium (lebih tebal dan glossy)", "Hardcover bukan sticker", "Hanya tersedia versi tanpa latin", "Terjemah perkata", "Terjemah perayat", "Fokus hafalan intensif", "QR Code Murottal"],
+        desc: "Dirancang untuk program tahfiz dengan 8 blok warna dan fokus hafalan intensif. Kertas Matte Premium dan hardcover, ukuran A5 (14,8 x 21 cm), hanya tersedia versi tanpa latin. Dilengkapi terjemah perkata, terjemah perayat, dan QR Code murottal."
     },
     {
         id: 4,
@@ -55,7 +58,8 @@ id: 3,
         images: ["img/tilawah-a5/tilawah-3.jpg", "img/tilawah-a5/tilawah.jpg", "img/tilawah-a5/tilawah-1.jpg", "img/tilawah-a5/tilawah-2.jpg", "img/usp.jpg", "img/usp-1.jpg", "img/usp-2.jpg"],
         wa: "Halo Admin, saya ingin pesan Al Quran Custom Nama Tilawah A5",
         shopee: "https://shopee.co.id/hamzahquran/26513988170",
-        specs: ["Kertas Quran Premium (awet dan tahan lama)", "Tajwid Warna", "Rasm Utsmani 15 baris", "Ukuran A5 (Sedang) 14,8 x 21 cm", "Tanpa terjemah", "Hardcover kokoh", "Cocok untuk tilawah harian", "Desain elegan", "Proses cetak cepat"]
+        specs: ["Kertas Quran Premium (awet dan tahan lama)", "Tajwid Warna", "Rasm Utsmani 15 baris", "Ukuran A5 (Sedang) 14,8 x 21 cm", "Tanpa terjemah", "Hardcover kokoh", "Cocok untuk tilawah harian", "Desain elegan", "Proses cetak cepat"],
+        desc: "Al Quran tilawah ukuran A5 (14,8 x 21 cm) dengan rasm Utsmani 15 baris dan tajwid warna. Kertas Quran premium dan hardcover kokoh, tanpa terjemah \u2014 cocok untuk tilawah harian dengan desain elegan."
     },
     {
         id: 5,
@@ -69,7 +73,8 @@ id: 3,
         images: ["img/hafalan-6blok/yazid-a5.jpg", "img/hafalan-6blok/yazid-a5-1.jpg", "img/hafalan-6blok/yazid-a5-2.jpg", "img/hafalan-6blok/yazid-a5-3.jpg", "img/usp.jpg", "img/usp-1.jpg", "img/usp-2.jpg"],
         wa: "Halo Admin, saya ingin pesan Al Quran Custom Nama Hafalan 6 Blok Non Terjemah A5",
         shopee: "https://shopee.co.id/hamzahquran/26474664037",
-        specs: ["Kertas Quran Premium (awet dan tahan lama)", "6 Blok Warna Hafalan", "Tajwid Warna", "Panduan Muroja'ah", "Ukuran A5 (Sedang) 14,8 x 21 cm", "Hardcover kokoh", "Tanpa terjemah", "Desain colorful", "Proses cetak cepat"]
+        specs: ["Kertas Quran Premium (awet dan tahan lama)", "6 Blok Warna Hafalan", "Tajwid Warna", "Panduan Muroja'ah", "Ukuran A5 (Sedang) 14,8 x 21 cm", "Hardcover kokoh", "Tanpa terjemah", "Desain colorful", "Proses cetak cepat"],
+        desc: "Al Quran hafalan 6 blok warna dengan desain colorful, tanpa terjemah, ukuran A5 (14,8 x 21 cm). Dilengkapi tajwid warna dan panduan muroja'ah untuk memudahkan muroja'ah hafalan."
     },
     {
         id: 6,
@@ -83,7 +88,8 @@ id: 3,
         images: ["img/8qpp-a4/8qpp-a4.jpg", "img/8qpp-a4/8qpp-a4-1.jpg", "img/8qpp-a4/8qpp-a4-2.jpg", "img/8qpp-a4/8qpp-a4-3.jpg", "img/8qpp-a4/8qpp-a4-4.jpg", "img/8qpp-a4/8qpp-a4-5.jpg", "img/usp.jpg", "img/usp-1.jpg", "img/usp-2.jpg"],
         wa: "Halo Admin, saya ingin pesan Al Quran Custom Nama Hafalan 8 Blok QPP A4",
         shopee: "https://shopee.co.id/hamzahquran/20691896045",
-        specs: ["8 blok warna hafalan", "Ukuran A4 (Besar) 21 x 29,7 cm", "Kertas Quran Premium (awet dan tahan lama)", "Hardcover bukan sticker", "Tersedia versi dengan latin maupun tanpa latin", "Terjemah perkata", "Terjemah perayat", "Tajwid Warna", "QR Code Murottal"]
+        specs: ["8 blok warna hafalan", "Ukuran A4 (Besar) 21 x 29,7 cm", "Kertas Quran Premium (awet dan tahan lama)", "Hardcover bukan sticker", "Tersedia versi dengan latin maupun tanpa latin", "Terjemah perkata", "Terjemah perayat", "Tajwid Warna", "QR Code Murottal"],
+        desc: "Al Quran hafalan 8 blok warna ukuran A4 besar (21 x 29,7 cm) dengan tulisan lebih lega. Kertas Quran premium dan hardcover, tersedia versi latin maupun tanpa latin. Dilengkapi terjemah perkata, terjemah perayat, tajwid warna, dan QR Code murottal."
     },
     {
         id: 7,
@@ -97,7 +103,8 @@ id: 3,
         images: ["img/8matte-a4/8matte-a4.jpg", "img/8matte-a4/8matte-a4-1.jpg", "img/8matte-a4/8matte-a4-2.jpg", "img/8matte-a4/8matte-a4-3.jpg", "img/8matte-a4/8matte-a4-4.jpg", "img/usp.jpg", "img/usp-1.jpg", "img/usp-2.jpg"],
         wa: "Halo Admin, saya ingin pesan Al Quran Custom Nama Hafalan 8 Blok Matte A4",
         shopee: "https://shopee.co.id/hamzahquran/23954192019",
-        specs: ["8 blok warna hafalan", "Ukuran A4 (Besar) 21 x 29,7 cm", "Kertas Matte Premium (lebih tebal dan glossy)", "Hardcover bukan sticker", "Hanya tersedia versi tanpa latin", "Terjemah perkata", "Terjemah perayat", "Tajwid Warna"]
+        specs: ["8 blok warna hafalan", "Ukuran A4 (Besar) 21 x 29,7 cm", "Kertas Matte Premium (lebih tebal dan glossy)", "Hardcover bukan sticker", "Hanya tersedia versi tanpa latin", "Terjemah perkata", "Terjemah perayat", "Tajwid Warna"],
+        desc: "Al Quran hafalan 8 blok warna ukuran A4 (21 x 29,7 cm) dengan kertas Matte Premium yang lebih tebal. Hardcover, hanya versi tanpa latin, lengkap dengan terjemah perkata, terjemah perayat, dan tajwid warna."
     },
     {
         id: 8,
@@ -112,7 +119,8 @@ id: 3,
         images: ["img/iqro-bw/iqro-bw.jpg", "img/iqro-bw/iqro-bw-1.jpg", "img/iqro-bw/iqro-bw-2.jpg", "img/iqro-bw/iqro-bw-3.jpg", "img/usp.jpg", "img/usp-1.jpg", "img/usp-2.jpg"],
         wa: "Halo Admin, saya ingin pesan IQRO Custom Nama Hitam Putih HVS A5",
         shopee: "https://shopee.co.id/hamzahquran/22346411504",
-        specs: ["Hardcover Premium", "Kertas HVS Premium 70gr", "Isi IQRO original", "Penerbit AMM Yogyakarta", "Ukuran A5 (Sedang) 14,8 x 21 cm", "Lengkap Jilid 1-6", "Kertas putih, tulisan jelas"]
+        specs: ["Hardcover Premium", "Kertas HVS Premium 70gr", "Isi IQRO original", "Penerbit AMM Yogyakarta", "Ukuran A5 (Sedang) 14,8 x 21 cm", "Lengkap Jilid 1-6", "Kertas putih, tulisan jelas"],
+        desc: "IQRO custom nama dengan isi IQRO original dari penerbit AMM Yogyakarta, lengkap jilid 1-6. Kertas HVS Premium 70gr berwarna putih dengan tulisan yang jelas, hardcover premium, ukuran A5 (14,8 x 21 cm)."
     },
     {
         id: 9,
@@ -127,7 +135,8 @@ id: 3,
         images: ["img/iqro-qr/iqro-qr-3.jpg", "img/iqro-qr/iqro-qr.jpg", "img/iqro-qr/iqro-qr-1.jpg", "img/iqro-qr/iqro-qr-2.jpg", "img/usp.jpg", "img/usp-1.jpg", "img/usp-2.jpg"],
         wa: "Halo Admin, saya ingin pesan IQRO Custom Nama Full Color QR Code HVS A5",
         shopee: "https://shopee.co.id/hamzahquran/18189793910",
-        specs: ["Hardcover Premium", "Kertas HVS Premium 70gr", "Isi IQRO original full color", "Penerbit Al Qosbah dengan lisensi", "QR Code video pembelajaran", "Tanpa transliterasi latin", "Ukuran A5 (Sedang) 14,8 x 21 cm", "Menarik untuk anak"]
+        specs: ["Hardcover Premium", "Kertas HVS Premium 70gr", "Isi IQRO original full color", "Penerbit Al Qosbah dengan lisensi", "QR Code video pembelajaran", "Tanpa transliterasi latin", "Ukuran A5 (Sedang) 14,8 x 21 cm", "Menarik untuk anak"],
+        desc: "IQRO full color dengan isi original dari Al Qosbah (berlisensi) dan QR Code video pembelajaran. Tanpa transliterasi latin, kertas HVS Premium 70gr, hardcover premium, ukuran A5 (14,8 x 21 cm) \u2014 menarik untuk anak belajar mengaji."
     },
     {
         id: 10,
@@ -142,7 +151,8 @@ id: 3,
         images: ["img/katalog/juzamma.jpg", "img/juzamma/juzamma-3.jpg", "img/juzamma/juzamma-2.jpg", "img/juzamma/juzamma-1.jpg", "img/juzamma/juzamma-4.jpg", "img/usp.jpg", "img/usp-1.jpg", "img/usp-2.jpg"],
         wa: "Halo Admin, saya ingin pesan Juz Amma Custom Nama Full Color A5",
         shopee: "https://shopee.co.id/hamzahquran/43817837285",
-        specs: ["Kertas HVS Premium 70gr", "Full Color", "Tajwid Warna", "Dilengkapi Asmaul Husna", "Ukuran A5 (Sedang) 14,8 x 21 cm", "Mudah dibawa", "Kertas berkualitas", "Tampilan cerah", "Bantu hafalan surat pendek"]
+        specs: ["Kertas HVS Premium 70gr", "Full Color", "Tajwid Warna", "Dilengkapi Asmaul Husna", "Ukuran A5 (Sedang) 14,8 x 21 cm", "Mudah dibawa", "Kertas berkualitas", "Tampilan cerah", "Bantu hafalan surat pendek"],
+        desc: "Juz Amma full color ukuran A5 (14,8 x 21 cm) dengan tajwid warna dan tampilan cerah. Dilengkapi Asmaul Husna dan mudah dibawa, cocok membantu hafalan surat-surat pendek."
     },
     {
         id: 11,
@@ -156,7 +166,8 @@ id: 3,
         images: ["img/tilawah-a4/tilawah-a4.jpg", "img/tilawah-a4/tilawah-a4-1.jpg", "img/tilawah-a4/tilawah-a4-2.jpg", "img/tilawah-a4/tilawah-a4-3.jpg", "img/tilawah-a4/tilawah-a4-4.jpg", "img/usp.jpg", "img/usp-1.jpg", "img/usp-2.jpg"],
         wa: "Halo Admin, saya ingin pesan Al Quran Custom Nama Tilawah A4 QPP Tajwid Warna",
         shopee: "https://shopee.co.id/hamzahquran",
-        specs: ["Kertas Quran Premium (awet dan tahan lama)", "Tajwid Warna", "Rasm Utsmani 15 baris", "Ukuran A4 (Besar) 21 x 29,7 cm", "Tanpa terjemah", "Hardcover kokoh", "Cocok untuk tilawah harian", "Desain elegan", "Proses cetak cepat"]
+        specs: ["Kertas Quran Premium (awet dan tahan lama)", "Tajwid Warna", "Rasm Utsmani 15 baris", "Ukuran A4 (Besar) 21 x 29,7 cm", "Tanpa terjemah", "Hardcover kokoh", "Cocok untuk tilawah harian", "Desain elegan", "Proses cetak cepat"],
+        desc: "Al Quran tilawah ukuran A4 besar (21 x 29,7 cm) dengan rasm Utsmani 15 baris dan tajwid warna. Kertas Quran premium dan hardcover kokoh, tanpa terjemah, nyaman untuk tilawah harian."
     },
     {
         id: 12,
@@ -171,7 +182,8 @@ id: 3,
         images: ["img/tilawah-4kode-a5/tilawah-4kode-a5.jpg", "img/tilawah-4kode-a5/tilawah-4kode-a5-1.jpg", "img/tilawah-4kode-a5/tilawah-4kode-a5-2.jpg", "img/tilawah-4kode-a5/tilawah-4kode-a5-3.jpg", "img/usp.jpg", "img/usp-1.jpg", "img/usp-2.jpg"],
         wa: "Halo Admin, saya ingin pesan Al Quran Custom Nama Tilawah 4 Kode Warna A5 HVS",
         shopee: "",
-        specs: ["Kertas HVS 70gsm", "Isi berwarna", "4 kode warna tajwid", "Rasm Utsmani 15 baris", "Ukuran A5 (Sedang) 14,8 x 21 cm", "Tanpa terjemah", "Hardcover kokoh", "Cocok untuk tilawah harian", "Desain elegan", "Proses cetak cepat"]
+        specs: ["Kertas HVS 70gsm", "Isi berwarna", "4 kode warna tajwid", "Rasm Utsmani 15 baris", "Ukuran A5 (Sedang) 14,8 x 21 cm", "Tanpa terjemah", "Hardcover kokoh", "Cocok untuk tilawah harian", "Desain elegan", "Proses cetak cepat"],
+        desc: "Al Quran tilawah ukuran A5 (14,8 x 21 cm) dengan 4 kode warna tajwid dan rasm Utsmani 15 baris. Kertas HVS 70gsm berisi warna, hardcover kokoh, tanpa terjemah, cocok untuk tilawah harian."
     },
     {
         id: 13,
@@ -186,11 +198,12 @@ id: 3,
         images: ["img/tilawah-4kode-a4/tilawah-4kode-a4.jpg", "img/tilawah-4kode-a4/tilawah-4kode-a4-1.jpg", "img/tilawah-4kode-a4/tilawah-4kode-a4-2.jpg", "img/tilawah-4kode-a4/tilawah-4kode-a4-3.jpg", "img/tilawah-4kode-a4/tilawah-4kode-a4-4.jpg", "img/usp.jpg", "img/usp-1.jpg", "img/usp-2.jpg"],
         wa: "Halo Admin, saya ingin pesan Al Quran Custom Nama Tilawah 4 Kode Warna A4 HVS",
         shopee: "",
-        specs: ["Kertas HVS 70gsm", "Isi berwarna", "4 kode warna tajwid", "Rasm Utsmani 15 baris", "Ukuran A4 (Besar) 21 x 29,7 cm", "Tanpa terjemah", "Hardcover kokoh", "Cocok untuk tilawah harian", "Desain elegan", "Proses cetak cepat"]
+        specs: ["Kertas HVS 70gsm", "Isi berwarna", "4 kode warna tajwid", "Rasm Utsmani 15 baris", "Ukuran A4 (Besar) 21 x 29,7 cm", "Tanpa terjemah", "Hardcover kokoh", "Cocok untuk tilawah harian", "Desain elegan", "Proses cetak cepat"],
+        desc: "Al Quran tilawah ukuran A4 besar (21 x 29,7 cm) dengan 4 kode warna tajwid dan rasm Utsmani 15 baris. Kertas HVS 70gsm berisi warna, hardcover kokoh, tanpa terjemah, nyaman untuk tilawah harian."
     },
     {
         id: 14,
-        name: "Al Quran Custom Perkata Latin 4 Kode Warna A5 HVS",
+        name: "Al Quran Custom Perkata Latin 4 Kode Tajwid A5 HVS",
         category: "Al Quran Sedang",
         weight: 850,
         priceCrt: "Rp100.000",
@@ -199,13 +212,14 @@ id: 3,
         xtraVoucher: 5000,
         img: "img/katalog/perkata-4kode-a5.jpg",
         images: ["img/perkata-4kode-a5/perkata-4kode-a5.jpg", "img/perkata-4kode-a5/perkata-4kode-a5-1.jpg", "img/perkata-4kode-a5/perkata-4kode-a5-2.jpg", "img/perkata-4kode-a5/perkata-4kode-a5-3.jpg", "img/usp.jpg", "img/usp-1.jpg", "img/usp-2.jpg"],
-        wa: "Halo Admin, saya ingin pesan Al Quran Custom Nama Perkata Latin 4 Kode Warna A5 HVS",
+        wa: "Halo Admin, saya ingin pesan Al Quran Custom Nama Perkata Latin 4 Kode Tajwid A5 HVS",
         shopee: "",
-        specs: ["Kertas HVS 70gsm", "Isi 2 warna", "Terjemah perkata", "Latin perkata", "4 kode warna tajwid", "Ukuran A5 (Sedang) 14,8 x 21 cm", "Hardcover kokoh", "Cocok untuk belajar arti per kata", "Proses cetak cepat"]
+        specs: ["Kertas HVS 70gsm", "Isi 2 warna", "Terjemah perkata", "Latin perkata", "4 kode tajwid", "Ukuran A5 (Sedang) 14,8 x 21 cm", "Hardcover kokoh", "Cocok untuk belajar arti per kata", "Proses cetak cepat"],
+        desc: "Al Quran dengan terjemah dan latin perkata serta 4 kode tajwid, ukuran A5 (14,8 x 21 cm). Kertas HVS 70gsm, isi 2 warna, hardcover kokoh \u2014 cocok untuk belajar arti tiap kata sambil membaca."
     },
     {
         id: 15,
-        name: "Al Quran Custom Perkata Latin 4 Kode Warna A4 HVS",
+        name: "Al Quran Custom Perkata Latin 4 Kode Tajwid A4 HVS",
         category: "Al Quran Besar",
         weight: 1600,
         priceCrt: "Rp133.000",
@@ -214,9 +228,10 @@ id: 3,
         xtraVoucher: 7000,
         img: "img/katalog/perkata-4kode-a4.jpg",
         images: ["img/perkata-4kode-a4/perkata-4kode-a4.jpg", "img/perkata-4kode-a4/perkata-4kode-a4-1.jpg", "img/perkata-4kode-a4/perkata-4kode-a4-2.jpg", "img/perkata-4kode-a4/perkata-4kode-a4-3.jpg", "img/perkata-4kode-a4/perkata-4kode-a4-4.jpg", "img/usp.jpg", "img/usp-1.jpg", "img/usp-2.jpg"],
-        wa: "Halo Admin, saya ingin pesan Al Quran Custom Nama Perkata Latin 4 Kode Warna A4 HVS",
+        wa: "Halo Admin, saya ingin pesan Al Quran Custom Nama Perkata Latin 4 Kode Tajwid A4 HVS",
         shopee: "",
-        specs: ["Kertas HVS 70gsm", "Isi 2 warna", "Terjemah perkata", "Latin perkata", "4 kode warna tajwid", "Ukuran A4 (Besar) 21 x 29,7 cm", "Hardcover kokoh", "Cocok untuk belajar arti per kata", "Proses cetak cepat"]
+        specs: ["Kertas HVS 70gsm", "Isi 2 warna", "Terjemah perkata", "Latin perkata", "4 kode tajwid", "Ukuran A4 (Besar) 21 x 29,7 cm", "Hardcover kokoh", "Cocok untuk belajar arti per kata", "Proses cetak cepat"],
+        desc: "Al Quran dengan terjemah dan latin perkata serta 4 kode tajwid, ukuran A4 besar (21 x 29,7 cm). Kertas HVS 70gsm, isi 2 warna, hardcover kokoh \u2014 pas untuk belajar arti per kata dengan tulisan yang lebih lega."
     },
 ];
 
@@ -880,22 +895,73 @@ function initProductDetail() {
         setEl('product-category', product.category);
         setEl('harga-coret', product.priceCrt);
         setEl('product-price', product.priceStr);
-        const waPriceRange = productPriceRange(product);
-        setEl('product-wa-price', `
-            <div class="wa-price-badge py-3 px-5 mb-2">
-                <span class="material-symbols-outlined !text-2xl">confirmation_number</span>
-                <span class="price-val ${waPriceRange ? '!text-xl sm:!text-2xl' : '!text-2xl sm:!text-3xl'}">${waPriceRange || product.priceWa}</span>
-                <span class="label-text !text-sm !opacity-100 !font-normal">Harga spesial Web</span>
-            </div>
-        `, 'innerHTML');
-
-        // Voucher banner
+        const toNum = v => parseInt(String(v).replace(/[^\d]/g, ''), 10) || 0;
+        const fmtRp = n => 'Rp' + Math.max(0, n).toLocaleString('id-ID');
         const productVoucher = productXtraVoucher(product);
+
+        const discountedWaStr = (quranType) => {
+            if (quranType) return fmtRp(toNum(variantPriceStr(product, 'priceWa', quranType)) - productVoucher);
+            if (product.bindings) return Object.values(product.bindings).map(v => fmtRp(toNum(v) - productVoucher)).join(' - ');
+            return fmtRp(toNum(product.priceWa) - productVoucher);
+        };
+        const setBigPrice = (displayStr) => {
+            const waEl = document.getElementById('product-wa-price');
+            if (!waEl) return;
+            const m = /^Rp\s?([\d.]+)$/.exec(displayStr);
+            if (m) {
+                waEl.innerHTML = `<span class="pd-currency">Rp</span><span class="pd-amount">${m[1]}</span>`;
+            } else {
+                waEl.innerHTML = `<span class="pd-amount pd-amount-sm">${displayStr}</span>`;
+            }
+        };
+        const shownPriceNum = (quranType) => {
+            if (quranType) return Math.max(0, toNum(variantPriceStr(product, 'priceWa', quranType)) - productVoucher);
+            if (product.bindings) return Math.min(...Object.values(product.bindings).map(v => toNum(v) - productVoucher));
+            return Math.max(0, toNum(product.priceWa) - productVoucher);
+        };
+        const setDiscountBanner = (quranType) => {
+            const banner = document.getElementById('pd-discount-banner');
+            const text = document.getElementById('pd-discount-text');
+            if (!banner || !text) return;
+            const crt = toNum(product.priceCrt);
+            const diff = crt - shownPriceNum(quranType);
+            if (diff > 0 && crt > 0) {
+                const pct = Math.round((diff / crt) * 100);
+                text.textContent = `Diskon ${pct}%, Hemat Rp${diff.toLocaleString('id-ID')}`;
+                banner.classList.remove('hidden');
+            } else {
+                banner.classList.add('hidden');
+            }
+        };
+
+        setBigPrice(discountedWaStr());
+        setDiscountBanner();
+
+        // Social proof (rating + jumlah terjual)
+        const social = PRODUCT_SOCIAL_PROOF[product.id] || {};
+        const soldLabel = social.sold != null ? social.sold.toLocaleString('id-ID') : '0';
+        const soldMain = document.getElementById('pd-sold-main');
+        const soldTitle = document.getElementById('pd-sold-title');
+        const ratingRow = document.getElementById('pd-rating-row');
+        if (soldMain) soldMain.textContent = soldLabel;
+        if (soldTitle) soldTitle.textContent = soldLabel;
+        if (ratingRow) {
+            if (social.rating || social.sold) {
+                ratingRow.classList.remove('hidden');
+                const ratingVal = document.getElementById('pd-rating-val');
+                if (ratingVal) ratingVal.textContent = social.rating || '';
+            } else {
+                ratingRow.classList.add('hidden');
+            }
+        }
+
+        // Voucher chip
         const voucherBanner = document.getElementById('voucher-banner');
         const voucherText = document.getElementById('voucher-banner-text');
         if (voucherBanner && voucherText) {
             voucherBanner.classList.remove('hidden');
-            voucherText.textContent = `Checkout sekarang dan dapatkan voucher XTRA ${getVoucherLabel(productVoucher)}!`;
+            voucherText.textContent = 'Dengan Voucher';
+            voucherBanner.title = `Voucher XTRA ${getVoucherLabel(productVoucher)}`;
         }
 
         setEl('main-image', product.img, 'src');
@@ -959,9 +1025,9 @@ function initProductDetail() {
         const thumbGallery = document.getElementById('thumbnail-gallery');
 
         if (thumbGallery && product.images) {
-            thumbGallery.className = "flex overflow-x-auto gap-3 pb-2 scrollbar-hide";
+            thumbGallery.className = "flex overflow-x-auto gap-1 pb-0 lg:pb-2 scrollbar-hide px-1 mt-1";
             thumbGallery.innerHTML = product.images.map((imgSrc, idx) => `
-                <div id="thumb-${idx}" class="thumb-item flex-shrink-0 w-20 sm:w-24 cursor-pointer aspect-square rounded-xl overflow-hidden border-2 transition-all ${idx === 0 ? 'border-brand-blue' : 'border-transparent opacity-60 hover:opacity-100'}"
+                <div id="thumb-${idx}" class="thumb-item flex-shrink-0 w-16 sm:w-20 cursor-pointer aspect-square rounded-md overflow-hidden border transition-all ${idx === 0 ? 'border-brand-blue' : 'border-transparent opacity-60 hover:opacity-100'}"
                      onclick="changeMainImage(${idx}, '${imgSrc}')">
                     <img src="${imgSrc}" class="w-full h-full object-cover">
                 </div>
@@ -972,17 +1038,48 @@ function initProductDetail() {
         const specList = document.getElementById('spec-list');
         if (specList && product.specs) {
             specList.innerHTML = product.specs.map(s => `
-                <li class="flex items-center gap-3 text-slate-900 dark:text-slate-100">
-                    <span class="material-symbols-outlined text-brand-blue dark:text-brand-gold">check_circle</span>
+                <li class="flex items-start gap-3 text-slate-700 dark:text-slate-200">
+                    <span class="material-symbols-outlined text-[1.2rem] text-brand-blue dark:text-brand-gold shrink-0" style="font-variation-settings: 'FILL' 1">check_circle</span>
                     <span>${s}</span>
                 </li>
             `).join('');
         }
 
-        // Dynamic Text Description
+        // Dynamic Text Description (tab Ringkasan)
         const productDesc = document.getElementById('product-desc');
-        if (productDesc && product.desc) {
-            productDesc.textContent = product.desc;
+        if (productDesc) {
+            if (product.desc) {
+                productDesc.textContent = product.desc;
+                productDesc.classList.remove('hidden');
+            } else {
+                productDesc.classList.add('hidden');
+            }
+        }
+
+        // Tabs (Ringkasan / Spesifikasi Produk)
+        const tabButtons = document.querySelectorAll('.pd-tab-btn');
+        const tabPanels = {
+            ringkasan: document.getElementById('pd-panel-ringkasan'),
+            spesifikasi: document.getElementById('pd-panel-spesifikasi')
+        };
+        tabButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const name = btn.dataset.tab;
+                tabButtons.forEach(b => b.classList.toggle('active', b === btn));
+                Object.keys(tabPanels).forEach(key => {
+                    const panel = tabPanels[key];
+                    if (panel) panel.classList.toggle('hidden', key !== name);
+                });
+            });
+        });
+
+        // Wishlist heart (UI only — belum terhubung ke fitur wishlist)
+        const wishlistBtn = document.getElementById('pd-wishlist-btn');
+        if (wishlistBtn) {
+            wishlistBtn.addEventListener('click', () => {
+                const active = wishlistBtn.classList.toggle('active');
+                wishlistBtn.setAttribute('aria-pressed', active ? 'true' : 'false');
+            });
         }
 
         // Render Related Products
@@ -1642,17 +1739,35 @@ function updateQuranPriceDisplay() {
     const hasPriceDiff = variants.some(k => VARIANT_OPTIONS[k] && VARIANT_OPTIONS[k].add > 0);
     if (!hasPriceDiff) return;
 
+    const toNum = v => parseInt(String(v).replace(/[^\d]/g, ''), 10) || 0;
+    const fmtRp = n => 'Rp' + Math.max(0, n).toLocaleString('id-ID');
+    const voucher = productXtraVoucher(product);
     const crtEl = document.getElementById('harga-coret');
     const priceEl = document.getElementById('product-price');
     const waEl = document.getElementById('product-wa-price');
+    const displayPrice = fmtRp(toNum(variantPriceStr(product, 'priceWa', selectedQuranType)) - voucher);
     if (crtEl) crtEl.textContent = variantPriceStr(product, 'priceCrt', selectedQuranType);
     if (priceEl) priceEl.textContent = variantPriceStr(product, 'priceStr', selectedQuranType);
-    if (waEl) waEl.innerHTML = `
-        <div class="wa-price-badge py-3 px-5 mb-2">
-            <span class="material-symbols-outlined !text-2xl">confirmation_number</span>
-            <span class="price-val !text-2xl sm:!text-3xl">${variantPriceStr(product, 'priceWa', selectedQuranType)}</span>
-            <span class="label-text !text-sm !opacity-100 !font-normal">Harga spesial Web</span>
-        </div>`;
+    if (waEl) {
+        const m = /^Rp\s?([\d.]+)$/.exec(displayPrice);
+        waEl.innerHTML = m
+            ? `<span class="pd-currency">Rp</span><span class="pd-amount">${m[1]}</span>`
+            : `<span class="pd-amount pd-amount-sm">${displayPrice}</span>`;
+    }
+
+    const banner = document.getElementById('pd-discount-banner');
+    const text = document.getElementById('pd-discount-text');
+    if (banner && text) {
+        const crt = toNum(product.priceCrt);
+        const diff = crt - toNum(displayPrice);
+        if (diff > 0 && crt > 0) {
+            const pct = Math.round((diff / crt) * 100);
+            text.textContent = `Diskon ${pct}%, Hemat Rp${diff.toLocaleString('id-ID')}`;
+            banner.classList.remove('hidden');
+        } else {
+            banner.classList.add('hidden');
+        }
+    }
 }
 
 function confirmQuranPicker() {
