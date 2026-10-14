@@ -578,7 +578,10 @@ function productCardTemplate(p, opts = {}) {
     const crt = toNum(p.priceCrt);
     const priceWaStr = productCheapestPrice(p);
     const wa = toNum(priceWaStr);
-    const discount = crt > 0 ? Math.round((crt - wa) / crt * 100) : 0;
+    const voucher = productXtraVoucher(p);
+    const finalWa = Math.max(0, wa - voucher);
+    const finalWaStr = 'Rp' + finalWa.toLocaleString('id-ID');
+    const discount = crt > 0 ? Math.round((crt - finalWa) / crt * 100) : 0;
 
     const social = PRODUCT_SOCIAL_PROOF[p.id] || {};
     const metaParts = [];
@@ -621,8 +624,7 @@ function productCardTemplate(p, opts = {}) {
             <h3 class="font-display font-bold text-[13px] sm:text-sm text-slate-900 dark:text-white line-clamp-2 min-h-[2.5rem]">${p.name}</h3>
             ${metaRow}
             <div class="mt-auto pt-3 border-t border-slate-100 dark:border-slate-800">
-                <p class="text-[10px] sm:text-xs text-slate-500 dark:text-slate-400">Harga Spesial</p>
-                <p class="price-val text-base sm:text-lg md:text-xl font-black leading-tight text-brand-blue dark:text-brand-gold">${priceWaStr}</p>
+                <p class="price-val text-base sm:text-lg md:text-xl font-black leading-tight text-brand-blue dark:text-brand-gold">${finalWaStr}</p>
                 ${discountRow}
             </div>
         </div>
@@ -1375,10 +1377,14 @@ function initPersonalizationPage() {
             if (el) el[attr] = content;
         };
 
+        const voucher = productXtraVoucher(product);
+        const toNum = v => parseInt(String(v).replace(/[^\d]/g, ''), 10) || 0;
+        const priceAfterVoucher = str => 'Rp' + Math.max(0, toNum(str) - voucher).toLocaleString('id-ID');
+
         setEl('personalize-product-img', product.img, 'src');
         setEl('personalize-product-name', product.name);
         setEl('personalize-product-category', product.category);
-        setEl('personalize-product-price', (binding && product.bindings && product.bindings[binding]) ? product.bindings[binding] : variantPriceStr(product, 'priceWa', quranType));
+        setEl('personalize-product-price', priceAfterVoucher((binding && product.bindings && product.bindings[binding]) ? product.bindings[binding] : variantPriceStr(product, 'priceWa', quranType)));
 
         const backLink = document.getElementById('back-to-product');
         if (backLink) backLink.href = `product-detail.html?id=${product.id}`;
@@ -1392,7 +1398,7 @@ function initPersonalizationPage() {
                 const editItem = cart[editIdx];
                 if (editItem.binding) {
                     binding = editItem.binding;
-                    setEl('personalize-product-price', (product.bindings && product.bindings[binding]) ? product.bindings[binding] : (product.priceWa || product.priceStr));
+                    setEl('personalize-product-price', priceAfterVoucher((product.bindings && product.bindings[binding]) ? product.bindings[binding] : (product.priceWa || product.priceStr)));
                 }
                 const nameInput = document.getElementById('custom-name-input');
                 if (nameInput && editItem.customName) nameInput.value = editItem.customName;
@@ -1672,11 +1678,14 @@ function openQuranPickerModal(productId, variants) {
 
     const product = GLOBAL_PRODUCTS.find(p => p.id === productId);
     const hasPriceDiff = variants.some(k => VARIANT_OPTIONS[k] && VARIANT_OPTIONS[k].add > 0);
+    const toNum = v => parseInt(String(v).replace(/[^\d]/g, ''), 10) || 0;
+    const fmtRp = n => 'Rp' + Math.max(0, n).toLocaleString('id-ID');
+    const voucher = product ? productXtraVoucher(product) : 0;
 
     container.innerHTML = variants.map(key => {
         const opt = VARIANT_OPTIONS[key] || { label: key, img: '', add: 0 };
         const priceTag = product && hasPriceDiff
-            ? `<span class="absolute bottom-2 right-2 rounded-full bg-black/70 text-white px-3 py-1 text-xs font-bold backdrop-blur-sm">${variantPriceStr(product, 'priceWa', key)}</span>`
+            ? `<span class="absolute bottom-2 right-2 rounded-full bg-black/70 text-white px-3 py-1 text-xs font-bold backdrop-blur-sm">${fmtRp(toNum(variantPriceStr(product, 'priceWa', key)) - voucher)}</span>`
             : '';
         return `
             <label id="quran-opt-${key}" class="quran-picker-card modal-cover-card cursor-pointer rounded-[1.25rem] overflow-hidden border-2 border-transparent relative"
@@ -1785,11 +1794,12 @@ function openBindingPickerModal(productId) {
 
     const product = GLOBAL_PRODUCTS.find(p => p.id === productId);
     const keys = bindingKeys(product);
+    const voucher = productXtraVoucher(product);
 
-    // Isi harga tiap opsi sesuai produk
+    // Isi harga tiap opsi sesuai produk (setelah dipotong voucher xtra)
     keys.forEach(k => {
         const priceEl = document.getElementById('binding-price-' + k);
-        if (priceEl) priceEl.textContent = product.bindings[k];
+        if (priceEl) priceEl.textContent = 'Rp' + Math.max(0, bindingPriceNum(product.bindings[k]) - voucher).toLocaleString('id-ID');
     });
 
     const defaultBinding = keys[0] || 'softcover';
@@ -1832,8 +1842,63 @@ function confirmBindingPicker() {
     }
 }
 
+// === Modal Rincian Harga ===
+function priceBreakdownBlock(label, crtLabel, priceWaStr, voucher) {
+    const toNum = v => parseInt(String(v).replace(/[^\d]/g, ''), 10) || 0;
+    const fmtRp = n => 'Rp' + Math.max(0, n).toLocaleString('id-ID');
+    const crt = toNum(crtLabel);
+    const wa = toNum(priceWaStr);
+    const diskon = Math.max(0, crt - wa);
+    const finalPrice = Math.max(0, wa - voucher);
+    const row = (l, val, cls = '') => `
+        <div class="flex items-center justify-between text-sm">
+            <span class="text-slate-500 dark:text-slate-400">${l}</span>
+            <span class="font-semibold ${cls}">${val}</span>
+        </div>`;
+    return `
+        <div class="space-y-2.5">
+            ${label ? `<p class="text-[11px] uppercase font-bold tracking-wider text-slate-400 dark:text-slate-500">${label}</p>` : ''}
+            ${row('Harga Normal', fmtRp(crt))}
+            ${diskon > 0 ? row('Diskon', '\u2212' + fmtRp(diskon), 'text-red-500') : ''}
+            ${voucher > 0 ? row('Voucher XTRA', '\u2212' + fmtRp(voucher), 'text-brand-blue dark:text-brand-gold') : ''}
+            <div class="border-t border-dashed border-slate-200 dark:border-slate-700 pt-2.5 flex items-center justify-between">
+                <span class="font-bold text-slate-900 dark:text-white">Harga Final</span>
+                <span class="text-lg font-black text-brand-blue dark:text-brand-gold">${fmtRp(finalPrice)}</span>
+            </div>
+        </div>`;
+}
+
+window.openPriceDetailModal = function () {
+    const modal = document.getElementById('price-detail-modal');
+    const body = document.getElementById('price-detail-body');
+    const product = currentProductData;
+    if (!modal || !body || !product) return;
+
+    const voucher = productXtraVoucher(product);
+    const crtLabel = product.priceCrt || 'Rp0';
+
+    if (product.bindings) {
+        body.innerHTML = Object.keys(product.bindings).map(k =>
+            priceBreakdownBlock(bindingLabel(k), crtLabel, product.bindings[k], voucher)
+        ).join('<div class="my-4 border-t border-slate-100 dark:border-slate-800"></div>');
+    } else {
+        body.innerHTML = priceBreakdownBlock('', crtLabel, product.priceWa || 'Rp0', voucher);
+    }
+
+    modal.style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+};
+
+window.closePriceDetailModal = function () {
+    const modal = document.getElementById('price-detail-modal');
+    if (modal) {
+        modal.style.display = 'none';
+        document.body.style.overflow = '';
+    }
+};
+
 document.addEventListener('keydown', function (e) {
-    if (e.key === 'Escape') { closeQuranPickerModal(); closeBindingPickerModal(); }
+    if (e.key === 'Escape') { closeQuranPickerModal(); closeBindingPickerModal(); closePriceDetailModal(); }
 });
 
 function updateCartQty(idx, newQty) {
