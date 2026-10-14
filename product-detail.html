@@ -5,6 +5,16 @@
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
     <title>Detail Produk - Hamzah Quran</title>
+    <meta name="description" content="Al Quran custom nama di Hamzah Quran. Kualitas premium, gratis ongkir, garansi ganti baru, dan 100% original.">
+    <link rel="canonical" href="https://hamzahquran.com/product-detail.html">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Hamzah Quran">
+    <meta property="og:title" content="Detail Produk - Hamzah Quran">
+    <meta property="og:description" content="Al Quran custom nama di Hamzah Quran. Kualitas premium, gratis ongkir, garansi ganti baru, dan 100% original.">
+    <meta property="og:url" content="https://hamzahquran.com/product-detail.html">
+    <meta property="og:image" content="https://hamzahquran.com/img/hamzahcolor.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="https://hamzahquran.com/img/hamzahcolor.png">
     <link rel="icon" type="image/svg+xml" href="img/hamzah-favico.svg">
 
     
@@ -300,7 +310,7 @@
                     </div>
 
                     <!-- Rating -->
-                    <div id="pd-rating-row" class="hidden mt-2 lg:order-[-1]">
+                    <div id="pd-rating-row" class="hidden mt-2 lg:order-[-1] flex items-center justify-between gap-3">
                         <div class="flex items-center gap-1.5 text-sm">
                             <span class="material-symbols-outlined text-brand-gold"
                                 style="font-size:1rem; font-variation-settings: 'FILL' 1">star</span>
@@ -308,6 +318,29 @@
                             <span class="text-slate-300 dark:text-slate-700">|</span>
                             <span id="pd-sold-title" class="text-slate-500 dark:text-slate-400">0</span>
                             <span class="text-slate-500 dark:text-slate-400">Terjual</span>
+                        </div>
+                        <div class="relative shrink-0">
+                            <button id="pd-share-btn" type="button" class="pd-share" aria-label="Bagikan produk"
+                                aria-haspopup="true" aria-expanded="false">
+                                <span class="material-symbols-outlined">share</span>
+                            </button>
+                            <div id="pd-share-menu" class="pd-share-menu" role="menu" aria-label="Bagikan ke">
+                                <a data-share="whatsapp" role="menuitem" target="_blank" rel="noopener noreferrer" class="pd-share-item">
+                                    <span class="material-symbols-outlined">chat</span>WhatsApp
+                                </a>
+                                <a data-share="telegram" role="menuitem" target="_blank" rel="noopener noreferrer" class="pd-share-item">
+                                    <span class="material-symbols-outlined">send</span>Telegram
+                                </a>
+                                <a data-share="facebook" role="menuitem" target="_blank" rel="noopener noreferrer" class="pd-share-item">
+                                    <span class="material-symbols-outlined">thumb_up</span>Facebook
+                                </a>
+                                <a data-share="x" role="menuitem" target="_blank" rel="noopener noreferrer" class="pd-share-item">
+                                    <span class="material-symbols-outlined">tag</span>X / Twitter
+                                </a>
+                                <button type="button" data-share="copy" role="menuitem" class="pd-share-item">
+                                    <span class="material-symbols-outlined">link</span>Salin Link
+                                </button>
+                            </div>
                         </div>
                     </div>
 
@@ -596,6 +629,7 @@
     </div>
 
     <script src="https://unpkg.com/lenis@1.1.20/dist/lenis.min.js"></script>
+    <script src="lib/products.js"></script>
     <script src="script.js"></script>
     <script>
     document.addEventListener('DOMContentLoaded',function(){
