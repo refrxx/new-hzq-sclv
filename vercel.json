@@ -36,6 +36,6 @@
         { "source": "/produk.html", "destination": "/shop.html", "permanent": true }
     ],
     "rewrites": [
-        { "source": "/p/:id", "destination": "/api/share?id=:id" }
+        { "source": "/p/:id", "destination": "/api/p?id=:id" }
     ]
 }
