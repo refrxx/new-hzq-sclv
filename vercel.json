@@ -3,6 +3,32 @@
     "functions": {
         "api/*.js": {
             "maxDuration": 30
+        },
+        "api/og.js": {
+            "maxDuration": 30,
+            "includeFiles": [
+                "assets/fonts/**",
+                "img/hamzahcolor.png",
+                "img/usp.jpg",
+                "img/usp-1.jpg",
+                "img/usp-2.jpg",
+                "img/8matte-a4/**",
+                "img/8matte-a5/**",
+                "img/8qpp-a4/**",
+                "img/8qpp-a5/**",
+                "img/8tahfiz/**",
+                "img/hafalan-6blok/**",
+                "img/iqro-bw/**",
+                "img/iqro-qr/**",
+                "img/juzamma/**",
+                "img/katalog/**",
+                "img/perkata-4kode-a4/**",
+                "img/perkata-4kode-a5/**",
+                "img/tilawah-4kode-a4/**",
+                "img/tilawah-4kode-a5/**",
+                "img/tilawah-a4/**",
+                "img/tilawah-a5/**"
+            ]
         }
     },
     "redirects": [
