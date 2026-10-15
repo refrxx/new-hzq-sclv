@@ -1,26 +1,14 @@
-// GLOBAL PRODUCT DATA
-const GLOBAL_PRODUCTS = (typeof window !== "undefined" && window.GLOBAL_PRODUCTS) || (typeof globalThis !== "undefined" && globalThis.GLOBAL_PRODUCTS) || [];
-
-// --- Social Proof (manual) ---
-// TODO: ganti angka di bawah dengan data penjualan asli dari Shopee sebelum publish.
-// Nilai di bawah ini placeholder. Kosongkan / hapus entry bila produk tidak punya data.
-const PRODUCT_SOCIAL_PROOF = {
-    1: { rating: '4.9', sold: 5450},
-    2: { rating: '4.8', sold: 1421 },
-    3: { rating: '4.9', sold: 18 },
-    4: { rating: '4.7', sold: 22 },
-    5: { rating: '4.8', sold: 43 },
-    6: { rating: '5.0', sold: 257 },
-    7: { rating: '4.9', sold: 153 },
-    8: { rating: '4.8', sold: 567 },
-    9: { rating: '4.9', sold: 4405 },
-    10: { rating: '4.8', sold: 314 },
-    11: { rating: '5.0', sold: 12 },
-    12: { rating: '5.0', sold: 5 },
-    13: { rating: '5.0', sold: 7 },
-    14: { rating: '5.0', sold: 4 },
-    15: { rating: '5.0', sold: 1 },
-};
+// GLOBAL PRODUCT DATA + helper harga murni (satu sumber: catalog.js).
+// catalog.js harus dimuat SEBELUM file ini (<script src="catalog.js">).
+const CATALOG = (typeof globalThis !== "undefined" && globalThis.HQ_CATALOG) || {};
+const GLOBAL_PRODUCTS = CATALOG.GLOBAL_PRODUCTS || [];
+const PRODUCT_SOCIAL_PROOF = CATALOG.PRODUCT_SOCIAL_PROOF || {};
+const productXtraVoucher = CATALOG.productXtraVoucher;
+const bindingPriceNum = CATALOG.bindingPriceNum;
+const productCheapestPrice = CATALOG.productCheapestPrice;
+const VARIANT_OPTIONS = CATALOG.VARIANT_OPTIONS || {};
+const variantPriceStr = CATALOG.variantPriceStr;
+const computeDetailPricing = CATALOG.computeDetailPricing;
 
 // --- Label singkat untuk pill kategori di card (data p.category tetap penuh) ---
 const CATEGORY_SHORT = {
@@ -37,19 +25,6 @@ const GRATIS_ONGKIR_TIERS = [
   { min: 300000, amount: 50000, label: 'Voucher Ongkir' },
   { min: 500000, amount: 70000, label: 'Voucher Ongkir' },
 ];
-// Voucher XTRA dihitung per produk per qty (bukan tier sub-total).
-// Default: Al Quran A4/A5 = Rp10.000, IQRO & Juz Amma = Rp5.000.
-// Produk dengan field xtraVoucher memakai nilai tsb (4 kode: A4 = Rp7.000, A5 = Rp5.000).
-const DEFAULT_XTRA_VOUCHER = 10000;
-const XTRA_VOUCHER_BY_CATEGORY = {
-  IQRO: 5000,
-  'Juz Amma': 5000,
-};
-function productXtraVoucher(p) {
-  if (p && p.xtraVoucher != null) return p.xtraVoucher;
-  if (p && XTRA_VOUCHER_BY_CATEGORY[p.category] != null) return XTRA_VOUCHER_BY_CATEGORY[p.category];
-  return DEFAULT_XTRA_VOUCHER;
-}
 function itemXtraVoucher(item) {
   const p = GLOBAL_PRODUCTS.find(x => x.id === item.id);
   return productXtraVoucher(p);
@@ -65,34 +40,13 @@ const QURAN_VARIANTS = {
 };
 
 // --- Konfigurasi opsi varian Quran (modal pilih varian di product detail) ---
-// add = selisih harga (Rp) terhadap harga dasar produk.
-const VARIANT_OPTIONS = {
-  latin: { label: 'Latin', img: 'img/preview-latin.jpg', add: 0 },
-  'tanpa-latin': { label: 'Tanpa Latin', img: 'img/preview-tanpa-latin.jpg', add: 0 },
-  'tajwid-terjemah': { label: 'Tajwid Terjemah', img: 'img/preview-tajwid-terjemah.jpg', add: 5000 },
-  'non-terjemah': { label: 'Non Terjemah', img: 'img/preview-non-terjemah.jpg', add: 0 },
-};
+// VARIANT_OPTIONS + variantPriceStr ada di catalog.js (globalThis.HQ_CATALOG).
 const variantLabel = k => (VARIANT_OPTIONS[k] && VARIANT_OPTIONS[k].label) || 'Varian';
-function variantPriceStr(product, field, quranType) {
-  const base = product && product[field] ? String(product[field]) : '';
-  const add = (VARIANT_OPTIONS[quranType] || {}).add || 0;
-  if (!add) return base;
-  const num = parseInt(base.replace(/[^\d]/g, ''), 10) || 0;
-  return 'Rp' + (num + add).toLocaleString('id-ID');
-}
 
 // --- Binding (softcover/hardcover) ---
 // Produk dengan pilihan jilid: hanya priceWa yang beda per binding, sisanya sama.
 const bindingLabel = b => (b === 'softcover' ? 'Softcover' : b === 'hardcover' ? 'Hardcover' : b);
 const bindingKeys = p => (p && p.bindings ? Object.keys(p.bindings) : []);
-function bindingPriceNum(v) { return parseInt(String(v).replace(/[^\d]/g, ''), 10) || 0; }
-function productCheapestPrice(p) {
-  if (p && p.bindings) {
-    const nums = Object.values(p.bindings).map(bindingPriceNum);
-    return 'Rp' + Math.min(...nums).toLocaleString('id-ID');
-  }
-  return p.priceWa;
-}
 function productPriceRange(p) {
   if (!p || !p.bindings) return null;
   return Object.values(p.bindings).join(' - ');
@@ -693,11 +647,11 @@ function initProductDetail() {
         const toNum = v => parseInt(String(v).replace(/[^\d]/g, ''), 10) || 0;
         const fmtRp = n => 'Rp' + Math.max(0, n).toLocaleString('id-ID');
         const productVoucher = productXtraVoucher(product);
+        const detailPrice = (quranType) => computeDetailPricing(product, quranType);
 
         const discountedWaStr = (quranType) => {
-            if (quranType) return fmtRp(toNum(variantPriceStr(product, 'priceWa', quranType)) - productVoucher);
-            if (product.bindings) return Object.values(product.bindings).map(v => fmtRp(toNum(v) - productVoucher)).join(' - ');
-            return fmtRp(toNum(product.priceWa) - productVoucher);
+            const info = detailPrice(quranType);
+            return info.isRange ? `${fmtRp(info.low)} - ${fmtRp(info.high)}` : fmtRp(info.low);
         };
         const setBigPrice = (displayStr) => {
             const waEl = document.getElementById('product-wa-price');
@@ -709,20 +663,14 @@ function initProductDetail() {
                 waEl.innerHTML = `<span class="pd-amount pd-amount-sm">${displayStr}</span>`;
             }
         };
-        const shownPriceNum = (quranType) => {
-            if (quranType) return Math.max(0, toNum(variantPriceStr(product, 'priceWa', quranType)) - productVoucher);
-            if (product.bindings) return Math.min(...Object.values(product.bindings).map(v => toNum(v) - productVoucher));
-            return Math.max(0, toNum(product.priceWa) - productVoucher);
-        };
+        const shownPriceNum = (quranType) => detailPrice(quranType).low;
         const setDiscountPill = (quranType) => {
             const pill = document.getElementById('pd-discount-pill');
             if (!pill) return;
-            const crt = toNum(product.priceCrt);
-            const diff = crt - shownPriceNum(quranType);
-            if (diff > 0 && crt > 0) {
-                const pct = Math.round((diff / crt) * 100);
-                pill.textContent = `-${pct}%`;
-                pill.title = `Hemat Rp${diff.toLocaleString('id-ID')}`;
+            const info = detailPrice(quranType);
+            if (info.save > 0 && info.crt > 0) {
+                pill.textContent = `-${info.pct}%`;
+                pill.title = `Hemat Rp${info.save.toLocaleString('id-ID')}`;
                 pill.classList.remove('hidden');
             } else {
                 pill.classList.add('hidden');

@@ -1,4 +1,4 @@
-import '../lib/products.js';
+import '../catalog.js';
 
 const SITE = 'https://hamzahquran.com';
 const DEFAULT_IMAGE = `${SITE}/img/hamzahcolor.png`;
@@ -52,7 +52,7 @@ function ogPage({ title, desc, image, shareUrl, target }) {
 export async function GET(request) {
     const requestUrl = new URL(request.url);
     const id = parseInt(requestUrl.searchParams.get('id'), 10);
-    const products = globalThis.GLOBAL_PRODUCTS || [];
+    const products = (globalThis.HQ_CATALOG && globalThis.HQ_CATALOG.GLOBAL_PRODUCTS) || [];
     const product = products.find(p => p.id === id);
 
     if (!product) {
