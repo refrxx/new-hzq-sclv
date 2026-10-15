@@ -82,6 +82,7 @@ document.addEventListener('click', function (e) {
 let selectedCourierPrice = 0;
 let selectedCourierName = '';
 let selectedCourierService = '';
+let selectedCourierEtd = '';
 
 const COVER_DESIGNS = [
     { id: 1, name: "Aesthetic Violet", category: "Aesthetic", img: "img/cover/aesthetic-series-1.jpg" },
@@ -1730,8 +1731,96 @@ window.closePriceDetailModal = function () {
     }
 };
 
+window.openServiceFeeInfo = function () {
+    const modal = document.getElementById('service-fee-info-modal');
+    const body = document.getElementById('service-fee-info-body');
+    if (!modal || !body) return;
+
+    const isCod = typeof isCOD === 'function' && isCOD();
+    const title = isCod ? 'Biaya Layanan COD' : 'Biaya Layanan QRIS & Transfer';
+    const desc = isCod
+        ? 'Untuk biaya admin COD ke aggregator (ekspedisi).'
+        : 'Untuk pengembangan aplikasi dan teknologi.';
+
+    body.innerHTML = `
+        <div class="flex gap-3 items-start">
+            <span class="material-symbols-outlined text-brand-blue dark:text-brand-gold">info</span>
+            <div>
+                <p class="font-bold text-slate-900 dark:text-white text-sm">${title}</p>
+                <p class="text-slate-500 dark:text-slate-400 text-sm mt-1 leading-relaxed">${desc}</p>
+            </div>
+        </div>`;
+
+    modal.style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+};
+
+window.closeServiceFeeInfo = function () {
+    const modal = document.getElementById('service-fee-info-modal');
+    if (modal) {
+        modal.style.display = 'none';
+        document.body.style.overflow = '';
+    }
+};
+
+function formatEtd(text) {
+    const raw = String(text || '').trim();
+    if (!raw) return '2-3 hari kerja';
+    return raw
+        .replace(/\bhours?\b/gi, 'jam')
+        .replace(/\bdays?\b/gi, 'hari kerja')
+        .replace(/\bweeks?\b/gi, 'minggu');
+}
+
+let codConfirmResolver = null;
+
+window.openCodConfirmModal = function ({ total, courier, etd } = {}) {
+    const modal = document.getElementById('cod-confirm-modal');
+    const body = document.getElementById('cod-confirm-modal-body');
+    if (!modal || !body) return Promise.resolve(true);
+
+    body.innerHTML = `
+        <div class="flex gap-3 items-start">
+            <span class="material-symbols-outlined text-brand-blue dark:text-brand-gold">payments</span>
+            <p class="text-sm text-slate-500 dark:text-slate-400 leading-relaxed">
+                Mohon siapkan uang sebesar <span class="font-bold text-slate-900 dark:text-white">${total}</span> saat kurir tiba.
+                Estimasi pengiriman sekitar <span class="font-bold text-slate-900 dark:text-white">${etd}</span>
+                dan dikirim oleh kurir <span class="font-bold text-slate-900 dark:text-white">${courier}</span>.
+                Admin Hamzah Quran akan segera mengkonfirmasi pesanan Anda setelah Anda klik Proses Checkout.
+            </p>
+        </div>`;
+
+    modal.style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+
+    return new Promise(resolve => {
+        codConfirmResolver = resolve;
+    });
+};
+
+function resolveCodConfirmModal(result) {
+    const modal = document.getElementById('cod-confirm-modal');
+    if (modal) {
+        modal.style.display = 'none';
+        document.body.style.overflow = '';
+    }
+    if (codConfirmResolver) {
+        const resolve = codConfirmResolver;
+        codConfirmResolver = null;
+        resolve(result);
+    }
+}
+
+window.closeCodConfirmModal = function () {
+    resolveCodConfirmModal(false);
+};
+
+window.confirmCodOrder = function () {
+    resolveCodConfirmModal(true);
+};
+
 document.addEventListener('keydown', function (e) {
-    if (e.key === 'Escape') { closeQuranPickerModal(); closeBindingPickerModal(); closePriceDetailModal(); }
+    if (e.key === 'Escape') { closeQuranPickerModal(); closeBindingPickerModal(); closePriceDetailModal(); closeServiceFeeInfo(); closeCodConfirmModal(); }
 });
 
 function updateCartQty(idx, newQty) {
@@ -1747,6 +1836,7 @@ function updateCartQty(idx, newQty) {
     selectedCourierPrice = 0;
     selectedCourierName = '';
     selectedCourierService = '';
+    selectedCourierEtd = '';
     updateGrandTotal();
 
     document.querySelectorAll('.shipping-option').forEach(el => {
@@ -1998,6 +2088,15 @@ async function initCart() {
             const codFee = isCodPay ? calcCodFee(feeBase) : 0;
             const serviceFee = isCodPay ? 0 : ONLINE_SERVICE_FEE;
             const grandTotal = subtotal + ongkirAfterSubsidy + codFee + serviceFee - voucher;
+
+            if (isCodPay) {
+                const okCod = await window.openCodConfirmModal({
+                    total: formatPrice(grandTotal),
+                    courier: courierLabel.trim() || '-',
+                    etd: formatEtd(selectedCourierEtd)
+                });
+                if (!okCod) return;
+            }
 
             const isGratisOngkir = getAutoGratisOngkir(subtotal) !== null;
             const goLabel = getGratisOngkirLabel(subtotal);
@@ -2833,6 +2932,7 @@ function renderShippingOptions(rates) {
             selectedCourierPrice = price;
             selectedCourierName = company;
             selectedCourierService = service;
+            selectedCourierEtd = est;
             updateGrandTotal();
         });
 
@@ -2874,6 +2974,7 @@ async function initBiteship() {
         selectedCourierPrice = 0;
         selectedCourierName = '';
         selectedCourierService = '';
+        selectedCourierEtd = '';
         document.getElementById('shipping-options')?.classList.add('hidden');
 
         const code = postalInput.value.replace(/\D/g, '').slice(0, 5);

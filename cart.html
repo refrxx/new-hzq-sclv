@@ -249,7 +249,7 @@
         </div>
     </div>
 
-    <main class="pt-12 lg:pt-12 pb-40 lg:pb-24 min-h-screen">
+    <main class="pt-12 lg:pt-12 pb-12 lg:pb-24 min-h-screen">
         <section class="max-w-[1200px] mx-auto px-8 md:px-12">
             <h1 class="text-2xl font-display font-black text-slate-900 dark:text-white mb-10 animate-fade-in-up">
                 Keranjang Belanja</h1>
@@ -449,11 +449,19 @@
                                 <span class="cart-discount font-semibold text-red-500">-Rp0</span>
                             </div>
                             <div id="cod-fee-row-mobile" class="hidden flex justify-between items-center">
-                                <span class="text-slate-500 dark:text-slate-400">Biaya Layanan</span>
+                                <span class="text-slate-500 dark:text-slate-400 flex items-center gap-1">Biaya Layanan
+                                    <button type="button" class="service-fee-info-btn inline-flex items-center justify-center text-slate-400 hover:text-brand-blue dark:hover:text-brand-gold transition-colors" onclick="openServiceFeeInfo()" aria-label="Informasi biaya layanan" title="Informasi biaya layanan">
+                                        <span class="material-symbols-outlined text-[15px] leading-none">info</span>
+                                    </button>
+                                </span>
                                 <span class="font-semibold" id="cod-fee-price-mobile">-</span>
                             </div>
                             <div id="service-fee-row-mobile" class="hidden flex justify-between items-center">
-                                <span class="text-slate-500 dark:text-slate-400">Biaya Layanan</span>
+                                <span class="text-slate-500 dark:text-slate-400 flex items-center gap-1">Biaya Layanan
+                                    <button type="button" class="service-fee-info-btn inline-flex items-center justify-center text-slate-400 hover:text-brand-blue dark:hover:text-brand-gold transition-colors" onclick="openServiceFeeInfo()" aria-label="Informasi biaya layanan" title="Informasi biaya layanan">
+                                        <span class="material-symbols-outlined text-[15px] leading-none">info</span>
+                                    </button>
+                                </span>
                                 <span class="font-semibold" id="service-fee-price-mobile">-</span>
                             </div>
                             <div id="voucher-row-mobile" class="hidden flex justify-between items-center text-red-500 dark:text-red-500">
@@ -464,6 +472,11 @@
                                 <span class="font-bold text-slate-900 dark:text-white">Total Belanja</span>
                                 <span class="cart-total font-black text-xl text-brand-blue dark:text-brand-gold">Rp0</span>
                             </div>
+                        </div>
+                        <div class="mt-4 flex items-center justify-center gap-1.5 flex-wrap">
+                            <span class="material-symbols-outlined text-[16px] text-slate-400">verified</span>
+                            <span class="text-[10px] text-slate-400 font-regular">Pembayaran aman diproses oleh</span>
+                            <img src="img/weselaja.webp" alt="Weselaja" class="h-8 w-auto">
                         </div>
                     </div>
                 </div>
@@ -494,11 +507,19 @@
                                     <span class="cart-discount font-semibold text-red-500">-Rp0</span>
                                 </div>
                                 <div id="cod-fee-row" class="hidden flex items-center justify-between text-sm">
-                                    <span class="text-slate-500 dark:text-slate-400">Biaya Layanan</span>
+                                    <span class="text-slate-500 dark:text-slate-400 flex items-center gap-1">Biaya Layanan
+                                        <button type="button" class="service-fee-info-btn inline-flex items-center justify-center text-slate-400 hover:text-brand-blue dark:hover:text-brand-gold transition-colors" onclick="openServiceFeeInfo()" aria-label="Informasi biaya layanan" title="Informasi biaya layanan">
+                                            <span class="material-symbols-outlined text-[15px] leading-none">info</span>
+                                        </button>
+                                    </span>
                                     <span class="font-semibold" id="cod-fee-price">-</span>
                                 </div>
                                 <div id="service-fee-row" class="hidden flex items-center justify-between text-sm">
-                                    <span class="text-slate-500 dark:text-slate-400">Biaya Layanan</span>
+                                    <span class="text-slate-500 dark:text-slate-400 flex items-center gap-1">Biaya Layanan
+                                        <button type="button" class="service-fee-info-btn inline-flex items-center justify-center text-slate-400 hover:text-brand-blue dark:hover:text-brand-gold transition-colors" onclick="openServiceFeeInfo()" aria-label="Informasi biaya layanan" title="Informasi biaya layanan">
+                                            <span class="material-symbols-outlined text-[15px] leading-none">info</span>
+                                        </button>
+                                    </span>
                                     <span class="font-semibold" id="service-fee-price">-</span>
                                 </div>
                                 <div id="voucher-row" class="hidden flex items-center justify-between text-sm text-red-500">
@@ -517,9 +538,10 @@
                             <span class="material-symbols-outlined">shopping_bag_speed</span>
                             Proses Checkout
                         </button>
-                        <div class="mt-4 text-center">
-                            <span class="text-[10px] text-slate-400 uppercase tracking-widest font-bold">Aman •
-                                Terpercaya • Cepat</span>
+                        <div class="mt-4 flex items-center justify-center gap-1.5 flex-wrap">
+                            <span class="material-symbols-outlined text-[16px] text-slate-400">verified</span>
+                            <span class="text-[10px] text-slate-400 font-regular">Pembayaran aman diproses oleh</span>
+                            <img src="img/weselaja.webp" alt="Weselaja" class="h-8 w-auto">
                         </div>
                     </div>
 
@@ -565,6 +587,41 @@
     </main>
 
     
+    <!-- Modal Informasi Biaya Layanan -->
+    <div id="service-fee-info-modal" class="fixed inset-0 z-[200] flex items-end sm:items-center justify-center p-0 sm:p-4" style="display:none;">
+        <div class="absolute inset-0 bg-black/60 backdrop-blur-sm" onclick="closeServiceFeeInfo()"></div>
+        <div class="relative w-full sm:max-w-md bg-white dark:bg-[#0f1825] rounded-t-xl sm:rounded-xl shadow-2xl z-10 animate-slide-up overflow-hidden">
+            <div class="flex items-center justify-between px-6 pt-6 pb-4 border-b border-slate-100 dark:border-slate-800">
+                <h2 class="text-lg font-display font-black text-slate-900 dark:text-white">Biaya Layanan</h2>
+                <button onclick="closeServiceFeeInfo()" class="w-9 h-9 flex items-center justify-center rounded-full bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-700 transition-all active:scale-95 border-0">
+                    <span class="material-symbols-outlined text-[1.2rem]">close</span>
+                </button>
+            </div>
+            <div id="service-fee-info-body" class="p-6 max-h-[60vh] overflow-y-auto custom-modal-scroll"></div>
+            <div class="px-6 pb-6">
+                <button onclick="closeServiceFeeInfo()" class="w-full bg-brand-blue dark:bg-brand-gold text-white dark:text-black py-4 rounded-2xl font-bold shadow-lg active:scale-[0.98] transition-all">Mengerti</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Konfirmasi Pemesanan COD -->
+    <div id="cod-confirm-modal" class="fixed inset-0 z-[210] flex items-end sm:items-center justify-center p-0 sm:p-4" style="display:none;">
+        <div class="absolute inset-0 bg-black/60 backdrop-blur-sm" onclick="closeCodConfirmModal()"></div>
+        <div class="relative w-full sm:max-w-md bg-white dark:bg-[#0f1825] rounded-t-xl sm:rounded-xl shadow-2xl z-10 animate-slide-up overflow-hidden">
+            <div class="flex items-center justify-between px-6 pt-6 pb-4 border-b border-slate-100 dark:border-slate-800">
+                <h2 class="text-lg font-display font-black text-slate-900 dark:text-white">Konfirmasi Pemesanan COD</h2>
+                <button onclick="closeCodConfirmModal()" class="w-9 h-9 flex items-center justify-center rounded-full bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-700 transition-all active:scale-95 border-0">
+                    <span class="material-symbols-outlined text-[1.2rem]">close</span>
+                </button>
+            </div>
+            <div id="cod-confirm-modal-body" class="p-6 max-h-[60vh] overflow-y-auto custom-modal-scroll"></div>
+            <div class="px-6 pb-6 flex flex-col gap-2.5">
+                <button onclick="confirmCodOrder()" class="w-full bg-brand-blue dark:bg-brand-gold text-white dark:text-black py-4 rounded-2xl font-bold shadow-lg active:scale-[0.98] transition-all">Proses Checkout</button>
+                <button onclick="closeCodConfirmModal()" class="w-full py-3 rounded-2xl font-bold text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-all">Batal</button>
+            </div>
+        </div>
+    </div>
+
     <div id="loading-overlay" class="fixed inset-0 z-[100] bg-white/80 dark:bg-[#080e16]/80 backdrop-blur-sm hidden flex-col items-center justify-center">
         <div class="w-12 h-12 border-4 border-brand-blue border-t-transparent rounded-full animate-spin mb-4"></div>
         <p class="text-sm font-bold text-slate-700 dark:text-slate-300">Memproses pesanan...</p>
