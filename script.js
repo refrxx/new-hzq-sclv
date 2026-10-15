@@ -831,7 +831,11 @@ function initProductDetail() {
         const shareBtn = document.getElementById('pd-share-btn');
         const shareMenu = document.getElementById('pd-share-menu');
         if (shareBtn) {
-            const shareText = `${product.name} - ${product.priceStr}`;
+            const sharePrice = computeDetailPricing(product);
+            const sharePriceStr = sharePrice.isRange
+                ? `mulai Rp${sharePrice.low.toLocaleString('id-ID')}`
+                : `Rp${sharePrice.low.toLocaleString('id-ID')}`;
+            const shareText = `${product.name} - ${sharePriceStr}`;
             const buildShareLinks = () => {
                 if (!shareMenu) return;
                 const u = encodeURIComponent(shareUrl);
@@ -840,7 +844,8 @@ function initProductDetail() {
                     whatsapp: `https://wa.me/?text=${t}%20${u}`,
                     telegram: `https://t.me/share/url?url=${u}&text=${t}`,
                     facebook: `https://www.facebook.com/sharer/sharer.php?u=${u}`,
-                    x: `https://twitter.com/intent/tweet?url=${u}&text=${t}`
+                    x: `https://twitter.com/intent/tweet?url=${u}&text=${t}`,
+                    threads: `https://www.threads.com/intent/post?url=${u}&text=${t}`
                 };
                 shareMenu.querySelectorAll('[data-share]').forEach(el => {
                     const key = el.getAttribute('data-share');
