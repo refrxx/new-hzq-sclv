@@ -236,6 +236,21 @@
             specs: ["Kertas HVS 70gsm", "Isi 2 warna", "Terjemah perkata", "Latin perkata", "4 kode tajwid", "Ukuran A4 (Besar) 21 x 29,7 cm", "Hardcover kokoh", "Cocok untuk belajar arti per kata", "Proses cetak cepat"],
             desc: "Al Quran dengan terjemah dan latin perkata serta 4 kode tajwid, ukuran A4 besar (21 x 29,7 cm). Kertas HVS 70gsm, isi 2 warna, hardcover kokoh \u2014 pas untuk belajar arti per kata dengan tulisan yang lebih lega."
         },
+        {
+            id: 16,
+            name: "TEST Produk Contoh",
+            category: "Al Quran Sedang",
+            weight: 850,
+            priceCrt: "Rp1.000",
+            priceStr: "Rp1.000",
+            priceWa: "Rp1.000",
+            img: "img/katalog/8qpp-a5.jpg",
+            images: ["img/katalog/8qpp-a5.jpg", "img/usp.jpg"],
+            wa: "Halo Admin, saya ingin pesan TEST Produk Contoh",
+            shopee: "",
+            specs: ["Produk percobaan", "Harga uji Rp1.000"],
+            desc: "Produk percobaan untuk pengujian sistem."
+        },
     ];
 
     // --- Social Proof (manual) ---
