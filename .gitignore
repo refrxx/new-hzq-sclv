@@ -1,4 +1,5 @@
 .env
+.env.local
 script.js.bak
 node_modules/
 .wrangler/
