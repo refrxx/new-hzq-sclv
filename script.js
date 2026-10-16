@@ -1,163 +1,14 @@
-// GLOBAL PRODUCT DATA
-const GLOBAL_PRODUCTS = [
-    {
-        id: 1,
-        name: "Al Quran Custom Hafalan 8 Blok QPP A5",
-        category: "Al Quran Sedang",
-        weight: 850,
-        priceCrt: "Rp159.000",
-        priceStr: "Rp143.000",
-        priceWa: "Rp139.000",
-        img: "img/katalog/8qpp-a5.jpg",
-        images: ["img/8qpp-a5/8qpp-a5.jpg", "img/8qpp-a5/8qpp-a5-1.jpg", "img/8qpp-a5/8qpp-a5-2.jpg", "img/8qpp-a5/8qpp-a5-3.jpg", "img/8qpp-a5/8qpp-a5-4.jpg", "img/usp.jpg", "img/usp-1.jpg", "img/usp-2.jpg"],
-        wa: "Halo Admin, saya ingin pesan Al Quran Custom Nama Hafalan 8 Blok QPP A5",
-        shopee: "https://shopee.co.id/hamzahquran/23569937190",
-        specs: ["8 blok warna hafalan", "Ukuran A5 (Sedang) 14,8 x 21 cm", "Kertas Quran Premium (awet dan tahan lama)", "Hardcover bukan sticker", "Tersedia versi dengan latin maupun tanpa latin", "Terjemah perkata", "Terjemah perayat", "Tajwid Warna", "QR Code Murottal"]
-    },
-    {
-        id: 2,
-        name: "Al Quran Custom Hafalan 8 Blok Matte A5",
-        category: "Al Quran Sedang",
-        weight: 850,
-        priceCrt: "Rp169.000",
-        priceStr: "Rp149.000",
-        priceWa: "Rp142.000",
-        img: "img/katalog/8matte-a5.jpg",
-        images: ["img/8matte-a5/8matte-a5.jpg", "img/8matte-a5/8matte-a5-1.jpg", "img/8matte-a5/8matte-a5-2.jpg", "img/8matte-a5/8matte-a5-3.jpg", "img/usp.jpg", "img/usp-1.jpg", "img/usp-2.jpg"],
-        wa: "Halo Admin, saya ingin pesan Al Quran Custom Nama Hafalan 8 Blok Matte A5",
-        shopee: "https://shopee.co.id/hamzahquran/17095398884",
-        specs: ["8 blok warna hafalan", "Ukuran A5 (Sedang) 14,8 x 21 cm", "Kertas Matte Premium (lebih tebal dan glossy)", "Hardcover bukan sticker", "Tersedia versi dengan latin maupun tanpa latin", "Terjemah perayat", "Tajwid Warna", "Desain elegan", "QR Code Murottal"]
-    },
-    {
-id: 3,
-        name: "Al Quran Custom Hafalan 8 TAHFIZ A5",
-        category: "Al Quran Sedang",
-        soldOut: true,
-        weight: 850,
-        priceCrt: "Rp169.000",
-        priceStr: "Rp149.000",
-        priceWa: "Rp142.000",
-        img: "img/katalog/8tahfiz-a5.jpg",
-        images: ["img/8tahfiz/8tahfiz-3.jpg", "img/8tahfiz/8tahfiz.jpg", "img/8tahfiz/8tahfiz-1.jpg", "img/8tahfiz/8tahfiz-2.jpg", "img/usp.jpg", "img/usp-1.jpg", "img/usp-2.jpg"],
-        wa: "Halo Admin, saya ingin pesan Al Quran Custom Nama Hafalan 8 TAHFIZ A5",
-        shopee: "https://shopee.co.id/hamzahquran/26385974446",
-        specs: ["8 blok warna hafalan", "Ukuran A5 (Sedang) 14,8 x 21 cm", "Kertas Matte Premium (lebih tebal dan glossy)", "Hardcover bukan sticker", "Hanya tersedia versi tanpa latin", "Terjemah perkata", "Terjemah perayat", "Fokus hafalan intensif", "QR Code Murottal"]
-    },
-    {
-        id: 4,
-        name: "Al Quran Custom Tilawah A5",
-        category: "Al Quran Sedang",
-        weight: 850,
-        priceCrt: "Rp129.000",
-        priceStr: "Rp120.000",
-        priceWa: "Rp115.000",
-        img: "img/katalog/tilawah-a5.jpg",
-        images: ["img/tilawah/tilawah-3.jpg", "img/tilawah/tilawah.jpg", "img/tilawah/tilawah-1.jpg", "img/tilawah/tilawah-2.jpg", "img/usp.jpg", "img/usp-1.jpg", "img/usp-2.jpg"],
-        wa: "Halo Admin, saya ingin pesan Al Quran Custom Nama Tilawah A5",
-        shopee: "https://shopee.co.id/hamzahquran/26513988170",
-        specs: ["Kertas Quran Premium (awet dan tahan lama)", "Tajwid Warna", "Rasm Utsmani 15 baris", "Ukuran A5 (Sedang) 14,8 x 21 cm", "Tanpa terjemah", "Hardcover kokoh", "Cocok untuk tilawah harian", "Desain elegan", "Proses cetak cepat"]
-    },
-    {
-        id: 5,
-        name: "Al Quran Custom Non Terjemah 6 Blok A5",
-        category: "Al Quran Sedang",
-        weight: 850,
-        priceCrt: "Rp149.000",
-        priceStr: "Rp139.000",
-        priceWa: "Rp129.000",
-        img: "img/katalog/yazid.jpg",
-        images: ["img/yazid/yazid-a5.jpg", "img/yazid/yazid-a5-1.jpg", "img/usp.jpg", "img/usp-1.jpg", "img/usp-2.jpg"],
-        wa: "Halo Admin, saya ingin pesan Al Quran Custom Nama Hafalan 6 Blok Non Terjemah A5",
-        shopee: "https://shopee.co.id/hamzahquran/26474664037",
-        specs: ["Kertas Quran Premium (awet dan tahan lama)", "6 Blok Warna Hafalan", "Tajwid Warna", "Panduan Muroja'ah", "Ukuran A5 (Sedang) 14,8 x 21 cm", "Hardcover kokoh", "Tanpa terjemah", "Desain colorful", "Proses cetak cepat"]
-    },
-    {
-        id: 6,
-        name: "Al Quran Custom Hafalan 8 Blok QPP A4",
-        category: "Al Quran Besar",
-        weight: 1600,
-        priceCrt: "Rp229.000",
-        priceStr: "Rp199.000",
-        priceWa: "Rp189.000",
-        img: "img/katalog/8qpp-a4.jpg",
-        images: ["img/8qpp-a4/8qpp-a4.jpg", "img/8qpp-a4/8qpp-a4-1.jpg", "img/8qpp-a4/8qpp-a4-2.jpg", "img/8qpp-a4/8qpp-a4-3.jpg", "img/8qpp-a4/8qpp-a4-4.jpg", "img/8qpp-a4/8qpp-a4-5.jpg", "img/usp.jpg", "img/usp-1.jpg", "img/usp-2.jpg"],
-        wa: "Halo Admin, saya ingin pesan Al Quran Custom Nama Hafalan 8 Blok QPP A4",
-        shopee: "https://shopee.co.id/hamzahquran/20691896045",
-        specs: ["8 blok warna hafalan", "Ukuran A4 (Besar) 21 x 29,7 cm", "Kertas Quran Premium (awet dan tahan lama)", "Hardcover bukan sticker", "Tersedia versi dengan latin maupun tanpa latin", "Terjemah perkata", "Terjemah perayat", "Tajwid Warna", "QR Code Murottal"]
-    },
-    {
-        id: 7,
-        name: "Al Quran Custom Hafalan 8 Blok Matte A4",
-        category: "Al Quran Besar",
-        weight: 1600,
-        priceCrt: "Rp239.000",
-        priceStr: "Rp219.000",
-        priceWa: "Rp195.000",
-        img: "img/katalog/8matte-a4.jpg",
-        images: ["img/8matte-a4/8matte-a4.jpg", "img/8matte-a4/8matte-a4-1.jpg", "img/8matte-a4/8matte-a4-2.jpg", "img/8matte-a4/8matte-a4-3.jpg", "img/8matte-a4/8matte-a4-4.jpg", "img/usp.jpg", "img/usp-1.jpg", "img/usp-2.jpg"],
-        wa: "Halo Admin, saya ingin pesan Al Quran Custom Nama Hafalan 8 Blok Matte A4",
-        shopee: "https://shopee.co.id/hamzahquran/23954192019",
-        specs: ["8 blok warna hafalan", "Ukuran A4 (Besar) 21 x 29,7 cm", "Kertas Matte Premium (lebih tebal dan glossy)", "Hardcover bukan sticker", "Hanya tersedia versi tanpa latin", "Terjemah perkata", "Terjemah perayat", "Tajwid Warna"]
-    },
-    {
-        id: 8,
-        name: "IQRO Custom Hitam Putih HVS A5",
-        category: "IQRO",
-        weight: 350,
-        priceCrt: "Rp79.000",
-        priceStr: "Rp69.000",
-        priceWa: "Rp64.000",
-        img: "img/katalog/iqro-bw-3.jpg",
-        images: ["img/iqro-bw/iqro-bw-3.jpg", "img/iqro-bw/iqro-bw.jpg", "img/iqro-bw/iqro-bw-1.jpg", "img/iqro-bw/iqro-bw-2.jpg", "img/usp.jpg", "img/usp-1.jpg", "img/usp-2.jpg"],
-        wa: "Halo Admin, saya ingin pesan IQRO Custom Nama Hitam Putih HVS A5",
-        shopee: "https://shopee.co.id/hamzahquran/22346411504",
-        specs: ["Hardcover Premium", "Kertas HVS Premium 70gr", "Isi IQRO original", "Penerbit AMM Yogyakarta", "Ukuran A5 (Sedang) 14,8 x 21 cm", "Lengkap Jilid 1-6", "Kertas putih, tulisan jelas"]
-    },
-    {
-        id: 9,
-        name: "IQRO Custom Full Color HVS A5",
-        category: "IQRO",
-        weight: 350,
-        priceCrt: "Rp99.000",
-        priceStr: "Rp84.900",
-        priceWa: "Rp79.000",
-        img: "img/katalog/iqro-qr-3.jpg",
-        images: ["img/iqro-qr/iqro-qr-3.jpg", "img/iqro-qr/iqro-qr.jpg", "img/iqro-qr/iqro-qr-1.jpg", "img/iqro-qr/iqro-qr-2.jpg", "img/usp.jpg", "img/usp-1.jpg", "img/usp-2.jpg"],
-        wa: "Halo Admin, saya ingin pesan IQRO Custom Nama Full Color QR Code HVS A5",
-        shopee: "https://shopee.co.id/hamzahquran/18189793910",
-        specs: ["Hardcover Premium", "Kertas HVS Premium 70gr", "Isi IQRO original full color", "Penerbit Al Qosbah dengan lisensi", "QR Code video pembelajaran", "Tanpa transliterasi latin", "Ukuran A5 (Sedang) 14,8 x 21 cm", "Menarik untuk anak"]
-    },
-    {
-        id: 10,
-        name: "Juz Amma Full Color A5",
-        category: "Juz Amma",
-        weight: 350,
-        priceCrt: "Rp79.000",
-        priceStr: "Rp62.000",
-        priceWa: "Rp58.000",
-        img: "img/katalog/juzamma.jpg",
-        images: ["img/katalog/juzamma.jpg", "img/juzamma/juzamma-3.jpg", "img/juzamma/juzamma-2.jpg", "img/juzamma/juzamma-1.jpg", "img/juzamma/juzamma-4.jpg", "img/usp.jpg", "img/usp-1.jpg", "img/usp-2.jpg"],
-        wa: "Halo Admin, saya ingin pesan Juz Amma Custom Nama Full Color A5",
-        shopee: "https://shopee.co.id/hamzahquran/43817837285",
-        specs: ["Kertas HVS Premium 70gr", "Full Color", "Tajwid Warna", "Dilengkapi Asmaul Husna", "Ukuran A5 (Sedang) 14,8 x 21 cm", "Mudah dibawa", "Kertas berkualitas", "Tampilan cerah", "Bantu hafalan surat pendek"]
-    },
-];
-
-// --- Social Proof (manual) ---
-// TODO: ganti angka di bawah dengan data penjualan asli dari Shopee sebelum publish.
-// Nilai di bawah ini placeholder. Kosongkan / hapus entry bila produk tidak punya data.
-const PRODUCT_SOCIAL_PROOF = {
-    1: { rating: '4.9', sold: 5450},
-    2: { rating: '4.8', sold: 1421 },
-    3: { rating: '4.9', sold: 18 },
-    4: { rating: '4.7', sold: 22 },
-    5: { rating: '4.8', sold: 43 },
-    6: { rating: '5.0', sold: 257 },
-    7: { rating: '4.9', sold: 153 },
-    8: { rating: '4.8', sold: 567 },
-    9: { rating: '4.9', sold: 4405 },
-    10: { rating: '4.8', sold: 314 },
-};
+// GLOBAL PRODUCT DATA + helper harga murni (satu sumber: catalog.js).
+// catalog.js harus dimuat SEBELUM file ini (<script src="catalog.js">).
+const CATALOG = (typeof globalThis !== "undefined" && globalThis.HQ_CATALOG) || {};
+const GLOBAL_PRODUCTS = CATALOG.GLOBAL_PRODUCTS || [];
+const PRODUCT_SOCIAL_PROOF = CATALOG.PRODUCT_SOCIAL_PROOF || {};
+const productXtraVoucher = CATALOG.productXtraVoucher;
+const bindingPriceNum = CATALOG.bindingPriceNum;
+const productCheapestPrice = CATALOG.productCheapestPrice;
+const VARIANT_OPTIONS = CATALOG.VARIANT_OPTIONS || {};
+const variantPriceStr = CATALOG.variantPriceStr;
+const computeDetailPricing = CATALOG.computeDetailPricing;
 
 // --- Label singkat untuk pill kategori di card (data p.category tetap penuh) ---
 const CATEGORY_SHORT = {
@@ -174,22 +25,31 @@ const GRATIS_ONGKIR_TIERS = [
   { min: 300000, amount: 50000, label: 'Voucher Ongkir' },
   { min: 500000, amount: 70000, label: 'Voucher Ongkir' },
 ];
-const VOUCHER_TIERS = [
-  { min: 400000, amount: 40000, label: 'Voucher XTRA' },
-  { min: 250000, amount: 25000, label: 'Voucher XTRA' },
-  { min: 100000, amount: 10000, label: 'Voucher XTRA' },
-  { min: 0, amount: 5000, label: 'Voucher XTRA' },
-];
+function itemXtraVoucher(item) {
+  const p = GLOBAL_PRODUCTS.find(x => x.id === item.id);
+  return productXtraVoucher(p);
+}
 
 const QURAN_VARIANTS = {
   1: ['latin', 'tanpa-latin'],
   2: ['latin', 'tanpa-latin'],
   6: ['latin', 'tanpa-latin'],
   7: ['latin'],
+  4: ['tajwid-terjemah', 'non-terjemah'],
+  11: ['tajwid-terjemah', 'non-terjemah'],
 };
-function getBestVoucherAmount(subtotal) {
-  for (const t of [...VOUCHER_TIERS].sort((a, b) => b.min - a.min)) if (subtotal >= t.min) return t.amount;
-  return 0;
+
+// --- Konfigurasi opsi varian Quran (modal pilih varian di product detail) ---
+// VARIANT_OPTIONS + variantPriceStr ada di catalog.js (globalThis.HQ_CATALOG).
+const variantLabel = k => (VARIANT_OPTIONS[k] && VARIANT_OPTIONS[k].label) || 'Varian';
+
+// --- Binding (softcover/hardcover) ---
+// Produk dengan pilihan jilid: hanya priceWa yang beda per binding, sisanya sama.
+const bindingLabel = b => (b === 'softcover' ? 'Softcover' : b === 'hardcover' ? 'Hardcover' : b);
+const bindingKeys = p => (p && p.bindings ? Object.keys(p.bindings) : []);
+function productPriceRange(p) {
+  if (!p || !p.bindings) return null;
+  return Object.values(p.bindings).join(' - ');
 }
 function getVoucherLabel(amount) {
   return `Rp${amount.toLocaleString('id-ID')}`;
@@ -198,9 +58,19 @@ function getAutoGratisOngkir(subtotal) {
   const e = GRATIS_ONGKIR_TIERS.filter(t => subtotal >= t.min).sort((a, b) => b.amount - a.amount);
   return e[0] || null;
 }
-function getAutoVoucher(subtotal) {
-  const e = VOUCHER_TIERS.filter(t => subtotal >= t.min).sort((a, b) => b.amount - a.amount);
-  return e[0] || null;
+
+// Nomor pesanan: HQ-YYYYMMDD + 6 karakter alfanumerik acak (tanggal WIB).
+function generateOrderId() {
+  const ALPHABET = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+  const d = new Date(Date.now() + 7 * 60 * 60 * 1000);
+  const yyyy = d.getUTCFullYear();
+  const mm = String(d.getUTCMonth() + 1).padStart(2, '0');
+  const dd = String(d.getUTCDate()).padStart(2, '0');
+  const bytes = new Uint8Array(6);
+  crypto.getRandomValues(bytes);
+  let rand = '';
+  for (let i = 0; i < bytes.length; i++) rand += ALPHABET[bytes[i] % ALPHABET.length];
+  return `HQ-${yyyy}${mm}${dd}${rand}`;
 }
 
 // Facebook Pixel: Lead event on all WhatsApp link clicks
@@ -212,6 +82,7 @@ document.addEventListener('click', function (e) {
 let selectedCourierPrice = 0;
 let selectedCourierName = '';
 let selectedCourierService = '';
+let selectedCourierEtd = '';
 
 const COVER_DESIGNS = [
     { id: 1, name: "Aesthetic Violet", category: "Aesthetic", img: "img/cover/aesthetic-series-1.jpg" },
@@ -426,8 +297,12 @@ function initLenis() {
 function productCardTemplate(p, opts = {}) {
     const toNum = s => parseInt(String(s).replace(/[^\d]/g, ''), 10) || 0;
     const crt = toNum(p.priceCrt);
-    const wa = toNum(p.priceWa);
-    const discount = crt > 0 ? Math.round((crt - wa) / crt * 100) : 0;
+    const priceWaStr = productCheapestPrice(p);
+    const wa = toNum(priceWaStr);
+    const voucher = productXtraVoucher(p);
+    const finalWa = Math.max(0, wa - voucher);
+    const finalWaStr = 'Rp' + finalWa.toLocaleString('id-ID');
+    const discount = crt > 0 ? Math.round((crt - finalWa) / crt * 100) : 0;
 
     const social = PRODUCT_SOCIAL_PROOF[p.id] || {};
     const metaParts = [];
@@ -465,14 +340,12 @@ function productCardTemplate(p, opts = {}) {
         </div>
         <div class="p-4 flex flex-col flex-1">
             <div class="flex flex-wrap items-center gap-1 mb-1.5 sm:gap-1.5 sm:mb-2">
-                <span class="rounded-full px-1.5 sm:px-2 py-0.5 text-[10px] sm:text-[11px] font-bold uppercase text-white bg-gradient-to-r from-brand-blue to-blue-800">COD</span>
-                <span class="rounded-full px-1.5 sm:px-2 py-0.5 text-[10px] sm:text-[11px] font-bold uppercase bg-brand-gold/20 text-amber-700 dark:text-brand-gold">${shortCategory(p.category)}</span>
+                <span class="rounded-full px-1.5 sm:px-2 py-0.5 text-[10px] sm:text-[11px] font-bold uppercase bg-brand-gold text-[#593218]">${shortCategory(p.category)}</span>
             </div>
             <h3 class="font-display font-bold text-[13px] sm:text-sm text-slate-900 dark:text-white line-clamp-2 min-h-[2.5rem]">${p.name}</h3>
             ${metaRow}
             <div class="mt-auto pt-3 border-t border-slate-100 dark:border-slate-800">
-                <p class="text-[10px] sm:text-xs text-slate-500 dark:text-slate-400">Harga Spesial</p>
-                <p class="price-val text-base sm:text-lg md:text-xl font-black leading-tight text-brand-blue dark:text-brand-gold">${p.priceWa}</p>
+                <p class="price-val text-base sm:text-lg md:text-xl font-black leading-tight text-brand-blue dark:text-brand-gold">${finalWaStr}</p>
                 ${discountRow}
             </div>
         </div>
@@ -505,8 +378,9 @@ function initKatalog() {
             filtered = GLOBAL_PRODUCTS.filter(p => p.category === currentFilter);
         }
 
-        if (currentSort === 'price-low') filtered.sort((a, b) => toNum(a.priceWa) - toNum(b.priceWa));
-        else if (currentSort === 'price-high') filtered.sort((a, b) => toNum(b.priceWa) - toNum(a.priceWa));
+        const effPrice = p => bindingPriceNum(productCheapestPrice(p));
+        if (currentSort === 'price-low') filtered.sort((a, b) => effPrice(a) - effPrice(b));
+        else if (currentSort === 'price-high') filtered.sort((a, b) => effPrice(b) - effPrice(a));
         else if (currentSort === 'sold-desc') filtered.sort((a, b) => soldOf(b) - soldOf(a));
 
         productGrid.innerHTML = filtered.map(p => productCardTemplate(p)).join('');
@@ -657,12 +531,12 @@ function initCoverKatalog() {
             // Reset sub-category filter when switching product type
             currentFilter = 'Semua Desain';
             filterButtons.forEach(b => {
-                b.classList.remove('bg-brand-blue', 'text-white', 'dark:bg-white', 'dark:text-black', 'shadow-lg');
+                b.classList.remove('bg-brand-blue', 'text-white', 'dark:bg-brand-gold', 'dark:text-black', 'shadow-lg');
                 b.classList.add('bg-slate-50', 'dark:bg-slate-900', 'text-slate-400', 'dark:text-slate-500');
             });
             const firstSubBtn = document.querySelector('.filter-btn');
             if (firstSubBtn) {
-                firstSubBtn.classList.add('bg-brand-blue', 'text-white', 'dark:bg-white', 'dark:text-black', 'shadow-lg');
+                firstSubBtn.classList.add('bg-brand-blue', 'text-white', 'dark:bg-brand-gold', 'dark:text-black', 'shadow-lg');
                 firstSubBtn.classList.remove('bg-slate-50', 'dark:bg-slate-900', 'text-slate-400', 'dark:text-slate-500');
             }
 
@@ -701,10 +575,10 @@ function initCoverKatalog() {
     filterButtons.forEach(btn => {
         btn.addEventListener('click', () => {
             filterButtons.forEach(b => {
-                b.classList.remove('bg-brand-blue', 'text-white', 'dark:bg-white', 'dark:text-black', 'shadow-lg');
+                b.classList.remove('bg-brand-blue', 'text-white', 'dark:bg-brand-gold', 'dark:text-black', 'shadow-lg');
                 b.classList.add('bg-slate-50', 'dark:bg-slate-900', 'text-slate-400', 'dark:text-slate-500');
             });
-            btn.classList.add('bg-brand-blue', 'text-white', 'dark:bg-white', 'dark:text-black', 'shadow-lg');
+            btn.classList.add('bg-brand-blue', 'text-white', 'dark:bg-brand-gold', 'dark:text-black', 'shadow-lg');
             btn.classList.remove('bg-slate-50', 'dark:bg-slate-900', 'text-slate-400', 'dark:text-slate-500');
             currentFilter = btn.textContent.trim().replace(/\s+/g, ' ');
             renderCovers();
@@ -736,27 +610,102 @@ function initProductDetail() {
             if (el) el[attr] = content;
         };
 
+        // Social meta (untuk share dialog; crawler pakai endpoint /p/:id)
+        const absImageUrl = (() => {
+            const u = product.img || '';
+            if (/^https?:\/\//i.test(u)) return u;
+            return location.origin + '/' + u.replace(/^\//, '');
+        })();
+        const shareUrl = `${location.origin}/p/${product.id}`;
+        const shareDesc = product.desc || `${product.category} - Hamzah Quran`;
+        const setMeta = (key, content, byName = false) => {
+            if (content == null) return;
+            const attr = byName ? 'name' : 'property';
+            let el = document.querySelector(`meta[${attr}="${key}"]`);
+            if (!el) {
+                el = document.createElement('meta');
+                el.setAttribute(attr, key);
+                document.head.appendChild(el);
+            }
+            el.setAttribute('content', content);
+        };
+        setMeta('description', shareDesc, true);
+        setMeta('og:title', `${product.name} - Hamzah Quran`);
+        setMeta('og:description', shareDesc);
+        setMeta('og:url', shareUrl);
+        setMeta('og:image', absImageUrl);
+        setMeta('og:image:alt', product.name);
+        setMeta('twitter:card', 'summary_large_image', true);
+        setMeta('twitter:title', `${product.name} - Hamzah Quran`, true);
+        setMeta('twitter:description', shareDesc, true);
+        setMeta('twitter:image', absImageUrl, true);
+
         setEl('breadcrumb-current', product.name);
         setEl('product-name', product.name);
         setEl('product-category', product.category);
         setEl('harga-coret', product.priceCrt);
         setEl('product-price', product.priceStr);
-        setEl('product-wa-price', `
-            <div class="wa-price-badge py-3 px-5 mb-2">
-                <span class="material-symbols-outlined !text-2xl">confirmation_number</span>
-                <span class="price-val !text-2xl sm:!text-3xl">${product.priceWa}</span>
-                <span class="label-text !text-sm !opacity-100 !font-normal">Harga spesial Web</span>
-            </div>
-        `, 'innerHTML');
+        const toNum = v => parseInt(String(v).replace(/[^\d]/g, ''), 10) || 0;
+        const fmtRp = n => 'Rp' + Math.max(0, n).toLocaleString('id-ID');
+        const productVoucher = productXtraVoucher(product);
+        const detailPrice = (quranType) => computeDetailPricing(product, quranType);
 
-        // Voucher banner
-        const priceNum = parseFloat(product.priceWa.replace(/[^\d]/g, ''));
-        const productVoucher = getBestVoucherAmount(priceNum);
+        const discountedWaStr = (quranType) => {
+            const info = detailPrice(quranType);
+            return info.isRange ? `${fmtRp(info.low)} - ${fmtRp(info.high)}` : fmtRp(info.low);
+        };
+        const setBigPrice = (displayStr) => {
+            const waEl = document.getElementById('product-wa-price');
+            if (!waEl) return;
+            const m = /^Rp\s?([\d.]+)$/.exec(displayStr);
+            if (m) {
+                waEl.innerHTML = `<span class="pd-currency">Rp</span><span class="pd-amount">${m[1]}</span>`;
+            } else {
+                waEl.innerHTML = `<span class="pd-amount pd-amount-sm">${displayStr}</span>`;
+            }
+        };
+        const shownPriceNum = (quranType) => detailPrice(quranType).low;
+        const setDiscountPill = (quranType) => {
+            const pill = document.getElementById('pd-discount-pill');
+            if (!pill) return;
+            const info = detailPrice(quranType);
+            if (info.save > 0 && info.crt > 0) {
+                pill.textContent = `-${info.pct}%`;
+                pill.title = `Hemat Rp${info.save.toLocaleString('id-ID')}`;
+                pill.classList.remove('hidden');
+            } else {
+                pill.classList.add('hidden');
+            }
+        };
+
+        setBigPrice(discountedWaStr());
+        setDiscountPill();
+
+        // Social proof (rating + jumlah terjual)
+        const social = PRODUCT_SOCIAL_PROOF[product.id] || {};
+        const soldLabel = social.sold != null ? social.sold.toLocaleString('id-ID') : '0';
+        const soldMain = document.getElementById('pd-sold-main');
+        const soldTitle = document.getElementById('pd-sold-title');
+        const ratingRow = document.getElementById('pd-rating-row');
+        if (soldMain) soldMain.textContent = soldLabel;
+        if (soldTitle) soldTitle.textContent = soldLabel;
+        if (ratingRow) {
+            if (social.rating || social.sold) {
+                ratingRow.classList.remove('hidden');
+                const ratingVal = document.getElementById('pd-rating-val');
+                if (ratingVal) ratingVal.textContent = social.rating || '';
+            } else {
+                ratingRow.classList.add('hidden');
+            }
+        }
+
+        // Voucher chip
         const voucherBanner = document.getElementById('voucher-banner');
         const voucherText = document.getElementById('voucher-banner-text');
         if (voucherBanner && voucherText) {
             voucherBanner.classList.remove('hidden');
-            voucherText.textContent = `Checkout sekarang dan dapatkan voucher XTRA ${getVoucherLabel(productVoucher)}!`;
+            voucherText.textContent = 'Dengan Voucher';
+            voucherBanner.title = `Voucher XTRA ${getVoucherLabel(productVoucher)}`;
         }
 
         setEl('main-image', product.img, 'src');
@@ -771,7 +720,9 @@ function initProductDetail() {
                 btn.onclick = (e) => {
                     e.preventDefault();
                     if (product.soldOut) return;
-                    if (product.category && product.category.startsWith('Al Quran')) {
+                    if (product.bindings) {
+                        openBindingPickerModal(product.id);
+                    } else if (product.category && product.category.startsWith('Al Quran')) {
                         const variants = QURAN_VARIANTS[product.id];
                         if (variants) {
                             openQuranPickerModal(product.id, variants);
@@ -818,9 +769,9 @@ function initProductDetail() {
         const thumbGallery = document.getElementById('thumbnail-gallery');
 
         if (thumbGallery && product.images) {
-            thumbGallery.className = "flex overflow-x-auto gap-3 pb-2 scrollbar-hide";
+            thumbGallery.className = "flex overflow-x-auto gap-1 pb-0 lg:pb-2 scrollbar-hide px-1 mt-1";
             thumbGallery.innerHTML = product.images.map((imgSrc, idx) => `
-                <div id="thumb-${idx}" class="thumb-item flex-shrink-0 w-20 sm:w-24 cursor-pointer aspect-square rounded-xl overflow-hidden border-2 transition-all ${idx === 0 ? 'border-brand-blue' : 'border-transparent opacity-60 hover:opacity-100'}"
+                <div id="thumb-${idx}" class="thumb-item flex-shrink-0 w-16 sm:w-20 cursor-pointer aspect-square rounded-md overflow-hidden border transition-all ${idx === 0 ? 'border-brand-blue' : 'border-transparent opacity-60 hover:opacity-100'}"
                      onclick="changeMainImage(${idx}, '${imgSrc}')">
                     <img src="${imgSrc}" class="w-full h-full object-cover">
                 </div>
@@ -831,17 +782,125 @@ function initProductDetail() {
         const specList = document.getElementById('spec-list');
         if (specList && product.specs) {
             specList.innerHTML = product.specs.map(s => `
-                <li class="flex items-center gap-3 text-slate-900 dark:text-slate-100">
-                    <span class="material-symbols-outlined text-brand-blue dark:text-brand-gold">check_circle</span>
+                <li class="flex items-start gap-3 text-slate-700 dark:text-slate-200">
+                    <span class="material-symbols-outlined text-[1.2rem] text-brand-blue dark:text-brand-gold shrink-0" style="font-variation-settings: 'FILL' 1">check_circle</span>
                     <span>${s}</span>
                 </li>
             `).join('');
         }
 
-        // Dynamic Text Description
+        // Dynamic Text Description (tab Ringkasan)
         const productDesc = document.getElementById('product-desc');
-        if (productDesc && product.desc) {
-            productDesc.textContent = product.desc;
+        if (productDesc) {
+            if (product.desc) {
+                productDesc.textContent = product.desc;
+                productDesc.classList.remove('hidden');
+            } else {
+                productDesc.classList.add('hidden');
+            }
+        }
+
+        // Tabs (Ringkasan / Spesifikasi Produk)
+        const tabButtons = document.querySelectorAll('.pd-tab-btn');
+        const tabPanels = {
+            ringkasan: document.getElementById('pd-panel-ringkasan'),
+            spesifikasi: document.getElementById('pd-panel-spesifikasi')
+        };
+        tabButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const name = btn.dataset.tab;
+                tabButtons.forEach(b => b.classList.toggle('active', b === btn));
+                Object.keys(tabPanels).forEach(key => {
+                    const panel = tabPanels[key];
+                    if (panel) panel.classList.toggle('hidden', key !== name);
+                });
+                updateTabIndicator();
+            });
+        });
+        updateTabIndicator();
+
+        // Wishlist heart (UI only — belum terhubung ke fitur wishlist)
+        const wishlistBtn = document.getElementById('pd-wishlist-btn');
+        if (wishlistBtn) {
+            wishlistBtn.addEventListener('click', () => {
+                const active = wishlistBtn.classList.toggle('active');
+                wishlistBtn.setAttribute('aria-pressed', active ? 'true' : 'false');
+            });
+        }
+
+        // Share button (Web Share API + fallback menu)
+        const shareBtn = document.getElementById('pd-share-btn');
+        const shareMenu = document.getElementById('pd-share-menu');
+        if (shareBtn) {
+            const sharePrice = computeDetailPricing(product);
+            const sharePriceStr = sharePrice.isRange
+                ? `mulai Rp${sharePrice.low.toLocaleString('id-ID')}`
+                : `Rp${sharePrice.low.toLocaleString('id-ID')}`;
+            const shareText = `${product.name} - ${sharePriceStr}`;
+            const buildShareLinks = () => {
+                if (!shareMenu) return;
+                const u = encodeURIComponent(shareUrl);
+                const t = encodeURIComponent(shareText);
+                const urls = {
+                    whatsapp: `https://wa.me/?text=${t}%20${u}`,
+                    telegram: `https://t.me/share/url?url=${u}&text=${t}`,
+                    facebook: `https://www.facebook.com/sharer/sharer.php?u=${u}`,
+                    x: `https://twitter.com/intent/tweet?url=${u}&text=${t}`,
+                    threads: `https://www.threads.com/intent/post?url=${u}&text=${t}`
+                };
+                shareMenu.querySelectorAll('[data-share]').forEach(el => {
+                    const key = el.getAttribute('data-share');
+                    if (key !== 'copy' && urls[key]) el.setAttribute('href', urls[key]);
+                });
+            };
+            const closeShareMenu = () => {
+                if (!shareMenu) return;
+                shareMenu.classList.remove('open');
+                shareBtn.setAttribute('aria-expanded', 'false');
+            };
+            shareBtn.addEventListener('click', async (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                const data = { title: product.name, text: shareText, url: shareUrl };
+                if (navigator.share) {
+                    try { await navigator.share(data); } catch (err) { /* dibatalkan */ }
+                    return;
+                }
+                if (!shareMenu) return;
+                buildShareLinks();
+                const isOpen = shareMenu.classList.toggle('open');
+                shareBtn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+            });
+            if (shareMenu) {
+                const copyBtn = shareMenu.querySelector('[data-share="copy"]');
+                if (copyBtn) {
+                    copyBtn.addEventListener('click', async (e) => {
+                        e.preventDefault();
+                        try {
+                            await navigator.clipboard.writeText(shareUrl);
+                        } catch (err) {
+                            const ta = document.createElement('textarea');
+                            ta.value = shareUrl;
+                            ta.style.position = 'fixed';
+                            ta.style.opacity = '0';
+                            document.body.appendChild(ta);
+                            ta.select();
+                            try { document.execCommand('copy'); } catch (e2) { /* noop */ }
+                            ta.remove();
+                        }
+                        closeShareMenu();
+                        if (typeof showToast === 'function') showToast('Link produk disalin');
+                    });
+                }
+                document.addEventListener('click', (ev) => {
+                    if (!shareMenu.classList.contains('open')) return;
+                    if (shareMenu.contains(ev.target) || shareBtn.contains(ev.target)) return;
+                    closeShareMenu();
+                });
+                document.addEventListener('keydown', (ev) => {
+                    if (ev.key === 'Escape') closeShareMenu();
+                });
+            }
         }
 
         // Render Related Products
@@ -1031,7 +1090,7 @@ function saveCart() {
 }
 
 function updateCartBadge() {
-    const badges = document.querySelectorAll('#nav-cart-badge');
+    const badges = document.querySelectorAll('.nav-cart-badge');
     const totalQty = cart.reduce((sum, item) => sum + item.qty, 0);
     badges.forEach(badge => {
         if (totalQty > 0) {
@@ -1043,19 +1102,21 @@ function updateCartBadge() {
     });
 }
 
-function addToCart(productId, customName, coverId, customNote = '', customFont = '', quranType = '') {
+function addToCart(productId, customName, coverId, customNote = '', customFont = '', quranType = '', binding = '') {
     const product = GLOBAL_PRODUCTS.find(p => p.id === productId);
     if (!product) return;
 
     const coverData = coverId ? COVER_DESIGNS.find(c => c.id === coverId) : null;
+    const chosenBinding = binding && product.bindings && product.bindings[binding] ? binding : '';
+    const priceWa = chosenBinding ? product.bindings[chosenBinding] : variantPriceStr(product, 'priceWa', quranType);
 
     // Each customization is unique, so always push new item
     cart.push({
         id: product.id,
         name: product.name,
         category: product.category,
-        priceCrt: product.priceCrt,
-        priceWa: product.priceWa,
+        priceCrt: variantPriceStr(product, 'priceCrt', quranType),
+        priceWa: priceWa,
         img: product.img,
         qty: 1,
         customName: customName || '',
@@ -1064,7 +1125,8 @@ function addToCart(productId, customName, coverId, customNote = '', customFont =
         coverName: coverData ? coverData.name : '',
         coverCategory: coverData ? coverData.category : '',
         coverImg: coverData ? coverData.img : '',
-        quranType: quranType || ''
+        quranType: quranType || '',
+        binding: chosenBinding
     });
     saveCart();
     showToast(`${product.name} berhasil ditambahkan ke keranjang!`);
@@ -1076,7 +1138,7 @@ function addToCart(productId, customName, coverId, customNote = '', customFont =
             content_category: product.category,
             content_ids: [product.id],
             content_type: 'product',
-            value: parseFloat(product.priceWa.replace(/[^\d]/g, '')),
+            value: parseInt(String(priceWa).replace(/[^\d]/g, ''), 10) || 0,
             currency: 'IDR'
         });
     }
@@ -1109,9 +1171,10 @@ let modalProductId = null;
 let modalSelectedCoverId = null;
 let modalCoverFilter = 'Semua';
 
-function openCustomModal(productId, quranType) {
+function openCustomModal(productId, quranType, binding) {
     let url = `personalize.html?id=${productId}`;
     if (quranType) url += `&quranType=${quranType}`;
+    if (binding) url += `&binding=${binding}`;
     window.location.href = url;
 }
 
@@ -1122,6 +1185,7 @@ function initPersonalizationPage() {
     const urlParams = new URLSearchParams(window.location.search);
     const productId = parseInt(urlParams.get('id'));
     const quranType = urlParams.get('quranType') || '';
+    let binding = urlParams.get('binding') || '';
     const product = GLOBAL_PRODUCTS.find(p => p.id === productId);
 
     if (product) {
@@ -1135,10 +1199,14 @@ function initPersonalizationPage() {
             if (el) el[attr] = content;
         };
 
+        const voucher = productXtraVoucher(product);
+        const toNum = v => parseInt(String(v).replace(/[^\d]/g, ''), 10) || 0;
+        const priceAfterVoucher = str => 'Rp' + Math.max(0, toNum(str) - voucher).toLocaleString('id-ID');
+
         setEl('personalize-product-img', product.img, 'src');
         setEl('personalize-product-name', product.name);
         setEl('personalize-product-category', product.category);
-        setEl('personalize-product-price', product.priceWa || product.priceStr);
+        setEl('personalize-product-price', priceAfterVoucher((binding && product.bindings && product.bindings[binding]) ? product.bindings[binding] : variantPriceStr(product, 'priceWa', quranType)));
 
         const backLink = document.getElementById('back-to-product');
         if (backLink) backLink.href = `product-detail.html?id=${product.id}`;
@@ -1150,6 +1218,10 @@ function initPersonalizationPage() {
             editIdx = parseInt(sessionStorage.getItem('hq_edit_cart_idx') || '-1');
             if (editIdx >= 0 && cart[editIdx]) {
                 const editItem = cart[editIdx];
+                if (editItem.binding) {
+                    binding = editItem.binding;
+                    setEl('personalize-product-price', priceAfterVoucher((product.bindings && product.bindings[binding]) ? product.bindings[binding] : (product.priceWa || product.priceStr)));
+                }
                 const nameInput = document.getElementById('custom-name-input');
                 if (nameInput && editItem.customName) nameInput.value = editItem.customName;
 
@@ -1211,7 +1283,7 @@ function initPersonalizationPage() {
                     showToast('Item berhasil diperbarui!');
                     sessionStorage.removeItem('hq_edit_cart_idx');
                 } else {
-                    addToCart(product.id, customName, modalSelectedCoverId, customNote, customFont, quranType);
+                    addToCart(product.id, customName, modalSelectedCoverId, customNote, customFont, quranType, binding);
                 }
                 window.location.href = 'cart.html';
             };
@@ -1307,14 +1379,23 @@ function renderModalCoverGrid() {
     grid.innerHTML = covers.map(c => {
         const isSelected = c.id === modalSelectedCoverId;
         const selectedBorder = isSelected ? 'ring-3 ring-brand-blue dark:ring-brand-gold' : 'border border-slate-200 dark:border-slate-700';
+        const showPreview = !!document.getElementById('cover-preview');
+        const previewBtn = showPreview
+            ? `<button type="button" class="cover-preview-btn" title="Lihat gambar penuh"
+                   data-cover-src="${c.img}"
+                   onclick="event.stopPropagation(); openCoverPreview(this.dataset.coverSrc)">
+                   <span class="material-symbols-outlined">zoom_in</span>
+               </button>`
+            : '';
         return `
             <div class="modal-cover-card rounded-xl overflow-hidden ${selectedBorder} ${isSelected ? 'selected' : ''}"
                  onclick="selectModalCover(${c.id})">
                 <div class="cover-check bg-brand-blue dark:bg-brand-gold text-white dark:text-black">
                     <span class="material-symbols-outlined text-[0.9rem]">check</span>
                 </div>
-                <div class="aspect-[3/4] bg-slate-100 dark:bg-slate-800">
+                <div class="aspect-[3/4] relative bg-slate-100 dark:bg-slate-800">
                     <img src="${c.img}" alt="${c.name}" class="w-full h-full object-cover">
+                    ${previewBtn}
                 </div>
                 <div class="p-2 bg-white dark:bg-slate-900">
                     <p class="text-[0.85rem] font-medium text-slate-900 dark:text-white text-center">${c.name}</p>
@@ -1415,21 +1496,40 @@ let selectedQuranType = 'latin';
 function openQuranPickerModal(productId, variants) {
     quranPickerProductId = productId;
     const modal = document.getElementById('quran-picker-modal');
-    if (!modal) return;
+    const container = document.getElementById('quran-options');
+    if (!modal || !container) return;
 
-    const optLatin = document.getElementById('quran-opt-latin');
-    const optTanpa = document.getElementById('quran-opt-tanpa-latin');
-    const hasLatin = variants.includes('latin');
-    const hasTanpa = variants.includes('tanpa-latin');
+    const product = GLOBAL_PRODUCTS.find(p => p.id === productId);
+    const hasPriceDiff = variants.some(k => VARIANT_OPTIONS[k] && VARIANT_OPTIONS[k].add > 0);
+    const toNum = v => parseInt(String(v).replace(/[^\d]/g, ''), 10) || 0;
+    const fmtRp = n => 'Rp' + Math.max(0, n).toLocaleString('id-ID');
+    const voucher = product ? productXtraVoucher(product) : 0;
 
-    // Show/hide options based on available variants
-    if (optLatin) optLatin.style.display = hasLatin ? '' : 'none';
-    if (optTanpa) optTanpa.style.display = hasTanpa ? '' : 'none';
+    container.innerHTML = variants.map(key => {
+        const opt = VARIANT_OPTIONS[key] || { label: key, img: '', add: 0 };
+        const priceTag = product && hasPriceDiff
+            ? `<span class="absolute bottom-2 right-2 rounded-full bg-black/70 text-white px-3 py-1 text-xs font-bold backdrop-blur-sm">${fmtRp(toNum(variantPriceStr(product, 'priceWa', key)) - voucher)}</span>`
+            : '';
+        return `
+            <label id="quran-opt-${key}" class="quran-picker-card modal-cover-card cursor-pointer rounded-[1.25rem] overflow-hidden border-2 border-transparent relative"
+                   onclick="selectQuranType('${key}')">
+                <input type="radio" name="quran-type" value="${key}" class="sr-only">
+                <div class="aspect-[16/7] relative bg-slate-100 dark:bg-slate-800 overflow-hidden">
+                  <img src="${opt.img}" alt="${opt.label}" class="w-full h-full object-cover">
+                  <div class="absolute inset-0 bg-gradient-to-r from-black/70 via-black/30 to-transparent flex items-center px-5">
+                    <span class="text-white font-display font-black text-2xl">${opt.label}</span>
+                  </div>
+                  ${priceTag}
+                </div>
+                <div class="cover-check bg-brand-blue text-white">
+                  <span class="material-symbols-outlined text-[0.9rem]">check</span>
+                </div>
+            </label>`;
+    }).join('');
 
     // Auto-select first available variant
-    const defaultType = hasLatin ? 'latin' : 'tanpa-latin';
-    selectedQuranType = defaultType;
-    selectQuranType(defaultType);
+    selectedQuranType = variants[0];
+    selectQuranType(variants[0]);
 
     modal.style.display = 'flex';
     document.body.style.overflow = 'hidden';
@@ -1450,15 +1550,63 @@ function selectQuranType(type) {
         el.classList.remove('border-brand-blue');
         el.classList.add('border-transparent');
     });
-    const target = type === 'latin'
-        ? document.getElementById('quran-opt-latin')
-        : document.getElementById('quran-opt-tanpa-latin');
+    const target = document.getElementById('quran-opt-' + type);
     if (target) {
         target.classList.add('selected');
         target.classList.remove('border-transparent');
         target.classList.add('border-brand-blue');
         const radio = target.querySelector('input[type="radio"]');
         if (radio) radio.checked = true;
+        updateQuranPriceDisplay();
+    }
+}
+
+function updateTabIndicator() {
+    const indicator = document.getElementById('pd-tab-indicator');
+    const active = document.querySelector('.pd-tab-btn.active');
+    if (!indicator || !active) return;
+    indicator.style.width = active.offsetWidth + 'px';
+    indicator.style.transform = `translateX(${active.offsetLeft}px)`;
+}
+
+window.addEventListener('resize', updateTabIndicator);
+if (document.fonts && document.fonts.ready) document.fonts.ready.then(updateTabIndicator);
+
+function updateQuranPriceDisplay() {
+    const product = quranPickerProductId ? GLOBAL_PRODUCTS.find(p => p.id === quranPickerProductId) : null;
+    if (!product) return;
+    const variants = QURAN_VARIANTS[product.id] || [];
+    const hasPriceDiff = variants.some(k => VARIANT_OPTIONS[k] && VARIANT_OPTIONS[k].add > 0);
+    if (!hasPriceDiff) return;
+
+    const toNum = v => parseInt(String(v).replace(/[^\d]/g, ''), 10) || 0;
+    const fmtRp = n => 'Rp' + Math.max(0, n).toLocaleString('id-ID');
+    const voucher = productXtraVoucher(product);
+    const crtEl = document.getElementById('harga-coret');
+    const priceEl = document.getElementById('product-price');
+    const waEl = document.getElementById('product-wa-price');
+    const displayPrice = fmtRp(toNum(variantPriceStr(product, 'priceWa', selectedQuranType)) - voucher);
+    if (crtEl) crtEl.textContent = variantPriceStr(product, 'priceCrt', selectedQuranType);
+    if (priceEl) priceEl.textContent = variantPriceStr(product, 'priceStr', selectedQuranType);
+    if (waEl) {
+        const m = /^Rp\s?([\d.]+)$/.exec(displayPrice);
+        waEl.innerHTML = m
+            ? `<span class="pd-currency">Rp</span><span class="pd-amount">${m[1]}</span>`
+            : `<span class="pd-amount pd-amount-sm">${displayPrice}</span>`;
+    }
+
+    const pill = document.getElementById('pd-discount-pill');
+    if (pill) {
+        const crt = toNum(product.priceCrt);
+        const diff = crt - toNum(displayPrice);
+        if (diff > 0 && crt > 0) {
+            const pct = Math.round((diff / crt) * 100);
+            pill.textContent = `-${pct}%`;
+            pill.title = `Hemat Rp${diff.toLocaleString('id-ID')}`;
+            pill.classList.remove('hidden');
+        } else {
+            pill.classList.add('hidden');
+        }
     }
 }
 
@@ -1469,8 +1617,210 @@ function confirmQuranPicker() {
     }
 }
 
+// === Binding Picker Modal (softcover / hardcover) ===
+let bindingPickerProductId = null;
+let selectedBinding = 'softcover';
+
+function openBindingPickerModal(productId) {
+    bindingPickerProductId = productId;
+    const modal = document.getElementById('binding-picker-modal');
+    if (!modal) return;
+
+    const product = GLOBAL_PRODUCTS.find(p => p.id === productId);
+    const keys = bindingKeys(product);
+    const voucher = productXtraVoucher(product);
+
+    // Isi harga tiap opsi sesuai produk (setelah dipotong voucher xtra)
+    keys.forEach(k => {
+        const priceEl = document.getElementById('binding-price-' + k);
+        if (priceEl) priceEl.textContent = 'Rp' + Math.max(0, bindingPriceNum(product.bindings[k]) - voucher).toLocaleString('id-ID');
+    });
+
+    const defaultBinding = keys[0] || 'softcover';
+    selectedBinding = defaultBinding;
+    selectBinding(defaultBinding);
+
+    modal.style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+}
+
+function closeBindingPickerModal() {
+    const modal = document.getElementById('binding-picker-modal');
+    if (modal) {
+        modal.style.display = 'none';
+        document.body.style.overflow = '';
+    }
+}
+
+function selectBinding(binding) {
+    selectedBinding = binding;
+    document.querySelectorAll('.binding-picker-btn').forEach(el => {
+        el.classList.remove('border-brand-blue', 'dark:border-brand-gold', 'bg-brand-blue/5', 'dark:bg-brand-gold/10');
+        el.classList.add('border-transparent');
+        const ic = el.querySelector('.binding-check');
+        if (ic) ic.classList.add('hidden');
+    });
+    const target = document.getElementById('binding-opt-' + binding);
+    if (target) {
+        target.classList.remove('border-transparent');
+        target.classList.add('border-brand-blue', 'dark:border-brand-gold', 'bg-brand-blue/5', 'dark:bg-brand-gold/10');
+        const ic = target.querySelector('.binding-check');
+        if (ic) ic.classList.remove('hidden');
+    }
+}
+
+function confirmBindingPicker() {
+    closeBindingPickerModal();
+    if (bindingPickerProductId) {
+        openCustomModal(bindingPickerProductId, '', selectedBinding);
+    }
+}
+
+// === Modal Rincian Harga ===
+function priceBreakdownBlock(label, crtLabel, priceWaStr, voucher) {
+    const toNum = v => parseInt(String(v).replace(/[^\d]/g, ''), 10) || 0;
+    const fmtRp = n => 'Rp' + Math.max(0, n).toLocaleString('id-ID');
+    const crt = toNum(crtLabel);
+    const wa = toNum(priceWaStr);
+    const diskon = Math.max(0, crt - wa);
+    const finalPrice = Math.max(0, wa - voucher);
+    const row = (l, val, cls = '') => `
+        <div class="flex items-center justify-between text-sm">
+            <span class="text-slate-500 dark:text-slate-400">${l}</span>
+            <span class="font-semibold ${cls}">${val}</span>
+        </div>`;
+    return `
+        <div class="space-y-2.5">
+            ${label ? `<p class="text-[11px] uppercase font-bold tracking-wider text-slate-400 dark:text-slate-500">${label}</p>` : ''}
+            ${row('Harga Normal', fmtRp(crt))}
+            ${diskon > 0 ? row('Diskon', '\u2212' + fmtRp(diskon), 'text-red-500') : ''}
+            ${voucher > 0 ? row('Voucher XTRA', '\u2212' + fmtRp(voucher), 'text-brand-blue dark:text-brand-gold') : ''}
+            <div class="border-t border-dashed border-slate-200 dark:border-slate-700 pt-2.5 flex items-center justify-between">
+                <span class="font-bold text-slate-900 dark:text-white">Harga Final</span>
+                <span class="text-lg font-black text-brand-blue dark:text-brand-gold">${fmtRp(finalPrice)}</span>
+            </div>
+        </div>`;
+}
+
+window.openPriceDetailModal = function () {
+    const modal = document.getElementById('price-detail-modal');
+    const body = document.getElementById('price-detail-body');
+    const product = currentProductData;
+    if (!modal || !body || !product) return;
+
+    const voucher = productXtraVoucher(product);
+    const crtLabel = product.priceCrt || 'Rp0';
+
+    if (product.bindings) {
+        body.innerHTML = Object.keys(product.bindings).map(k =>
+            priceBreakdownBlock(bindingLabel(k), crtLabel, product.bindings[k], voucher)
+        ).join('<div class="my-4 border-t border-slate-100 dark:border-slate-800"></div>');
+    } else {
+        body.innerHTML = priceBreakdownBlock('', crtLabel, product.priceWa || 'Rp0', voucher);
+    }
+
+    modal.style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+};
+
+window.closePriceDetailModal = function () {
+    const modal = document.getElementById('price-detail-modal');
+    if (modal) {
+        modal.style.display = 'none';
+        document.body.style.overflow = '';
+    }
+};
+
+window.openServiceFeeInfo = function () {
+    const modal = document.getElementById('service-fee-info-modal');
+    const body = document.getElementById('service-fee-info-body');
+    if (!modal || !body) return;
+
+    const isCod = typeof isCOD === 'function' && isCOD();
+    const title = isCod ? 'Biaya Layanan COD' : 'Biaya Layanan QRIS & Transfer';
+    const desc = isCod
+        ? 'Untuk biaya admin COD ke aggregator (ekspedisi).'
+        : 'Untuk pengembangan aplikasi dan teknologi.';
+
+    body.innerHTML = `
+        <div class="flex gap-3 items-start">
+            <span class="material-symbols-outlined text-brand-blue dark:text-brand-gold">info</span>
+            <div>
+                <p class="font-bold text-slate-900 dark:text-white text-sm">${title}</p>
+                <p class="text-slate-500 dark:text-slate-400 text-sm mt-1 leading-relaxed">${desc}</p>
+            </div>
+        </div>`;
+
+    modal.style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+};
+
+window.closeServiceFeeInfo = function () {
+    const modal = document.getElementById('service-fee-info-modal');
+    if (modal) {
+        modal.style.display = 'none';
+        document.body.style.overflow = '';
+    }
+};
+
+function formatEtd(text) {
+    const raw = String(text || '').trim();
+    if (!raw) return '2-3 hari kerja';
+    return raw
+        .replace(/\bhours?\b/gi, 'jam')
+        .replace(/\bdays?\b/gi, 'hari kerja')
+        .replace(/\bweeks?\b/gi, 'minggu');
+}
+
+let codConfirmResolver = null;
+
+window.openCodConfirmModal = function ({ total, courier, etd } = {}) {
+    const modal = document.getElementById('cod-confirm-modal');
+    const body = document.getElementById('cod-confirm-modal-body');
+    if (!modal || !body) return Promise.resolve(true);
+
+    body.innerHTML = `
+        <div class="flex gap-3 items-start">
+            <span class="material-symbols-outlined text-brand-blue dark:text-brand-gold">payments</span>
+            <p class="text-sm text-slate-500 dark:text-slate-400 leading-relaxed">
+                Mohon siapkan uang sebesar <span class="font-bold text-slate-900 dark:text-white">${total}</span> saat kurir tiba.
+                Estimasi pengiriman sekitar <span class="font-bold text-slate-900 dark:text-white">${etd}</span>
+                dan dikirim oleh kurir <span class="font-bold text-slate-900 dark:text-white">${courier}</span>.
+                Admin Hamzah Quran akan segera mengkonfirmasi pesanan Anda setelah Anda klik Proses Checkout.
+            </p>
+        </div>`;
+
+    modal.style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+
+    return new Promise(resolve => {
+        codConfirmResolver = resolve;
+    });
+};
+
+function resolveCodConfirmModal(result) {
+    const modal = document.getElementById('cod-confirm-modal');
+    if (modal) {
+        modal.style.display = 'none';
+        document.body.style.overflow = '';
+    }
+    if (codConfirmResolver) {
+        const resolve = codConfirmResolver;
+        codConfirmResolver = null;
+        resolve(result);
+    }
+}
+
+window.closeCodConfirmModal = function () {
+    resolveCodConfirmModal(false);
+};
+
+window.confirmCodOrder = function () {
+    resolveCodConfirmModal(true);
+};
+
 document.addEventListener('keydown', function (e) {
-    if (e.key === 'Escape') closeQuranPickerModal();
+    if (e.key === 'Escape') { closeQuranPickerModal(); closeBindingPickerModal(); closePriceDetailModal(); closeServiceFeeInfo(); closeCodConfirmModal(); }
 });
 
 function updateCartQty(idx, newQty) {
@@ -1486,6 +1836,7 @@ function updateCartQty(idx, newQty) {
     selectedCourierPrice = 0;
     selectedCourierName = '';
     selectedCourierService = '';
+    selectedCourierEtd = '';
     updateGrandTotal();
 
     document.querySelectorAll('.shipping-option').forEach(el => {
@@ -1540,7 +1891,7 @@ function renderCart() {
         subtotal += priceNum * item.qty;
 
         return `
-            <div class="flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-6 bg-slate-50 dark:bg-slate-800/50 p-4 rounded-2xl relative group">
+            <div class="flex flex-col sm:flex-row items-start gap-4 sm:gap-6 bg-slate-50 dark:bg-slate-800/50 p-4 rounded-2xl relative group">
                 <button onclick="editCartItem(${idx})" class="absolute top-3 right-3 flex items-center gap-1 px-2.5 py-1 rounded-full bg-brand-blue/10 dark:bg-brand-gold/10 text-brand-blue dark:text-brand-gold hover:bg-brand-blue/20 dark:hover:bg-brand-gold/20 transition-colors text-xs font-semibold z-10" title="Ubah">
                     <span class="material-symbols-outlined text-[0.9rem]">edit</span>ubah
                 </button>
@@ -1551,7 +1902,8 @@ function renderCart() {
                     <h3 class="font-bold text-lg text-slate-900 dark:text-white leading-tight">${item.name}</h3>
                     ${item.customName ? `<div class="flex items-center gap-1.5 mt-1"><span class="material-symbols-outlined text-[1rem] text-brand-blue dark:text-brand-gold">badge</span><span class="text-sm font-semibold text-slate-600 dark:text-slate-300">Nama: ${item.customName}</span></div>` : ''}
                     ${item.coverName ? `<div class="flex items-center gap-1.5 mt-0.5"><span class="material-symbols-outlined text-[1rem] text-brand-blue dark:text-brand-gold">palette</span><span class="text-sm font-semibold text-slate-600 dark:text-slate-300">Cover: ${item.coverName} (${item.coverCategory})</span></div>` : ''}
-                    ${item.quranType ? `<div class="flex items-center gap-1.5 mt-0.5"><span class="material-symbols-outlined text-[1rem] text-brand-blue dark:text-brand-gold">menu_book</span><span class="text-sm font-semibold text-slate-600 dark:text-slate-300">Varian: ${item.quranType === 'latin' ? 'Latin' : 'Tanpa Latin'}</span></div>` : ''}
+                    ${item.quranType ? `<div class="flex items-center gap-1.5 mt-0.5"><span class="material-symbols-outlined text-[1rem] text-brand-blue dark:text-brand-gold">menu_book</span><span class="text-sm font-semibold text-slate-600 dark:text-slate-300">Varian: ${item.quranType ? variantLabel(item.quranType) : ''}</span></div>` : ''}
+                    ${item.binding ? `<div class="flex items-center gap-1.5 mt-0.5"><span class="material-symbols-outlined text-[1rem] text-brand-blue dark:text-brand-gold">layers</span><span class="text-sm font-semibold text-slate-600 dark:text-slate-300">Jilid: ${bindingLabel(item.binding)}</span></div>` : ''}
                     ${item.customNote ? `<div class="flex items-center gap-1.5 mt-0.5"><span class="material-symbols-outlined text-[1rem] text-brand-blue dark:text-brand-gold">edit_note</span><span class="text-sm font-semibold text-slate-600 dark:text-slate-300">Ucapan: ${item.customNote}</span></div>` : ''}
                     ${item.customFont ? `<div class="flex items-center gap-1.5 mt-0.5"><span class="material-symbols-outlined text-[1rem] text-brand-blue dark:text-brand-gold">font_download</span><span class="text-sm font-semibold text-slate-600 dark:text-slate-300">Font: ${item.customFont}</span></div>` : ''}
                     <div class="text-brand-blue dark:text-brand-gold font-bold text-sm mt-1 mb-3">${formatPrice(priceNum)} <span class="text-xs text-slate-400 font-normal line-through ml-1">${item.priceCrt}</span></div>
@@ -1643,7 +1995,7 @@ function showAlert(title, text, type = 'warning') {
     modal.onclick = (e) => { if (e.target === modal) close(); };
 }
 
-function initCart() {
+async function initCart() {
     updateCartBadge();
     const cartContainer = document.getElementById('cart-container');
     if (!cartContainer) return; // Only run on cart.html
@@ -1716,7 +2068,8 @@ function initCart() {
                 message += `${i + 1}. ${c.name}\n`;
                 if (c.customName) message += `   - Nama: ${c.customName}\n`;
                 if (c.coverName) message += `   - Cover: ${c.coverName} (${c.coverCategory})\n`;
-                if (c.quranType) message += `   - Varian: ${c.quranType === 'latin' ? 'Latin' : 'Tanpa Latin'}\n`;
+                if (c.quranType) message += `   - Varian: ${variantLabel(c.quranType)}\n`;
+                if (c.binding) message += `   - Jilid: ${bindingLabel(c.binding)}\n`;
                 if (c.customNote) message += `   - Ucapan: ${c.customNote}\n`;
                 if (c.customFont) message += `   - Font: ${c.customFont}\n`;
                 message += `   ${c.qty} x ${formatPrice(priceNum)} = ${formatPrice(totalItem)}\n`;
@@ -1724,14 +2077,26 @@ function initCart() {
 
             const paymentRadio = document.querySelector('input[name="payment-method"]:checked');
             const paymentMethodValue = paymentRadio?.value || 'xenith';
-            const paymentLabels = { xenith: 'Bayar Online (Xenith)', cod: 'COD' };
-            const paymentMethodText = paymentLabels[paymentMethodValue] || 'Bayar Online (Xenith)';
+            const paymentLabels = { xenith: 'Online Payment', cod: 'COD' };
+            const paymentMethodText = paymentLabels[paymentMethodValue] || 'Online Payment';
 
             const shippingDiscount = getShippingDiscount(courierPrice, subtotal);
             const ongkirAfterSubsidy = courierPrice - shippingDiscount;
             const voucher = getVoucherDiscount(subtotal);
-            const codFee = paymentMethodValue === 'cod' ? Math.round((subtotal + ongkirAfterSubsidy - voucher) * 0.04) : 0;
-            const grandTotal = subtotal + ongkirAfterSubsidy + codFee - voucher;
+            const feeBase = subtotal + ongkirAfterSubsidy - voucher;
+            const isCodPay = paymentMethodValue === 'cod';
+            const codFee = isCodPay ? calcCodFee(feeBase) : 0;
+            const serviceFee = isCodPay ? 0 : ONLINE_SERVICE_FEE;
+            const grandTotal = subtotal + ongkirAfterSubsidy + codFee + serviceFee - voucher;
+
+            if (isCodPay) {
+                const okCod = await window.openCodConfirmModal({
+                    total: formatPrice(grandTotal),
+                    courier: courierLabel.trim() || '-',
+                    etd: formatEtd(selectedCourierEtd)
+                });
+                if (!okCod) return;
+            }
 
             const isGratisOngkir = getAutoGratisOngkir(subtotal) !== null;
             const goLabel = getGratisOngkirLabel(subtotal);
@@ -1753,15 +2118,131 @@ function initCart() {
             }
             message += `*Total Ongkir:* ${ongkirAfterSubsidy === 0 ? 'Gratis 🎉' : formatPrice(ongkirAfterSubsidy)}\n`;
             if (codFee > 0) {
-                message += `*Biaya Admin Bayar di Rumah (4%):* ${formatPrice(codFee)}\n`;
+                message += `*Biaya Admin Bayar di Rumah (3% + PPN 11%):* ${formatPrice(codFee)}\n`;
+            }
+            if (serviceFee > 0) {
+                message += `*Biaya Layanan:* ${formatPrice(serviceFee)}\n`;
             }
             message += `*TOTAL PEMBAYARAN:* ${formatPrice(grandTotal)}\n\n`;
 
             message += `*Metode Pembayaran:* ${paymentMethodText}\n\n`;
 
+            // === XENITH ONLINE PAYMENT ===
+            // Order dicatat di server (Sheets), customer diarahkan ke halaman bayar Xenith.
+            if (paymentMethodValue === 'xenith') {
+                loadingOverlay?.classList.remove('hidden');
+                loadingOverlay?.classList.add('flex');
+                try {
+                    const payRes = await fetch('/api/xenith-create', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            name, phone, address,
+                            region: regionParts.join(', '),
+                            courier: courierLabel,
+                            items: cart.map(c => ({
+                                name: c.name,
+                                qty: c.qty,
+                                price: parsePrice(c.priceWa || c.priceCrt),
+                                variant: c.quranType ? variantLabel(c.quranType) : '',
+                                note: [
+                                    c.customName && `Nama: ${c.customName}`,
+                                    c.coverName && `Cover: ${c.coverName}`,
+                                    c.binding && `Jilid: ${bindingLabel(c.binding)}`,
+                                    c.customNote && `Ucapan: ${c.customNote}`,
+                                    c.customFont && `Font: ${c.customFont}`
+                                ].filter(Boolean).join(', ')
+                            })),
+                            subtotal,
+                            ongkir: ongkirAfterSubsidy,
+                            voucher,
+                            serviceFee,
+                            grandTotal
+                        })
+                    });
+                    const pay = await payRes.json();
+                    if (!payRes.ok || !pay.paymentLinkUrl) throw new Error(pay.error || 'Gagal membuat pembayaran');
+
+                    // Telegram: detail order lengkap + Order ID dari server
+                    try {
+                        await fetch('/api/notify', {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({
+                                text: message + `*Order ID:* ${pay.orderId}\n*Status:* Menunggu pembayaran online`,
+                                parse_mode: 'Markdown'
+                            })
+                        });
+                    } catch (err) { console.error('Telegram notify error:', err); }
+
+                    // Riwayat untuk pesanan-saya.html
+                    const xenithOrder = {
+                        name, phone, address,
+                        paymentMethod: 'xenith',
+                        subtotal,
+                        ongkir: ongkirAfterSubsidy,
+                        courier: courierLabel,
+                        subsidy: shippingDiscount,
+                        subsidyQty: isGratisOngkir ? 0 : totalQty,
+                        voucher,
+                        voucherLabel: vchLabel,
+                        gratisOngkirLabel: goLabel,
+                        codFee: 0,
+                        serviceFee,
+                        grandTotal,
+                        cart: cart.map(item => ({
+                            name: item.name,
+                            qty: item.qty,
+                            price: parsePrice(item.priceWa || item.priceCrt),
+                            quranType: item.quranType || '',
+                            img: item.img || '',
+                            coverImg: item.coverImg || '',
+                            customName: item.customName || '',
+                            customNote: item.customNote || '',
+                            binding: item.binding || ''
+                        })),
+                        orderId: pay.orderId,
+                        paymentUrl: pay.paymentLinkUrl,
+                        createdAt: new Date().toISOString(),
+                        status: 'Menunggu Pembayaran'
+                    };
+                    const prevOrders = JSON.parse(localStorage.getItem('hq_orders') || '[]');
+                    prevOrders.unshift(xenithOrder);
+                    localStorage.setItem('hq_orders', JSON.stringify(prevOrders.slice(0, 5)));
+
+                    if (typeof fbq !== 'undefined') {
+                        fbq('track', 'Purchase', {
+                            value: subtotal,
+                            currency: 'IDR',
+                            contents: cart.map(item => ({ id: item.id, quantity: item.qty })),
+                            content_type: 'product'
+                        });
+                    }
+
+                    cart = [];
+                    localStorage.setItem('hq_cart', JSON.stringify(cart));
+                    updateCartTotalUI();
+
+                    saveCurrentAddress();
+                    window.location.href = pay.paymentLinkUrl;
+                    return;
+                } catch (err) {
+                    console.error('Xenith checkout error:', err);
+                    loadingOverlay?.classList.add('hidden');
+                    loadingOverlay?.classList.remove('flex');
+                    showAlert('Pembayaran Gagal', 'Pembayaran online belum bisa dibuat. Keranjang kamu aman, coba lagi atau pilih metode pembayaran lain.', 'error');
+                    return;
+                }
+            }
+
             // Show loading, mulai kirim notifikasi
             loadingOverlay?.classList.remove('hidden');
             loadingOverlay?.classList.add('flex');
+
+            // Order ID dibuat lebih awal supaya ikut terkirim ke Telegram dan
+            // dipakai mencocokkan baris di Google Sheets (tempat admin isi resi).
+            const orderId = generateOrderId();
+            message += `*Order ID:* ${orderId}\n`;
 
             // === TELEGRAM NOTIFICATION ===
             try {
@@ -1792,19 +2273,24 @@ function initCart() {
                 voucherLabel: vchLabel,
                 gratisOngkirLabel: goLabel,
                 codFee,
+                serviceFee,
                 grandTotal,
                 cart: cart.map(item => ({
                     name: item.name,
                     qty: item.qty,
                     price: parsePrice(item.priceWa || item.priceCrt),
-                    quranType: item.quranType || ''
+                    quranType: item.quranType || '',
+                    img: item.img || '',
+                    coverImg: item.coverImg || '',
+                    customName: item.customName || '',
+                    customNote: item.customNote || '',
+                    binding: item.binding || ''
                 }))
             };
             // Tetap simpan ke sessionStorage untuk thank-you page
             sessionStorage.setItem('hq_order', JSON.stringify(orderData));
 
             // Simpan ke localStorage untuk pesanan-saya.html (max 5 pesanan)
-            const orderId = 'HQ-' + Date.now();
             const orderWithMeta = {
                 ...orderData,
                 orderId,
@@ -1816,6 +2302,39 @@ function initCart() {
             existingOrders.unshift(orderWithMeta);
             const trimmed = existingOrders.slice(0, 5);
             localStorage.setItem('hq_orders', JSON.stringify(trimmed));
+
+            // Rekam order ke Google Sheets supaya admin bisa mengisi nomor resi.
+            try {
+                await fetch('/api/record-order', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        orderId, name, phone, address,
+                        region: regionParts.join(', '),
+                        courier: courierLabel,
+                        items: cart.map(c => ({
+                            name: c.name,
+                            qty: c.qty,
+                            price: parsePrice(c.priceWa || c.priceCrt),
+                            variant: c.quranType ? variantLabel(c.quranType) : '',
+                            note: [
+                                c.customName && `Nama: ${c.customName}`,
+                                c.coverName && `Cover: ${c.coverName}`,
+                                c.binding && `Jilid: ${bindingLabel(c.binding)}`,
+                                c.customNote && `Ucapan: ${c.customNote}`,
+                                c.customFont && `Font: ${c.customFont}`
+                            ].filter(Boolean).join(', ')
+                        })),
+                        subtotal,
+                        ongkir: ongkirAfterSubsidy,
+                        voucher,
+                        codFee,
+                        grandTotal
+                    })
+                });
+            } catch (e) {
+                console.error('record-order error:', e);
+            }
 
             // === FACEBOOK PIXEL ===
             if (typeof fbq !== 'undefined') {
@@ -1834,6 +2353,8 @@ function initCart() {
             cart = [];
             localStorage.setItem('hq_cart', JSON.stringify(cart));
             updateCartTotalUI();
+
+            saveCurrentAddress();
 
             // === REDIRECT KE THANK YOU PAGE ===
             window.location.href = 'thank-you.html';
@@ -1867,7 +2388,8 @@ function initCart() {
     });
 
     initBiteship();
-    initRegionalAPI();
+    const regionalApi = await initRegionalAPI();
+    initSavedAddresses(regionalApi);
 }
 
 // Nama wilayah dari carikodepos.id campur kapital: "DKI JAKARTA", "BALI",
@@ -2023,7 +2545,186 @@ async function initRegionalAPI() {
         if (villageSelect.value !== villageId) return;
         setPostalCode(postalCodes[0]?.code || '');
     });
+
+    function findOption(select, value, text) {
+        if (!select) return null;
+        const opts = [...select.options];
+        if (value) {
+            const byVal = opts.find(o => o.value === value);
+            if (byVal) return byVal;
+        }
+        if (text) {
+            const byTxt = opts.find(o => o.text.trim().toLowerCase() === text.trim().toLowerCase());
+            if (byTxt) return byTxt;
+        }
+        return null;
+    }
+
+    async function waitOptions(select, timeout = 8000) {
+        const start = Date.now();
+        while (Date.now() - start < timeout) {
+            if (select && !select.disabled) return true;
+            await new Promise(r => setTimeout(r, 100));
+        }
+        return false;
+    }
+
+    async function waitPostal(timeout = 8000) {
+        const start = Date.now();
+        while (Date.now() - start < timeout) {
+            if (!postalInput || postalInput.placeholder !== 'Memuat...') return true;
+            await new Promise(r => setTimeout(r, 100));
+        }
+        return false;
+    }
+
+    // Pulihkan form wilayah dari alamat tersimpan. Cocokkan by id, fallback by nama.
+    async function restore(entry) {
+        const applyPostal = () => { if (entry.postalCode) setPostalCode(entry.postalCode); };
+
+        const p = findOption(provinceSelect, entry.provinceId, entry.provinceText);
+        if (!p) { applyPostal(); return false; }
+        provinceSelect.value = p.value;
+        provinceSelect.dispatchEvent(new Event('change'));
+
+        if (!entry.cityId && !entry.cityText) { applyPostal(); return true; }
+        await waitOptions(citySelect);
+        const c = findOption(citySelect, entry.cityId, entry.cityText);
+        if (!c) { applyPostal(); return false; }
+        citySelect.value = c.value;
+        citySelect.dispatchEvent(new Event('change'));
+
+        if (!entry.districtId && !entry.districtText) { applyPostal(); return true; }
+        await waitOptions(districtSelect);
+        const d = findOption(districtSelect, entry.districtId, entry.districtText);
+        if (!d) { applyPostal(); return false; }
+        districtSelect.value = d.value;
+        districtSelect.dispatchEvent(new Event('change'));
+
+        if (!entry.villageId && !entry.villageText) { applyPostal(); return true; }
+        await waitOptions(villageSelect);
+        const v = findOption(villageSelect, entry.villageId, entry.villageText);
+        if (!v) { applyPostal(); return false; }
+        villageSelect.value = v.value;
+        villageSelect.dispatchEvent(new Event('change'));
+        await waitPostal();
+        applyPostal();
+        return true;
+    }
+
+    return { restore };
 }
+
+// === ALAMAT TERSIMPAN (localStorage, per device) ===
+const SAVED_ADDR_KEY = 'hq_saved_addresses';
+const SAVED_ADDR_MAX = 5;
+
+function getSavedAddresses() {
+    try { return JSON.parse(localStorage.getItem(SAVED_ADDR_KEY) || '[]'); } catch (e) { return []; }
+}
+function setSavedAddresses(list) {
+    try { localStorage.setItem(SAVED_ADDR_KEY, JSON.stringify(list.slice(0, SAVED_ADDR_MAX))); } catch (e) {}
+}
+function getSelectInfo(id) {
+    const el = document.getElementById('cust-' + id);
+    if (!el || el.selectedIndex <= 0) return { id: '', text: '' };
+    const text = el.options[el.selectedIndex].text.trim();
+    if (!text || text.startsWith('Pilih ') || text.includes('Memuat')) return { id: '', text: '' };
+    return { id: el.value, text };
+}
+function captureCurrentAddress() {
+    const val = id => (document.getElementById(id)?.value || '').trim();
+    const province = getSelectInfo('province');
+    const city = getSelectInfo('city');
+    const district = getSelectInfo('district');
+    const subdistrict = getSelectInfo('subdistrict');
+    return {
+        name: val('cust-name'),
+        phone: val('cust-phone'),
+        address: val('cust-address'),
+        provinceId: province.id, provinceText: province.text,
+        cityId: city.id, cityText: city.text,
+        districtId: district.id, districtText: district.text,
+        villageId: subdistrict.id, villageText: subdistrict.text,
+        postalCode: val('cust-postal-code')
+    };
+}
+// Dipanggil saat checkout sukses (kalau checkbox dicentang).
+function saveCurrentAddress() {
+    const check = document.getElementById('save-address-check');
+    if (!check || !check.checked) return;
+    const snap = captureCurrentAddress();
+    if (!snap.name || !snap.phone || !snap.address) return;
+    const list = getSavedAddresses();
+    const idx = list.findIndex(a => a.address === snap.address && a.phone === snap.phone);
+    const id = idx >= 0 ? list[idx].id : (Date.now().toString(36) + Math.random().toString(36).slice(2, 6));
+    const entry = { ...snap, id, updatedAt: Date.now() };
+    if (idx >= 0) list.splice(idx, 1);
+    list.unshift(entry);
+    setSavedAddresses(list);
+}
+async function applySavedAddress(entry, regionalApi) {
+    const set = (id, v) => { const el = document.getElementById(id); if (el) el.value = v || ''; };
+    set('cust-name', entry.name);
+    set('cust-phone', entry.phone);
+    set('cust-address', entry.address);
+
+    if (regionalApi && typeof regionalApi.restore === 'function') {
+        await regionalApi.restore(entry);
+    } else {
+        const postal = document.getElementById('cust-postal-code');
+        if (postal) {
+            postal.value = entry.postalCode || '';
+            if (entry.postalCode) postal.dispatchEvent(new Event('input'));
+        }
+    }
+
+    updateCheckoutButtonState();
+    updateGrandTotal();
+    document.getElementById('shipping-form')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+function initSavedAddresses(regionalApi) {
+    const block = document.getElementById('saved-address-block');
+    const select = document.getElementById('saved-address-select');
+    const delBtn = document.getElementById('saved-address-delete');
+    if (!block || !select) return;
+
+    const render = () => {
+        const list = getSavedAddresses();
+        if (!list.length) { block.classList.add('hidden'); return; }
+        block.classList.remove('hidden');
+        select.innerHTML = '<option value="" disabled selected>Pilih alamat tersimpan</option>';
+        list.forEach(a => {
+            const region = [a.districtText, a.cityText || a.provinceText].filter(Boolean).join(', ');
+            const opt = document.createElement('option');
+            opt.value = a.id;
+            opt.textContent = `${a.name}${region ? ' — ' + region : ''} (${a.phone})`;
+            select.appendChild(opt);
+        });
+    };
+
+    select.addEventListener('change', async () => {
+        const entry = getSavedAddresses().find(a => a.id === select.value);
+        if (entry) await applySavedAddress(entry, regionalApi);
+    });
+
+    delBtn?.addEventListener('click', () => {
+        const id = select.value;
+        if (!id) return;
+        setSavedAddresses(getSavedAddresses().filter(a => a.id !== id));
+        render();
+    });
+
+    render();
+}
+
+// Biaya metode pembayaran:
+// - COD: 3% dari (subtotal + ongkir setelah subsidi - voucher) + PPN 11% atas biaya tsb.
+// - QRIS & Transfer Bank: biaya layanan tetap Rp1.000 per order.
+const COD_RATE = 0.03;
+const PPN_RATE = 0.11;
+const ONLINE_SERVICE_FEE = 1000;
+const calcCodFee = (base) => Math.round(Math.max(0, base) * COD_RATE * (1 + PPN_RATE));
 
 function isCOD() {
     return document.querySelector('input[name="payment-method"]:checked')?.value === 'cod';
@@ -2040,9 +2741,9 @@ function getShippingDiscount(ongkirPrice, subtotal) {
     return Math.min(getSubsidy(), ongkirPrice);
 }
 
-function getVoucherDiscount(subtotal) {
-    const auto = getAutoVoucher(subtotal);
-    return auto ? auto.amount : 0;
+function getVoucherDiscount() {
+    // Voucher XTRA per produk per qty (bukan tier sub-total).
+    return cart.reduce((sum, item) => sum + (item.qty || 1) * itemXtraVoucher(item), 0);
 }
 
 function getGratisOngkirLabel(subtotal) {
@@ -2050,9 +2751,8 @@ function getGratisOngkirLabel(subtotal) {
     return auto ? auto.label : null;
 }
 
-function getAutoVoucherLabel(subtotal) {
-    const auto = getAutoVoucher(subtotal);
-    return auto ? auto.label : null;
+function getAutoVoucherLabel() {
+    return 'Voucher XTRA';
 }
 
 function updateGrandTotal() {
@@ -2066,8 +2766,10 @@ function updateGrandTotal() {
     const shippingDiscount = getShippingDiscount(ongkirPrice, subtotal);
     const ongkirAfterSubsidy = ongkirPrice - shippingDiscount;
     const voucher = getVoucherDiscount(subtotal);
-    const codFee = isCOD() ? Math.round((subtotal + ongkirAfterSubsidy - voucher) * 0.04) : 0;
-    const grandTotal = subtotal + ongkirAfterSubsidy + codFee - voucher;
+    const feeBase = subtotal + ongkirAfterSubsidy - voucher;
+    const codFee = isCOD() ? calcCodFee(feeBase) : 0;
+    const serviceFee = isCOD() ? 0 : ONLINE_SERVICE_FEE;
+    const grandTotal = subtotal + ongkirAfterSubsidy + codFee + serviceFee - voucher;
 
     // Get labels for display
     const isGratisOngkir = getAutoGratisOngkir(subtotal) !== null;
@@ -2075,11 +2777,11 @@ function updateGrandTotal() {
     const vchLabel = getAutoVoucherLabel(subtotal);
 
     const rows = [
-        { rowId: 'ongkir-summary-row', labelId: 'ongkir-summary-label', priceId: 'ongkir-summary-price', totalId: 'grand-total', codRowId: 'cod-fee-row', codPriceId: 'cod-fee-price', subRowId: 'subsidy-row', subPriceId: 'subsidy-price', vchRowId: 'voucher-row', vchPriceId: 'voucher-price' },
-        { rowId: 'ongkir-summary-row-mobile', labelId: 'ongkir-summary-label-mobile', priceId: 'ongkir-summary-price-mobile', totalId: 'grand-total-mobile', codRowId: 'cod-fee-row-mobile', codPriceId: 'cod-fee-price-mobile', subRowId: 'subsidy-row-mobile', subPriceId: 'subsidy-price-mobile', vchRowId: 'voucher-row-mobile', vchPriceId: 'voucher-price-mobile' },
+        { rowId: 'ongkir-summary-row', labelId: 'ongkir-summary-label', priceId: 'ongkir-summary-price', totalId: 'grand-total', codRowId: 'cod-fee-row', codPriceId: 'cod-fee-price', subRowId: 'subsidy-row', subPriceId: 'subsidy-price', vchRowId: 'voucher-row', vchPriceId: 'voucher-price', serviceFeeRowId: 'service-fee-row', serviceFeePriceId: 'service-fee-price' },
+        { rowId: 'ongkir-summary-row-mobile', labelId: 'ongkir-summary-label-mobile', priceId: 'ongkir-summary-price-mobile', totalId: 'grand-total-mobile', codRowId: 'cod-fee-row-mobile', codPriceId: 'cod-fee-price-mobile', subRowId: 'subsidy-row-mobile', subPriceId: 'subsidy-price-mobile', vchRowId: 'voucher-row-mobile', vchPriceId: 'voucher-price-mobile', serviceFeeRowId: 'service-fee-row-mobile', serviceFeePriceId: 'service-fee-price-mobile' },
     ];
 
-    rows.forEach(({ rowId, labelId, priceId, totalId, codRowId, codPriceId, subRowId, subPriceId, vchRowId, vchPriceId }) => {
+    rows.forEach(({ rowId, labelId, priceId, totalId, codRowId, codPriceId, subRowId, subPriceId, vchRowId, vchPriceId, serviceFeeRowId, serviceFeePriceId }) => {
         const row = document.getElementById(rowId);
         const label = document.getElementById(labelId);
         const priceEl = document.getElementById(priceId);
@@ -2090,6 +2792,8 @@ function updateGrandTotal() {
         const subPriceEl = document.getElementById(subPriceId);
         const vchRow = document.getElementById(vchRowId);
         const vchPriceEl = document.getElementById(vchPriceId);
+        const serviceFeeRow = document.getElementById(serviceFeeRowId);
+        const serviceFeePriceEl = document.getElementById(serviceFeePriceId);
 
         if (selectedCourierName && row) {
             row.classList.remove('hidden');
@@ -2135,6 +2839,13 @@ function updateGrandTotal() {
             codRow.classList.add('hidden');
         }
 
+        if (serviceFee > 0 && serviceFeeRow) {
+            serviceFeeRow.classList.remove('hidden');
+            if (serviceFeePriceEl) serviceFeePriceEl.textContent = formatPrice(serviceFee);
+        } else if (serviceFeeRow) {
+            serviceFeeRow.classList.add('hidden');
+        }
+
         if (totalEl) totalEl.textContent = formatPrice(grandTotal);
     });
 
@@ -2171,8 +2882,8 @@ async function fetchRates(postalCode) {
 }
 
 const COURIER_LOGOS = {
-    'jne': 'img/jneico.svg',
-    'lion': 'img/lionico.svg',
+    'jne': 'img/jne.png',
+    'lion': 'img/lion.png',
 };
 
 function getCourierLogo(rate) {
@@ -2199,7 +2910,7 @@ function renderShippingOptions(rates) {
         const price = rate.price || rate.courier_price || 0;
         const company = rate.company || rate.courier_company || '';
         const service = rate.service || rate.courier_service_name || '';
-        const est = rate.delivery_time || rate.courier_estimated || '';
+        const est = rate.duration || rate.delivery_time || rate.courier_estimated || '';
         const logo = getCourierLogo(rate);
 
         const label = document.createElement('label');
@@ -2208,7 +2919,7 @@ function renderShippingOptions(rates) {
         label.innerHTML = `
             <input type="radio" name="shipping-courier" value="${idx}"
                 class="accent-brand-blue w-4 h-4 flex-shrink-0">
-            ${logo ? `<img src="${logo}" alt="${company}" class="w-10 h-10 object-contain flex-shrink-0">` : ''}
+            ${logo ? `<img src="${logo}" alt="${company}" class="w-auto h-7 object-contain flex-shrink-0">` : ''}
             <div class="flex-1 min-w-0">
                 <p class="text-sm font-semibold text-slate-800 dark:text-slate-100">${service}</p>
                 <p class="text-xs text-slate-400">${est}</p>
@@ -2221,6 +2932,7 @@ function renderShippingOptions(rates) {
             selectedCourierPrice = price;
             selectedCourierName = company;
             selectedCourierService = service;
+            selectedCourierEtd = est;
             updateGrandTotal();
         });
 
@@ -2262,6 +2974,7 @@ async function initBiteship() {
         selectedCourierPrice = 0;
         selectedCourierName = '';
         selectedCourierService = '';
+        selectedCourierEtd = '';
         document.getElementById('shipping-options')?.classList.add('hidden');
 
         const code = postalInput.value.replace(/\D/g, '').slice(0, 5);
@@ -2423,6 +3136,96 @@ function initThemeMobile() {
     updateMobileToggle();
 }
 
+// Bottom navigation slide-up sheet (separate from the top hamburger dropdown)
+function initBottomSheet() {
+    const sheet = document.getElementById('bottom-sheet');
+    if (!sheet) return;
+    const toggles = document.querySelectorAll('[data-bottom-menu-toggle]');
+
+    const openSheet = () => {
+        sheet.classList.add('open');
+        sheet.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+        toggles.forEach((b) => b.classList.add('active'));
+    };
+    const closeSheet = () => {
+        sheet.classList.remove('open');
+        sheet.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+        toggles.forEach((b) => b.classList.remove('active'));
+    };
+
+    toggles.forEach((btn) => {
+        btn.addEventListener('click', () => {
+            sheet.classList.contains('open') ? closeSheet() : openSheet();
+        });
+    });
+
+    sheet.querySelectorAll('[data-bottom-sheet-close]').forEach((el) => {
+        el.addEventListener('click', closeSheet);
+    });
+
+    sheet.querySelectorAll('a').forEach((a) => {
+        a.addEventListener('click', closeSheet);
+    });
+
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && sheet.classList.contains('open')) closeSheet();
+    });
+}
+
+// Dark mode switch inside the bottom sheet
+function initSheetThemeToggle() {
+    const toggle = document.getElementById('theme-toggle-sheet');
+    const knob = document.getElementById('theme-toggle-sheet-knob');
+    if (!toggle) return;
+
+    const update = () => {
+        const isDark = document.documentElement.classList.contains('dark');
+        toggle.style.setProperty('--toggle-bg', isDark ? '#1A5FB4' : '#cbd5e1');
+        toggle.style.background = isDark ? '#1A5FB4' : '#cbd5e1';
+        if (knob) knob.style.transform = isDark ? 'translateX(1.5rem)' : 'translateX(0.125rem)';
+    };
+
+    toggle.addEventListener('click', () => {
+        const isDark = document.documentElement.classList.contains('dark');
+        document.documentElement.classList.toggle('dark', !isDark);
+        localStorage.setItem('theme', !isDark ? 'dark' : 'light');
+        update();
+    });
+
+    update();
+}
+
+// Cover image preview overlay (personalize page)
+function openCoverPreview(src) {
+    if (!src) return;
+    const preview = document.getElementById('cover-preview');
+    const img = document.getElementById('cover-preview-img');
+    if (!preview || !img) return;
+    img.src = src;
+    preview.classList.add('active');
+    document.body.style.overflow = 'hidden';
+}
+
+function closeCoverPreview() {
+    const preview = document.getElementById('cover-preview');
+    if (!preview) return;
+    preview.classList.remove('active');
+    document.body.style.overflow = '';
+}
+
+function initCoverPreview() {
+    const preview = document.getElementById('cover-preview');
+    if (!preview) return;
+    preview.addEventListener('click', (e) => {
+        if (e.target.tagName !== 'IMG') closeCoverPreview();
+    });
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && preview.classList.contains('active')) closeCoverPreview();
+    });
+}
+
 // --- START ALL ---
 document.addEventListener('DOMContentLoaded', () => {
     initLenis();
@@ -2437,4 +3240,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initPersonalizationPage();
     initBulkOrder();
     initThemeMobile();
+    initBottomSheet();
+    initSheetThemeToggle();
+    initCoverPreview();
 });

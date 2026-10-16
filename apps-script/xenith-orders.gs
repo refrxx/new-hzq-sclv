@@ -11,16 +11,16 @@
  *    Salin URL /exec -> Cloudflare env XENITH_SHEETS_URL.
  * 5. Tiap ubah kode: Deploy -> Manage deployments -> Edit -> New version.
  *
- * Kolom (A-N):
+ * Kolom (A-O):
  * order_id | tanggal | nama | wa | alamat | produk | qty | total | status |
- * xenith_ref | paid_at | payment_url | paid_amount | note
+ * xenith_ref | paid_at | payment_url | paid_amount | note | resi
  *
  * Status: PENDING, PAID, EXPIRED, CREATE_FAILED, AMOUNT_MISMATCH
  */
 
 const SHEET_NAME = 'Orders';
 const HEADERS = ['order_id', 'tanggal', 'nama', 'wa', 'alamat', 'produk', 'qty', 'total',
-  'status', 'xenith_ref', 'paid_at', 'payment_url', 'paid_amount', 'note'];
+  'status', 'xenith_ref', 'paid_at', 'payment_url', 'paid_amount', 'note', 'resi'];
 const COL = {}; HEADERS.forEach(function (h, i) { COL[h] = i + 1; });
 
 function setup() { getSheet_(); }
@@ -32,6 +32,15 @@ function getSheet_() {
   if (sh.getLastRow() === 0) {
     sh.appendRow(HEADERS);
     sh.setFrozenRows(1);
+  } else {
+    // Migrasi: pastikan semua kolom header ada (mis. kolom baru 'resi').
+    var need = HEADERS.length;
+    if (sh.getMaxColumns() < need) {
+      sh.insertColumnsAfter(sh.getMaxColumns(), need - sh.getMaxColumns());
+    }
+    if (String(sh.getRange(1, need).getValue() || '') !== HEADERS[need - 1]) {
+      sh.getRange(1, 1, 1, need).setValues([HEADERS]);
+    }
   }
   return sh;
 }
@@ -67,7 +76,7 @@ function doPost(e) {
         sh.getRange(row, COL.wa).setNumberFormat('@'); // jaga angka 0 di depan nomor WA
         sh.getRange(row, 1, 1, HEADERS.length).setValues([[
           b.orderId, new Date(), b.name, b.phone, b.address, b.produk, b.qty, b.total,
-          'PENDING', '', '', '', '', b.note || ''
+          'PENDING', '', '', '', '', b.note || '', b.resi || ''
         ]]);
         return out_({ ok: true });
 
@@ -132,6 +141,7 @@ function doPost(e) {
             xenithRef: r[COL.xenith_ref - 1],
             paymentUrl: r[COL.payment_url - 1],
             note: r[COL.note - 1],
+            resi: r[COL.resi - 1],
             tanggal: r[COL.tanggal - 1]
           }
         });

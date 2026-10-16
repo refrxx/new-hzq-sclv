@@ -1,0 +1,19 @@
+{
+    "$schema": "https://openapi.vercel.sh/vercel.json",
+    "functions": {
+        "api/og.js": {
+            "maxDuration": 30,
+            "includeFiles": "{assets/fonts/**,img/{8*,iqro-*,tilawah-*,hafalan-*,juzamma,katalog,perkata-*}/**,img/hamzahcolor.png,img/usp*.jpg,img/preview-*.jpg}"
+        },
+        "api/*.js": {
+            "maxDuration": 30
+        }
+    },
+    "redirects": [
+        { "source": "/produk", "destination": "/shop", "permanent": true },
+        { "source": "/produk.html", "destination": "/shop.html", "permanent": true }
+    ],
+    "rewrites": [
+        { "source": "/p/:id", "destination": "/api/p?id=:id" }
+    ]
+}

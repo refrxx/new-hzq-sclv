@@ -5,6 +5,16 @@
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
     <title>Detail Produk - Hamzah Quran</title>
+    <meta name="description" content="Al Quran custom nama di Hamzah Quran. Kualitas premium, gratis ongkir, garansi ganti baru, dan 100% original.">
+    <link rel="canonical" href="https://hamzahquran.com/product-detail.html">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Hamzah Quran">
+    <meta property="og:title" content="Detail Produk - Hamzah Quran">
+    <meta property="og:description" content="Al Quran custom nama di Hamzah Quran. Kualitas premium, gratis ongkir, garansi ganti baru, dan 100% original.">
+    <meta property="og:url" content="https://hamzahquran.com/product-detail.html">
+    <meta property="og:image" content="https://hamzahquran.com/img/hamzahcolor.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="https://hamzahquran.com/img/hamzahcolor.png">
     <link rel="icon" type="image/svg+xml" href="img/hamzah-favico.svg">
 
     
@@ -25,8 +35,14 @@
                         sans: ['Inter', 'sans-serif'],
                     },
                     borderRadius: {
-                        '32': '32px',
-                        '40': '40px',
+                        'DEFAULT': '2px',
+                        'md': '2px',
+                        'lg': '4px',
+                        'xl': '5px',
+                        '2xl': '6px',
+                        '3xl': '8px',
+                        '32': '10px',
+                        '40': '12px',
                     }
                 }
             }
@@ -67,12 +83,12 @@
 </head>
 
 <body class="bg-white dark:bg-[#080e16] transition-colors duration-300">
-    <header class="header-sticky w-full z-50 scrolled">
+    <header class="header-sticky pd-header-float w-full z-50 scrolled">
         <nav class="max-w-[1200px] mx-auto px-8 md:px-12 py-4 flex items-center justify-between">
             <div class="flex items-center gap-2">
                 
                 <button onclick="history.back()"
-                    class="lg:hidden p-2 -ml-2 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors duration-300 border-0 flex items-center justify-center">
+                    class="pd-nav-icon lg:hidden p-2 -ml-2 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors duration-300 border-0 flex items-center justify-center">
                     <span class="material-symbols-outlined">arrow_back</span>
                 </button>
 
@@ -94,6 +110,8 @@
                 <li><a class="nav-link-underline font-sans font-semibold text-slate-500 hover:text-brand-blue dark:text-slate-400 dark:hover:text-white transition-colors duration-300"
                         href="cover.html">Katalog Cover</a></li>
                 <li><a class="nav-link-underline font-sans font-semibold text-slate-500 hover:text-brand-blue dark:text-slate-400 dark:hover:text-white transition-colors duration-300"
+                        href="cara-order.html">Cara Order</a></li>
+                <li><a class="nav-link-underline font-sans font-semibold text-slate-500 hover:text-brand-blue dark:text-slate-400 dark:hover:text-white transition-colors duration-300"
                         href="reseller.html">Reseller</a></li>
                 <li><a class="nav-link-underline font-sans font-semibold text-slate-500 hover:text-brand-blue dark:text-slate-400 dark:hover:text-white transition-colors duration-300"
                         href="bulk-order.html">B2B</a></li>
@@ -101,15 +119,15 @@
 
             <div class="flex items-center gap-4">
                 <a href="pesanan-saya.html"
-                    class="p-2.5 bg-slate-100 dark:bg-slate-800 rounded-full text-slate-600 dark:text-slate-400 hover:text-brand-blue dark:hover:text-brand-gold transition-colors duration-300 flex items-center justify-center w-10 h-10 relative"
+                    class="hidden lg:flex p-2.5 bg-slate-100 dark:bg-slate-800 rounded-full text-slate-600 dark:text-slate-400 hover:text-brand-blue dark:hover:text-brand-gold transition-colors duration-300 items-center justify-center w-10 h-10 relative"
                     title="Pesanan Saya">
                     <span class="material-symbols-outlined">receipt_long</span>
                 </a>
                 <a href="cart.html"
-                    class="p-2.5 bg-slate-100 dark:bg-slate-800 rounded-full text-slate-600 dark:text-slate-400 hover:text-brand-blue dark:hover:text-brand-gold transition-colors duration-300 border-0 flex items-center justify-center w-10 h-10 relative">
+                    class="hidden lg:flex p-2.5 bg-slate-100 dark:bg-slate-800 rounded-full text-slate-600 dark:text-slate-400 hover:text-brand-blue dark:hover:text-brand-gold transition-colors duration-300 border-0 items-center justify-center w-10 h-10 relative">
                     <span class="material-symbols-outlined">shopping_cart</span>
                     <span id="nav-cart-badge"
-                        class="absolute -top-1 -right-1 bg-red-500 text-white text-[0.6rem] font-bold w-4 h-4 rounded-full flex items-center justify-center hidden">0</span>
+                        class="nav-cart-badge absolute -top-1 -right-1 bg-red-500 text-white text-[0.6rem] font-bold w-4 h-4 rounded-full flex items-center justify-center hidden">0</span>
                 </a>
                 <button id="theme-toggle"
                     class="hidden lg:flex p-2.5 bg-slate-100 dark:bg-slate-800 rounded-full text-slate-600 dark:text-slate-400 hover:text-brand-blue dark:hover:text-brand-gold transition-colors duration-300 items-center justify-center w-10 h-10 border-0"
@@ -120,7 +138,7 @@
 
                 
                 <button id="mobile-menu-button"
-                    class="lg:hidden p-2 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors duration-300 border-0 flex items-center justify-center">
+                    class="pd-nav-icon lg:hidden p-2 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors duration-300 border-0 flex items-center justify-center">
                     <span class="material-symbols-outlined">menu</span>
                 </button>
             </div>
@@ -136,6 +154,8 @@
                         href="shop.html">Shop</a></li>
                 <li><a class="font-sans font-semibold text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white block px-8 md:px-12 py-2 transition-colors duration-300"
                         href="cover.html">Katalog Cover</a></li>
+                <li><a class="font-sans font-semibold text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white block px-8 md:px-12 py-2 transition-colors duration-300"
+                        href="cara-order.html">Cara Order</a></li>
                 <li><a class="font-sans font-semibold text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white block px-8 md:px-12 py-2 transition-colors duration-300"
                         href="reseller.html">Reseller</a></li>
                 <li><a class="font-sans font-semibold text-slate-500 dark:text-slate-400 hover:text-slate-500 dark:hover:text-white block px-8 md:px-12 py-2 transition-colors duration-300"
@@ -159,15 +179,75 @@
         </div>
     </header>
 
-    <main class="pt-0 lg:pt-12 pb-32 lg:pb-20">
-        <section class="max-w-[1200px] mx-auto px-8 md:px-12">
+    <!-- Bottom Navigation (mobile) -->
+    <nav class="bottom-nav fixed inset-x-0 bottom-0 z-[110] bg-white/95 dark:bg-[#080e16]/95 backdrop-blur-md border-t border-slate-100 dark:border-slate-800">
+        <a href="index.html" class="bottom-nav-item">
+            <span class="material-symbols-outlined">home</span>
+            <span>Home</span>
+        </a>
+        <a href="shop.html" class="bottom-nav-item active">
+            <span class="material-symbols-outlined">storefront</span>
+            <span>Shop</span>
+        </a>
+        <a href="cart.html" class="bottom-nav-item">
+            <span class="relative">
+                <span class="material-symbols-outlined">shopping_cart</span>
+                <span class="nav-cart-badge absolute -top-1 -right-3 bg-red-500 text-white text-[0.6rem] font-bold w-4 h-4 rounded-full flex items-center justify-center hidden">0</span>
+            </span>
+            <span>Keranjang</span>
+        </a>
+        <a href="pesanan-saya.html" class="bottom-nav-item">
+            <span class="material-symbols-outlined">receipt_long</span>
+            <span>Pesanan</span>
+        </a>
+        <button type="button" data-bottom-menu-toggle class="bottom-nav-item">
+            <span class="material-symbols-outlined">menu</span>
+            <span>Menu</span>
+        </button>
+    </nav>
 
+    <!-- Bottom Sheet (slide-up menu) -->
+    <div id="bottom-sheet" class="bottom-sheet" aria-hidden="true">
+        <div class="bottom-sheet-backdrop" data-bottom-sheet-close></div>
+        <div class="bottom-sheet-panel" role="dialog" aria-label="Menu lainnya">
+            <div class="bottom-sheet-handle"></div>
+            <a href="cover.html" class="bottom-sheet-link">
+                <span class="material-symbols-outlined">palette</span>
+                <span>Katalog Cover</span>
+            </a>
+            <a href="cara-order.html" class="bottom-sheet-link">
+                <span class="material-symbols-outlined">shopping_cart_checkout</span>
+                <span>Cara Order</span>
+            </a>
+            <a href="reseller.html" class="bottom-sheet-link">
+                <span class="material-symbols-outlined">storefront</span>
+                <span>Reseller</span>
+            </a>
+            <a href="bulk-order.html" class="bottom-sheet-link">
+                <span class="material-symbols-outlined">inventory_2</span>
+                <span>B2B / Grosir</span>
+            </a>
+            <div class="bottom-sheet-row">
+                <span>Aktifkan Dark Mode</span>
+                <button id="theme-toggle-sheet"
+                    class="relative inline-flex items-center w-12 h-6 rounded-full transition-colors duration-300 focus:outline-none border-0"
+                    style="background: var(--toggle-bg, #cbd5e1);"
+                    aria-label="Toggle dark mode">
+                    <span id="theme-toggle-sheet-knob"
+                        class="inline-block w-5 h-5 bg-white rounded-full shadow transform transition-transform duration-300 translate-x-0.5"></span>
+                </button>
+            </div>
+        </div>
+    </div>
 
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-24">
-                
+    <main class="pt-0 lg:pt-12 pb-40 lg:pb-20">
+        <section class="max-w-[1200px] mx-auto">
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-[2px] lg:gap-24 md:px-12">
+
                 <div class="animate-fade-in-up lg:sticky lg:top-32 h-fit">
                     <div
-                        class="relative group/main overflow-hidden -mx-8 md:mx-0 rounded-none md:rounded-[1rem] border-x-0 md:border border-slate-100 dark:border-slate-800 shadow-none md:shadow-xl mb-6 bg-slate-50 dark:bg-slate-900 aspect-square">
+                        class="relative group/main overflow-hidden rounded-none md:rounded-lg border-x-0 md:border border-slate-100 dark:border-slate-800 shadow-none md:shadow-xl bg-slate-50 dark:bg-slate-900 aspect-square">
                         <img id="main-image" src="" alt="Product Image"
                             class="w-full h-full object-cover transition-all duration-500" onclick="openLightbox()">
 
@@ -183,57 +263,141 @@
                     </div>
 
                     
-                    <div id="thumbnail-gallery" class="grid grid-cols-4 sm:grid-cols-5 gap-3 sm:gap-4 mb-8 lg:mb-0">
+                    <div id="thumbnail-gallery" class="flex overflow-x-auto gap-1 px-1 pb-0 lg:pb-2 scrollbar-hide mt-1 mb-0">
                         
                     </div>
                 </div>
 
                 
-                <div class="flex flex-col animate-fade-in-up" style="animation-delay: 100ms">
-                    <h1 id="product-name"
-                        class="text-2xl lg:text-6xl font-display font-black text-slate-900 dark:text-white mb-6 leading-tight">
-                        Product Name</h1>
-                    <div class="flex items-baseline gap-3 mb-1">
-                        <span class="text-xs font-medium text-slate-400 dark:text-slate-500">Harga Shopee</span>
-                        <div id="product-price"
-                            class="text-xl lg:text-2xl font-black text-brand-blue dark:text-brand-gold">
-                            Rp0
+                <div class="flex flex-col animate-fade-in-up px-8 md:px-0" style="animation-delay: 100ms">
+
+                    <!-- Price block -->
+                    <div class="pd-price-block -mx-8 md:mx-0 px-8 md:px-6 py-4 lg:mt-4">
+                        <div class="flex flex-col">
+                            <span id="harga-coret"
+                                class="text-xs font-medium text-slate-400 dark:text-slate-500 line-through">Rp0</span>
+                            <div class="flex items-center gap-2 mt-0.5 cursor-pointer hover:opacity-85 transition-opacity"
+                                role="button" tabindex="0" aria-label="Lihat rincian harga" title="Lihat rincian harga"
+                                onclick="openPriceDetailModal()"
+                                onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openPriceDetailModal();}">
+                                <div id="product-wa-price" class="pd-big-price">
+                                    <span class="pd-currency">Rp</span><span class="pd-amount">0</span>
+                                </div>
+                                <span
+                                    class="material-symbols-outlined text-slate-400 dark:text-slate-500 text-[1.1rem] select-none">info</span>
+                                <span id="pd-discount-pill" class="pd-discount-pill hidden" title="Hemat Rp0">-0%</span>
+                            </div>
+                            <span id="product-price" class="hidden">Rp0</span>
+                            <div id="voucher-banner" class="hidden mt-1.5">
+                                <div onclick="openPriceDetailModal()"
+                                    class="inline-flex items-center gap-1 text-xs font-semibold text-brand-blue dark:text-brand-gold cursor-pointer hover:opacity-80 transition-opacity">
+                                    <span class="material-symbols-outlined text-[0.95rem]">confirmation_number</span>
+                                    <span id="voucher-banner-text">Dengan Voucher</span>
+                                </div>
+                            </div>
                         </div>
-                        <div id="harga-coret"
-                            class="text-lg lg:text-xl font-medium text-slate-400 dark:text-slate-400 line-through">
-                            Rp0
+                    </div>
+
+                    <!-- Title -->
+                    <div class="flex items-start justify-between gap-3 mt-5 lg:mt-0 lg:order-first">
+                        <h1 id="product-name"
+                            class="text-xl lg:text-2xl font-display font-semibold text-slate-900 dark:text-white leading-snug">
+                            Product Name</h1>
+                        <button id="pd-wishlist-btn" type="button" class="pd-heart shrink-0"
+                            aria-label="Tambah ke wishlist" aria-pressed="false">
+                            <span class="material-symbols-outlined">favorite</span>
+                        </button>
+                    </div>
+
+                    <!-- Rating -->
+                    <div id="pd-rating-row" class="hidden mt-2 lg:order-[-1] flex items-center justify-between gap-3">
+                        <div class="flex items-center gap-1.5 text-sm">
+                            <span class="material-symbols-outlined text-brand-gold"
+                                style="font-size:1rem; font-variation-settings: 'FILL' 1">star</span>
+                            <span id="pd-rating-val" class="font-bold text-slate-800 dark:text-slate-100">0</span>
+                            <span class="text-slate-300 dark:text-slate-700">|</span>
+                            <span id="pd-sold-title" class="text-slate-500 dark:text-slate-400">0</span>
+                            <span class="text-slate-500 dark:text-slate-400">Terjual</span>
+                        </div>
+                        <div class="relative shrink-0">
+                            <button id="pd-share-btn" type="button" class="pd-share" aria-label="Bagikan produk"
+                                aria-haspopup="true" aria-expanded="false">
+                                <span class="material-symbols-outlined">share</span>
+                            </button>
+                            <div id="pd-share-menu" class="pd-share-menu" role="menu" aria-label="Bagikan ke">
+                                <a data-share="whatsapp" role="menuitem" target="_blank" rel="noopener noreferrer" class="pd-share-item">
+                                    <span class="material-symbols-outlined">chat</span>WhatsApp
+                                </a>
+                                <a data-share="telegram" role="menuitem" target="_blank" rel="noopener noreferrer" class="pd-share-item">
+                                    <span class="material-symbols-outlined">send</span>Telegram
+                                </a>
+                                <a data-share="facebook" role="menuitem" target="_blank" rel="noopener noreferrer" class="pd-share-item">
+                                    <span class="material-symbols-outlined">thumb_up</span>Facebook
+                                </a>
+                                <a data-share="threads" role="menuitem" target="_blank" rel="noopener noreferrer" class="pd-share-item">
+                                    <span class="material-symbols-outlined">alternate_email</span>Threads
+                                </a>
+                                <a data-share="x" role="menuitem" target="_blank" rel="noopener noreferrer" class="pd-share-item">
+                                    <span class="material-symbols-outlined">tag</span>X / Twitter
+                                </a>
+                                <button type="button" data-share="copy" role="menuitem" class="pd-share-item">
+                                    <span class="material-symbols-outlined">link</span>Salin Link
+                                </button>
+                            </div>
                         </div>
                     </div>
-                    <div id="product-wa-price"
-                        class="text-xl lg:text-3xl font-bold text-emerald-600 dark:text-emerald-400">
-                        Harga Diskon Khusus WA: Rp0
+
+                    <!-- Info rows -->
+                    <div
+                        class="mt-5 divide-y divide-slate-100 dark:divide-slate-800 border-y border-slate-100 dark:border-slate-800">
+                        <div class="pd-info-row">
+                            <span class="material-symbols-outlined">local_shipping</span>
+                            <span class="pd-info-strong">Gratis Ongkir</span>
+                            <span class="pd-info-dot">&middot;</span>
+                            <span class="pd-info-muted">Subsidi hingga Rp20.000</span>
+                        </div>
+                        <div class="pd-info-row">
+                            <span class="material-symbols-outlined">shield</span>
+                            <span class="pd-info-strong">Garansi Ganti Baru</span>
+                            <span class="pd-info-dot">&middot;</span>
+                            <span class="pd-info-muted">100% Gratis</span>
+                        </div>
+                        <div class="pd-info-row">
+                            <span class="material-symbols-outlined">verified</span>
+                            <span class="pd-info-strong">100% Original</span>
+                            <span class="pd-info-dot">&middot;</span>
+                            <span class="pd-info-muted">Jaminan keaslian produk</span>
+                        </div>
                     </div>
 
-                    <div id="voucher-banner" class="mt-3 p-3 rounded-xl bg-gradient-to-r from-amber-50 to-orange-50 dark:from-amber-900/20 dark:to-orange-900/20 border border-amber-200 dark:border-amber-800 text-sm font-semibold text-amber-700 dark:text-amber-300 flex items-center gap-2 hidden">
-                        <span class="material-symbols-outlined text-amber-500">redeem</span>
-                        <span id="voucher-banner-text">Checkout sekarang dan dapatkan voucher XTRA Rp0!</span>
+                    <!-- Tabs -->
+                    <div id="pd-tabs"
+                        class="pd-tabs mt-6 flex gap-6 border-b border-slate-100 dark:border-slate-800">
+                        <button type="button" class="pd-tab-btn active" data-tab="ringkasan">Ringkasan</button>
+                        <button type="button" class="pd-tab-btn" data-tab="spesifikasi">Spesifikasi Produk</button>
+                        <span id="pd-tab-indicator" class="pd-tab-indicator"></span>
                     </div>
 
-                    <ul class="flex flex-col gap-2 my-6">
-                        <li class="flex items-center gap-2.5 text-sm font-semibold text-slate-700 dark:text-slate-300">
-                            <span class="material-symbols-outlined text-[1.2rem] text-brand-blue dark:text-brand-gold">local_shipping</span>
-                            Gratis Ongkir <span class="font-normal text-slate-500 dark:text-slate-400">Subsidi hingga Rp20.000</span>
-                        </li>
-                        <li class="flex items-center gap-2.5 text-sm font-semibold text-slate-700 dark:text-slate-300">
-                            <span class="material-symbols-outlined text-[1.2rem] text-brand-blue dark:text-brand-gold">verified</span>
-                            Garansi Ganti Baru <span class="font-normal text-slate-500 dark:text-slate-400">100% Gratis</span>
-                        </li>
-                        <li class="flex items-center gap-2.5 text-sm font-semibold text-slate-700 dark:text-slate-300">
-                            <span class="material-symbols-outlined text-[1.2rem] text-brand-blue dark:text-brand-gold">box</span>
-                            Bisa COD <span class="font-normal text-slate-500 dark:text-slate-400">ke Seluruh Indonesia</span>
-                        </li>
-                    </ul>
+                    <div id="pd-panel-spesifikasi" class="hidden py-5">
+                        <ul id="spec-list" class="space-y-4">
+                            
+                        </ul>
+                    </div>
 
-                    
-                    <div class="hidden lg:flex flex-col gap-4 mb-8">
+                    <div id="pd-panel-ringkasan" class="py-5">
+                        <p id="product-desc" class="hidden text-slate-600 dark:text-slate-300 leading-relaxed mb-4"></p>
+                        <div
+                            class="p-5 rounded-lg bg-brand-blue/5 dark:bg-slate-900 border border-brand-blue/10 dark:border-slate-800">
+                            <p class="text-sm text-slate-500 dark:text-slate-400">Proses pengerjaan 2-3 hari kerja. Kami
+                                akan menghubungi Anda untuk konfirmasi.</p>
+                        </div>
+                    </div>
+
+                    <!-- Desktop CTA -->
+                    <div class="hidden lg:flex flex-col gap-4 mt-4">
                         <button id="add-to-cart-btn"
                             class="w-full bg-brand-blue dark:bg-brand-gold text-white dark:text-black py-5 rounded-2xl font-bold hover:bg-brand-blue/90 dark:hover:bg-brand-gold/80 transition-all transition-duration-300 text-center flex items-center justify-center gap-3">
-                                <span class="material-symbols-outlined">add_shopping_cart</span>
+                            <span class="material-symbols-outlined">add_shopping_cart</span>
                             Masukkan Keranjang
                         </button>
                         <div class="grid grid-cols-2 gap-4">
@@ -248,25 +412,6 @@
                                 Beli di Shopee
                             </a>
                         </div>
-                    </div>
-
-
-
-                    <div class="h-px w-full bg-[#f7f7f7] mb-8"></div>
-
-                    <div class="mb-10">
-                        <h3 class="text-sm font-bold uppercase tracking-widest text-slate-400 mb-4">Spesifikasi Utama
-                        </h3>
-                        <ul id="spec-list" class="space-y-4">
-                            
-                        </ul>
-                    </div>
-
-                    <div
-                        class="mt-6 p-6 rounded-2xl bg-brand-blue/5 dark:bg-slate-900 border border-brand-blue/10 dark:border-slate-800">
-                        <p class="text-sm text-slate-500 dark:text-slate-400">Proses pengerjaan 2-3 hari kerja. Kami
-                            akan
-                            menghubungi Anda untuk konfirmasi.</p>
                     </div>
                 </div>
             </div>
@@ -297,20 +442,20 @@
 
     
     <div
-        class="lg:hidden fixed bottom-0 left-0 w-full bg-white/95 dark:bg-slate-900/95 backdrop-blur-md border-t border-slate-200 dark:border-slate-800 p-4 z-[100] shadow-[0_-10px_30px_rgba(0,0,0,0.05)]">
-        <div class="flex items-center gap-3 w-full max-w-[1200px] mx-auto">
+        class="lg:hidden fixed bottom-[calc(var(--bottom-nav-h)+env(safe-area-inset-bottom))] left-0 w-full bg-white/95 dark:bg-slate-900/95 backdrop-blur-md border-t border-slate-200 dark:border-slate-800 z-[100] shadow-[0_-10px_30px_rgba(0,0,0,0.05)]">
+        <div class="flex items-stretch gap-0 w-full">
             <a id="wa-link-mobile" href="https://wa.me/6285155060816" target="_blank"
-                class="w-14 h-14 shrink-0 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl flex items-center justify-center transition-all active:scale-95 hover:scale-110">
+                class="w-12 h-[52px] shrink-0 bg-slate-50 dark:bg-slate-800 border-r border-slate-200 dark:border-slate-700 flex items-center justify-center transition-colors active:opacity-80">
                 <img src="img/wa-logo.svg" alt="WhatsApp" class="w-6 h-6"
                     style="filter: invert(61%) sepia(82%) saturate(464%) hue-rotate(94deg) brightness(80%) contrast(92%);">
             </a>
             <a id="shopee-link-mobile" href="https://shopee.co.id/shopee-link" target="_blank"
-                class="w-14 h-14 shrink-0 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl flex items-center justify-center transition-all active:scale-95 hover:scale-110">
+                class="w-12 h-[52px] shrink-0 bg-slate-50 dark:bg-slate-800 border-r border-slate-200 dark:border-slate-700 flex items-center justify-center transition-colors active:opacity-80">
                 <img src="img/shopee.svg" alt="Shopee" class="w-6 h-6"
                     style="filter: invert(41%) sepia(91%) saturate(2463%) hue-rotate(342deg) brightness(96%) contrast(94%);">
             </a>
             <button id="add-to-cart-btn-mobile"
-                class="flex-1 bg-brand-blue dark:bg-brand-gold text-white dark:text-black py-4 rounded-xl font-medium shadow-lg hover:scale-[1.02] active:scale-[0.98] transition-all flex items-center justify-center gap-2">
+                class="flex-1 bg-brand-blue dark:bg-brand-gold text-white dark:text-black font-medium transition-colors active:opacity-90 flex items-center justify-center gap-2">
                 <span class="material-symbols-outlined">add_shopping_cart</span>
                 Masukkan Keranjang
             </button>
@@ -358,7 +503,7 @@
            onclick="closeQuranPickerModal()"></div>
 
       <!-- Sheet / Card -->
-      <div class="relative w-full sm:max-w-lg bg-white dark:bg-[#0f1825] rounded-t-[2rem] sm:rounded-[2rem] 
+      <div class="relative w-full sm:max-w-lg bg-white dark:bg-[#0f1825] rounded-t-xl sm:rounded-xl 
                   shadow-2xl z-10 animate-slide-up overflow-hidden">
         
         <!-- Header -->
@@ -367,42 +512,7 @@
         </div>
 
         <!-- Options -->
-        <div class="p-6 flex flex-col gap-4">
-          
-          <!-- Opsi Latin -->
-          <label id="quran-opt-latin" 
-                 class="quran-picker-card modal-cover-card selected cursor-pointer rounded-[1.25rem] overflow-hidden border-2 border-brand-blue relative"
-                 onclick="selectQuranType('latin')">
-            <input type="radio" name="quran-type" value="latin" class="sr-only" checked>
-            <div class="aspect-[16/7] relative bg-slate-100 dark:bg-slate-800 overflow-hidden">
-              <img src="img/preview-latin.jpg" alt="Latin" class="w-full h-full object-cover">
-              <div class="absolute inset-0 bg-gradient-to-r from-black/70 via-black/30 to-transparent flex items-center px-5">
-                <span class="text-white font-display font-black text-2xl">Latin</span>
-              </div>
-            </div>
-            <!-- Checkmark -->
-            <div class="cover-check bg-brand-blue text-white">
-              <span class="material-symbols-outlined text-[0.9rem]">check</span>
-            </div>
-          </label>
-
-          <!-- Opsi Tanpa Latin -->
-          <label id="quran-opt-tanpa-latin" 
-                 class="quran-picker-card modal-cover-card cursor-pointer rounded-[1.25rem] overflow-hidden border-2 border-transparent relative"
-                 onclick="selectQuranType('tanpa-latin')">
-            <input type="radio" name="quran-type" value="tanpa-latin" class="sr-only">
-            <div class="aspect-[16/7] relative bg-slate-100 dark:bg-slate-800 overflow-hidden">
-              <img src="img/preview-tanpa-latin.jpg" alt="Tanpa Latin" class="w-full h-full object-cover">
-              <div class="absolute inset-0 bg-gradient-to-r from-black/70 via-black/30 to-transparent flex items-center px-5">
-                <span class="text-white font-display font-black text-2xl">Tanpa Latin</span>
-              </div>
-            </div>
-            <!-- Checkmark -->
-            <div class="cover-check bg-brand-blue text-white">
-              <span class="material-symbols-outlined text-[0.9rem]">check</span>
-            </div>
-          </label>
-
+        <div id="quran-options" class="p-6 flex flex-col gap-4">
         </div>
 
         <!-- Footer CTA -->
@@ -420,8 +530,109 @@
       </div>
     </div>
 
+    <!-- Modal Pilihan Jilid -->
+    <div id="binding-picker-modal"
+         class="fixed inset-0 z-[200] flex items-end sm:items-center justify-center p-0 sm:p-4"
+         style="display:none;">
+
+      <!-- Backdrop -->
+      <div id="binding-picker-backdrop"
+           class="absolute inset-0 bg-black/60 backdrop-blur-sm"
+           onclick="closeBindingPickerModal()"></div>
+
+      <!-- Sheet / Card -->
+      <div class="relative w-full sm:max-w-lg bg-white dark:bg-[#0f1825] rounded-t-xl sm:rounded-xl
+                  shadow-2xl z-10 animate-slide-up overflow-hidden">
+
+        <!-- Header -->
+        <div class="flex items-center justify-between px-6 pt-6 pb-4 border-b border-slate-100 dark:border-slate-800">
+          <h2 class="text-lg font-display font-black text-slate-900 dark:text-white">Pilihan Jilid</h2>
+        </div>
+
+        <!-- Options -->
+        <div class="p-6 flex flex-col gap-4">
+
+          <button id="binding-opt-softcover" type="button" onclick="selectBinding('softcover')"
+                  class="binding-picker-btn w-full flex items-center justify-between gap-4 px-5 py-4 rounded-xl border-2 border-transparent bg-slate-50 dark:bg-slate-800/60 hover:border-slate-300 dark:hover:border-slate-600 transition-all text-left">
+            <span class="flex flex-col">
+              <span class="font-display font-black text-lg text-slate-900 dark:text-white">Softcover</span>
+              <span class="text-xs text-slate-500 dark:text-slate-400">Sampul lunak &amp; fleksibel</span>
+            </span>
+            <span class="flex items-center gap-3 shrink-0">
+              <span id="binding-price-softcover" class="font-bold text-brand-blue dark:text-brand-gold">Rp0</span>
+              <span class="binding-check material-symbols-outlined text-brand-blue dark:text-brand-gold hidden">check_circle</span>
+            </span>
+          </button>
+
+          <button id="binding-opt-hardcover" type="button" onclick="selectBinding('hardcover')"
+                  class="binding-picker-btn w-full flex items-center justify-between gap-4 px-5 py-4 rounded-xl border-2 border-transparent bg-slate-50 dark:bg-slate-800/60 hover:border-slate-300 dark:hover:border-slate-600 transition-all text-left">
+            <span class="flex flex-col">
+              <span class="font-display font-black text-lg text-slate-900 dark:text-white">Hardcover</span>
+              <span class="text-xs text-slate-500 dark:text-slate-400">Sampul keras &amp; kokoh</span>
+            </span>
+            <span class="flex items-center gap-3 shrink-0">
+              <span id="binding-price-hardcover" class="font-bold text-brand-blue dark:text-brand-gold">Rp0</span>
+              <span class="binding-check material-symbols-outlined text-brand-blue dark:text-brand-gold hidden">check_circle</span>
+            </span>
+          </button>
+
+        </div>
+
+        <!-- Footer CTA -->
+        <div class="flex gap-3 px-6 pb-6">
+          <button onclick="closeBindingPickerModal()"
+                  class="flex items-center justify-center w-14 h-14 bg-slate-100 dark:bg-slate-800 rounded-2xl text-slate-600 dark:text-slate-400 hover:bg-slate-200 transition-all active:scale-95 border-0">
+            <span class="material-symbols-outlined">arrow_back</span>
+          </button>
+          <button onclick="confirmBindingPicker()"
+                  class="flex-1 bg-brand-blue dark:bg-brand-gold text-white dark:text-black py-4 rounded-2xl font-bold shadow-lg flex items-center justify-center gap-3 active:scale-[0.98] transition-all">
+            Lanjut
+          </button>
+        </div>
+
+      </div>
+    </div>
+
     
+    <!-- Modal Rincian Harga -->
+    <div id="price-detail-modal"
+         class="fixed inset-0 z-[200] flex items-end sm:items-center justify-center p-0 sm:p-4"
+         style="display:none;">
+
+      <!-- Backdrop -->
+      <div id="price-detail-backdrop"
+           class="absolute inset-0 bg-black/60 backdrop-blur-sm"
+           onclick="closePriceDetailModal()"></div>
+
+      <!-- Sheet / Card -->
+      <div class="relative w-full sm:max-w-md bg-white dark:bg-[#0f1825] rounded-t-xl sm:rounded-xl
+                  shadow-2xl z-10 animate-slide-up overflow-hidden">
+
+        <!-- Header -->
+        <div class="flex items-center justify-between px-6 pt-6 pb-4 border-b border-slate-100 dark:border-slate-800">
+          <h2 class="text-lg font-display font-black text-slate-900 dark:text-white">Rincian Harga</h2>
+          <button onclick="closePriceDetailModal()"
+                  class="w-9 h-9 flex items-center justify-center rounded-full bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-700 transition-all active:scale-95 border-0">
+            <span class="material-symbols-outlined text-[1.2rem]">close</span>
+          </button>
+        </div>
+
+        <!-- Body -->
+        <div id="price-detail-body" class="p-6 max-h-[60vh] overflow-y-auto custom-modal-scroll"></div>
+
+        <!-- Footer -->
+        <div class="px-6 pb-6">
+          <button onclick="closePriceDetailModal()"
+                  class="w-full bg-brand-blue dark:bg-brand-gold text-white dark:text-black py-4 rounded-2xl font-bold shadow-lg active:scale-[0.98] transition-all">
+            Mengerti
+          </button>
+        </div>
+
+      </div>
+    </div>
+
     <script src="https://unpkg.com/lenis@1.1.20/dist/lenis.min.js"></script>
+    <script src="catalog.js"></script>
     <script src="script.js"></script>
     <script>
     document.addEventListener('DOMContentLoaded',function(){
@@ -433,4 +644,3 @@
 </body>
 
 </html>
-

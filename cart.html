@@ -25,8 +25,14 @@
                         sans: ['Inter', 'sans-serif'],
                     },
                     borderRadius: {
-                        '32': '32px',
-                        '40': '40px',
+                        'DEFAULT': '2px',
+                        'md': '2px',
+                        'lg': '4px',
+                        'xl': '5px',
+                        '2xl': '6px',
+                        '3xl': '8px',
+                        '32': '10px',
+                        '40': '12px',
                     },
                     keyframes: {
                         shake: {
@@ -113,6 +119,8 @@
                 <li><a class="nav-link-underline font-sans font-semibold text-slate-500 hover:text-brand-blue dark:text-slate-400 dark:hover:text-white transition-colors duration-300"
                         href="cover.html">Katalog Cover</a></li>
                 <li><a class="nav-link-underline font-sans font-semibold text-slate-500 hover:text-brand-blue dark:text-slate-400 dark:hover:text-white transition-colors duration-300"
+                        href="cara-order.html">Cara Order</a></li>
+                <li><a class="nav-link-underline font-sans font-semibold text-slate-500 hover:text-brand-blue dark:text-slate-400 dark:hover:text-white transition-colors duration-300"
                         href="reseller.html">Reseller</a></li>
                 <li><a class="nav-link-underline font-sans font-semibold text-slate-500 hover:text-brand-blue dark:text-slate-400 dark:hover:text-white transition-colors duration-300"
                         href="bulk-order.html">B2B</a></li>
@@ -120,15 +128,15 @@
 
             <div class="flex items-center gap-4">
                 <a href="pesanan-saya.html"
-                    class="p-2.5 bg-slate-100 dark:bg-slate-800 rounded-full text-slate-600 dark:text-slate-400 hover:text-brand-blue dark:hover:text-brand-gold transition-colors duration-300 flex items-center justify-center w-10 h-10 relative"
+                    class="hidden lg:flex p-2.5 bg-slate-100 dark:bg-slate-800 rounded-full text-slate-600 dark:text-slate-400 hover:text-brand-blue dark:hover:text-brand-gold transition-colors duration-300 items-center justify-center w-10 h-10 relative"
                     title="Pesanan Saya">
                     <span class="material-symbols-outlined">receipt_long</span>
                 </a>
                 <a href="cart.html"
-                    class="p-2.5 bg-slate-100 dark:bg-slate-800 rounded-full text-slate-600 dark:text-slate-400 hover:text-brand-blue dark:hover:text-brand-gold transition-colors duration-300 border-0 flex items-center justify-center w-10 h-10 relative">
+                    class="hidden lg:flex p-2.5 bg-slate-100 dark:bg-slate-800 rounded-full text-slate-600 dark:text-slate-400 hover:text-brand-blue dark:hover:text-brand-gold transition-colors duration-300 border-0 items-center justify-center w-10 h-10 relative">
                     <span class="material-symbols-outlined">shopping_cart</span>
                     <span id="nav-cart-badge"
-                        class="absolute -top-1 -right-1 bg-red-500 text-white text-[0.6rem] font-bold w-4 h-4 rounded-full flex items-center justify-center hidden">0</span>
+                        class="nav-cart-badge absolute -top-1 -right-1 bg-red-500 text-white text-[0.6rem] font-bold w-4 h-4 rounded-full flex items-center justify-center hidden">0</span>
                 </a>
                 <button id="theme-toggle"
                     class="hidden lg:flex p-2.5 bg-slate-100 dark:bg-slate-800 rounded-full text-slate-600 dark:text-slate-400 hover:text-brand-blue dark:hover:text-brand-gold transition-colors duration-300 items-center justify-center w-10 h-10 border-0"
@@ -156,6 +164,8 @@
                 <li><a class="font-sans font-semibold text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white block px-8 md:px-12 py-2 transition-colors duration-300"
                         href="cover.html">Katalog Cover</a></li>
                 <li><a class="font-sans font-semibold text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white block px-8 md:px-12 py-2 transition-colors duration-300"
+                        href="cara-order.html">Cara Order</a></li>
+                <li><a class="font-sans font-semibold text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white block px-8 md:px-12 py-2 transition-colors duration-300"
                         href="reseller.html">Reseller</a></li>
                 <li><a class="font-sans font-semibold text-slate-500 dark:text-slate-400 hover:text-slate-500 dark:hover:text-white block px-8 md:px-12 py-2 transition-colors duration-300"
                         href="bulk-order.html">B2B</a></li>
@@ -178,7 +188,68 @@
         </div>
     </header>
 
-    <main class="pt-12 lg:pt-12 pb-24 min-h-screen">
+    <!-- Bottom Navigation (mobile) -->
+    <nav class="bottom-nav fixed inset-x-0 bottom-0 z-[110] bg-white/95 dark:bg-[#080e16]/95 backdrop-blur-md border-t border-slate-100 dark:border-slate-800">
+        <a href="index.html" class="bottom-nav-item">
+            <span class="material-symbols-outlined">home</span>
+            <span>Home</span>
+        </a>
+        <a href="shop.html" class="bottom-nav-item">
+            <span class="material-symbols-outlined">storefront</span>
+            <span>Shop</span>
+        </a>
+        <a href="cart.html" class="bottom-nav-item active">
+            <span class="relative">
+                <span class="material-symbols-outlined">shopping_cart</span>
+                <span class="nav-cart-badge absolute -top-1 -right-3 bg-red-500 text-white text-[0.6rem] font-bold w-4 h-4 rounded-full flex items-center justify-center hidden">0</span>
+            </span>
+            <span>Keranjang</span>
+        </a>
+        <a href="pesanan-saya.html" class="bottom-nav-item">
+            <span class="material-symbols-outlined">receipt_long</span>
+            <span>Pesanan</span>
+        </a>
+        <button type="button" data-bottom-menu-toggle class="bottom-nav-item">
+            <span class="material-symbols-outlined">menu</span>
+            <span>Menu</span>
+        </button>
+    </nav>
+
+    <!-- Bottom Sheet (slide-up menu) -->
+    <div id="bottom-sheet" class="bottom-sheet" aria-hidden="true">
+        <div class="bottom-sheet-backdrop" data-bottom-sheet-close></div>
+        <div class="bottom-sheet-panel" role="dialog" aria-label="Menu lainnya">
+            <div class="bottom-sheet-handle"></div>
+            <a href="cover.html" class="bottom-sheet-link">
+                <span class="material-symbols-outlined">palette</span>
+                <span>Katalog Cover</span>
+            </a>
+            <a href="cara-order.html" class="bottom-sheet-link">
+                <span class="material-symbols-outlined">shopping_cart_checkout</span>
+                <span>Cara Order</span>
+            </a>
+            <a href="reseller.html" class="bottom-sheet-link">
+                <span class="material-symbols-outlined">storefront</span>
+                <span>Reseller</span>
+            </a>
+            <a href="bulk-order.html" class="bottom-sheet-link">
+                <span class="material-symbols-outlined">inventory_2</span>
+                <span>B2B / Grosir</span>
+            </a>
+            <div class="bottom-sheet-row">
+                <span>Aktifkan Dark Mode</span>
+                <button id="theme-toggle-sheet"
+                    class="relative inline-flex items-center w-12 h-6 rounded-full transition-colors duration-300 focus:outline-none border-0"
+                    style="background: var(--toggle-bg, #cbd5e1);"
+                    aria-label="Toggle dark mode">
+                    <span id="theme-toggle-sheet-knob"
+                        class="inline-block w-5 h-5 bg-white rounded-full shadow transform transition-transform duration-300 translate-x-0.5"></span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <main class="pt-12 lg:pt-12 pb-12 lg:pb-24 min-h-screen">
         <section class="max-w-[1200px] mx-auto px-8 md:px-12">
             <h1 class="text-2xl font-display font-black text-slate-900 dark:text-white mb-10 animate-fade-in-up">
                 Keranjang Belanja</h1>
@@ -211,6 +282,26 @@
                         <h2
                             class="text-xl font-bold text-slate-900 dark:text-white mb-6">
                             Informasi Pengiriman</h2>
+
+                        <div id="saved-address-block" class="hidden mb-5">
+                            <label class="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-2">Alamat Tersimpan</label>
+                            <div class="flex items-center gap-2">
+                                <div class="relative flex-1">
+                                    <select id="saved-address-select"
+                                        class="w-full bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-600 rounded-xl px-4 py-3 text-slate-900 dark:text-white focus:ring-2 focus:ring-brand-blue outline-none transition-all appearance-none cursor-pointer pr-10">
+                                        <option value="" disabled selected>Pilih alamat tersimpan</option>
+                                    </select>
+                                    <span
+                                        class="material-symbols-outlined absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-slate-400 text-sm">expand_more</span>
+                                </div>
+                                <button type="button" id="saved-address-delete" title="Hapus alamat"
+                                    class="flex items-center justify-center px-3 py-3 rounded-xl bg-red-50 dark:bg-red-500/10 text-red-500 hover:bg-red-100 dark:hover:bg-red-500/20 transition-colors shrink-0">
+                                    <span class="material-symbols-outlined text-[1.2rem]">delete</span>
+                                </button>
+                            </div>
+                            <p class="text-[11px] text-slate-400 dark:text-slate-500 mt-1.5">Pilih alamat untuk mengisi form otomatis.</p>
+                        </div>
+
                         <form id="shipping-form" class="space-y-5">
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
                                 <div>
@@ -295,7 +386,13 @@
                                 </div>
                             </div>
 
-
+                            <label
+                                class="flex items-start gap-3 bg-slate-50 dark:bg-slate-800 rounded-xl px-4 py-3 cursor-pointer">
+                                <input type="checkbox" id="save-address-check" checked
+                                    class="accent-brand-blue w-4 h-4 mt-0.5 flex-shrink-0">
+                                <span class="text-sm font-medium text-slate-700 dark:text-slate-300">Simpan alamat ini
+                                    untuk checkout berikutnya</span>
+                            </label>
 
                             <div>
                                 <label class="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-3">Metode
@@ -305,7 +402,7 @@
                                         <input type="radio" name="payment-method" value="xenith" checked
                                             class="accent-brand-blue w-4 h-4 flex-shrink-0">
                                         <span class="material-symbols-outlined text-brand-blue text-[28px]">credit_card</span>
-                                        <span class="text-sm font-semibold text-slate-800 dark:text-slate-100">Bayar Online (Xenith)</span>
+                                        <span class="text-sm font-semibold text-slate-800 dark:text-slate-100">QRIS &amp; Transfer Bank</span>
                                     </label>
                                     <label class="payment-option flex items-center gap-3 bg-slate-50 dark:bg-slate-800 rounded-xl px-4 py-3 cursor-pointer has-[:checked]:ring-2 has-[:checked]:ring-brand-blue has-[:checked]:bg-brand-blue/5 transition-all">
                                         <input type="radio" name="payment-method" value="cod"
@@ -334,36 +431,52 @@
                     
                     <div class="xl:hidden bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-32 p-6 md:p-8 shadow-sm">
                         <h2 class="text-xl font-bold text-slate-900 dark:text-white mb-4 border-b border-slate-100 dark:border-slate-800 pb-3">Rincian Pembayaran</h2>
-                        <div class="space-y-3 text-sm font-medium">
+                        <div class="space-y-2.5 text-sm">
                             <div class="flex justify-between items-center text-slate-500 dark:text-slate-400">
                                 <span>Harga Normal</span>
-                                <span class="cart-normal-total font-bold text-slate-900 dark:text-white">Rp0</span>
+                                <span class="cart-normal-total font-semibold">Rp0</span>
                             </div>
                             <div id="ongkir-summary-row-mobile" class="hidden flex justify-between items-center">
                                 <span class="text-slate-500 dark:text-slate-400" id="ongkir-summary-label-mobile">Ongkos Kirim</span>
-                                <span class="font-semibold text-slate-800 dark:text-slate-100" id="ongkir-summary-price-mobile">-</span>
+                                <span class="font-semibold" id="ongkir-summary-price-mobile">-</span>
                             </div>
-                            <div id="subsidy-row-mobile" class="hidden flex justify-between items-center text-green-600 dark:text-green-400">
+                            <div id="subsidy-row-mobile" class="hidden flex justify-between items-center text-slate-500 dark:text-slate-400">
                                 <span>Diskon Ongkir</span>
-                                <span class="font-semibold" id="subsidy-price-mobile">-</span>
+                                <span class="text-red-500 font-semibold" id="subsidy-price-mobile">-</span>
                             </div>
                             <div class="flex justify-between items-center text-slate-500 dark:text-slate-400">
-                                <span class="text-red-400 dark:text-red-400">Diskon Barang</span>
-                                <span class="cart-discount font-bold text-red-500">-Rp0</span>
+                                <span>Diskon Barang</span>
+                                <span class="cart-discount font-semibold text-red-500">-Rp0</span>
                             </div>
                             <div id="cod-fee-row-mobile" class="hidden flex justify-between items-center">
-                                <span class="text-slate-500 dark:text-slate-400">Biaya Admin COD (4%)</span>
-                                <span class="font-semibold text-slate-800 dark:text-slate-100" id="cod-fee-price-mobile">-</span>
+                                <span class="text-slate-500 dark:text-slate-400 flex items-center gap-1">Biaya Layanan
+                                    <button type="button" class="service-fee-info-btn inline-flex items-center justify-center text-slate-400 hover:text-brand-blue dark:hover:text-brand-gold transition-colors" onclick="openServiceFeeInfo()" aria-label="Informasi biaya layanan" title="Informasi biaya layanan">
+                                        <span class="material-symbols-outlined text-[15px] leading-none">info</span>
+                                    </button>
+                                </span>
+                                <span class="font-semibold" id="cod-fee-price-mobile">-</span>
                             </div>
-                            <div id="voucher-row-mobile" class="hidden flex justify-between items-center text-emerald-600 dark:text-emerald-400">
+                            <div id="service-fee-row-mobile" class="hidden flex justify-between items-center">
+                                <span class="text-slate-500 dark:text-slate-400 flex items-center gap-1">Biaya Layanan
+                                    <button type="button" class="service-fee-info-btn inline-flex items-center justify-center text-slate-400 hover:text-brand-blue dark:hover:text-brand-gold transition-colors" onclick="openServiceFeeInfo()" aria-label="Informasi biaya layanan" title="Informasi biaya layanan">
+                                        <span class="material-symbols-outlined text-[15px] leading-none">info</span>
+                                    </button>
+                                </span>
+                                <span class="font-semibold" id="service-fee-price-mobile">-</span>
+                            </div>
+                            <div id="voucher-row-mobile" class="hidden flex justify-between items-center text-red-500 dark:text-red-500">
                                 <span>Voucher XTRA</span>
                                 <span class="font-semibold" id="voucher-price-mobile">-Rp0</span>
                             </div>
-                            <div class="h-px w-full bg-slate-100 dark:bg-slate-800"></div>
-                            <div class="flex justify-between items-center">
+                            <div class="border-t border-dashed border-slate-200 dark:border-slate-700 pt-2.5 flex justify-between items-center">
                                 <span class="font-bold text-slate-900 dark:text-white">Total Belanja</span>
                                 <span class="cart-total font-black text-xl text-brand-blue dark:text-brand-gold">Rp0</span>
                             </div>
+                        </div>
+                        <div class="mt-4 flex items-center justify-center gap-1.5 flex-wrap">
+                            <span class="material-symbols-outlined text-[16px] text-slate-400">verified</span>
+                            <span class="text-[10px] text-slate-400 font-regular">Pembayaran aman diproses oleh</span>
+                            <img src="img/weselaja.webp" alt="Weselaja" class="h-8 w-auto">
                         </div>
                     </div>
                 </div>
@@ -376,33 +489,44 @@
                         <h2
                             class="text-xl font-bold text-slate-900 dark:text-white mb-4 border-b border-slate-100 dark:border-slate-800 pb-3">
                             Rincian Pembayaran</h2>
-                            <div class="space-y-3 text-sm font-medium">
+                            <div class="space-y-2.5 text-sm">
                                 <div class="flex justify-between items-center text-slate-500 dark:text-slate-400">
                                     <span>Harga Normal</span>
-                                    <span class="cart-normal-total font-bold text-slate-900 dark:text-white">Rp0</span>
+                                    <span class="cart-normal-total font-semibold">Rp0</span>
                                 </div>
                                 <div id="ongkir-summary-row" class="hidden flex items-center justify-between text-sm">
                                     <span class="text-slate-500 dark:text-slate-400" id="ongkir-summary-label">Ongkos Kirim</span>
-                                    <span class="font-semibold text-slate-800 dark:text-slate-100" id="ongkir-summary-price">-</span>
+                                    <span class="font-semibold" id="ongkir-summary-price">-</span>
                                 </div>
-                                <div id="subsidy-row" class="hidden flex items-center justify-between text-sm text-green-600 dark:text-green-400">
+                                <div id="subsidy-row" class="hidden flex items-center justify-between text-sm text-slate-500 dark:text-slate-400">
                                     <span>Diskon Ongkir</span>
-                                    <span class="font-semibold" id="subsidy-price">-</span>
+                                    <span class="text-red-500 font-semibold" id="subsidy-price">-</span>
                                 </div>
                                 <div class="flex justify-between items-center text-slate-500 dark:text-slate-400">
-                                    <span class="text-red-400 dark:text-red-400">Diskon Barang</span>
-                                    <span class="cart-discount font-bold text-red-500">-Rp0</span>
+                                    <span>Diskon Barang</span>
+                                    <span class="cart-discount font-semibold text-red-500">-Rp0</span>
                                 </div>
                                 <div id="cod-fee-row" class="hidden flex items-center justify-between text-sm">
-                                    <span class="text-slate-500 dark:text-slate-400">Biaya Admin Bayar di Rumah (4%)</span>
-                                    <span class="font-semibold text-slate-800 dark:text-slate-100" id="cod-fee-price">-</span>
+                                    <span class="text-slate-500 dark:text-slate-400 flex items-center gap-1">Biaya Layanan
+                                        <button type="button" class="service-fee-info-btn inline-flex items-center justify-center text-slate-400 hover:text-brand-blue dark:hover:text-brand-gold transition-colors" onclick="openServiceFeeInfo()" aria-label="Informasi biaya layanan" title="Informasi biaya layanan">
+                                            <span class="material-symbols-outlined text-[15px] leading-none">info</span>
+                                        </button>
+                                    </span>
+                                    <span class="font-semibold" id="cod-fee-price">-</span>
                                 </div>
-                                <div id="voucher-row" class="hidden flex items-center justify-between text-sm text-emerald-600 dark:text-emerald-400">
+                                <div id="service-fee-row" class="hidden flex items-center justify-between text-sm">
+                                    <span class="text-slate-500 dark:text-slate-400 flex items-center gap-1">Biaya Layanan
+                                        <button type="button" class="service-fee-info-btn inline-flex items-center justify-center text-slate-400 hover:text-brand-blue dark:hover:text-brand-gold transition-colors" onclick="openServiceFeeInfo()" aria-label="Informasi biaya layanan" title="Informasi biaya layanan">
+                                            <span class="material-symbols-outlined text-[15px] leading-none">info</span>
+                                        </button>
+                                    </span>
+                                    <span class="font-semibold" id="service-fee-price">-</span>
+                                </div>
+                                <div id="voucher-row" class="hidden flex items-center justify-between text-sm text-red-500">
                                     <span>Voucher XTRA</span>
                                     <span class="font-semibold" id="voucher-price">-Rp0</span>
                                 </div>
-                                <div class="h-px w-full bg-slate-100 dark:bg-slate-800 my-4"></div>
-                                <div class="flex justify-between items-center">
+                                <div class="border-t border-dashed border-slate-200 dark:border-slate-700 pt-2.5 flex justify-between items-center">
                                     <span class="font-bold text-lg text-slate-900 dark:text-white">Total Belanja</span>
                                     <span
                                         id="grand-total"
@@ -414,14 +538,15 @@
                             <span class="material-symbols-outlined">shopping_bag_speed</span>
                             Proses Checkout
                         </button>
-                        <div class="mt-4 text-center">
-                            <span class="text-[10px] text-slate-400 uppercase tracking-widest font-bold">Aman •
-                                Terpercaya • Cepat</span>
+                        <div class="mt-4 flex items-center justify-center gap-1.5 flex-wrap">
+                            <span class="material-symbols-outlined text-[16px] text-slate-400">verified</span>
+                            <span class="text-[10px] text-slate-400 font-regular">Pembayaran aman diproses oleh</span>
+                            <img src="img/weselaja.webp" alt="Weselaja" class="h-8 w-auto">
                         </div>
                     </div>
 
                     
-                    <div class="xl:hidden fixed bottom-0 left-0 w-full bg-white dark:bg-[#080e16] border-t border-slate-100 dark:border-slate-800 px-4 py-3 z-50 shadow-[0_-10px_30px_rgba(0,0,0,0.08)] transition-all duration-300">
+                    <div class="xl:hidden fixed bottom-[calc(var(--bottom-nav-h)+env(safe-area-inset-bottom))] lg:bottom-0 left-0 w-full bg-white dark:bg-[#080e16] border-t border-slate-100 dark:border-slate-800 px-4 py-3 z-50 shadow-[0_-10px_30px_rgba(0,0,0,0.08)] transition-all duration-300">
                         <div class="max-w-[600px] mx-auto flex items-center gap-3">
                             <a href="shop.html"
                                 class="flex items-center justify-center w-12 h-12 bg-slate-100 dark:bg-slate-800 rounded-2xl text-slate-600 dark:text-slate-400 flex-shrink-0">
@@ -462,6 +587,41 @@
     </main>
 
     
+    <!-- Modal Informasi Biaya Layanan -->
+    <div id="service-fee-info-modal" class="fixed inset-0 z-[200] flex items-end sm:items-center justify-center p-0 sm:p-4" style="display:none;">
+        <div class="absolute inset-0 bg-black/60 backdrop-blur-sm" onclick="closeServiceFeeInfo()"></div>
+        <div class="relative w-full sm:max-w-md bg-white dark:bg-[#0f1825] rounded-t-xl sm:rounded-xl shadow-2xl z-10 animate-slide-up overflow-hidden">
+            <div class="flex items-center justify-between px-6 pt-6 pb-4 border-b border-slate-100 dark:border-slate-800">
+                <h2 class="text-lg font-display font-black text-slate-900 dark:text-white">Biaya Layanan</h2>
+                <button onclick="closeServiceFeeInfo()" class="w-9 h-9 flex items-center justify-center rounded-full bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-700 transition-all active:scale-95 border-0">
+                    <span class="material-symbols-outlined text-[1.2rem]">close</span>
+                </button>
+            </div>
+            <div id="service-fee-info-body" class="p-6 max-h-[60vh] overflow-y-auto custom-modal-scroll"></div>
+            <div class="px-6 pb-6">
+                <button onclick="closeServiceFeeInfo()" class="w-full bg-brand-blue dark:bg-brand-gold text-white dark:text-black py-4 rounded-2xl font-bold shadow-lg active:scale-[0.98] transition-all">Mengerti</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Konfirmasi Pemesanan COD -->
+    <div id="cod-confirm-modal" class="fixed inset-0 z-[210] flex items-end sm:items-center justify-center p-0 sm:p-4" style="display:none;">
+        <div class="absolute inset-0 bg-black/60 backdrop-blur-sm" onclick="closeCodConfirmModal()"></div>
+        <div class="relative w-full sm:max-w-md bg-white dark:bg-[#0f1825] rounded-t-xl sm:rounded-xl shadow-2xl z-10 animate-slide-up overflow-hidden">
+            <div class="flex items-center justify-between px-6 pt-6 pb-4 border-b border-slate-100 dark:border-slate-800">
+                <h2 class="text-lg font-display font-black text-slate-900 dark:text-white">Konfirmasi Pemesanan COD</h2>
+                <button onclick="closeCodConfirmModal()" class="w-9 h-9 flex items-center justify-center rounded-full bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-700 transition-all active:scale-95 border-0">
+                    <span class="material-symbols-outlined text-[1.2rem]">close</span>
+                </button>
+            </div>
+            <div id="cod-confirm-modal-body" class="p-6 max-h-[60vh] overflow-y-auto custom-modal-scroll"></div>
+            <div class="px-6 pb-6 flex flex-col gap-2.5">
+                <button onclick="confirmCodOrder()" class="w-full bg-brand-blue dark:bg-brand-gold text-white dark:text-black py-4 rounded-2xl font-bold shadow-lg active:scale-[0.98] transition-all">Proses Checkout</button>
+                <button onclick="closeCodConfirmModal()" class="w-full py-3 rounded-2xl font-bold text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-all">Batal</button>
+            </div>
+        </div>
+    </div>
+
     <div id="loading-overlay" class="fixed inset-0 z-[100] bg-white/80 dark:bg-[#080e16]/80 backdrop-blur-sm hidden flex-col items-center justify-center">
         <div class="w-12 h-12 border-4 border-brand-blue border-t-transparent rounded-full animate-spin mb-4"></div>
         <p class="text-sm font-bold text-slate-700 dark:text-slate-300">Memproses pesanan...</p>
@@ -469,6 +629,7 @@
 
     
     <script src="https://unpkg.com/lenis@1.1.20/dist/lenis.min.js"></script>
+    <script src="catalog.js"></script>
     <script src="script.js"></script>
     <script>
     document.addEventListener('DOMContentLoaded',function(){

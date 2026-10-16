@@ -25,8 +25,14 @@
                         sans: ['Inter', 'sans-serif'],
                     },
                     borderRadius: {
-                        '32': '32px',
-                        '40': '40px',
+                        'DEFAULT': '2px',
+                        'md': '2px',
+                        'lg': '4px',
+                        'xl': '5px',
+                        '2xl': '6px',
+                        '3xl': '8px',
+                        '32': '10px',
+                        '40': '12px',
                     },
                     keyframes: {
                         shake: {
@@ -111,6 +117,8 @@
                 <li><a class="nav-link-underline font-sans font-semibold text-slate-500 hover:text-brand-blue dark:text-slate-400 dark:hover:text-white transition-colors duration-300"
                         href="cover.html">Katalog Cover</a></li>
                 <li><a class="nav-link-underline font-sans font-semibold text-slate-500 hover:text-brand-blue dark:text-slate-400 dark:hover:text-white transition-colors duration-300"
+                        href="cara-order.html">Cara Order</a></li>
+                <li><a class="nav-link-underline font-sans font-semibold text-slate-500 hover:text-brand-blue dark:text-slate-400 dark:hover:text-white transition-colors duration-300"
                         href="reseller.html">Reseller</a></li>
                 <li><a class="nav-link-underline font-sans font-semibold text-slate-500 hover:text-brand-blue dark:text-slate-400 dark:hover:text-white transition-colors duration-300"
                         href="bulk-order.html">B2B</a></li>
@@ -118,15 +126,15 @@
 
             <div class="flex items-center gap-4">
                 <a href="pesanan-saya.html"
-                    class="p-2.5 bg-slate-100 dark:bg-slate-800 rounded-full text-slate-600 dark:text-slate-400 hover:text-brand-blue dark:hover:text-brand-gold transition-colors duration-300 flex items-center justify-center w-10 h-10 relative"
+                    class="hidden lg:flex p-2.5 bg-slate-100 dark:bg-slate-800 rounded-full text-slate-600 dark:text-slate-400 hover:text-brand-blue dark:hover:text-brand-gold transition-colors duration-300 items-center justify-center w-10 h-10 relative"
                     title="Pesanan Saya">
                     <span class="material-symbols-outlined">receipt_long</span>
                 </a>
                 <a href="cart.html"
-                    class="p-2.5 bg-slate-100 dark:bg-slate-800 rounded-full text-slate-600 dark:text-slate-400 hover:text-brand-blue dark:hover:text-brand-gold transition-colors duration-300 border-0 flex items-center justify-center w-10 h-10 relative">
+                    class="hidden lg:flex p-2.5 bg-slate-100 dark:bg-slate-800 rounded-full text-slate-600 dark:text-slate-400 hover:text-brand-blue dark:hover:text-brand-gold transition-colors duration-300 border-0 items-center justify-center w-10 h-10 relative">
                     <span class="material-symbols-outlined">shopping_cart</span>
                     <span id="nav-cart-badge"
-                        class="absolute -top-1 -right-1 bg-red-500 text-white text-[0.6rem] font-bold w-4 h-4 rounded-full flex items-center justify-center hidden">0</span>
+                        class="nav-cart-badge absolute -top-1 -right-1 bg-red-500 text-white text-[0.6rem] font-bold w-4 h-4 rounded-full flex items-center justify-center hidden">0</span>
                 </a>
                 <button id="theme-toggle"
                     class="hidden lg:flex p-2.5 bg-slate-100 dark:bg-slate-800 rounded-full text-slate-600 dark:text-slate-400 hover:text-brand-blue dark:hover:text-brand-gold transition-colors duration-300 items-center justify-center w-10 h-10 border-0"
@@ -151,6 +159,8 @@
                         href="shop.html">Shop</a></li>
                 <li><a class="font-sans font-semibold text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white block px-8 md:px-12 py-2 transition-colors duration-300"
                         href="cover.html">Katalog Cover</a></li>
+                <li><a class="font-sans font-semibold text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white block px-8 md:px-12 py-2 transition-colors duration-300"
+                        href="cara-order.html">Cara Order</a></li>
                 <li><a class="font-sans font-semibold text-slate-500 dark:text-slate-400 hover:text-slate-500 dark:hover:text-white block px-8 md:px-12 py-2 transition-colors duration-300"
                         href="reseller.html">Reseller</a></li>
                 <li><a class="font-sans font-semibold text-slate-500 dark:text-slate-400 hover:text-slate-500 dark:hover:text-white block px-8 md:px-12 py-2 transition-colors duration-300"
@@ -174,6 +184,67 @@
         </div>
     </header>
 
+    <!-- Bottom Navigation (mobile) -->
+    <nav class="bottom-nav fixed inset-x-0 bottom-0 z-[110] bg-white/95 dark:bg-[#080e16]/95 backdrop-blur-md border-t border-slate-100 dark:border-slate-800">
+        <a href="index.html" class="bottom-nav-item">
+            <span class="material-symbols-outlined">home</span>
+            <span>Home</span>
+        </a>
+        <a href="shop.html" class="bottom-nav-item">
+            <span class="material-symbols-outlined">storefront</span>
+            <span>Shop</span>
+        </a>
+        <a href="cart.html" class="bottom-nav-item">
+            <span class="relative">
+                <span class="material-symbols-outlined">shopping_cart</span>
+                <span class="nav-cart-badge absolute -top-1 -right-3 bg-red-500 text-white text-[0.6rem] font-bold w-4 h-4 rounded-full flex items-center justify-center hidden">0</span>
+            </span>
+            <span>Keranjang</span>
+        </a>
+        <a href="pesanan-saya.html" class="bottom-nav-item">
+            <span class="material-symbols-outlined">receipt_long</span>
+            <span>Pesanan</span>
+        </a>
+        <button type="button" data-bottom-menu-toggle class="bottom-nav-item">
+            <span class="material-symbols-outlined">menu</span>
+            <span>Menu</span>
+        </button>
+    </nav>
+
+    <!-- Bottom Sheet (slide-up menu) -->
+    <div id="bottom-sheet" class="bottom-sheet" aria-hidden="true">
+        <div class="bottom-sheet-backdrop" data-bottom-sheet-close></div>
+        <div class="bottom-sheet-panel" role="dialog" aria-label="Menu lainnya">
+            <div class="bottom-sheet-handle"></div>
+            <a href="cover.html" class="bottom-sheet-link">
+                <span class="material-symbols-outlined">palette</span>
+                <span>Katalog Cover</span>
+            </a>
+            <a href="cara-order.html" class="bottom-sheet-link">
+                <span class="material-symbols-outlined">shopping_cart_checkout</span>
+                <span>Cara Order</span>
+            </a>
+            <a href="reseller.html" class="bottom-sheet-link">
+                <span class="material-symbols-outlined">storefront</span>
+                <span>Reseller</span>
+            </a>
+            <a href="bulk-order.html" class="bottom-sheet-link">
+                <span class="material-symbols-outlined">inventory_2</span>
+                <span>B2B / Grosir</span>
+            </a>
+            <div class="bottom-sheet-row">
+                <span>Aktifkan Dark Mode</span>
+                <button id="theme-toggle-sheet"
+                    class="relative inline-flex items-center w-12 h-6 rounded-full transition-colors duration-300 focus:outline-none border-0"
+                    style="background: var(--toggle-bg, #cbd5e1);"
+                    aria-label="Toggle dark mode">
+                    <span id="theme-toggle-sheet-knob"
+                        class="inline-block w-5 h-5 bg-white rounded-full shadow transform transition-transform duration-300 translate-x-0.5"></span>
+                </button>
+            </div>
+        </div>
+    </div>
+
     <main class="pt-12 lg:pt-12 pb-20 min-h-screen">
         <section class="max-w-[1200px] mx-auto px-8 md:px-12" id="thankyou-content">
             
@@ -182,6 +253,7 @@
 
     
     <script src="https://unpkg.com/lenis@1.1.20/dist/lenis.min.js"></script>
+    <script src="catalog.js"></script>
     <script src="script.js"></script>
     <script>
     document.addEventListener('DOMContentLoaded',function(){
@@ -203,24 +275,24 @@
         const order = JSON.parse(orderJson);
         sessionStorage.removeItem('hq_order');
 
-        const { name, phone, address, paymentMethod, subtotal, ongkir, courier, codFee, grandTotal, cart } = order;
+        const { name, phone, address, paymentMethod, subtotal, ongkir, courier, codFee, serviceFee, grandTotal, cart } = order;
 
         const formatPrice = (amount) => `Rp${Number(amount).toLocaleString('id-ID')}`;
 
         const container = document.getElementById('thankyou-content');
 
         const paymentLabels = {
-            bca: 'Transfer Bank BCA',
-            bsi: 'Transfer Bank BSI',
-            qris: 'QRIS',
+            xenith: 'QRIS & Transfer Bank',
             cod: 'Bayar di Rumah'
         };
 
         let paymentSpecificHtml = '';
         let icon = '';
+        let paymentHint = '';
 
         if (paymentMethod === 'bca' || paymentMethod === 'bsi') {
             icon = '🏦';
+            paymentHint = `Selesaikan pembayaran via ${paymentLabels[paymentMethod]}`;
             paymentSpecificHtml = `
                 <div class="bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-32 p-6 md:p-8 shadow-sm animate-fade-in-up" style="animation-delay: 200ms">
                     <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-4">Data Rekening</h3>
@@ -252,6 +324,7 @@
             `;
         } else if (paymentMethod === 'qris') {
             icon = '📱';
+            paymentHint = 'Selesaikan pembayaran via QRIS';
             paymentSpecificHtml = `
                 <div class="bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-32 p-6 md:p-8 shadow-sm animate-fade-in-up" style="animation-delay: 200ms">
                     <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-4 text-center">Scan QRIS untuk Bayar</h3>
@@ -267,8 +340,26 @@
                     </a>
                 </div>
             `;
+        } else if (paymentMethod === 'xenith') {
+            icon = '💳';
+            paymentHint = 'Lanjutkan pembayaran online di halaman Xenith';
+            paymentSpecificHtml = `
+                <div class="bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-32 p-6 md:p-8 shadow-sm animate-fade-in-up" style="animation-delay: 200ms">
+                    <div class="flex items-start gap-3">
+                        <span class="material-symbols-outlined text-brand-blue dark:text-brand-gold text-3xl">credit_card</span>
+                        <div>
+                            <p class="text-sm text-slate-500 dark:text-slate-400">Pesanan ini memakai Bayar Online. Halaman pembayaran Xenith tidak terbuka, jadi klik tombol di bawah untuk melanjutkan.</p>
+                            <a href="pesanan-saya.html"
+                                class="mt-4 inline-flex items-center gap-2 bg-brand-blue dark:bg-brand-gold text-white dark:text-black font-bold py-3 px-6 rounded-xl text-sm hover:opacity-90 transition-all">
+                                <span class="material-symbols-outlined">receipt_long</span> Lihat Status Pembayaran
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            `;
         } else {
             icon = '🚚';
+            paymentHint = 'Pembayaran dilakukan saat barang tiba (COD)';
             paymentSpecificHtml = `
                 <div class="bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-32 p-6 md:p-8 shadow-sm animate-fade-in-up" style="animation-delay: 200ms">
                     <div class="flex items-start gap-3">
@@ -298,7 +389,7 @@
                     <span class="material-symbols-outlined text-green-600 dark:text-green-400 text-4xl">check_circle</span>
                 </div>
                 <h1 class="text-2xl md:text-3xl font-display font-black text-slate-900 dark:text-white">Pesanan Diterima! 🎉</h1>
-                <p class="text-lg text-slate-500 dark:text-slate-400 mt-2 font-medium">${icon} ${paymentMethod === 'bca' || paymentMethod === 'bsi' ? `Selesaikan pembayaran via ${paymentLabels[paymentMethod]}` : paymentMethod === 'qris' ? 'Selesaikan pembayaran via QRIS' : 'Pembayaran dilakukan saat barang tiba (COD)'}</p>
+                <p class="text-lg text-slate-500 dark:text-slate-400 mt-2 font-medium">${icon} ${paymentHint}</p>
             </div>
 
             <div class="bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-32 p-6 md:p-8 shadow-sm animate-fade-in-up" style="animation-delay: 100ms">
@@ -306,7 +397,8 @@
                     <p class="text-sm text-slate-500 dark:text-slate-400">Total yang harus dibayar</p>
                     <p class="text-3xl md:text-4xl font-black text-brand-blue dark:text-brand-gold mt-1">${formatPrice(grandTotal || subtotal)}</p>
                     ${ongkir > 0 ? `<p class="text-xs text-slate-400 mt-1">Termasuk ongkos kirim ${formatPrice(ongkir)}${courier ? ` (${courier})` : ''}</p>` : ''}
-                    ${codFee > 0 ? `<p class="text-xs text-slate-400 mt-1">Biaya admin Bayar di Rumah 4%: ${formatPrice(codFee)}</p>` : ''}
+                    ${codFee > 0 ? `<p class="text-xs text-slate-400 mt-1">Biaya admin Bayar di Rumah (3% + PPN 11%): ${formatPrice(codFee)}</p>` : ''}
+                    ${serviceFee > 0 ? `<p class="text-xs text-slate-400 mt-1">Biaya layanan: ${formatPrice(serviceFee)}</p>` : ''}
                 </div>
             </div>
 
@@ -336,8 +428,12 @@
                         <span class="font-semibold text-slate-900 dark:text-white">${formatPrice(ongkir)}</span>
                     </div>` : ''}
                     ${codFee > 0 ? `<div class="flex">
-                        <span class="text-slate-500 dark:text-slate-400 w-28 shrink-0">COD Fee</span>
+                        <span class="text-slate-500 dark:text-slate-400 w-28 shrink-0">Biaya Admin COD</span>
                         <span class="font-semibold text-slate-900 dark:text-white">${formatPrice(codFee)}</span>
+                    </div>` : ''}
+                    ${serviceFee > 0 ? `<div class="flex">
+                        <span class="text-slate-500 dark:text-slate-400 w-28 shrink-0">Biaya Layanan</span>
+                        <span class="font-semibold text-slate-900 dark:text-white">${formatPrice(serviceFee)}</span>
                     </div>` : ''}
                     <div class="flex">
                         <span class="text-slate-500 dark:text-slate-400 w-28 shrink-0">Pembayaran</span>
@@ -388,7 +484,6 @@
         const container = document.getElementById('thankyou-content');
         const esc = s => String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
         const fmt = n => `Rp${Number(n).toLocaleString('id-ID')}`;
-        const waLink = `https://wa.me/6285155060816?text=${encodeURIComponent('Halo Admin, saya ingin konfirmasi pesanan ' + orderId + '.')}`;
 
         const VIEW = {
             PENDING: { icon: 'hourglass_top', bg: 'bg-amber-100 dark:bg-amber-900/30', fg: 'text-amber-600 dark:text-amber-400', title: 'Menunggu Konfirmasi Pembayaran', text: 'Kami sedang mengecek pembayaranmu. Halaman ini akan update otomatis, jangan ditutup dulu.' },
@@ -413,7 +508,7 @@
                     <div class="mt-6 flex flex-col sm:flex-row gap-3 justify-center">
                         ${status === 'PENDING' && /^https:\/\//.test(paymentUrl || '') ? `<a href="${esc(paymentUrl)}" class="px-6 py-3 bg-brand-blue text-white rounded-full font-bold">Lanjut Bayar</a>` : ''}
                         ${(status === 'Abandoned' || status === 'EXPIRED') ? `<a href="cart.html" class="px-6 py-3 bg-brand-blue text-white rounded-full font-bold">Beli Lagi</a>` : ''}
-                        <a href="${waLink}" target="_blank" class="px-6 py-3 bg-green-500 hover:bg-green-600 text-white rounded-full font-bold">Hubungi Admin WA</a>
+                        <a href="pesanan-saya.html" class="px-6 py-3 bg-green-500 hover:bg-green-600 text-white rounded-full font-bold">Lihat Transaksi</a>
                         <a href="shop.html" class="px-6 py-3 border border-slate-300 dark:border-slate-600 text-slate-700 dark:text-slate-200 rounded-full font-bold">Kembali Belanja</a>
                     </div>
                 </div>`;
@@ -423,7 +518,7 @@
             try {
                 const list = JSON.parse(localStorage.getItem('hq_orders') || '[]');
                 const o = list.find(x => x.orderId === orderId);
-                if (o) { o.status = 'Dibayar'; localStorage.setItem('hq_orders', JSON.stringify(list)); }
+                if (o) { o.status = 'PAID'; localStorage.setItem('hq_orders', JSON.stringify(list)); }
             } catch (e) { /* abaikan */ }
         }
 
