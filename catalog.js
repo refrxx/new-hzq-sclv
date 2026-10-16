@@ -244,6 +244,7 @@
             priceCrt: "Rp1.000",
             priceStr: "Rp1.000",
             priceWa: "Rp1.000",
+            xtraVoucher: 0,
             img: "img/katalog/8qpp-a5.jpg",
             images: ["img/katalog/8qpp-a5.jpg", "img/usp.jpg"],
             wa: "Halo Admin, saya ingin pesan TEST Produk Contoh",
