@@ -6,7 +6,7 @@ const json = (obj, status = 200) => new Response(JSON.stringify(obj), {
     headers: { 'Content-Type': 'application/json', 'Cache-Control': 'no-store' }
 });
 
-// Dipakai thank-you.html untuk polling status.
+// Dipakai /thank-you untuk polling status.
 // Kalau masih PENDING, tanya langsung ke Xenith (rekonsiliasi), jadi tetap
 // benar walau webhook telat atau gagal.
 const env = process.env;

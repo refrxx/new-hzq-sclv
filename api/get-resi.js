@@ -7,7 +7,7 @@ const json = (obj, status = 200) => new Response(JSON.stringify(obj), {
 
 const env = process.env;
 
-// Dipakai pesanan-saya.html untuk mengambil nomor resi milik sebuah order.
+// Dipakai /pesanan-saya untuk mengambil nomor resi milik sebuah order.
 // Resi diisi manual oleh admin di kolom "resi" pada Google Sheet.
 // Endpoint terpisah dari xenith-status supaya tidak kena efek samping
 // auto-Abandoned (yang tidak cocok untuk order COD).

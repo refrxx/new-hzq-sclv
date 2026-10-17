@@ -65,13 +65,13 @@ async function handler(request) {
         : null;
 
     if (!product) {
-        return new Response(null, { status: 302, headers: { Location: '/shop.html' } });
+        return new Response(null, { status: 302, headers: { Location: '/shop' } });
     }
 
     const price = globalThis.HQ_CATALOG.computeDetailPricing(product);
     const shareUrl = `${host}/p/${product.id}`;
     const image = `${host}/api/og?id=${product.id}&v=${hashOf(product, price)}`;
-    const target = `/product-detail.html?id=${product.id}`;
+    const target = `/product-detail?id=${product.id}`;
 
     const title = `${product.name} - Hamzah Quran`;
     const priceText = price.isRange ? `Mulai ${rp(price.low)}` : `${rp(price.low)}`;

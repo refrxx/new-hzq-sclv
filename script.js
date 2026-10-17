@@ -330,7 +330,7 @@ function productCardTemplate(p, opts = {}) {
                 </div>`
         : '';
 
-    return `<a href="product-detail.html?id=${p.id}"
+    return `<a href="/product-detail?id=${p.id}"
         class="group flex flex-col h-full rounded-2xl overflow-hidden bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 transition-shadow hover:shadow-xl ${opts.className || ''}"
         style="${opts.style || ''}" aria-label="Lihat detail ${p.name}">
         <div class="relative aspect-square overflow-hidden bg-slate-100 dark:bg-slate-800">
@@ -925,8 +925,8 @@ function initProductDetail() {
             }, { passive: true });
         }
 
-    } else if (window.location.pathname.includes('product-detail.html')) {
-        window.location.href = 'shop.html';
+    } else if (window.location.pathname.includes('/product-detail')) {
+        window.location.href = '/shop';
     }
 }
 
@@ -1172,7 +1172,7 @@ let modalSelectedCoverId = null;
 let modalCoverFilter = 'Semua';
 
 function openCustomModal(productId, quranType, binding) {
-    let url = `personalize.html?id=${productId}`;
+    let url = `/personalize?id=${productId}`;
     if (quranType) url += `&quranType=${quranType}`;
     if (binding) url += `&binding=${binding}`;
     window.location.href = url;
@@ -1209,7 +1209,7 @@ function initPersonalizationPage() {
         setEl('personalize-product-price', priceAfterVoucher((binding && product.bindings && product.bindings[binding]) ? product.bindings[binding] : variantPriceStr(product, 'priceWa', quranType)));
 
         const backLink = document.getElementById('back-to-product');
-        if (backLink) backLink.href = `product-detail.html?id=${product.id}`;
+        if (backLink) backLink.href = `/product-detail?id=${product.id}`;
 
         // Edit mode: pre-fill form with existing cart item data
         const editMode = urlParams.get('edit');
@@ -1285,7 +1285,7 @@ function initPersonalizationPage() {
                 } else {
                     addToCart(product.id, customName, modalSelectedCoverId, customNote, customFont, quranType, binding);
                 }
-                window.location.href = 'cart.html';
+                window.location.href = '/cart';
             };
         }
 
@@ -1299,7 +1299,7 @@ function initPersonalizationPage() {
         updateConfirmBtn();
 
     } else {
-        window.location.href = 'shop.html';
+        window.location.href = '/shop';
     }
 }
 
@@ -1451,7 +1451,7 @@ function confirmAddToCart() {
     const quranType = urlParams.get('quranType') || '';
 
     addToCart(modalProductId, customName, modalSelectedCoverId, '', '', quranType);
-    window.location.href = 'cart.html';
+    window.location.href = '/cart';
 }
 
 // Init modal event listeners (called from DOMContentLoaded)
@@ -1854,7 +1854,7 @@ function editCartItem(idx) {
     const item = cart[idx];
     if (!item) return;
     sessionStorage.setItem('hq_edit_cart_idx', idx);
-    window.location.href = `personalize.html?id=${item.id}&edit=1`;
+    window.location.href = `/personalize?id=${item.id}&edit=1`;
 }
 
 function renderCart() {
@@ -1998,7 +1998,7 @@ function showAlert(title, text, type = 'warning') {
 async function initCart() {
     updateCartBadge();
     const cartContainer = document.getElementById('cart-container');
-    if (!cartContainer) return; // Only run on cart.html
+    if (!cartContainer) return; // Only run on /cart
 
     renderCart();
 
@@ -2175,7 +2175,7 @@ async function initCart() {
                         });
                     } catch (err) { console.error('Telegram notify error:', err); }
 
-                    // Riwayat untuk pesanan-saya.html
+                    // Riwayat untuk /pesanan-saya
                     const xenithOrder = {
                         name, phone, address,
                         paymentMethod: 'xenith',
@@ -2290,7 +2290,7 @@ async function initCart() {
             // Tetap simpan ke sessionStorage untuk thank-you page
             sessionStorage.setItem('hq_order', JSON.stringify(orderData));
 
-            // Simpan ke localStorage untuk pesanan-saya.html (max 5 pesanan)
+            // Simpan ke localStorage untuk /pesanan-saya (max 5 pesanan)
             const orderWithMeta = {
                 ...orderData,
                 orderId,
@@ -2357,7 +2357,7 @@ async function initCart() {
             saveCurrentAddress();
 
             // === REDIRECT KE THANK YOU PAGE ===
-            window.location.href = 'thank-you.html';
+            window.location.href = '/thank-you';
             } catch (err) {
                 console.error('Checkout error:', err);
                 loadingOverlay?.classList.add('hidden');

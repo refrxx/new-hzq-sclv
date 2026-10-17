@@ -70,7 +70,7 @@ async function handler(request) {
         xr = await xenithRequest(env, 'POST', '/v1/payment-links', {
             amount: total,
             currency: 'IDR',
-            redirectUrl: `${origin}/thank-you.html?order=${orderId}`,
+            redirectUrl: `${origin}/thank-you?order=${orderId}`,
             paymentLinkCallbackUrl: `${origin}/api/xenith-webhook`,
             customerReference: phone,
             customerName: name.length < 5 ? `${name} (HQ)` : name, // IDR: min 5 karakter
