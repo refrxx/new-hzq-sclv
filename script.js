@@ -613,6 +613,7 @@ function initProductDetail() {
         // Social meta (untuk share dialog; crawler pakai endpoint /p/:id)
         const absImageUrl = (() => {
             const u = product.img || '';
+            if (!u) return location.origin + '/img/og-default.jpg';
             if (/^https?:\/\//i.test(u)) return u;
             return location.origin + '/' + u.replace(/^\//, '');
         })();
