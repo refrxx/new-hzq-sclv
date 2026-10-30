@@ -31,8 +31,8 @@
                         }
                     },
                     fontFamily: {
-                        display: ['Plus Jakarta Sans', 'sans-serif'],
-                        sans: ['Inter', 'sans-serif'],
+                        display: ['Parkinsans', 'sans-serif'],
+                        sans: ['DM Sans', 'sans-serif'],
                     },
                     borderRadius: {
                         'DEFAULT': '2px',
@@ -54,7 +54,7 @@
 
     
     <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@700;800;900&display=swap"
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,300..900;1,300..900&family=Parkinsans:wght@300..800&display=swap"
         rel="stylesheet" />
     <link
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-25..0&display=block"
@@ -284,7 +284,7 @@
                                     <span class="pd-currency">Rp</span><span class="pd-amount">0</span>
                                 </div>
                                 <span
-                                    class="material-symbols-outlined text-slate-400 dark:text-slate-500 text-[1.1rem] select-none">info</span>
+                                    class="material-symbols-outlined text-slate-400 dark:text-slate-500 text-[0.95rem] select-none">info</span>
                                 <span id="pd-discount-pill" class="pd-discount-pill hidden" title="Hemat Rp0">-0%</span>
                             </div>
                             <span id="product-price" class="hidden">Rp0</span>
@@ -328,11 +328,14 @@
                                 <a data-share="whatsapp" role="menuitem" target="_blank" rel="noopener noreferrer" class="pd-share-item">
                                     <span class="material-symbols-outlined">chat</span>WhatsApp
                                 </a>
-                                <a data-share="telegram" role="menuitem" target="_blank" rel="noopener noreferrer" class="pd-share-item">
-                                    <span class="material-symbols-outlined">send</span>Telegram
+                                <a data-share="instagram" role="menuitem" target="_blank" rel="noopener noreferrer" class="pd-share-item">
+                                    <span class="material-symbols-outlined">photo_camera</span>Instagram
                                 </a>
                                 <a data-share="facebook" role="menuitem" target="_blank" rel="noopener noreferrer" class="pd-share-item">
                                     <span class="material-symbols-outlined">thumb_up</span>Facebook
+                                </a>
+                                <a data-share="telegram" role="menuitem" target="_blank" rel="noopener noreferrer" class="pd-share-item">
+                                    <span class="material-symbols-outlined">send</span>Telegram
                                 </a>
                                 <a data-share="threads" role="menuitem" target="_blank" rel="noopener noreferrer" class="pd-share-item">
                                     <span class="material-symbols-outlined">alternate_email</span>Threads
@@ -422,7 +425,7 @@
             class="max-w-[1200px] mx-auto mt-12 px-8 md:px-12 py-12 border-t border-slate-100 dark:border-slate-800 animate-fade-in-up">
             <div class="flex flex-col sm:flex-row items-center justify-between mb-12 gap-6">
                 <div class="text-center sm:text-left">
-                    <h2 class="text-xl md:text-2xl font-display font-black text-slate-900 dark:text-white mb-2">Mungkin
+                    <h2 class="text-xl md:text-2xl font-display font-semibold text-slate-900 dark:text-white mb-2">Mungkin
                         Anda Tertarik</h2>
                     <p class="text-slate-500 dark:text-slate-400 font-medium">Pilihan produk Al Quran custom lainnya
                         untuk Anda</p>
@@ -508,7 +511,7 @@
         
         <!-- Header -->
         <div class="flex items-center justify-between px-6 pt-6 pb-4 border-b border-slate-100 dark:border-slate-800">
-          <h2 class="text-lg font-display font-black text-slate-900 dark:text-white">Pilihan Quran</h2>
+          <h2 class="text-lg font-display font-semibold text-slate-900 dark:text-white">Pilihan Quran</h2>
         </div>
 
         <!-- Options -->
@@ -546,7 +549,7 @@
 
         <!-- Header -->
         <div class="flex items-center justify-between px-6 pt-6 pb-4 border-b border-slate-100 dark:border-slate-800">
-          <h2 class="text-lg font-display font-black text-slate-900 dark:text-white">Pilihan Jilid</h2>
+          <h2 class="text-lg font-display font-semibold text-slate-900 dark:text-white">Pilihan Jilid</h2>
         </div>
 
         <!-- Options -->
@@ -610,7 +613,7 @@
 
         <!-- Header -->
         <div class="flex items-center justify-between px-6 pt-6 pb-4 border-b border-slate-100 dark:border-slate-800">
-          <h2 class="text-lg font-display font-black text-slate-900 dark:text-white">Rincian Harga</h2>
+          <h2 class="text-lg font-display font-semibold text-slate-900 dark:text-white">Rincian Harga</h2>
           <button onclick="closePriceDetailModal()"
                   class="w-9 h-9 flex items-center justify-center rounded-full bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-700 transition-all active:scale-95 border-0">
             <span class="material-symbols-outlined text-[1.2rem]">close</span>
@@ -629,6 +632,47 @@
         </div>
 
       </div>
+    </div>
+
+    <!-- Share Card Modal (Desktop) -->
+    <div id="share-card-modal" class="share-card-modal" style="display:none;" aria-modal="true" role="dialog">
+        <div class="share-card-backdrop" id="share-card-backdrop"></div>
+        <div class="share-card" role="document">
+            <button class="share-card-close" id="share-card-close" type="button" aria-label="Tutup">
+                <span class="material-symbols-outlined">close</span>
+            </button>
+            <img id="share-card-image" class="share-card-img" alt="Share card produk" src="">
+            <div class="share-card-linkrow">
+                <input id="share-card-link" class="share-card-linkinput" type="text" readonly>
+                <button id="share-card-copy" class="share-card-copybtn" type="button">Salin Link</button>
+            </div>
+            <button id="share-card-save" class="share-card-savebtn" type="button">
+                <span class="material-symbols-outlined">download</span> Simpan Gambar
+            </button>
+            <div class="share-card-divider">
+                <span>atau bagikan link ke</span>
+            </div>
+            <div class="share-card-social">
+                <a id="share-card-wa" target="_blank" rel="noopener noreferrer" aria-label="Bagikan ke WhatsApp">
+                    <img src="img/share/whatsapp.svg" alt="WhatsApp">
+                </a>
+                <a id="share-card-ig" target="_blank" rel="noopener noreferrer" aria-label="Buka Instagram Hamzah Quran">
+                    <img src="img/share/instagram.svg" alt="Instagram">
+                </a>
+                <a id="share-card-fb" target="_blank" rel="noopener noreferrer" aria-label="Bagikan ke Facebook">
+                    <img src="img/share/facebook.svg" alt="Facebook">
+                </a>
+                <a id="share-card-tg" target="_blank" rel="noopener noreferrer" aria-label="Bagikan ke Telegram">
+                    <img src="img/share/telegram.svg" alt="Telegram">
+                </a>
+                <a id="share-card-threads" target="_blank" rel="noopener noreferrer" aria-label="Bagikan ke Threads">
+                    <img src="img/share/threads.svg" alt="Threads">
+                </a>
+                <a id="share-card-x" target="_blank" rel="noopener noreferrer" aria-label="Bagikan ke X">
+                    <img src="img/share/x.svg" alt="X / Twitter">
+                </a>
+            </div>
+        </div>
     </div>
 
     <script src="https://unpkg.com/lenis@1.1.20/dist/lenis.min.js"></script>

@@ -844,10 +844,11 @@ function initProductDetail() {
                 const t = encodeURIComponent(shareText);
                 const urls = {
                     whatsapp: `https://wa.me/?text=${t}%20${u}`,
-                    telegram: `https://t.me/share/url?url=${u}&text=${t}`,
+                    instagram: 'https://instagram.com/hamzahquran',
                     facebook: `https://www.facebook.com/sharer/sharer.php?u=${u}`,
-                    x: `https://twitter.com/intent/tweet?url=${u}&text=${t}`,
-                    threads: `https://www.threads.com/intent/post?url=${u}&text=${t}`
+                    telegram: `https://t.me/share/url?url=${u}&text=${t}`,
+                    threads: `https://www.threads.com/intent/post?url=${u}&text=${t}`,
+                    x: `https://twitter.com/intent/tweet?url=${u}&text=${t}`
                 };
                 shareMenu.querySelectorAll('[data-share]').forEach(el => {
                     const key = el.getAttribute('data-share');
@@ -859,9 +860,103 @@ function initProductDetail() {
                 shareMenu.classList.remove('open');
                 shareBtn.setAttribute('aria-expanded', 'false');
             };
+
+            // Share card modal setup (desktop)
+            const shareCardModal = document.getElementById('share-card-modal');
+            const shareCardBackdrop = document.getElementById('share-card-backdrop');
+            const shareCardClose = document.getElementById('share-card-close');
+            const shareCardImg = document.getElementById('share-card-image');
+            const shareCardLinkInput = document.getElementById('share-card-link');
+            const shareCardCopyBtn = document.getElementById('share-card-copy');
+            const shareCardSaveBtn = document.getElementById('share-card-save');
+            const shareCardWa = document.getElementById('share-card-wa');
+            const shareCardIg = document.getElementById('share-card-ig');
+            const shareCardFb = document.getElementById('share-card-fb');
+            const shareCardTg = document.getElementById('share-card-tg');
+            const shareCardThreads = document.getElementById('share-card-threads');
+            const shareCardX = document.getElementById('share-card-x');
+
+            const openShareCardModal = () => {
+                if (!shareCardModal) return;
+                const u = encodeURIComponent(shareUrl);
+                const t = encodeURIComponent(shareText);
+                if (shareCardImg) {
+                    shareCardImg.src = `${location.origin}/api/og?id=${product.id}&t=${Date.now()}`;
+                }
+                if (shareCardLinkInput) {
+                    shareCardLinkInput.value = shareUrl;
+                }
+                if (shareCardWa) shareCardWa.href = `https://wa.me/?text=${t}%20${u}`;
+                if (shareCardIg) shareCardIg.href = 'https://instagram.com/hamzahquran';
+                if (shareCardFb) shareCardFb.href = `https://www.facebook.com/sharer/sharer.php?u=${u}`;
+                if (shareCardTg) shareCardTg.href = `https://t.me/share/url?url=${u}&text=${t}`;
+                if (shareCardThreads) shareCardThreads.href = `https://www.threads.com/intent/post?url=${u}&text=${t}`;
+                if (shareCardX) shareCardX.href = `https://twitter.com/intent/tweet?url=${u}&text=${t}`;
+                shareCardModal.style.display = 'flex';
+                document.body.style.overflow = 'hidden';
+            };
+
+            const closeShareCardModal = () => {
+                if (!shareCardModal) return;
+                shareCardModal.style.display = 'none';
+                document.body.style.overflow = '';
+            };
+
+            if (shareCardBackdrop) shareCardBackdrop.addEventListener('click', closeShareCardModal);
+            if (shareCardClose) shareCardClose.addEventListener('click', closeShareCardModal);
+            document.addEventListener('keydown', (ev) => {
+                if (ev.key === 'Escape' && shareCardModal && shareCardModal.style.display === 'flex') {
+                    closeShareCardModal();
+                }
+            });
+
+            if (shareCardCopyBtn && shareCardLinkInput) {
+                shareCardCopyBtn.addEventListener('click', async (e) => {
+                    e.preventDefault();
+                    try {
+                        await navigator.clipboard.writeText(shareCardLinkInput.value || shareUrl);
+                        if (typeof showToast === 'function') showToast('Link produk disalin');
+                    } catch (err) {
+                        try {
+                            shareCardLinkInput.select();
+                            shareCardLinkInput.setSelectionRange(0, 99999);
+                            document.execCommand('copy');
+                            if (typeof showToast === 'function') showToast('Link produk disalin');
+                        } catch (e2) { /* noop */ }
+                    }
+                });
+            }
+
+            if (shareCardSaveBtn) {
+                shareCardSaveBtn.addEventListener('click', async (e) => {
+                    e.preventDefault();
+                    try {
+                        const imgUrl = `${location.origin}/api/og?id=${product.id}`;
+                        const res = await fetch(imgUrl);
+                        const blob = await res.blob();
+                        const url = window.URL.createObjectURL(blob);
+                        const a = document.createElement('a');
+                        a.href = url;
+                        a.download = `hamzahquran-${product.id}.jpg`;
+                        document.body.appendChild(a);
+                        a.click();
+                        document.body.removeChild(a);
+                        window.URL.revokeObjectURL(url);
+                    } catch (err) {
+                        // fallback: open image in new tab
+                        window.open(`${location.origin}/api/og?id=${product.id}`, '_blank');
+                    }
+                });
+            }
+
             shareBtn.addEventListener('click', async (e) => {
                 e.preventDefault();
                 e.stopPropagation();
+                const isDesktop = window.matchMedia('(min-width: 1024px)').matches;
+                if (isDesktop) {
+                    openShareCardModal();
+                    return;
+                }
                 const data = { title: product.name, text: shareText, url: shareUrl };
                 if (navigator.share) {
                     try { await navigator.share(data); } catch (err) { /* dibatalkan */ }
@@ -1964,7 +2059,7 @@ function showAlert(title, text, type = 'warning') {
                 <div class="w-20 h-20 bg-slate-50 dark:bg-slate-800 rounded-3xl flex items-center justify-center mb-8">
                     <span class="material-symbols-outlined text-5xl ${colors[type] || colors.warning}">${icons[type] || icons.warning}</span>
                 </div>
-                <h3 class="text-2xl font-display font-black text-slate-900 dark:text-white mb-3">${title}</h3>
+                <h3 class="text-2xl font-display font-semibold text-slate-900 dark:text-white mb-3">${title}</h3>
                 <p class="text-slate-500 dark:text-slate-400 font-medium mb-10 leading-relaxed">${text}</p>
                 <button id="close-alert-btn" class="w-full bg-brand-blue dark:bg-white text-white dark:text-black font-bold py-4 rounded-3xl shadow-lg hover:shadow-brand-blue/30 transition-all hover:-translate-y-1">
                     Oke, Mengerti
