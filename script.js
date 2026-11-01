@@ -531,21 +531,21 @@ function initCoverKatalog() {
             // Reset sub-category filter when switching product type
             currentFilter = 'Semua Desain';
             filterButtons.forEach(b => {
-                b.classList.remove('bg-brand-blue', 'text-white', 'dark:bg-brand-gold', 'dark:text-black', 'shadow-lg');
+                b.classList.remove('btn-gradient-blue');
                 b.classList.add('bg-slate-50', 'dark:bg-slate-900', 'text-slate-400', 'dark:text-slate-500');
             });
             const firstSubBtn = document.querySelector('.filter-btn');
             if (firstSubBtn) {
-                firstSubBtn.classList.add('bg-brand-blue', 'text-white', 'dark:bg-brand-gold', 'dark:text-black', 'shadow-lg');
+                firstSubBtn.classList.add('btn-gradient-blue');
                 firstSubBtn.classList.remove('bg-slate-50', 'dark:bg-slate-900', 'text-slate-400', 'dark:text-slate-500');
             }
 
             // Update Tabs UI
             productTabs.forEach(b => {
-                b.classList.remove('bg-brand-blue', 'text-white', 'dark:bg-white', 'dark:text-black', 'shadow-lg');
+                b.classList.remove('btn-gradient-blue');
                 b.classList.add('bg-slate-50', 'dark:bg-slate-900', 'text-slate-400', 'dark:text-slate-500');
             });
-            btn.classList.add('bg-brand-blue', 'text-white', 'dark:bg-white', 'dark:text-black', 'shadow-lg');
+            btn.classList.add('btn-gradient-blue');
             btn.classList.remove('bg-slate-50', 'dark:bg-slate-900', 'text-slate-400', 'dark:text-slate-500');
 
             // Toggle sub-filters visibility
@@ -575,10 +575,10 @@ function initCoverKatalog() {
     filterButtons.forEach(btn => {
         btn.addEventListener('click', () => {
             filterButtons.forEach(b => {
-                b.classList.remove('bg-brand-blue', 'text-white', 'dark:bg-brand-gold', 'dark:text-black', 'shadow-lg');
+                b.classList.remove('btn-gradient-blue');
                 b.classList.add('bg-slate-50', 'dark:bg-slate-900', 'text-slate-400', 'dark:text-slate-500');
             });
-            btn.classList.add('bg-brand-blue', 'text-white', 'dark:bg-brand-gold', 'dark:text-black', 'shadow-lg');
+            btn.classList.add('btn-gradient-blue');
             btn.classList.remove('bg-slate-50', 'dark:bg-slate-900', 'text-slate-400', 'dark:text-slate-500');
             currentFilter = btn.textContent.trim().replace(/\s+/g, ' ');
             renderCovers();
@@ -1437,7 +1437,7 @@ function renderModalCoverFilters() {
     container.innerHTML = categories.map(cat => {
         const isActive = cat === modalCoverFilter;
         const activeClass = isActive
-            ? 'bg-brand-blue text-white dark:bg-brand-gold dark:text-black shadow-lg font-medium'
+            ? 'btn-gradient-blue font-medium'
             : 'bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-700 font-medium';
         return `<button onclick="filterModalCovers('${cat.replace(/'/g, "\\'")}')"
             class="whitespace-nowrap px-4 py-2 rounded-full text-xs font-bold transition-all shrink-0 ${activeClass}">${cat}</button>`;
@@ -1751,18 +1751,11 @@ function closeBindingPickerModal() {
 function selectBinding(binding) {
     selectedBinding = binding;
     document.querySelectorAll('.binding-picker-btn').forEach(el => {
-        el.classList.remove('border-brand-blue', 'dark:border-brand-gold', 'bg-brand-blue/5', 'dark:bg-brand-gold/10');
-        el.classList.add('border-transparent');
+        const isSelected = el.id === 'binding-opt-' + binding;
+        el.classList.toggle('selected', isSelected);
         const ic = el.querySelector('.binding-check');
-        if (ic) ic.classList.add('hidden');
+        if (ic) ic.classList.toggle('hidden', !isSelected);
     });
-    const target = document.getElementById('binding-opt-' + binding);
-    if (target) {
-        target.classList.remove('border-transparent');
-        target.classList.add('border-brand-blue', 'dark:border-brand-gold', 'bg-brand-blue/5', 'dark:bg-brand-gold/10');
-        const ic = target.querySelector('.binding-check');
-        if (ic) ic.classList.remove('hidden');
-    }
 }
 
 function confirmBindingPicker() {
@@ -2061,7 +2054,7 @@ function showAlert(title, text, type = 'warning') {
                 </div>
                 <h3 class="text-2xl font-display font-semibold text-slate-900 dark:text-white mb-3">${title}</h3>
                 <p class="text-slate-500 dark:text-slate-400 font-medium mb-10 leading-relaxed">${text}</p>
-                <button id="close-alert-btn" class="w-full bg-brand-blue dark:bg-white text-white dark:text-black font-bold py-4 rounded-3xl shadow-lg hover:shadow-brand-blue/30 transition-all hover:-translate-y-1">
+                <button id="close-alert-btn" class="btn-gradient-blue w-full font-bold py-4 rounded-3xl transition-all hover:-translate-y-1">
                     Oke, Mengerti
                 </button>
             </div>
