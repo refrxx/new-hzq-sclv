@@ -1748,7 +1748,7 @@ input[type="radio"] {
     background: linear-gradient(to bottom, #020617, #0f172a);
 }
 .hero-watermark { opacity: .6; }
-.dark .hero-watermark { opacity: .2; }
+.dark .hero-watermark { display: none; }
 
 .hero-callout { filter: drop-shadow(0 12px 20px rgba(15, 23, 42, .15)); }
 .hero-float { animation: heroFloat 5s ease-in-out infinite; }
