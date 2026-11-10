@@ -37,11 +37,12 @@ async function handler(request) {
     const subtotal = toInt(b.subtotal);
     const ongkir = toInt(b.ongkir);
     const voucher = toInt(b.voucher);
+    const flashDiscount = toInt(b.flashDiscount);
     const codFee = toInt(b.codFee);
     const total = toInt(b.grandTotal);
     const itemsSum = items.reduce((s, i) => s + toInt(i.price) * toInt(i.qty), 0);
     const MAX = Number(env.XENITH_MAX_AMOUNT) || 20000000;
-    if (total <= 0 || total > MAX || itemsSum !== subtotal || subtotal + ongkir + codFee - voucher !== total) {
+    if (total <= 0 || total > MAX || flashDiscount < 0 || itemsSum !== subtotal || subtotal + ongkir + codFee - voucher - flashDiscount !== total) {
         return json({ error: 'Data order tidak valid' }, 400);
     }
 

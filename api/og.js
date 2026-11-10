@@ -53,10 +53,10 @@ async function renderCard(product, link) {
         h('div', { position: 'absolute', left: 0, top: 940, width: 1080, height: 124, background: 'linear-gradient(90deg, #e4ecfa 0%, #f2f6fd 100%)', alignItems: 'center', paddingLeft: 56 }, [
             h('div', { alignItems: 'flex-end', color: '#0b0b0b' }, [
                 h('div', { fontSize: 40, fontWeight: 600, marginBottom: 8 }, p.isRange ? 'mulai Rp' : 'Rp'),
-                h('div', { fontSize: 92, fontWeight: 800, lineHeight: 1, letterSpacing: -2, marginLeft: 2 }, p.low.toLocaleString('id-ID')),
-                (p.crt > p.low && !p.isRange) ? h('div', { fontSize: 34, fontWeight: 500, color: '#6b6b6b', textDecoration: 'line-through', marginLeft: 30, marginBottom: 10 }, rp(p.crt)) : null,
+                h('div', { fontSize: 92, fontWeight: 800, lineHeight: 1, letterSpacing: -2, marginLeft: 2 }, p.effLow.toLocaleString('id-ID')),
+                (p.crt > p.effLow && !p.isRange) ? h('div', { fontSize: 34, fontWeight: 500, color: '#6b6b6b', textDecoration: 'line-through', marginLeft: 30, marginBottom: 10 }, rp(p.crt)) : null,
             ].filter(Boolean)),
-            p.pct > 0 ? h('div', { position: 'absolute', left: 0, top: 34, width: 1038, justifyContent: 'flex-end' }, [h('div', { background: '#e03a1a', color: '#fff', fontSize: 40, fontWeight: 600, padding: '8px 30px', borderRadius: 999 }, `${p.isRange ? 'hingga ' : ''}-${p.pct}%`)]) : null,
+            p.effPct > 0 ? h('div', { position: 'absolute', left: 0, top: 34, width: 1038, justifyContent: 'flex-end' }, [h('div', { background: '#e03a1a', color: '#fff', fontSize: 40, fontWeight: 600, padding: '8px 30px', borderRadius: 999 }, `${p.isRange ? 'hingga ' : ''}-${p.effPct}%`)]) : null,
         ].filter(Boolean)),
 
         // judul

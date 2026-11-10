@@ -15,7 +15,7 @@ const rp = n => 'Rp' + n.toLocaleString('id-ID');
 
 function hashOf(product, price) {
     const social = (globalThis.HQ_CATALOG.PRODUCT_SOCIAL_PROOF || {})[product.id] || {};
-    const seed = [product.name, price.low, price.high, social.rating || '', social.sold || ''].join('|');
+    const seed = [product.name, price.low, price.high, price.effLow, price.effHigh, social.rating || '', social.sold || ''].join('|');
     return crypto.createHash('sha1').update(seed).digest('hex').slice(0, 8);
 }
 
@@ -74,8 +74,8 @@ async function handler(request) {
     const target = `/product-detail?id=${product.id}`;
 
     const title = `${product.name} - Hamzah Quran`;
-    const priceText = price.isRange ? `Mulai ${rp(price.low)}` : `${rp(price.low)}`;
-    const description = `${priceText} setelah voucher XTRA. Bisa COD ke seluruh Indonesia & garansi ganti baru.`;
+    const priceText = price.isRange ? `Mulai ${rp(price.effLow)}` : `${rp(price.effLow)}`;
+    const description = `${priceText} harga promo terbaru. Bisa COD ke seluruh Indonesia & garansi ganti baru.`;
 
     return new Response(page({ title, description, shareUrl, image, target }), {
         status: 200,

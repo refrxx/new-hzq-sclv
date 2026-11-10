@@ -299,10 +299,98 @@
         return 'Rp' + (num + add).toLocaleString('id-ID');
     }
 
+    // --- Flash sale berulang (tanggal kembar H-1 s/d H+1 + payday 25-28, WIB) ---
+    // Aktif otomatis sepanjang tahun tanpa perlu ubah tanggal manual.
+    const WIB_OFFSET_MS = 7 * 60 * 60 * 1000;
+    const FLASH_ROUNDING = 500;
+    const FLASH_DISCOUNT_BY_CATEGORY = {
+        'Al Quran': 0.10,
+        'IQRO': 0.05,
+    };
+
+    function wibParts(date) {
+        const d = new Date((date ? date.getTime() : Date.now()) + WIB_OFFSET_MS);
+        return {
+            year: d.getUTCFullYear(),
+            month: d.getUTCMonth() + 1,
+            day: d.getUTCDate(),
+        };
+    }
+
+    function wibDate(year, month, day, hour = 0, minute = 0, second = 0, ms = 0) {
+        return new Date(Date.UTC(year, month - 1, day, hour, minute, second, ms) - WIB_OFFSET_MS);
+    }
+
+    function flashEventLabel(type, month, day) {
+        return type === 'payday' ? 'PAYDAY SALE' : `FLASH SALE ${month}.${day}`;
+    }
+
+    function getFlashSaleInfo(now) {
+        const ref = now ? new Date(now) : new Date();
+        const p = wibParts(ref);
+        let type = null;
+        let label = null;
+        let start = null;
+        let end = null;
+
+        if (p.day >= 25 && p.day <= 28) {
+            type = 'payday';
+            label = flashEventLabel('payday', p.month, p.day);
+            start = wibDate(p.year, p.month, 25);
+            end = wibDate(p.year, p.month, 28, 23, 59, 59, 999);
+        } else {
+            // Tanggal kembar aktif H-1 s/d H+1 (3 hari penuh, WIB).
+            // Cek hari ini, kemarin, dan besok; salah satunya bisa jadi tanggal kembar.
+            const todayStart = wibDate(p.year, p.month, p.day);
+            for (const offset of [0, -1, 1]) {
+                const candidate = new Date(todayStart.getTime() + offset * 86400000);
+                const cp = wibParts(candidate);
+                if (cp.month === cp.day) {
+                    type = 'twin';
+                    label = flashEventLabel('twin', cp.month, cp.day);
+                    const twinStart = wibDate(cp.year, cp.month, cp.day);
+                    start = new Date(twinStart.getTime() - 86400000);
+                    end = new Date(twinStart.getTime() + 2 * 86400000 - 1);
+                    break;
+                }
+            }
+        }
+
+        if (!type || ref < start || ref > end) {
+            return { active: false, event: null };
+        }
+
+        return {
+            active: true,
+            event: { type, label, start, end },
+        };
+    }
+
+    function isFlashSaleActive(now) {
+        return getFlashSaleInfo(now).active;
+    }
+
+    function flashDiscountRate(product) {
+        const category = String((product && product.category) || '');
+        if (category.indexOf('Al Quran') === 0) return FLASH_DISCOUNT_BY_CATEGORY['Al Quran'];
+        if (category === 'IQRO') return FLASH_DISCOUNT_BY_CATEGORY.IQRO;
+        return 0;
+    }
+
+    // Diskon dihitung dari harga final (setelah voucher XTRA), lalu dibulatkan ke bawah kelipatan Rp500.
+    function roundFlashPrice(amount, rate) {
+        const base = Math.max(0, Number(amount) || 0);
+        if (!rate) return base;
+        const discounted = base * (1 - rate);
+        // +1e-6 menahan galat floating point agar tidak turun 500 dari kelipatan pas.
+        return Math.max(0, Math.floor((discounted + 1e-6) / FLASH_ROUNDING) * FLASH_ROUNDING);
+    }
+
     // --- Harga halaman detail (murni, tanpa DOM) ---
-    // Harga Web (atau tiap binding) dikurangi voucher XTRA per produk.
-    // crt = priceCrt; pct dihitung hanya jika crt > low; isRange jika low !== high.
-    function computeDetailPricing(product, quranType) {
+    // low/high = harga setelah voucher XTRA (sebelum flash sale).
+    // effLow/effHigh = harga efektif setelah diskon flash sale (jika event aktif).
+    // crt = priceCrt; pct/effPct dihitung hanya jika crt lebih besar dari harga terkait.
+    function computeDetailPricing(product, quranType, now) {
         const p = product || {};
         const voucher = productXtraVoucher(p);
         const crt = bindingPriceNum(p.priceCrt);
@@ -321,7 +409,19 @@
         const isRange = low !== high;
         const pct = (crt > low && crt > 0) ? Math.round((crt - low) / crt * 100) : 0;
         const save = Math.max(0, crt - low);
-        return { low, high, isRange, crt, pct, save, voucher };
+
+        const flashRate = isFlashSaleActive(now) ? flashDiscountRate(p) : 0;
+        const flashLow = flashRate ? roundFlashPrice(low, flashRate) : low;
+        const flashHigh = flashRate ? roundFlashPrice(high, flashRate) : high;
+        const flashSave = Math.max(0, low - flashLow);
+        const effPct = (crt > flashLow && crt > 0) ? Math.round((crt - flashLow) / crt * 100) : 0;
+        const effSave = Math.max(0, crt - flashLow);
+
+        return {
+            low, high, isRange, crt, pct, save, voucher,
+            flashRate, flashLow, flashHigh, flashSave,
+            effLow: flashLow, effHigh: flashHigh, effPct, effSave,
+        };
     }
 
     root.HQ_CATALOG = {
@@ -335,5 +435,11 @@
         VARIANT_OPTIONS: VARIANT_OPTIONS,
         variantPriceStr: variantPriceStr,
         computeDetailPricing: computeDetailPricing,
+        FLASH_ROUNDING: FLASH_ROUNDING,
+        FLASH_DISCOUNT_BY_CATEGORY: FLASH_DISCOUNT_BY_CATEGORY,
+        getFlashSaleInfo: getFlashSaleInfo,
+        isFlashSaleActive: isFlashSaleActive,
+        flashDiscountRate: flashDiscountRate,
+        roundFlashPrice: roundFlashPrice,
     };
 })(typeof globalThis !== 'undefined' ? globalThis : this);

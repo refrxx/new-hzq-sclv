@@ -239,6 +239,30 @@
             <img src="img/banner_desktop.jpg" alt="Produk Kami" class="w-full h-auto object-cover">
         </section>
 
+        <!-- Flash Sale: hanya tampil saat event aktif -->
+        <section data-flash-sale class="hidden flash-panel rounded-3xl overflow-hidden shadow-xl mb-8 md:mb-10">
+            <div class="flash-panel-head flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 px-5 py-4 md:px-8 md:py-5">
+                <div class="flex items-center gap-3">
+                    <span class="flash-bolt material-symbols-outlined">bolt</span>
+                    <div>
+                        <p class="text-white/75 text-[10px] md:text-xs font-bold uppercase tracking-[0.22em]">Promo terbatas</p>
+                        <h2 class="text-lg md:text-2xl font-display font-black text-white leading-tight">
+                            <span data-flash-label>Flash Sale</span>
+                        </h2>
+                    </div>
+                </div>
+                <div class="flash-countdown">
+                    <div class="flash-unit"><span data-flash-unit="days">00</span><small>Hari</small></div>
+                    <span class="flash-sep">:</span>
+                    <div class="flash-unit"><span data-flash-unit="hours">00</span><small>Jam</small></div>
+                    <span class="flash-sep">:</span>
+                    <div class="flash-unit"><span data-flash-unit="minutes">00</span><small>Menit</small></div>
+                    <span class="flash-sep">:</span>
+                    <div class="flash-unit"><span data-flash-unit="seconds">00</span><small>Detik</small></div>
+                </div>
+            </div>
+        </section>
+
         <section
             class="reveal mb-8">
             <div class="flex items-center justify-between gap-4 mb-5">

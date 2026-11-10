@@ -274,12 +274,31 @@
                     <!-- Price block -->
                     <div class="pd-price-block -mx-8 md:mx-0 px-8 md:px-6 py-4 lg:mt-4">
                         <div class="flex flex-col">
+                            <div id="pd-flash-banner" data-flash-sale data-flash-product-only class="hidden mb-2">
+                                <div class="pd-flash-banner">
+                                    <div class="flex items-center gap-1.5">
+                                        <span class="material-symbols-outlined text-[1.05rem]">bolt</span>
+                                        <span class="font-black tracking-wide"><span data-flash-label>Flash Sale</span></span>
+                                    </div>
+                                    <div class="flash-countdown flash-countdown-sm">
+                                        <div class="flash-unit"><span data-flash-unit="days">00</span><small>Hari</small></div>
+                                        <span class="flash-sep">:</span>
+                                        <div class="flash-unit"><span data-flash-unit="hours">00</span><small>Jam</small></div>
+                                        <span class="flash-sep">:</span>
+                                        <div class="flash-unit"><span data-flash-unit="minutes">00</span><small>Menit</small></div>
+                                        <span class="flash-sep">:</span>
+                                        <div class="flash-unit"><span data-flash-unit="seconds">00</span><small>Detik</small></div>
+                                    </div>
+                                </div>
+                            </div>
                             <span id="harga-coret"
                                 class="text-xs font-medium text-slate-400 dark:text-slate-500 line-through">Rp0</span>
-                            <div class="flex items-center gap-2 mt-0.5 cursor-pointer hover:opacity-85 transition-opacity"
+                            <div class="flex flex-wrap items-center gap-x-2 gap-y-1 mt-0.5 cursor-pointer hover:opacity-85 transition-opacity"
                                 role="button" tabindex="0" aria-label="Lihat rincian harga" title="Lihat rincian harga"
                                 onclick="openPriceDetailModal()"
                                 onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openPriceDetailModal();}">
+                                <span id="pd-final-price" class="pd-flash-final hidden"></span>
+                                <span id="pd-flash-arrow" class="pd-flash-arrow hidden" aria-hidden="true">&gt;&gt;</span>
                                 <div id="product-wa-price" class="pd-big-price">
                                     <span class="pd-currency">Rp</span><span class="pd-amount">0</span>
                                 </div>

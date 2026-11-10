@@ -9,6 +9,100 @@ const productCheapestPrice = CATALOG.productCheapestPrice;
 const VARIANT_OPTIONS = CATALOG.VARIANT_OPTIONS || {};
 const variantPriceStr = CATALOG.variantPriceStr;
 const computeDetailPricing = CATALOG.computeDetailPricing;
+const getFlashSaleInfo = CATALOG.getFlashSaleInfo || (() => ({ active: false, event: null }));
+const isFlashSaleActive = CATALOG.isFlashSaleActive || (() => false);
+const flashDiscountRate = CATALOG.flashDiscountRate || (() => 0);
+const roundFlashPrice = CATALOG.roundFlashPrice || ((amount) => amount);
+
+function formatRupiah(amount) {
+    return 'Rp' + Math.max(0, Math.round(Number(amount) || 0)).toLocaleString('id-ID');
+}
+
+function currentFlashLabel() {
+    const info = getFlashSaleInfo();
+    return info && info.active && info.event ? info.event.label : 'Flash Sale';
+}
+
+function flashRateOf(product) {
+    if (!isFlashSaleActive()) return 0;
+    return flashDiscountRate(product) || 0;
+}
+
+function flashNetPrice(product, amount) {
+    const rate = flashRateOf(product);
+    return rate ? roundFlashPrice(amount, rate) : Math.max(0, Math.round(Number(amount) || 0));
+}
+
+// Render blok harga halaman detail.
+// Tanpa pilihan: harga terendah. Dengan quranType/binding: harga spesifik pilihan user.
+// Diskon flash selalu dihitung dari harga final setelah voucher XTRA.
+function applyDetailPriceDisplay(product, quranType, binding) {
+    if (!product) return;
+    const toNum = v => parseInt(String(v).replace(/[^\d]/g, ''), 10) || 0;
+    const voucher = (productXtraVoucher(product) || 0);
+
+    let baseFinal, crtStr;
+    if (binding && product.bindings && product.bindings[binding] != null) {
+        baseFinal = Math.max(0, bindingPriceNum(product.bindings[binding]) - voucher);
+        crtStr = product.priceCrt;
+    } else if (quranType) {
+        baseFinal = Math.max(0, toNum(variantPriceStr(product, 'priceWa', quranType)) - voucher);
+        crtStr = variantPriceStr(product, 'priceCrt', quranType) || product.priceCrt;
+    } else {
+        const pricing = computeDetailPricing(product);
+        baseFinal = pricing.low;
+        crtStr = product.priceCrt;
+    }
+
+    const netFinal = flashNetPrice(product, baseFinal);
+    const showFlashStrike = flashRateOf(product) > 0 && baseFinal > netFinal;
+
+    const crtEl = document.getElementById('harga-coret');
+    if (crtEl) crtEl.textContent = crtStr;
+
+    const priceEl = document.getElementById('product-price');
+    if (priceEl) {
+        priceEl.textContent = quranType
+            ? (variantPriceStr(product, 'priceStr', quranType) || product.priceStr)
+            : product.priceStr;
+    }
+
+    const waEl = document.getElementById('product-wa-price');
+    if (waEl) {
+        const displayPrice = formatRupiah(netFinal);
+        const m = /^Rp\s?([\d.]+)$/.exec(displayPrice);
+        waEl.innerHTML = m
+            ? `<span class="pd-currency">Rp</span><span class="pd-amount">${m[1]}</span>`
+            : `<span class="pd-amount pd-amount-sm">${displayPrice}</span>`;
+    }
+
+    const finalEl = document.getElementById('pd-final-price');
+    const arrowEl = document.getElementById('pd-flash-arrow');
+    if (finalEl && arrowEl) {
+        if (showFlashStrike) {
+            finalEl.textContent = formatRupiah(baseFinal);
+            finalEl.classList.remove('hidden');
+            arrowEl.classList.remove('hidden');
+        } else {
+            finalEl.textContent = '';
+            finalEl.classList.add('hidden');
+            arrowEl.classList.add('hidden');
+        }
+    }
+
+    const pill = document.getElementById('pd-discount-pill');
+    if (pill) {
+        const crt = toNum(crtStr);
+        const diff = crt - netFinal;
+        if (diff > 0 && crt > 0) {
+            pill.textContent = `-${Math.round((diff / crt) * 100)}%`;
+            pill.title = `Hemat Rp${diff.toLocaleString('id-ID')}`;
+            pill.classList.remove('hidden');
+        } else {
+            pill.classList.add('hidden');
+        }
+    }
+}
 
 // --- Label singkat untuk pill kategori di card (data p.category tetap penuh) ---
 const CATEGORY_SHORT = {
@@ -295,14 +389,12 @@ function initLenis() {
 
 // Product Card Template (katalog, related, trending)
 function productCardTemplate(p, opts = {}) {
-    const toNum = s => parseInt(String(s).replace(/[^\d]/g, ''), 10) || 0;
-    const crt = toNum(p.priceCrt);
-    const priceWaStr = productCheapestPrice(p);
-    const wa = toNum(priceWaStr);
-    const voucher = productXtraVoucher(p);
-    const finalWa = Math.max(0, wa - voucher);
-    const finalWaStr = 'Rp' + finalWa.toLocaleString('id-ID');
-    const discount = crt > 0 ? Math.round((crt - finalWa) / crt * 100) : 0;
+    const pricing = computeDetailPricing(p);
+    const finalWa = pricing.effLow;
+    const finalWaStr = formatRupiah(finalWa);
+    const discount = pricing.effPct;
+    const flashActive = pricing.flashRate > 0;
+    const flashLabel = currentFlashLabel();
 
     const social = PRODUCT_SOCIAL_PROOF[p.id] || {};
     const metaParts = [];
@@ -323,6 +415,10 @@ function productCardTemplate(p, opts = {}) {
                 </div>`
         : '';
 
+    const flashBadge = flashActive
+        ? `<span class="flash-card-badge"><span class="material-symbols-outlined text-[0.9rem]" style="font-variation-settings:'FILL' 1">bolt</span>${flashLabel}</span>`
+        : '';
+
     // Sold out: gambar jadi abu-abu + label overlay
     const soldOutOverlay = p.soldOut
         ? `<div class="absolute inset-0 flex items-center justify-center bg-slate-900/40">
@@ -336,6 +432,7 @@ function productCardTemplate(p, opts = {}) {
         <div class="relative aspect-square overflow-hidden bg-slate-100 dark:bg-slate-800">
             <img src="${p.img}" alt="${p.name}" loading="lazy"
                 class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105 ${p.soldOut ? 'grayscale opacity-60' : ''}">
+            ${flashBadge}
             ${soldOutOverlay}
         </div>
         <div class="p-4 flex flex-col flex-1">
@@ -378,7 +475,7 @@ function initKatalog() {
             filtered = GLOBAL_PRODUCTS.filter(p => p.category === currentFilter);
         }
 
-        const effPrice = p => bindingPriceNum(productCheapestPrice(p));
+        const effPrice = p => computeDetailPricing(p).effLow;
         if (currentSort === 'price-low') filtered.sort((a, b) => effPrice(a) - effPrice(b));
         else if (currentSort === 'price-high') filtered.sort((a, b) => effPrice(b) - effPrice(a));
         else if (currentSort === 'sold-desc') filtered.sort((a, b) => soldOf(b) - soldOf(a));
@@ -646,41 +743,10 @@ function initProductDetail() {
         setEl('product-category', product.category);
         setEl('harga-coret', product.priceCrt);
         setEl('product-price', product.priceStr);
-        const toNum = v => parseInt(String(v).replace(/[^\d]/g, ''), 10) || 0;
-        const fmtRp = n => 'Rp' + Math.max(0, n).toLocaleString('id-ID');
         const productVoucher = productXtraVoucher(product);
-        const detailPrice = (quranType) => computeDetailPricing(product, quranType);
 
-        const discountedWaStr = (quranType) => {
-            const info = detailPrice(quranType);
-            return info.isRange ? `${fmtRp(info.low)} - ${fmtRp(info.high)}` : fmtRp(info.low);
-        };
-        const setBigPrice = (displayStr) => {
-            const waEl = document.getElementById('product-wa-price');
-            if (!waEl) return;
-            const m = /^Rp\s?([\d.]+)$/.exec(displayStr);
-            if (m) {
-                waEl.innerHTML = `<span class="pd-currency">Rp</span><span class="pd-amount">${m[1]}</span>`;
-            } else {
-                waEl.innerHTML = `<span class="pd-amount pd-amount-sm">${displayStr}</span>`;
-            }
-        };
-        const shownPriceNum = (quranType) => detailPrice(quranType).low;
-        const setDiscountPill = (quranType) => {
-            const pill = document.getElementById('pd-discount-pill');
-            if (!pill) return;
-            const info = detailPrice(quranType);
-            if (info.save > 0 && info.crt > 0) {
-                pill.textContent = `-${info.pct}%`;
-                pill.title = `Hemat Rp${info.save.toLocaleString('id-ID')}`;
-                pill.classList.remove('hidden');
-            } else {
-                pill.classList.add('hidden');
-            }
-        };
-
-        setBigPrice(discountedWaStr());
-        setDiscountPill();
+        // Harga awal: yang terendah. Pilihan varian/binding akan menimpa via picker.
+        applyDetailPriceDisplay(product);
 
         // Social proof (rating + jumlah terjual)
         const social = PRODUCT_SOCIAL_PROOF[product.id] || {};
@@ -835,8 +901,8 @@ function initProductDetail() {
         if (shareBtn) {
             const sharePrice = computeDetailPricing(product);
             const sharePriceStr = sharePrice.isRange
-                ? `mulai Rp${sharePrice.low.toLocaleString('id-ID')}`
-                : `Rp${sharePrice.low.toLocaleString('id-ID')}`;
+                ? `mulai ${formatRupiah(sharePrice.effLow)}`
+                : formatRupiah(sharePrice.effLow);
             const shareText = `${product.name} - ${sharePriceStr}`;
             const buildShareLinks = () => {
                 if (!shareMenu) return;
@@ -1132,6 +1198,75 @@ trendingGrid.innerHTML = trendingProducts.map((p, idx) => productCardTemplate(p,
     })).join('');
 }
 
+// 7. Flash Sale berulang (tanggal kembar H-1 s/d H+1 + payday 25-28)
+let flashSaleTimer = null;
+
+function initFlashSale() {
+    const info = getFlashSaleInfo();
+    const flashEls = document.querySelectorAll('[data-flash-sale]');
+
+    if (!info.active) {
+        flashEls.forEach(el => el.classList.add('hidden'));
+        return;
+    }
+
+    flashEls.forEach(el => {
+        if (el.hasAttribute('data-flash-product-only')) {
+            const rate = currentProductData ? flashDiscountRate(currentProductData) : 0;
+            el.classList.toggle('hidden', !rate);
+        } else {
+            el.classList.remove('hidden');
+        }
+    });
+
+    document.querySelectorAll('[data-flash-label]').forEach(el => {
+        el.textContent = info.event.label;
+    });
+
+    const grid = document.getElementById('flash-sale-grid');
+    if (grid && !grid.dataset.rendered) {
+        const products = GLOBAL_PRODUCTS
+            .filter(p => flashDiscountRate(p) > 0 && !p.soldOut)
+            .sort((a, b) => ((PRODUCT_SOCIAL_PROOF[b.id] || {}).sold || 0) - ((PRODUCT_SOCIAL_PROOF[a.id] || {}).sold || 0))
+            .slice(0, 4);
+        grid.innerHTML = products.map((p, idx) => productCardTemplate(p, {
+            className: 'animate-fade-in-up',
+            style: `animation-delay: ${idx * 60}ms`
+        })).join('');
+        grid.dataset.rendered = '1';
+    }
+
+    const tick = () => {
+        const msLeft = info.event.end.getTime() - Date.now();
+        if (msLeft <= 0) {
+            if (flashSaleTimer) clearInterval(flashSaleTimer);
+            flashSaleTimer = null;
+            flashEls.forEach(el => el.classList.add('hidden'));
+            if (document.getElementById('cart-container')) {
+                updateCartTotalUI();
+            } else if (document.getElementById('product-name') || document.getElementById('product-list') || document.getElementById('flash-sale-grid')) {
+                window.location.reload();
+            }
+            return;
+        }
+
+        const total = Math.floor(msLeft / 1000);
+        const values = {
+            days: Math.floor(total / 86400),
+            hours: Math.floor((total % 86400) / 3600),
+            minutes: Math.floor((total % 3600) / 60),
+            seconds: total % 60,
+        };
+        document.querySelectorAll('[data-flash-unit]').forEach(el => {
+            const key = el.getAttribute('data-flash-unit');
+            if (key in values) el.textContent = String(values[key]).padStart(2, '0');
+        });
+    };
+
+    tick();
+    flashSaleTimer = setInterval(tick, 1000);
+}
+
 const counters = document.querySelectorAll('.counter');
 const speed = 200; // Semakin tinggi semakin lambat
 
@@ -1297,7 +1432,7 @@ function initPersonalizationPage() {
 
         const voucher = productXtraVoucher(product);
         const toNum = v => parseInt(String(v).replace(/[^\d]/g, ''), 10) || 0;
-        const priceAfterVoucher = str => 'Rp' + Math.max(0, toNum(str) - voucher).toLocaleString('id-ID');
+        const priceAfterVoucher = str => formatRupiah(flashNetPrice(product, Math.max(0, toNum(str) - voucher)));
 
         setEl('personalize-product-img', product.img, 'src');
         setEl('personalize-product-name', product.name);
@@ -1604,7 +1739,7 @@ function openQuranPickerModal(productId, variants) {
     container.innerHTML = variants.map(key => {
         const opt = VARIANT_OPTIONS[key] || { label: key, img: '', add: 0 };
         const priceTag = product && hasPriceDiff
-            ? `<span class="absolute bottom-2 right-2 rounded-full bg-black/70 text-white px-3 py-1 text-xs font-bold backdrop-blur-sm">${fmtRp(toNum(variantPriceStr(product, 'priceWa', key)) - voucher)}</span>`
+            ? `<span class="absolute bottom-2 right-2 rounded-full bg-black/70 text-white px-3 py-1 text-xs font-bold backdrop-blur-sm">${fmtRp(flashNetPrice(product, toNum(variantPriceStr(product, 'priceWa', key)) - voucher))}</span>`
             : '';
         return `
             <label id="quran-opt-${key}" class="quran-picker-card modal-cover-card cursor-pointer rounded-[1.25rem] overflow-hidden border-2 border-transparent relative"
@@ -1671,39 +1806,7 @@ if (document.fonts && document.fonts.ready) document.fonts.ready.then(updateTabI
 function updateQuranPriceDisplay() {
     const product = quranPickerProductId ? GLOBAL_PRODUCTS.find(p => p.id === quranPickerProductId) : null;
     if (!product) return;
-    const variants = QURAN_VARIANTS[product.id] || [];
-    const hasPriceDiff = variants.some(k => VARIANT_OPTIONS[k] && VARIANT_OPTIONS[k].add > 0);
-    if (!hasPriceDiff) return;
-
-    const toNum = v => parseInt(String(v).replace(/[^\d]/g, ''), 10) || 0;
-    const fmtRp = n => 'Rp' + Math.max(0, n).toLocaleString('id-ID');
-    const voucher = productXtraVoucher(product);
-    const crtEl = document.getElementById('harga-coret');
-    const priceEl = document.getElementById('product-price');
-    const waEl = document.getElementById('product-wa-price');
-    const displayPrice = fmtRp(toNum(variantPriceStr(product, 'priceWa', selectedQuranType)) - voucher);
-    if (crtEl) crtEl.textContent = variantPriceStr(product, 'priceCrt', selectedQuranType);
-    if (priceEl) priceEl.textContent = variantPriceStr(product, 'priceStr', selectedQuranType);
-    if (waEl) {
-        const m = /^Rp\s?([\d.]+)$/.exec(displayPrice);
-        waEl.innerHTML = m
-            ? `<span class="pd-currency">Rp</span><span class="pd-amount">${m[1]}</span>`
-            : `<span class="pd-amount pd-amount-sm">${displayPrice}</span>`;
-    }
-
-    const pill = document.getElementById('pd-discount-pill');
-    if (pill) {
-        const crt = toNum(product.priceCrt);
-        const diff = crt - toNum(displayPrice);
-        if (diff > 0 && crt > 0) {
-            const pct = Math.round((diff / crt) * 100);
-            pill.textContent = `-${pct}%`;
-            pill.title = `Hemat Rp${diff.toLocaleString('id-ID')}`;
-            pill.classList.remove('hidden');
-        } else {
-            pill.classList.add('hidden');
-        }
-    }
+    applyDetailPriceDisplay(product, selectedQuranType);
 }
 
 function confirmQuranPicker() {
@@ -1726,10 +1829,10 @@ function openBindingPickerModal(productId) {
     const keys = bindingKeys(product);
     const voucher = productXtraVoucher(product);
 
-    // Isi harga tiap opsi sesuai produk (setelah dipotong voucher xtra)
+    // Isi harga tiap opsi sesuai produk (setelah voucher xtra + diskon flash bila aktif)
     keys.forEach(k => {
         const priceEl = document.getElementById('binding-price-' + k);
-        if (priceEl) priceEl.textContent = 'Rp' + Math.max(0, bindingPriceNum(product.bindings[k]) - voucher).toLocaleString('id-ID');
+        if (priceEl) priceEl.textContent = formatRupiah(flashNetPrice(product, Math.max(0, bindingPriceNum(product.bindings[k]) - voucher)));
     });
 
     const defaultBinding = keys[0] || 'softcover';
@@ -1756,6 +1859,8 @@ function selectBinding(binding) {
         const ic = el.querySelector('.binding-check');
         if (ic) ic.classList.toggle('hidden', !isSelected);
     });
+    const product = bindingPickerProductId ? GLOBAL_PRODUCTS.find(p => p.id === bindingPickerProductId) : null;
+    if (product) applyDetailPriceDisplay(product, '', binding);
 }
 
 function confirmBindingPicker() {
@@ -1766,13 +1871,15 @@ function confirmBindingPicker() {
 }
 
 // === Modal Rincian Harga ===
-function priceBreakdownBlock(label, crtLabel, priceWaStr, voucher) {
+function priceBreakdownBlock(label, crtLabel, priceWaStr, voucher, flashRate) {
     const toNum = v => parseInt(String(v).replace(/[^\d]/g, ''), 10) || 0;
     const fmtRp = n => 'Rp' + Math.max(0, n).toLocaleString('id-ID');
     const crt = toNum(crtLabel);
     const wa = toNum(priceWaStr);
     const diskon = Math.max(0, crt - wa);
     const finalPrice = Math.max(0, wa - voucher);
+    const flashPrice = flashRate ? roundFlashPrice(finalPrice, flashRate) : finalPrice;
+    const flashDiscount = Math.max(0, finalPrice - flashPrice);
     const row = (l, val, cls = '') => `
         <div class="flex items-center justify-between text-sm">
             <span class="text-slate-500 dark:text-slate-400">${l}</span>
@@ -1784,9 +1891,10 @@ function priceBreakdownBlock(label, crtLabel, priceWaStr, voucher) {
             ${row('Harga Normal', fmtRp(crt))}
             ${diskon > 0 ? row('Diskon', '\u2212' + fmtRp(diskon), 'text-red-500') : ''}
             ${voucher > 0 ? row('Voucher XTRA', '\u2212' + fmtRp(voucher), 'text-brand-blue dark:text-brand-gold') : ''}
+            ${flashDiscount > 0 ? row('Diskon ' + currentFlashLabel(), '\u2212' + fmtRp(flashDiscount), 'text-red-500') : ''}
             <div class="border-t border-dashed border-slate-200 dark:border-slate-700 pt-2.5 flex items-center justify-between">
                 <span class="font-bold text-slate-900 dark:text-white">Harga Final</span>
-                <span class="text-lg font-black text-brand-blue dark:text-brand-gold">${fmtRp(finalPrice)}</span>
+                <span class="text-lg font-black text-brand-blue dark:text-brand-gold">${fmtRp(flashPrice)}</span>
             </div>
         </div>`;
 }
@@ -1799,13 +1907,14 @@ window.openPriceDetailModal = function () {
 
     const voucher = productXtraVoucher(product);
     const crtLabel = product.priceCrt || 'Rp0';
+    const flashRate = flashRateOf(product);
 
     if (product.bindings) {
         body.innerHTML = Object.keys(product.bindings).map(k =>
-            priceBreakdownBlock(bindingLabel(k), crtLabel, product.bindings[k], voucher)
+            priceBreakdownBlock(bindingLabel(k), crtLabel, product.bindings[k], voucher, flashRate)
         ).join('<div class="my-4 border-t border-slate-100 dark:border-slate-800"></div>');
     } else {
-        body.innerHTML = priceBreakdownBlock('', crtLabel, product.priceWa || 'Rp0', voucher);
+        body.innerHTML = priceBreakdownBlock('', crtLabel, product.priceWa || 'Rp0', voucher, flashRate);
     }
 
     modal.style.display = 'flex';
@@ -2172,11 +2281,12 @@ async function initCart() {
             const shippingDiscount = getShippingDiscount(courierPrice, subtotal);
             const ongkirAfterSubsidy = courierPrice - shippingDiscount;
             const voucher = getVoucherDiscount(subtotal);
-            const feeBase = subtotal + ongkirAfterSubsidy - voucher;
+            const flashDiscount = getFlashDiscountTotal();
+            const feeBase = subtotal + ongkirAfterSubsidy - voucher - flashDiscount;
             const isCodPay = paymentMethodValue === 'cod';
             const codFee = isCodPay ? calcCodFee(feeBase) : 0;
             const serviceFee = isCodPay ? 0 : ONLINE_SERVICE_FEE;
-            const grandTotal = subtotal + ongkirAfterSubsidy + codFee + serviceFee - voucher;
+            const grandTotal = subtotal + ongkirAfterSubsidy + codFee + serviceFee - voucher - flashDiscount;
 
             if (isCodPay) {
                 const okCod = await window.openCodConfirmModal({
@@ -2190,12 +2300,16 @@ async function initCart() {
             const isGratisOngkir = getAutoGratisOngkir(subtotal) !== null;
             const goLabel = getGratisOngkirLabel(subtotal);
             const vchLabel = getAutoVoucherLabel(subtotal);
+            const flashLabel = currentFlashLabel();
             const totalQty = cart.reduce((sum, item) => sum + item.qty, 0);
 
             message += `==============\n`;
             message += `*SUBTOTAL: ${formatPrice(subtotal)}*\n`;
             if (voucher > 0) {
                 message += `*${vchLabel || 'Voucher XTRA'}:* -${formatPrice(voucher)}\n`;
+            }
+            if (flashDiscount > 0) {
+                message += `*Diskon ${flashLabel}:* -${formatPrice(flashDiscount)}\n`;
             }
             message += `*Ongkos Kirim:* ${courierLabel ? `${courierLabel} — ${formatPrice(courierPrice)}` : formatPrice(courierPrice)}\n`;
             if (shippingDiscount > 0) {
@@ -2245,6 +2359,7 @@ async function initCart() {
                             subtotal,
                             ongkir: ongkirAfterSubsidy,
                             voucher,
+                            flashDiscount,
                             serviceFee,
                             grandTotal
                         })
@@ -2275,6 +2390,8 @@ async function initCart() {
                         subsidyQty: isGratisOngkir ? 0 : totalQty,
                         voucher,
                         voucherLabel: vchLabel,
+                        flashDiscount,
+                        flashLabel,
                         gratisOngkirLabel: goLabel,
                         codFee: 0,
                         serviceFee,
@@ -2360,6 +2477,8 @@ async function initCart() {
                 subsidyQty: isGratisOngkir ? 0 : totalQty,
                 voucher: voucher,
                 voucherLabel: vchLabel,
+                flashDiscount,
+                flashLabel,
                 gratisOngkirLabel: goLabel,
                 codFee,
                 serviceFee,
@@ -2417,6 +2536,7 @@ async function initCart() {
                         subtotal,
                         ongkir: ongkirAfterSubsidy,
                         voucher,
+                        flashDiscount,
                         codFee,
                         grandTotal
                     })
@@ -2835,6 +2955,19 @@ function getVoucherDiscount() {
     return cart.reduce((sum, item) => sum + (item.qty || 1) * itemXtraVoucher(item), 0);
 }
 
+function getFlashDiscountTotal() {
+    if (!isFlashSaleActive()) return 0;
+    return cart.reduce((sum, item) => {
+        const product = GLOBAL_PRODUCTS.find(p => p.id === item.id);
+        const rate = flashDiscountRate(product);
+        if (!rate) return sum;
+        const price = parseFloat(String(item.priceWa || item.priceCrt).replace(/[^0-9]/g, '')) || 0;
+        const finalPrice = Math.max(0, price - itemXtraVoucher(item));
+        const flashPrice = roundFlashPrice(finalPrice, rate);
+        return sum + Math.max(0, finalPrice - flashPrice) * (item.qty || 1);
+    }, 0);
+}
+
 function getGratisOngkirLabel(subtotal) {
     const auto = getAutoGratisOngkir(subtotal);
     return auto ? auto.label : null;
@@ -2855,22 +2988,24 @@ function updateGrandTotal() {
     const shippingDiscount = getShippingDiscount(ongkirPrice, subtotal);
     const ongkirAfterSubsidy = ongkirPrice - shippingDiscount;
     const voucher = getVoucherDiscount(subtotal);
-    const feeBase = subtotal + ongkirAfterSubsidy - voucher;
+    const flashDiscount = getFlashDiscountTotal();
+    const feeBase = subtotal + ongkirAfterSubsidy - voucher - flashDiscount;
     const codFee = isCOD() ? calcCodFee(feeBase) : 0;
     const serviceFee = isCOD() ? 0 : ONLINE_SERVICE_FEE;
-    const grandTotal = subtotal + ongkirAfterSubsidy + codFee + serviceFee - voucher;
+    const grandTotal = subtotal + ongkirAfterSubsidy + codFee + serviceFee - voucher - flashDiscount;
 
     // Get labels for display
     const isGratisOngkir = getAutoGratisOngkir(subtotal) !== null;
     const goLabel = getGratisOngkirLabel(subtotal);
     const vchLabel = getAutoVoucherLabel(subtotal);
+    const flashLabel = currentFlashLabel();
 
     const rows = [
-        { rowId: 'ongkir-summary-row', labelId: 'ongkir-summary-label', priceId: 'ongkir-summary-price', totalId: 'grand-total', codRowId: 'cod-fee-row', codPriceId: 'cod-fee-price', subRowId: 'subsidy-row', subPriceId: 'subsidy-price', vchRowId: 'voucher-row', vchPriceId: 'voucher-price', serviceFeeRowId: 'service-fee-row', serviceFeePriceId: 'service-fee-price' },
-        { rowId: 'ongkir-summary-row-mobile', labelId: 'ongkir-summary-label-mobile', priceId: 'ongkir-summary-price-mobile', totalId: 'grand-total-mobile', codRowId: 'cod-fee-row-mobile', codPriceId: 'cod-fee-price-mobile', subRowId: 'subsidy-row-mobile', subPriceId: 'subsidy-price-mobile', vchRowId: 'voucher-row-mobile', vchPriceId: 'voucher-price-mobile', serviceFeeRowId: 'service-fee-row-mobile', serviceFeePriceId: 'service-fee-price-mobile' },
+        { rowId: 'ongkir-summary-row', labelId: 'ongkir-summary-label', priceId: 'ongkir-summary-price', totalId: 'grand-total', codRowId: 'cod-fee-row', codPriceId: 'cod-fee-price', subRowId: 'subsidy-row', subPriceId: 'subsidy-price', vchRowId: 'voucher-row', vchPriceId: 'voucher-price', serviceFeeRowId: 'service-fee-row', serviceFeePriceId: 'service-fee-price', flashRowId: 'flash-row', flashPriceId: 'flash-price' },
+        { rowId: 'ongkir-summary-row-mobile', labelId: 'ongkir-summary-label-mobile', priceId: 'ongkir-summary-price-mobile', totalId: 'grand-total-mobile', codRowId: 'cod-fee-row-mobile', codPriceId: 'cod-fee-price-mobile', subRowId: 'subsidy-row-mobile', subPriceId: 'subsidy-price-mobile', vchRowId: 'voucher-row-mobile', vchPriceId: 'voucher-price-mobile', serviceFeeRowId: 'service-fee-row-mobile', serviceFeePriceId: 'service-fee-price-mobile', flashRowId: 'flash-row-mobile', flashPriceId: 'flash-price-mobile' },
     ];
 
-    rows.forEach(({ rowId, labelId, priceId, totalId, codRowId, codPriceId, subRowId, subPriceId, vchRowId, vchPriceId, serviceFeeRowId, serviceFeePriceId }) => {
+    rows.forEach(({ rowId, labelId, priceId, totalId, codRowId, codPriceId, subRowId, subPriceId, vchRowId, vchPriceId, serviceFeeRowId, serviceFeePriceId, flashRowId, flashPriceId }) => {
         const row = document.getElementById(rowId);
         const label = document.getElementById(labelId);
         const priceEl = document.getElementById(priceId);
@@ -2883,6 +3018,8 @@ function updateGrandTotal() {
         const vchPriceEl = document.getElementById(vchPriceId);
         const serviceFeeRow = document.getElementById(serviceFeeRowId);
         const serviceFeePriceEl = document.getElementById(serviceFeePriceId);
+        const flashRow = document.getElementById(flashRowId);
+        const flashPriceEl = document.getElementById(flashPriceId);
 
         if (selectedCourierName && row) {
             row.classList.remove('hidden');
@@ -2919,6 +3056,15 @@ function updateGrandTotal() {
             }
         } else if (vchRow) {
             vchRow.classList.add('hidden');
+        }
+
+        if (flashDiscount > 0 && flashRow) {
+            flashRow.classList.remove('hidden');
+            if (flashPriceEl) flashPriceEl.textContent = `-${formatPrice(flashDiscount)}`;
+            const flashLabelEl = flashRow.querySelector('span:first-child');
+            if (flashLabelEl) flashLabelEl.textContent = `Diskon ${flashLabel}`;
+        } else if (flashRow) {
+            flashRow.classList.add('hidden');
         }
 
         if (codFee > 0 && codRow) {
@@ -3323,6 +3469,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initCoverKatalog();
     initProductDetail();
     initTrending();
+    initFlashSale();
     initCart();
     initPromoRotator();
     initCustomModal();
